@@ -1,0 +1,191 @@
+<div id="Tony-Stark-Holo" class="portfolio">
+    <div id="drag-container">
+      <div id="spin-container">
+          
+          <video onclick="window.open('dist/resume.html', '_blank', 'noopener, noreferrer')" 
+                  src="./assets/images/joker.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('assets/images/mtobabenResumeStandard.pdf', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/harleyQuinn2.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/flashcards.html', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/joker2.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/PathFinder.html', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/balrog.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/Zombies.html', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/negan.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/CONAN.html', '_blank', 'noopener, noreferrer', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/jarvis1.webm" style='width: 150px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/Seven.html', '_blank', 'noopener, noreferrer')"
+                  src="./assets/images/sevenOfNine.webm" style='width: 150px; height: 175px' loop autoplay muted ></video>
+          <video onclick="window.open('dist/DiceMark2.html', '_blank', 'noopener, noreferrer')" 
+                  src="./assets/images/die2.webm" style='width: 150px; height: 175px' loop autoplay muted ></video>
+          <!-- <img src='./assets/images/arkhamAsylum.webp' style='width: 150px'/> -->
+          <!-- <div class="spin-div" 
+                style="color: whitesmoke; background-size: 50%; background-size: '50% 50%'; background: URL('./assets/images/arkhamAsylum.webp') center"
+          >
+            <ul>
+              <li>
+                <a href='assets/images/mtobabenResume.pdf' 
+                    target='blank' 
+                    rel='noopener noreferrer' 
+                    class='bubble-hover' 
+                    id='resume'
+                    style="font-size: small; color: silver">Resume</a>
+              </li>
+              <li>
+                <a href='dist/dice.html' 
+                    target='blank' 
+                    rel='noopener noreferrer' 
+                    class='bubble-hover' 
+                    id='resume'
+                    style="font-size: small; color: silver">🎲Dice🎲</a>
+              </li>
+            </ul>
+          </div> -->
+
+          <!-- You can do something like background-size: 75% 50% if you want to set a width/height (width first, then height).
+          background-size: cover will fill the container it's in if that works better. Could also try background-size: contain -->
+
+          <!-- Text at center of ground -->
+          <p>WildCardDEV</p>
+          
+      </div>
+      <div id="ground"></div>
+  </div>
+
+  <!-- <div id="music-container"></div> -->
+
+</div>
+<script>
+  // You can change global variables here:
+  var radius = 240; // how big of the radius
+  var autoRotate = true; // auto rotate or not
+  var rotateSpeed = -60; // unit: seconds/360 degrees
+  var imgWidth = 120; // width of images (unit: px)
+  var imgHeight = 170; // height of images (unit: px)
+
+  // Link of background music - set 'null' if you dont want to play background music
+  var bgMusicURL = null
+    "";
+  var bgMusicControls = true; // Show UI music control
+  
+  // ===================== start =======================
+  setTimeout(init, 100);
+
+  var odrag = document.getElementById("drag-container");
+  var ospin = document.getElementById("spin-container");
+  var aImg = ospin.getElementsByTagName("img");
+  var aVid = ospin.getElementsByTagName("video");
+  var aDiv = ospin.getElementsByClassName("spin-div");
+  var aEle = [...aImg, ...aVid, ...aDiv]; // combine 3 arrays
+
+  // Size of images
+  ospin.style.width = imgWidth + "px";
+  ospin.style.height = imgHeight + "px";
+
+  // Size of ground - depend on radius
+  var ground = document.getElementById("ground");
+  ground.style.width = radius * 3 + "px";
+  ground.style.height = radius * 3 + "px";
+
+  function init(delayTime) {
+      for (var i = 0; i < aEle.length; i++) {
+          aEle[i].style.transform =
+              "rotateY(" +
+              i * (360 / aEle.length) +
+              "deg) translateZ(" +
+              radius +
+              "px)";
+          aEle[i].style.transition = "transform 1s";
+          aEle[i].style.transitionDelay =
+              delayTime || (aEle.length - i) / 4 + "s";
+      }
+  }
+
+  function applyTranform(obj) {
+      // Constrain the angle of camera (between 0 and 180)
+      if (tY > 180) tY = 180;
+      if (tY < 0) tY = 0;
+
+      // Apply the angle
+      obj.style.transform = "rotateX(" + -tY + "deg) rotateY(" + tX + "deg)";
+  }
+
+  function playSpin(yes) {
+      ospin.style.animationPlayState = yes ? "running" : "paused";
+  }
+
+  var sX,
+      sY,
+      nX,
+      nY,
+      desX = 0,
+      desY = 0,
+      tX = 0,
+      tY = 10;
+
+  // auto spin
+  if (autoRotate) {
+      var animationName = rotateSpeed > 0 ? "spin" : "spinRevert";
+      ospin.style.animation = `${animationName} ${Math.abs(
+      rotateSpeed
+    )}s infinite linear`;
+  }
+
+  // add background music
+// if (bgMusicURL) {
+//     document.getElementById("music-container").innerHTML += `
+// <audio src="${bgMusicURL}" ${
+//           bgMusicControls ? "controls" : ""
+//         } autoplay loop>    
+// <p>If you are reading this, it is because your browser does not support the audio element.</p>
+// </audio>
+// `;
+
+// here's some t-rex audio i got from here: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/audio
+
+  // setup events
+  document.onpointerdown = function(e) {
+      clearInterval(odrag.timer);
+      e = e || window.event;
+      var sX = e.clientX,
+          sY = e.clientY;
+
+      this.onpointermove = function(e) {
+          e = e || window.event;
+          var nX = e.clientX,
+              nY = e.clientY;
+          desX = nX - sX;
+          desY = nY - sY;
+          tX += desX * 0.1;
+          tY += desY * 0.1;
+          applyTranform(odrag);
+          sX = nX;
+          sY = nY;
+      };
+
+      this.onpointerup = function(e) {
+          odrag.timer = setInterval(function() {
+              desX *= 0.95;
+              desY *= 0.95;
+              tX += desX * 0.1;
+              tY += desY * 0.1;
+              applyTranform(odrag);
+              playSpin(false);
+              if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+                  clearInterval(odrag.timer);
+                  playSpin(true);
+              }
+          }, 17);
+          this.onpointermove = this.onpointerup = null;
+      };
+
+      return false;
+  };
+
+  document.onmousewheel = function(e) {
+      e = e || window.event;
+      var d = e.wheelDelta / 20 || -e.detail;
+      radius += d;
+      init(1);
+  };
+</script>
