@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shawn Young - Personal Portfolio</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/SKY-T.REPLACE.png" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+
+
+</head>
+<!-- <canvas id="myCanvas"></canvas> -->
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/SKY-T.REPLACE.png" alt="Shawn Young" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Richard hanrick">Shawn Young</h1>
+
+          <p class="title">Web developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down">⇅</ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <img style='height: 40px; border-radius: 5px' src="assets/images/image20250502094739.png"/>
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="shawnkodyyoung@gmail.com" class="contact-link">shawnkodyyoung@gmail.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <img style='height: 40px; border-radius: 5px' src="assets/images/Image20250502094729.png"/>
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+12133522795" class="contact-link">+1 (213) 352-2795</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <img style='height: 40px; border-radius: 5px' src="assets/images/Image20250502094717.png"/>
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="2000-06-00">Jan 6, 2000</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <img style='height: 40px; border-radius: 5px;' src="assets/images/image20250502094735.png"/>
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Longtown, Oklahoma, USA</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Custom</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+
+          <li class="navbar-item">
+            <!-- Render cart function is for rerendering the page to display the correct quantity -->
+            <button class="navbar-link" onclick="renderCart()" data-nav-link>Checkout</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+        <div class="flex1">
+          <h2 class="h2 article-title" id="aboutMe">About me</h2>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round" onclick="myfunction()"></span>
+          </label>
+        </div>
+        </header>
+
+        <section class="about-text">
+          <p>
+            I am a junior web and application developer using JavaScript, React, CSS, HTML && mySQL. I enjoy turning complex problems into simple, beautiful and intuitive designs.
+          </p>
+
+          <p>
+            My job is to build your website so that it is functional and user-friendly but at the same time attractive.
+            Moreover, I
+            add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring
+            across your
+            message and identity in the most creative way. I created web design for many famous brand companies.
+          </p>
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What i'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web design</h4>
+
+                <p class="service-item-text">
+                  The most modern and high-quality design made at a professional level.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web development</h4>
+
+                <p class="service-item-text">
+                  High-quality development of sites at the professional level.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile apps</h4>
+
+                <p class="service-item-text">
+                  Professional development of applications for iOS and Android.
+                </p>
+              </div>
+
+            </li>
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/apple_logo_PNG19675.png" alt="mobile app icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Logo</h4>
+
+                <p class="service-item-text">
+                  Professional development of applications for iOS and Android.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - testimonials
+        -->
+        <section class="testimonials">
+          
+          <h3 class="h3 testimonials-title">Testimonials</h3>
+          <!-- <ul class="testimonials-list has-scrollbar"> -->
+
+      
+                      <ul class="clients-list has-scrollbar">
+                      <li class="testimonials-item">
+                        <div class="content-card" data-testimonials-item>
+          
+                          <figure class="testimonials-avatar-box">
+                            <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
+                          </figure>
+          
+                          <h4 class="h4 testimonials-item-title" data-testimonials-title>Michelle Obama</h4>
+          
+                          <div class="testimonials-text" data-testimonials-text>
+                            <p class="p">
+                              Shawn was hired to create a beautiful website and application for my company called windter sports mountain and he did a superb job bringing my vision to life! Highly recommended and a fair price!
+                            </p>
+                          </div>
+          
+                        </div>
+                      </li>
+                      <li class="testimonials-item">
+                        <div class="content-card" data-testimonials-item>
+          
+                          <figure class="testimonials-avatar-box">
+                            <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
+                          </figure>
+          
+                          <h4 class="h4 testimonials-item-title" data-testimonials-title>Serena Williams</h4>
+          
+                          <div class="testimonials-text" data-testimonials-text>
+                            <p class="p">
+                              I hired Shawn last year to complete my company website and I could not be happier. It was a ecommerce driven website and he gave me a fair price as well. He awesome!
+                            </p>
+                          </div>
+          
+                        </div>
+                      </li>
+                      <li class="testimonials-item">
+                        <div class="content-card" data-testimonials-item>
+          
+                          <figure class="testimonials-avatar-box">
+                            <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
+                          </figure>
+          
+                          <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry Ford</h4>
+          
+                          <div class="testimonials-text" data-testimonials-text>
+                            <p class="p">
+                              Hey y'all im THE Henry Ford. I hired Shawn Young to do upkeep and maintance on the Ford Motor Company website and he is always quick and responsive with his work and made my dream come true. If it wasn't for Shawn Ford Motor Company would be nothing
+                            </p>
+                          </div>
+          
+                        </div>
+                      </li>
+                    </ul>
+        
+                <!-- end of headline display and start of control box -->
+
+
+
+
+
+
+
+
+
+
+
+          <!-- </ul> -->
+
+        </section>
+
+
+        <!--
+          - testimonials mo
+
+          </section>
+
+        </div>
+
+
+   
+          - clients
+        -->
+
+        <section class="clients">
+
+          <h3 class="h3 clients-title">Clients</h3>
+
+          <div class="carousel">
+            <ul id="track">
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-1-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-2-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-3-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-4-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-5-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-6-color.png" alt="client logo">
+              </a>
+            </li>
+
+          </ul>
+          </div>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Midland University Code Academy</h4>
+
+              <span>2024-2025</span>
+
+              <p class="timeline-text">
+                There I learn to create beautiful application and website using JavaScript, React, HTML, CSS && mySQL
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Oklahoma State University</h4>
+
+              <span>2018-2020</span>
+
+              <p class="timeline-text">
+                Associates in Applied Science Pipeline Integrity Technology
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">National Association of Corrosion Engineers (NACE) Cathodic Protection 2 </h4>
+
+              <span>2018</span>
+
+              <p class="timeline-text">
+                Canadian, Oklahoma
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Canadian High School</h4>
+
+              <span>2018</span>
+
+              <p class="timeline-text">
+                Canadian, Oklahoma
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Web developer</h4>
+
+              <span>2024 — Present</span>
+
+              <p class="timeline-text">
+                Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas
+                molestias
+                exceptur.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Corrosion Engineer Technician</h4>
+
+              <span>2020-2024</span>
+
+              <p class="timeline-text">
+                Was a petroleum corrosion engineering technician that mitigated the possibility of corrosion and complied with federal regulations(NACE).
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">App Developer</h4>
+
+              <span>2024 - Present</span>
+
+              <p class="timeline-text">
+                Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
+                quas molestias
+                exceptur.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">My skills</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Web design</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Graphic design</h5>
+                <data value="70">70%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 70%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">mySQL</h5>
+                <data value="90">90%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Applications</h5>
+                <data value="50">50%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 50%;"></div>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Finance</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Orizon</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Fundo</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Brawlhalla</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
+                </figure>
+
+                <h3 class="project-title">DSM.</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">MetaSpark</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Summary</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Task Manager</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Arrival</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="portfolio-active" data-page="custom">
+        <header>
+            <h2 class="h2 article-title">Customize</h2>
+          <div id="myBtnContainer">
+            <button class="btn" onclick="filterSelection('all')" id="show"> Show all</button>
+            <button class="btn" onclick="filterSelection('websites')"> Websites</button>
+            <button class="btn" onclick="filterSelection('application')"> Application</button>
+            <button class="btn" onclick="filterSelection('logos')"> Logos</button>
+          </div>
+          <div id="Tony-Stark-Holo" class="portfolio">
+            <div id="drag-container">
+              <div id="spin-container">
+                  <!-- If you want the images to navigate to another page -->
+                  <!-- <img onclick="window.open('dist/resume.html', '_blank', 'noopener, noreferrer')"  -->
+                  <video
+                          src="./assets/images/addToCart.webm" style='width: 120px' loop autoplay muted ></video>
+                  <img 
+                          src="./assets/images/project-2.png" style='width: 120px' loop autoplay muted ></img>
+                  
+                  <img 
+                          src="./assets/images/project-3.jpg" style='width: 120px' loop autoplay muted ></img>
+                  <img 
+                          src="./assets/images/project-4.png" style='width: 120px' loop autoplay muted ></img>
+                  <video 
+                          src="./assets/images/addToCart2.webm" style='width: 120px' loop autoplay muted ></video>
+                  <img 
+                          src="./assets/images/project-6.png" style='width: 120px' loop autoplay muted ></img>
+                  <img 
+                          src="./assets/images/project-8.jpg" style='width: 120px' loop autoplay muted ></img>
+                  <img 
+                          src="./assets/images/project-9.png" style='width: 120px' loop autoplay muted ></img>
+                  
+              </div>
+              <div id="ground"></div>
+          </div>
+        
+          <!-- <div id="music-container"></div> -->
+        
+        </div>
+      
+          <!-- <div id="music-container"></div> -->
+            <!-- <div  id="custom"></div> -->
+        </header>
+
+        
+        <!-- Portfolio Gallery Grid -->
+        <div class="row">
+          <div class="column websites">
+            <div class="content">
+              <div id="custom"></div>
+            </div>
+        </div>
+          <div class="column application">
+            <div class="content">
+              <div id="custom2"></div>
+            </div>
+          </div>
+        
+          <div class="column logos">
+            <div class="content">
+              <div id="custom3"></div>
+            </div>
+          </div>
+        </div>
+        
+
+
+
+        
+        <!-- <header >
+          <h2 class="h2 article-title" >Websites</h2>
+          <div class="scroll-container1">
+            <div id="custom2"></div>
+            </div>
+        </header> -->
+       
+
+      </article>
+
+
+    
+      
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="mapbox" data-mapbox>
+          <figure>
+            <img class="img1"
+              src="assets/images/SKY-T.REPLACE.png"
+              width="330" height="300" marging-bottom="30px" loading="lazy"></img>
+          </figure>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+
+
+
+          <!-- FORM that we want to send to the database -->
+          <form name="myForm" action=""   method="post" class="form" required >
+
+              <div class="input-wrapper">
+                <input type="text" id="name"  class="form-input" placeholder="Full Name">
+                <input type="Email" id="email" class="form-input" placeholder="E-Mail">
+                <input type="number"   id="phone" class="form-input" placeholder="Number">
+                <textarea type="text" id="comment" class="form-input" placeholder="Information regarding your needs"></textarea>
+              </div>
+              
+            </form>
+            <input onclick="fetchForm()"   class="form-btn" type="submit" value="Submit">
+        </section>
+
+      </article>
+
+      
+
+      <!-- Checkout -->
+      <article class="contact" data-page="checkout">
+
+        <header>
+          <h2 class="h2 article-title">Checkout</h2>
+        </header>
+        
+        
+        <section class="contact-form">
+          
+          <h3 class="h3 form-title">Checkout Form</h3>
+
+          <div class="scroll-container">
+            <div id="customPage">
+            </div>
+            <div id="snackbar">Sent to database for processing. We will contact your shortly!</div>
+          </div>
+          <input type="text" id="name1"  class="form-input" placeholder="Full Name">
+          <input type="Email" id="email1" class="form-input" placeholder="E-Mail" required>
+
+          <button id="clear1"  onclick="myclear()">Clear Cart</button>
+          <button id="checkout" onclick="myFunction()">Checkout</button>
+          <!-- For sending you an sms message to your cellular device -->
+          <a href="sms:+14323314396?body= Check Your data base. You have recieved"></a>
+        </section>
+
+      </article>
+
+
+    </div>
+
+  </main>
+<script>
+  // You can change global variables here:
+  var radius = 170; // how big of the radius
+  var autoRotate = true; // auto rotate or not
+  var rotateSpeed = -60; // unit: seconds/360 degrees
+  var imgWidth = 120; // width of images (unit: px)
+  var imgHeight = 170; // height of images (unit: px)
+
+  // Link of background music - set 'null' if you dont want to play background music
+  var bgMusicURL = null
+    "";
+  var bgMusicControls = true; // Show UI music control
+  
+  // ===================== start =======================
+  setTimeout(init, 100);
+
+  var odrag = document.getElementById("drag-container");
+  var ospin = document.getElementById("spin-container");
+  var aImg = ospin.getElementsByTagName("img");
+  var aVid = ospin.getElementsByTagName("video");
+  var aDiv = ospin.getElementsByClassName("spin-div");
+  var aEle = [...aImg, ...aVid, ...aDiv]; // combine 3 arrays
+
+  // Size of images
+  ospin.style.width = imgWidth + "px";
+  ospin.style.height = imgHeight + "px";
+
+  // Size of ground - depend on radius
+  var ground = document.getElementById("ground");
+  ground.style.width = radius * 3 + "px";
+  ground.style.height = radius * 3 + "px";
+
+  function init(delayTime) {
+      for (var i = 0; i < aEle.length; i++) {
+          aEle[i].style.transform =
+              "rotateY(" +
+              i * (360 / aEle.length) +
+              "deg) translateZ(" +
+              radius +
+              "px)";
+          aEle[i].style.transition = "transform 1s";
+          aEle[i].style.transitionDelay =
+              delayTime || (aEle.length - i) / 4 + "s";
+      }
+  }
+
+  function applyTranform(obj) {
+      // Constrain the angle of camera (between 0 and 180)
+      if (tY > 180) tY = 180;
+      if (tY < 0) tY = 0;
+
+      // Apply the angle
+      obj.style.transform = "rotateX(" + -tY + "deg) rotateY(" + tX + "deg)";
+  }
+
+  function playSpin(yes) {
+      ospin.style.animationPlayState = yes ? "running" : "paused";
+  }
+
+  var sX,
+      sY,
+      nX,
+      nY,
+      desX = 0,
+      desY = 0,
+      tX = 0,
+      tY = 10;
+
+  // auto spin
+  if (autoRotate) {
+      var animationName = rotateSpeed > 0 ? "spin" : "spinRevert";
+      ospin.style.animation = `${animationName} ${Math.abs(
+      rotateSpeed
+    )}s infinite linear`;
+  }
+
+  // add background music
+// if (bgMusicURL) {
+//     document.getElementById("music-container").innerHTML += `
+// <audio src="${bgMusicURL}" ${
+//           bgMusicControls ? "controls" : ""
+//         } autoplay loop>    
+// <p>If you are reading this, it is because your browser does not support the audio element.</p>
+// </audio>
+// `;
+
+// here's some t-rex audio i got from here: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/audio
+
+  // setup events
+  document.onpointerdown = function(e) {
+      clearInterval(odrag.timer);
+      e = e || window.event;
+      var sX = e.clientX,
+          sY = e.clientY;
+
+      this.onpointermove = function(e) {
+          e = e || window.event;
+          var nX = e.clientX,
+              nY = e.clientY;
+          desX = nX - sX;
+          desY = nY - sY;
+          tX += desX * 0.1;
+          tY += desY * 0.1;
+          applyTranform(odrag);
+          sX = nX;
+          sY = nY;
+      };
+
+      this.onpointerup = function(e) {
+          odrag.timer = setInterval(function() {
+              desX *= 0.95;
+              desY *= 0.95;
+              tX += desX * 0.1;
+              tY += desY * 0.1;
+              applyTranform(odrag);
+              playSpin(false);
+              if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+                  clearInterval(odrag.timer);
+                  playSpin(true);
+              }
+          }, 17);
+          this.onpointermove = this.onpointerup = null;
+      };
+
+      return false;
+  };
+
+  // document.onmousewheel = function(e) {
+  //     e = e || window.event;
+  //     var d = e.wheelDelta / 20 || -e.detail;
+  //     radius += d;
+  //     init(1);
+  // };
+</script>
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/customCart.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="server.js"></script>
+
+
+  <!--
+    - ionicon link
+  -->
+  <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> -->
+  <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+
+</body>
+
+</html>
