@@ -148,20 +148,81 @@
                 <img class="contact-img" src="./Extra Images/WhatsAppOrange.png" alt="WhatsApp">
               </div>
   
-              <div class="contact-info">
-                <p class="contact-title">WhatsApp</p>
-                <!-- <a href="whatsapp://send?text=Please contact me about a development job." class="contact-link">Contact via WhatsApp</a> -->
-                <a href="https://wa.me/14029150789?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">Matt</a>
-              </div>
+             <a href="https://wa.me/14023326748?text=Hey%20Penny%20%E2%80%94%20I%E2%80%99ve%20got%20an%20idea%20and%20I%20think%20WildCard%20DEV%20is%20exactly%20who%20I%20need.%20Can%20you%20help%20me%20bring%20it%20to%20life%3F"
+               class="contact-link" id="whatsapp-link">Matt</a>
+
+            <!-- Penny Popup Container -->
+            <div id="penny-popup" style="
+              position: fixed;
+              bottom: 20px;
+              right: 20px;
+              width: 120px;
+              opacity: 0;
+              transform: translateY(20px);
+              transition: all 0.4s ease;
+              pointer-events: none;
+              z-index: 9999;
+            ">
+
+            <!-- Penny Video -->
+            <video src="./images/customerService.webm" autoplay muted loop style="
+              width:100%;
+              border-radius: 12px;
+            "></video>
+          
+            <!-- Thought Bubble -->
+            <div id="penny-bubble" style="
+              position: absolute;
+              bottom: 110%;
+              right: 0;
+              background: rgba(255,255,255,0.9);
+              color: #000;
+              padding: 6px 10px;
+              border-radius: 12px;
+              font-size: 12px;
+              opacity: 0;
+              transform: translateY(10px);
+              transition: all 0.3s ease;
+              white-space: nowrap;
+            ">
+              I’ve got this 😉
+            </div>
+
+        </div>
+
+          <script>
+            const whatsappLink = document.getElementById('whatsapp-link');
+            const popup = document.getElementById('penny-popup');
+            const bubble = document.getElementById('penny-bubble');
+          
+            whatsappLink.addEventListener('click', () => {
+              // Show Penny
+              popup.style.opacity = '1';
+              popup.style.transform = 'translateY(0)';
+          
+              // Show bubble
+              bubble.style.opacity = '1';
+              bubble.style.transform = 'translateY(0)';
+          
+              // Hide after short delay
+              setTimeout(() => {
+                popup.style.opacity = '0';
+                popup.style.transform = 'translateY(20px)';
+          
+                bubble.style.opacity = '0';
+                bubble.style.transform = 'translateY(10px)';
+              }, 1800);
+            });
+          </script>
   
-              <div class="icon-box">
+              <!--<div class="icon-box">
                 <img class="contact-img" src="./Extra Images/WhatsAppOrange.png" alt="WhatsApp">
               </div>
   
               <div class="contact-info">
                 <p class="contact-title">WhatsApp</p>
                 <a href="https://wa.me/14029996491?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">Space Beth</a>
-              </div>
+              </div> -->
             </li>
             <br>
             <li class="contact-item">
