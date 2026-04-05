@@ -429,8 +429,198 @@
     border-radius: 10px !important;
   }
 }
+.contact-office {
+  display: grid;
+  gap: 18px;
+}
+
+.penny-office-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.penny-office-video-wrap {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  min-height: 220px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.penny-office-video {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.penny-presence-card {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.penny-kicker {
+  margin: 0 0 6px 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.penny-title {
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+  font-size: 1.05rem;
+}
+
+.penny-dialogue {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 0.95rem;
+  color: #ff9bdc;
+  text-shadow:
+    0 0 4px rgba(255, 155, 220, 0.4),
+    0 0 10px rgba(255, 105, 180, 0.2);
+}
+
+.contact-form .form {
+  display: grid;
+  gap: 14px;
+}
+
+.input-wrapper {
+  display: grid;
+  gap: 12px;
+}
+
+#penny.form-input {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.penny-form-note {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  opacity: 0.8;
+  padding: 0 2px;
+}
+
+.form-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .penny-office-panel {
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    align-items: stretch;
+  }
+
+  .penny-office-video-wrap,
+  .penny-office-video {
+    min-height: 320px;
+  }
+
+  .input-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #phone.form-input {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-office {
+    gap: 22px;
+  }
+
+  .penny-presence-card {
+  position: relative;
+  padding: 16px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg,
+      rgba(255, 40, 160, 0.16) 0%,
+      rgba(180, 70, 255, 0.10) 35%,
+      rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 130, 220, 0.38);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 18px rgba(255, 70, 190, 0.18),
+    0 0 40px rgba(170, 70, 255, 0.10),
+    inset 0 0 22px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.penny-presence-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.06) 32%,
+      rgba(255, 160, 230, 0.10) 50%,
+      transparent 68%);
+  transform: translateX(-120%);
+  animation: pennyShimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+  .penny-title {
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+  font-size: 1.05rem;
+  color: #ffd8f6;
+  text-shadow:
+    0 0 6px rgba(255, 180, 235, 0.25),
+    0 0 18px rgba(255, 90, 210, 0.18);
+}
+
+  .penny-dialogue
+}
+
+@media (max-width: 420px) {
+  .penny-office-video-wrap,
+  .penny-office-video {
+    min-height: 180px;
+  }
+
+  .penny-presence-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .penny-title {
+    font-size: 0.98rem;
+  }
+
+  .penny-dialogue,
+  .penny-form-note {
+    font-size: 0.82rem;
+  }
+}
+
+.penny-kicker {
+  margin: 0 0 6px 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffb6ea;
+  opacity: 0.92;
+  text-shadow:
+    0 0 6px rgba(255, 120, 220, 0.25);
+}
 
 </style>
+
 </head>
 
 <body>
@@ -3019,283 +3209,247 @@
       <!--
         - #CONTACT
       -->
+<article class="contact" data-page="🃏contact">
 
-<script>
-  let i = 0;
-  let txt = 'Hi, I’m Penny… what can we at 🃏WildCard DEV help you create today? Don’t be shy — just send me a message and let’s get started.';
-  let typespeed = 75;
-  let timeout;
-        
-  function typeWriterPenny() {
-    if (i < txt.length) {
-      document.getElementById("penny").placeholder += txt.charAt(i);
-      i++;
-      setTimeout(typeWriterPenny, typespeed);
-    }
-  // let counter = setInterval(() => {
-  //     i = -1;
-  //     setType('')
-  //     typeLoop();  
-  //   }, 10000);
-  // clearTimeout(timeout);
-}
-// typeWriterPenny()
-</script>
+  <header>
+    <h2 class="h2 article-title">Contact</h2>
+  </header>
 
-<script>
-  let z = 0;
-  let txtn = 'Please Enter Your Full Name Here.';
-  let typespeedn = 75;
-        
-  function typeWriterName() {
-    if (z < txtn.length) {
-      document.getElementById("name").placeholder += txtn.charAt(z);
-      z++;
-      setTimeout(typeWriterName, typespeedn);
-    }
-}
-// typeWriterName()
-</script>
+  <section class="contact-office">
 
-<script>
-  let y = 0;
-  let txte = 'What Email Would You Like Us To Contact You At?';
-  let typespeede = 75;
-        
-  function typeWriterEmail() {
-    if (y < txte.length) {
-      document.getElementById("email").placeholder += txte.charAt(y);
-      y++;
-      setTimeout(typeWriterEmail, typespeede);
-    }
-}
-// typeWriterEmail()
-</script>
+    <div class="penny-office-panel">
 
-<script>
-  let x = 0;
-  let txtp = 'Please Provide A Contact Phone Number.';
-  let typespeedp = 75;
-        
-  function typeWriterPhone() {
-    if (x < txte.length) {
-      document.getElementById("phone").placeholder += txtp.charAt(x);
-      x++;
-      setTimeout(typeWriterPhone, typespeedp);
-    }
-}
-// typeWriterEmail()
-</script>
+      <div class="penny-office-video-wrap">
+        <video
+          src="./images/customerService.webm"
+          class="penny-office-video"
+          loop
+          autoplay
+          muted
+          playsinline
+        ></video>
+      </div>
 
-      <article class="contact" data-page="🃏contact">
+      <div class="penny-presence-card">
+        <p class="penny-kicker">Penny’s Office</p>
+        <h3 class="penny-title">
+          Tell me what you need… I’ll make sure it lands exactly where it should 😏
+        </h3>
+        <p class="penny-dialogue" id="pennyDialogue">
+          Start with a few details… I’ll take it from there.
+        </p>
+      </div>
 
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
+    </div>
 
-        <section class="mapbox" data-mapbox>
-          <video src="./images/customerService.webm" style='width: 100%; height: 100%; object-fit: cover' loop autoplay muted ></video>
-        </section>
+    <section class="contact-form">
 
-        <section class="contact-form">
+      <h3 class="h3 form-title">Contact Form</h3>
 
-          <h3 class="h3 form-title">Contact Form</h3>
+      <form action="#" class="form" id="contactForm">
 
-          <form action="#" class="form" data-form>
+        <div class="input-wrapper">
 
-            <div class="input-wrapper">
-              <input id="name" type="text" name="fullname" class="form-input" placeholder="" title="Please follow Penny's instructions." data-form-input>
+          <input
+            id="name"
+            type="text"
+            name="fullname"
+            class="form-input"
+            placeholder="Your name"
+            autocomplete="name"
+            title="Penny would love to know who she's talking to."
+          >
 
-              <input id="email" type="email" name="email" class="form-input" placeholder="" title="Please follow Penny's instructions."data-form-input>
-            
-              <input id="phone" type="tel" name="phone" class="form-input" placeholder="" title="Please follow Penny's instructions."data-form-input>
-            </div>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            class="form-input"
+            placeholder="Your email"
+            autocomplete="email"
+            title="Where should Penny send your reply?"
+          >
 
-            <textarea id="penny" name="message" class="form-input" placeholder="" required data-form-input></textarea>
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            class="form-input"
+            placeholder="Your phone (optional)"
+            autocomplete="tel"
+            title="Optional, but helpful if you'd like a call back."
+          >
 
-            <button class="form-btn" type="button" data-form-btn>
-              <img src="./Extra Images/paperAirplane.png" style="height: 30px">
-              <a id="sendEmail" class="contact-link"><span>Send Message</span></a>
-            </button>
+        </div>
 
-<script>
-  let name= document.getElementById("name");
-  let email= document.getElementById("email");
-  let phone= document.getElementById("phone");
-  let penny= document.getElementById("penny");
-  let send= document.getElementById("sendEmail");
-  
-  window.addEventListener('keydown', (e)=> {
-    if (e.key == 'Enter') {
+        <textarea
+          id="penny"
+          name="message"
+          class="form-input"
+          placeholder="What are you looking to build, improve, or ask about?"
+          required
+        ></textarea>
 
-    e.preventDefault()
-      const nameValue = encodeURIComponent(name.value);
-      const emailValue = encodeURIComponent(email.value);
-      const phoneValue = encodeURIComponent(phone.value);
-      const pennyValue = encodeURIComponent(penny.value);
-      window.location.href=`mailto:mtobabendev@gmail.com?cc=entobaben@gmail.com&subject=WildCardDEV Inquiry&body=Name: ${nameValue}%0D%0AEmail: ${emailValue}%0D%0APhone: ${phoneValue}%0D%0AMessage: ${pennyValue}`;
-   } else if (e.key == '$') {
-    alert ('Hello. I am SeVeN. If you would like to make an inquiry to our Financial Services Division please click the BitCoin Icon in my section of the site. ');
-   }
-  });
+        <div class="penny-form-note" id="pennyFormNote">
+          Penny is currently routing messages for Matt, Space Beth, and custom builds.
+        </div>
 
-  send.addEventListener('click', (e)=> {
-    e.preventDefault()
-      const nameValue = encodeURIComponent(name.value);
-      const emailValue = encodeURIComponent(email.value);
-      const phoneValue = encodeURIComponent(phone.value);
-      const pennyValue = encodeURIComponent(penny.value);
-      window.location.href=`mailto:mtobabendev@gmail.com?cc=entobaben@gmail.com&subject=WildCardDEV Inquiry&body=Name: ${nameValue}%0D%0AEmail: ${emailValue}%0D%0APhone: ${phoneValue}%0D%0AMessage: ${pennyValue}`;
-   });
-</script>
+        <button class="form-btn" type="submit" id="sendEmail">
+          <img src="./Extra Images/paperAirplane.png" alt="" style="height: 30px;">
+          <span>Send Message</span>
+        </button>
 
-          </form>
-          <!-- <div  id='demo' className='header'></div> -->
+      </form>
 
-        </section>
+      <script>
+        (function () {
+          const form = document.getElementById("contactForm");
+          const nameField = document.getElementById("name");
+          const emailField = document.getElementById("email");
+          const phoneField = document.getElementById("phone");
+          const messageField = document.getElementById("penny");
+          const pennyDialogue = document.getElementById("pennyDialogue");
+          const pennyFormNote = document.getElementById("pennyFormNote");
+          const pennyCard = document.querySelector(".penny-presence-card");
 
-      </article>
+          const pennyLines = {
+            idle: "Start with a few details… I’ll take it from there.",
+            name: "Let’s start simple… who do I have the pleasure of talking to?",
+            email: "Where should I send your reply once I line things up?",
+            phone: "Optional… but useful if you’d rather talk than type.",
+            message: "Tell me what you need—or who caught your attention 😏",
+            submit: "Perfect… I’ll make sure the right person sees this.",
+            invalid: "Almost… I still need your name, email, and message.",
+            sent: "Your message is ready to go. Penny likes decisive people."
+          };
+
+          function setPennyLine(line, note) {
+            pennyDialogue.style.opacity = "0.2";
+            pennyDialogue.style.transform = "translateY(4px)";
+
+            setTimeout(function () {
+              pennyDialogue.textContent = line;
+              if (note) pennyFormNote.textContent = note;
+              pennyDialogue.style.opacity = "1";
+              pennyDialogue.style.transform = "translateY(0)";
+            }, 120);
+          }
+
+          nameField.addEventListener("focus", function () {
+            setPennyActive(true);
+            setPennyLine(
+              pennyLines.name,
+              "Start with your name so Penny knows who she’s coordinating for."
+            );
+          });
+
+          emailField.addEventListener("focus", function () {
+            setPennyActive(true);
+            setPennyLine(
+              pennyLines.email,
+              "Use the best email for follow-up. Penny replies fast when the project is interesting."
+            );
+          });
+
+          phoneField.addEventListener("focus", function () {
+            setPennyActive(true);
+            setPennyLine(
+              pennyLines.phone,
+              "Phone is optional for now—but useful if you'd rather talk than type."
+            );
+          });
+
+          messageField.addEventListener("focus", function () {
+            setPennyActive(true);
+            setPennyLine(
+              pennyLines.message,
+              "A little context goes a long way. Penny’s smart, but she still likes specifics."
+            );
+          });
+
+         [nameField, emailField, phoneField, messageField].forEach(function (field) {
+            field.addEventListener("blur", function () {
+              setPennyActive(false);
+              setPennyLine(
+                pennyLines.idle,
+                "Penny is currently routing messages for Matt, Space Beth, and custom builds."
+              );
+            });
+          });
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nameValueRaw = nameField.value.trim();
+            const emailValueRaw = emailField.value.trim();
+            const phoneValueRaw = phoneField.value.trim();
+            const messageValueRaw = messageField.value.trim();
+
+            if (!nameValueRaw || !emailValueRaw || !messageValueRaw) {
+              setPennyLine(
+                pennyLines.invalid,
+                "Required: name, email, and message."
+              );
+              return;
+            }
+
+            setPennyLine(
+              pennyLines.submit,
+              "Opening your mail app now…"
+            );
+
+            const subject = encodeURIComponent("Wildcard DEV Inquiry");
+            const body =
+              "Name: " + encodeURIComponent(nameValueRaw) +
+              "%0D%0AEmail: " + encodeURIComponent(emailValueRaw) +
+              "%0D%0APhone: " + encodeURIComponent(phoneValueRaw || "Not provided") +
+              "%0D%0AMessage: " + encodeURIComponent(messageValueRaw);
+
+            window.location.href =
+              "mailto:penny@wildcarddev.com?cc=mtobabendev@gmail.com&subject=" +
+              subject +
+              "&body=" +
+              body;
+
+            setTimeout(function () {
+              setPennyLine(
+                pennyLines.sent,
+                "If nothing opened, your device may not have a default mail app configured."
+              );
+            }, 700);
+          });
+
+          function setPennyActive(isActive) {
+            if (isActive) {
+              pennyCard.classList.add("penny-active");
+            } else {
+              pennyCard.classList.remove("penny-active");
+            }
+          }
+
+          form.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+              e.preventDefault();
+              form.requestSubmit();
+            }
+
+            if (e.key === "$") {
+              alert("Hello. I am SeVeN. If you would like to make an inquiry to our Financial Services Division please click the BitCoin icon in my section of the site.");
+            }
+          });
+        })();
+      </script>
+
+    </section>
+
+  </section>
+
+</article>
 
     </div>
 
   </main>
 
-<script>
-// var DELETE_ALL_SENTINEL = -1
-
-// function noop () {}
-
-// function malarkey (callback, options) {
-//   options = options || {}
-
-//   var text = 'Testing 1...2...3...'
-
-//   var functionQueue = []
-//   var functionArguments = []
-//   var functionIndex = -1
-
-//   var isStopped = true
-//   var stoppedCallback = noop
-
-//   var methods = {
-//     call: function (fn) {
-//       return enqueue(_call, [fn])
-//     },
-//     clear: function () {
-//       return enqueue(_clear, null)
-//     },
-//     delete: function (characterCount, deleteOptions) {
-//       if (typeof characterCount === 'object') {
-//         deleteOptions = characterCount
-//         characterCount = DELETE_ALL_SENTINEL
-//       }
-//       return enqueue(_delete, [
-//         characterCount || DELETE_ALL_SENTINEL,
-//         (deleteOptions ? deleteOptions.speed : options.deleteSpeed) || 50
-//       ])
-//     },
-//     isStopped: function () {
-//       return isStopped
-//     },
-//     pause: function (pauseOptions) {
-//       return enqueue(setTimeout, [
-//         (pauseOptions ? pauseOptions.duration : options.pauseDuration) || 2000
-//       ])
-//     },
-//     triggerResume: function () {
-//       if (isStopped) {
-//         isStopped = false
-//         next()
-//       }
-//       return methods
-//     },
-//     triggerStop: function (fn) {
-//       isStopped = true
-//       stoppedCallback = fn || noop
-//       return methods
-//     },
-//     type: function (text, typeOptions) {
-//       return enqueue(_type, [
-//         text,
-//         (typeOptions ? typeOptions.speed : options.typeSpeed) || 50
-//       ])
-//     }
-//   }
-
-//   function next () {
-//     if (isStopped) {
-//       stoppedCallback(text)
-//       stoppedCallback = noop
-//       return
-//     }
-//     functionIndex += 1
-//     if (functionIndex === functionQueue.length) {
-//       if (!options.repeat) {
-//         functionIndex = functionQueue.length - 1
-//         isStopped = true
-//         return
-//       }
-//       functionIndex = 0
-//     }
-//     functionQueue[functionIndex].apply(
-//       null,
-//       [next].concat(functionArguments[functionIndex])
-//     )
-//   }
-
-//   function enqueue (callback, args) {
-//     functionQueue.push(callback)
-//     functionArguments.push(args)
-//     if (isStopped) {
-//       isStopped = false
-//       setTimeout(next, 0)
-//     }
-//     return methods
-//   }
-
-//   function _type (next, typeText, typeSpeed) {
-//     var length = typeText.length
-//     var i = 0
-//     setTimeout(function typeCharacter () {
-//       text += typeText[i++]
-//       callback(text)
-//       if (i === length) {
-//         next()
-//         return
-//       }
-//       setTimeout(typeCharacter, typeSpeed)
-//     }, typeSpeed)
-//   }
-
-//   function _delete (next, characterCount, deleteSpeed) {
-//     var finalLength =
-//       characterCount === DELETE_ALL_SENTINEL ? 0 : text.length - characterCount
-//     setTimeout(function deleteCharacter () {
-//       text = text.substring(0, text.length - 1)
-//       callback(text)
-//       if (text.length === finalLength) {
-//         next()
-//         return
-//       }
-//       setTimeout(deleteCharacter, deleteSpeed)
-//     }, deleteSpeed)
-//   }
-
-//   function _clear (next) {
-//     text = ''
-//     callback(text)
-//     next()
-//   }
-
-//   function _call (next, fn) {
-//     fn(next, text)
-//   }
-
-//   return methods
-// }
-
-// module.exports = malarkey
-</script>
 
 <script>
 'use strict';
