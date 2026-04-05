@@ -86,427 +86,70 @@
   
           <div class="separator"></div>
   
-          <ul class="contacts-list">
-  
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeEmail.png" alt="Email">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Email</p>
-                <a href="mailto:mtobabendev@gmail.com?bcc=entobaben@gmail.com&subject=vCard Message" class="contact-link">mtobabendev@gmail.com</a>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeEmail.png" alt="Email">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Email</p>
-                <a href="mailto:entobaben@gmail.com?bcc=mtobabendev@gmil.com&subject=vCard Message" class="contact-link">SpaceBeth@gmail.com</a>
-              </div>
-  
-            </li>
-            
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/TextOrange.png" alt="Text">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Text</p>
-                <a href="sms:+14029150789?body=Please%20contact%20me%20about%20a%20job" class="contact-link">Text Matt</a>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/TextOrange.png" alt="Text">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Text</p>
-                <a href="sms:+14029996491body=Please%20contact%20me%20about%20a%20job" class="contact-link">Text Space Beth</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangePhone.png" alt="Phone">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Phone</p>
-  
-                <!-- ===== PENNY PHONE CONTACT (ALL-IN-ONE) ===== -->
+                  <div class="contacts-panel">
 
-                <a href="tel:+14023326748" id="phone-link">Call Matt</a>
-                
-                <!-- Penny Popup -->
-                <div id="penny-popup" style="
-                  position: fixed;
-                  bottom: 20px;
-                  right: 20px;
-                  width: 120px;
-                  opacity: 0;
-                  transform: translateY(20px);
-                  transition: all 0.4s ease;
-                  pointer-events: none;
-                  z-index: 9999;
-                ">
-                
-                  <!-- Penny Video -->
-                  <video src="./images/customerService.webm" autoplay muted loop playsinline style="
-                    width:100%;
-                    border-radius: 12px;
-                  "></video>
-                
-                  <!-- Thought Bubble -->
-                  <div id="penny-bubble" style="
-                    position: absolute;
-                    bottom: 110%;
-                    right: 0;
-                    background: rgba(255,255,255,0.92);
-                    color: #000;
-                    padding: 6px 10px;
-                    border-radius: 12px;
-                    font-size: 12px;
-                    opacity: 0;
-                    transform: translateY(10px);
-                    transition: all 0.3s ease;
-                    white-space: nowrap;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                  "></div>
-                
-                </div>
-                
-                <script>
-                (function() {
-                  const phoneLink = document.getElementById('phone-link');
-                  const popup = document.getElementById('penny-popup');
-                  const bubble = document.getElementById('penny-bubble');
-                
-                  if (!phoneLink || !popup || !bubble) return;
-                
-                  phoneLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                
-                    // Show Penny
-                    popup.style.opacity = '1';
-                    popup.style.transform = 'translateY(0)';
-                
-                    // Step 1: Flirty + professional opener
-                    setTimeout(function() {
-                      bubble.innerText = "I’ve got you 😉";
-                      bubble.style.opacity = '1';
-                      bubble.style.transform = 'translateY(0)';
-                    }, 200);
-                
-                    // Step 2: Action confirmation
-                    setTimeout(function() {
-                      bubble.innerText = "Connecting you now 📞";
-                    }, 700);
-                
-                    // Google Analytics event tracking
-                    if (typeof gtag === 'function') {
-                      gtag('event', 'phone_click', {
-                        event_category: 'contact',
-                        event_label: 'penny_call_button'
-                      });
-                    }
-                
-                    // Trigger phone call
-                    setTimeout(function() {
-                      window.location.href = phoneLink.href;
-                    }, 1100);
-                
-                    // Hide Penny
-                    setTimeout(function() {
-                      popup.style.opacity = '0';
-                      popup.style.transform = 'translateY(20px)';
-                      bubble.style.opacity = '0';
-                      bubble.style.transform = 'translateY(10px)';
-                    }, 1700);
-                  });
-                })();
-                </script>
-                
-                <!-- ===== END PENNY PHONE CONTACT ===== -->
-              </div>
-              <br>
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangePhone.png" alt="Phone">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Phone</p>
-  
-                <a href="tel:+4029996491" class="contact-link">(402) 555-1234</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/WhatsAppOrange.png" alt="WhatsApp">
-              </div>
-  
-             <a href="https://wa.me/14023326748?text=Hey%20Penny%20%E2%80%94%20I%E2%80%99ve%20got%20an%20idea%20and%20I%20think%20WildCard%20DEV%20is%20exactly%20who%20I%20need.%20Can%20you%20help%20me%20bring%20it%20to%20life%3F"
-               class="contact-link" id="whatsapp-link">Matt</a>
+                    <!-- MATT COLUMN -->
+                    <section class="contact-column" id="matt-contact">
+                      <h3 class="contact-person">Matt</h3>
 
-            <!-- Penny Popup Container -->
-            <div id="penny-popup" style="
-              position: fixed;
-              bottom: 20px;
-              right: 20px;
-              width: 120px;
-              opacity: 0;
-              transform: translateY(20px);
-              transition: all 0.4s ease;
-              pointer-events: none;
-              z-index: 9999;
-            ">
-            
-              <!-- Penny Video -->
-              <video src="./images/customerService.webm" autoplay muted loop style="
-                width:100%;
-                border-radius: 12px;
-              "></video>
-            
-              <!-- Thought Bubble -->
-              <div id="penny-bubble" style="
-                position: absolute;
-                bottom: 110%;
-                right: 0;
-                background: rgba(255,255,255,0.9);
-                color: #000;
-                padding: 6px 10px;
-                border-radius: 12px;
-                font-size: 12px;
-                opacity: 0;
-                transform: translateY(10px);
-                transition: all 0.3s ease;
-                white-space: nowrap;
-              ">
-                I’ve got this 😉
-              </div>
-            
-            </div>
-            
-            <script>
-              const whatsappLink = document.getElementById('whatsapp-link');
-              const popup = document.getElementById('penny-popup');
-              const bubble = document.getElementById('penny-bubble');
-            
-              whatsappLink.addEventListener('click', (e) => {
-                e.preventDefault(); // 🚨 stop instant redirect
-            
-                // Show Penny
-                popup.style.opacity = '1';
-                popup.style.transform = 'translateY(0)';
-            
-                // Show bubble (slight delay feels nicer)
-                setTimeout(() => {
-                  bubble.style.opacity = '1';
-                  bubble.style.transform = 'translateY(0)';
-                }, 200);
-            
-                // Open WhatsApp AFTER animation plays
-                setTimeout(() => {
-                  window.location.href = whatsappLink.href;
-                }, 1200); // ⏱ gives user time to see it
-            
-                // Hide animation after
-                setTimeout(() => {
-                  popup.style.opacity = '0';
-                  popup.style.transform = 'translateY(20px)';
-                  bubble.style.opacity = '0';
-                  bubble.style.transform = 'translateY(10px)';
-                }, 1800);
-              });
-            </script>
-  
-              <!--<div class="icon-box">
-                <img class="contact-img" src="./Extra Images/WhatsAppOrange.png" alt="WhatsApp">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">WhatsApp</p>
-                <a href="https://wa.me/14029996491?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">Space Beth</a>
-              </div> -->
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/XOrange.png" alt="X">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">@DEV_WildCard on X</p>
-                <a href="https://x.com/@Dev_WildCard" target="_blank" rel="noopener noreferrer" class="contact-link">Matt on X</a>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/XOrange.png" alt="X">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">@DEV_WildCard on X</p>
-                <a href="https://x.com/@Dev_WildCard" target="_blank" rel="noopener noreferrer" class="contact-link">Space Beth on X</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/SnapChatOrange.png" alt="SnapChat">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">SnapChat</p>
-                <a href="snapchat://share?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">SnapChat to Matt</a>
-                <!-- can share links too: share?link=https%3A%2F%2Fexample.com" -->
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/SnapChatOrange.png" alt="SnapChat">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">SnapChat</p>
-                <a href="snapchat://share?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">SnapChat to Space Beth</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/GitHubOrange.png" alt="GitHub">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">GitHub</p>
-                <a href="snapchat://share?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">Matt' GitHub</a>
-                <!-- can share links too: share?link=https%3A%2F%2Fexample.com" -->
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/GitHubOrange.png" alt="GitHub">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">GitHub</p>
-                <a href="snapchat://share?text=Hello%20There.%20Please%20contact%20me%20about%20a%20job." class="contact-link">Space Beth's GitHub</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/InstaGramOrange.png" alt="InstaGram">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">InstaGram</p>
-                <a href="instagram://user?username=USERNAME" class="contact-link">Matt's InstaGram</a>
-                <!-- Direct Message thru Browser -->
-                <!-- <a href="https://www.instagram.com/direct/inbox/" target="_blank" rel="noopener noreferrer">
-                  Message me on Instagram
-                </a> -->
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/InstaGramOrange.png" alt="InstaGram">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">InstaGram</p>
-                <a href="instagram://user?username=USERNAME" class="contact-link">Space Beth's InstaGram</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeWWW.png" alt="World Wide Web">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">URL</p>
-  
-                <a href="https://www.wildcarddev.com" target="_blank" class="contact-link">WildCardDEV.com</a>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeWWW.png" alt="World Wide Web">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">URL</p>
-  
-                <a href="https://www.wildcarddev.com" target="_blank" class="contact-link">WildCardDEV.com</a>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/birthday.png" alt="Birthday">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Birthday</p>
-  
-                <time datetime="1980-01-01">♑January 1, 1980</time>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/birthday.png" alt="Birthday">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Birthday</p>
-  
-                <time datetime="2006-11-30">♐October 31, 2006</time>
-              </div>
-  
-            </li>
-            <br>
-            <li class="contact-item">
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeLocation.png" alt="Location">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Location</p>
-  
-                <address>Lincoln, NE, USA</address>
-              </div>
-  
-              <div class="icon-box">
-                <img class="contact-img" src="./Extra Images/orangeLocation.png" alt="Location">
-              </div>
-  
-              <div class="contact-info">
-                <p class="contact-title">Location</p>
-  
-                <address>Pullman, WA, USA</address>
-              </div>
-  
-            </li>
-            
-          </ul>
+                      <div class="contact-item">
+                        <img src="./images/email.png" alt="Email" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Email</span>
+                          <a href="mailto:matt@wildcarddev.com" class="contact-link">matt@wildcarddev.com</a>
+                        </div>
+                      </div>
+
+                      <div class="contact-item">
+                        <img src="./images/text.png" alt="Text" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Text</span>
+                          <a href="sms:+14029150789" class="contact-link">Text Me</a>
+                        </div>
+                      </div>
+
+                      <div class="contact-item">
+                        <img src="./images/phone.png" alt="Phone" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Phone</span>
+                          <a href="tel:+14029150789" class="contact-link matt-phone-link">Call Me</a>
+                          <div class="penny-popup">
+                            <div class="penny-bubble">Hey... call Matt 😉</div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <!-- SPACE BETH COLUMN -->
+                    <section class="contact-column" id="beth-contact">
+                      <h3 class="contact-person">Space Beth</h3>
+
+                      <div class="contact-item">
+                        <img src="./images/email.png" alt="Email" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Email</span>
+                          <a href="mailto:SpaceBeth@wildcarddev.com" class="contact-link">SpaceBeth@wildcarddev.com</a>
+                        </div>
+                      </div>
+
+                      <div class="contact-item">
+                        <img src="./images/text.png" alt="Text" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Text</span>
+                          <a href="sms:+14029996491" class="contact-link">Text Space Beth</a>
+                        </div>
+                      </div>
+
+                      <div class="contact-item">
+                        <img src="./images/phone.png" alt="Phone" class="contact-img">
+                        <div class="contact-info">
+                          <span class="contact-title">Phone</span>
+                          <a href="tel:+14029996491" class="contact-link">Call Her</a>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
   
           <div class="separator"></div>
   
