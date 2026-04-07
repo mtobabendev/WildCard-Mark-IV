@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  />
+  <title>Penny Watch</title>
+  <style>
+    :root {
+      --bg-0: #05060a;
+      --bg-1: #0a0d14;
+      --panel: rgba(10, 14, 24, 0.78);
+      --line: rgba(255, 255, 255, 0.08);
+
+      --system-glow-a: rgba(122, 92, 255, 0.28);
+      --system-glow-b: rgba(75, 170, 255, 0.18);
+
+      --penny-pink: #ff78c8;
+      --penny-pink-soft: rgba(255, 120, 200, 0.22);
+      --penny-pink-strong: rgba(255, 120, 200, 0.42);
+      --penny-text: #ffe7f5;
+
+      --text-main: rgba(255, 255, 255, 0.94);
+      --text-soft: rgba(255, 255, 255, 0.68);
+
+      --ring: 0 0 0 1px rgba(255,255,255,0.06), 0 0 18px rgba(122,92,255,0.16), 0 0 38px rgba(255,120,200,0.16);
+      --penny-shadow: 0 0 24px rgba(255,120,200,0.30), 0 0 64px rgba(255,120,200,0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,120,200,0.08), transparent 24%),
+        radial-gradient(circle at 18% 22%, var(--system-glow-a), transparent 34%),
+        radial-gradient(circle at 82% 78%, var(--system-glow-b), transparent 34%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0));
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.00)),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.02) 0px,
+          rgba(255,255,255,0.02) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      mix-blend-mode: screen;
+      opacity: 0.22;
+    }
+
+    .watch-app {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      isolation: isolate;
+    }
+
+    .watch-shell {
+      position: relative;
+      width: min(100%, 390px);
+      min-height: min(100vh - 24px, 520px);
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        rgba(8, 10, 16, 0.74);
+      border: 1px solid var(--line);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 12px 30px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.03);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .watch-shell::before {
+      content: "";
+      position: absolute;
+      inset: -15%;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,120,200,0.10), transparent 22%),
+        radial-gradient(circle at 50% 60%, rgba(122,92,255,0.10), transparent 30%);
+      pointer-events: none;
+      filter: blur(14px);
+      z-index: 0;
+    }
+
+    .watch-shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 18%, transparent 82%, rgba(255,255,255,0.03)),
+        radial-gradient(circle at 50% 50%, transparent 58%, rgba(255,255,255,0.03) 100%);
+      z-index: 0;
+    }
+
+    .watch-stage {
+      position: relative;
+      z-index: 1;
+      min-height: min(100vh - 24px, 520px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 18px 16px 16px;
+    }
+
+    .penny-wrap {
+      position: relative;
+      width: min(58vw, 180px);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      transform: translateX(0);
+      opacity: 1;
+      transition:
+        transform 520ms ease,
+        opacity 520ms ease,
+        filter 520ms ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .penny-wrap.is-exiting {
+      transform: translateX(24px) translateY(-6px);
+      opacity: 0;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .penny-core-glow,
+    .penny-linger-glow {
+      position: absolute;
+      inset: 14%;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .penny-core-glow {
+      background:
+        radial-gradient(circle, rgba(255,120,200,0.20) 0%, rgba(255,120,200,0.08) 45%, transparent 72%);
+      filter: blur(16px);
+      box-shadow: var(--penny-shadow);
+      animation: pulseGlow 2.8s ease-in-out infinite;
+    }
+
+    .penny-linger-glow {
+      inset: 8%;
+      background:
+        radial-gradient(circle, rgba(255,120,200,0.28) 0%, rgba(255,120,200,0.10) 42%, transparent 72%);
+      filter: blur(18px);
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .penny-linger-glow.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(0.98); opacity: 0.88; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    .penny-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+      box-shadow: var(--ring);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,0.06), transparent 35%),
+        linear-gradient(180deg, rgba(20,24,34,0.94), rgba(8,10,16,0.98));
+    }
+
+    .penny-still,
+    .penny-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .penny-still {
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .penny-video {
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 420ms ease;
+      background: transparent;
+    }
+
+    .penny-video.is-ready {
+      opacity: 1;
+    }
+
+    .penny-hotspot {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .penny-hotspot:focus-visible {
+      outline: 2px solid rgba(255,120,200,0.8);
+      outline-offset: 2px;
+    }
+
+    .speech {
+      width: min(100%, 260px);
+      min-height: 58px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 120, 200, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        rgba(17, 12, 22, 0.76);
+      color: var(--penny-text);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 20px rgba(255,120,200,0.10);
+      text-align: center;
+      line-height: 1.35;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .speech.is-hidden {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .microcopy {
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.82;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        rgba(12, 15, 24, 0.75);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 18px rgba(122,92,255,0.09);
+    }
+
+    .chip.penny {
+      border-color: rgba(255,120,200,0.22);
+      color: var(--penny-text);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 18px rgba(255,120,200,0.14);
+    }
+
+    .qr-panel {
+      width: min(100%, 260px);
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,120,200,0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+        rgba(10, 10, 14, 0.88);
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+      pointer-events: none;
+      transition:
+        opacity 360ms ease,
+        transform 360ms ease;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 28px rgba(255,120,200,0.14);
+    }
+
+    .qr-panel.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .qr-title {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--penny-text);
+      text-align: center;
+    }
+
+    .qr-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      padding: 12px;
+      background: #060608;
+      border: 1px solid rgba(255,120,200,0.22);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 0 1px rgba(255,120,200,0.08),
+        0 0 18px rgba(255,120,200,0.14),
+        0 0 38px rgba(255,120,200,0.10);
+      animation: qrPulse 2.6s ease-in-out infinite;
+    }
+
+    @keyframes qrPulse {
+      0%, 100% {
+        box-shadow:
+          inset 0 0 0 1px rgba(255,255,255,0.02),
+          0 0 0 1px rgba(255,120,200,0.08),
+          0 0 18px rgba(255,120,200,0.14),
+          0 0 38px rgba(255,120,200,0.10);
+      }
+      50% {
+        box-shadow:
+          inset 0 0 0 1px rgba(255,255,255,0.02),
+          0 0 0 1px rgba(255,120,200,0.12),
+          0 0 26px rgba(255,120,200,0.22),
+          0 0 52px rgba(255,120,200,0.16);
+      }
+    }
+
+    .qr-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: auto;
+      border-radius: 10px;
+      background: #000;
+    }
+
+    .qr-note {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.35;
+    }
+
+    .tagline {
+      width: min(100%, 270px);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: center;
+      color: rgba(255,255,255,0.74);
+    }
+
+    @media (max-width: 360px) {
+      .watch-stage {
+        padding: 14px 12px;
+      }
+
+      .speech {
+        font-size: 13px;
+      }
+
+      .chip {
+        font-size: 11px;
+        padding: 9px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="watch-app">
+    <section class="watch-shell" aria-label="Penny watch demo">
+      <div class="watch-stage">
+        <div class="penny-wrap" id="pennyWrap">
+          <div class="penny-linger-glow" id="pennyLingerGlow"></div>
+          <div class="penny-core-glow"></div>
+
+          <div class="penny-media">
+            <img
+              class="penny-still"
+              id="pennyStill"
+              src="../media/penny/images/Penny_Watch_Round_Base_v1.png"
+              alt="Penny watch still"
+            />
+            <video
+              class="penny-video"
+              id="pennyVideo"
+              src="../media/penny/video/Penny_Watch_Square_Anim_v1.mp4"
+              playsinline
+              muted
+              autoplay
+              preload="auto"
+            ></video>
+            <button
+              class="penny-hotspot"
+              id="pennyHotspot"
+              type="button"
+              aria-label="Call Penny back"
+            ></button>
+          </div>
+        </div>
+
+        <div class="speech" id="speechBubble">
+          Most sites weren’t built for your watch, honey. I was.
+        </div>
+
+        <div class="microcopy" id="microcopy">
+          Penny watch interface
+        </div>
+
+        <div class="controls">
+          <button class="chip penny" id="callPennyBtn" type="button">Call Penny</button>
+          <button class="chip" id="showQrBtn" type="button">Show QR</button>
+        </div>
+
+        <section class="qr-panel" id="qrPanel" aria-label="QR card">
+          <h2 class="qr-title">Penny QR Card</h2>
+          <div class="qr-frame">
+            <img
+              class="qr-image"
+              src="../media/penny/qr/watch-qr-code.png"
+              alt="Penny QR code"
+            />
+          </div>
+          <div class="qr-note">
+            Temporary placeholder path is wired correctly. Swap in the final pink-on-black version when ready.
+          </div>
+        </section>
+
+        <div class="tagline">
+          Penny doesn’t scale. She adapts.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const pennyWrap = document.getElementById('pennyWrap');
+      const pennyVideo = document.getElementById('pennyVideo');
+      const speechBubble = document.getElementById('speechBubble');
+      const qrPanel = document.getElementById('qrPanel');
+      const pennyHotspot = document.getElementById('pennyHotspot');
+      const callPennyBtn = document.getElementById('callPennyBtn');
+      const showQrBtn = document.getElementById('showQrBtn');
+      const pennyLingerGlow = document.getElementById('pennyLingerGlow');
+
+      const introLines = [
+        "Most sites weren’t built for your watch, honey. I was.",
+        "I kept this one light on purpose.",
+        "Tap me when you want me back."
+      ];
+
+      let introIndex = 0;
+      let introRunning = false;
+      let pennyVisible = true;
+      let introDone = false;
+
+      function showSpeech(text) {
+        speechBubble.classList.remove('is-hidden');
+        speechBubble.textContent = text;
+      }
+
+      function hideSpeech() {
+        speechBubble.classList.add('is-hidden');
+      }
+
+      function showQr() {
+        qrPanel.classList.add('is-visible');
+      }
+
+      function hideQr() {
+        qrPanel.classList.remove('is-visible');
+      }
+
+      function showLinger() {
+        pennyLingerGlow.classList.add('is-visible');
+      }
+
+      function hideLinger() {
+        pennyLingerGlow.classList.remove('is-visible');
+      }
+
+      function showPenny() {
+        pennyWrap.classList.remove('is-exiting');
+        pennyVisible = true;
+        hideLinger();
+
+        if (pennyVideo) {
+          const playAttempt = pennyVideo.play();
+          if (playAttempt && typeof playAttempt.catch === 'function') {
+            playAttempt.catch(() => {});
+          }
+        }
+      }
+
+      function hidePenny() {
+        pennyWrap.classList.add('is-exiting');
+        pennyVisible = false;
+        showLinger();
+      }
+
+      function runIntro() {
+        if (introRunning) return;
+        introRunning = true;
+        introIndex = 0;
+        hideQr();
+        showPenny();
+        showSpeech(introLines[introIndex]);
+
+        setTimeout(() => {
+          introIndex = 1;
+          showSpeech(introLines[introIndex]);
+        }, 2000);
+
+        setTimeout(() => {
+          introIndex = 2;
+          showSpeech(introLines[introIndex]);
+        }, 3900);
+
+        setTimeout(() => {
+          hideSpeech();
+        }, 5900);
+
+        setTimeout(() => {
+          hidePenny();
+          introRunning = false;
+          introDone = true;
+        }, 6500);
+      }
+
+      function recallPenny(withQr) {
+        showPenny();
+        showSpeech(withQr ? "Let’s make sure you don’t lose me..." : "There you are, honey.");
+        if (withQr) {
+          setTimeout(showQr, 450);
+        } else {
+          hideQr();
+        }
+      }
+
+      if (pennyVideo) {
+        pennyVideo.addEventListener('loadeddata', function () {
+          pennyVideo.classList.add('is-ready');
+        });
+
+        pennyVideo.addEventListener('error', function () {
+          pennyVideo.classList.remove('is-ready');
+        });
+      }
+
+      pennyHotspot.addEventListener('click', function () {
+        if (!introDone) return;
+        recallPenny(false);
+      });
+
+      callPennyBtn.addEventListener('click', function () {
+        recallPenny(false);
+      });
+
+      showQrBtn.addEventListener('click', function () {
+        recallPenny(true);
+      });
+
+      runIntro();
+    })();
+  </script>
+</body>
+</html>
