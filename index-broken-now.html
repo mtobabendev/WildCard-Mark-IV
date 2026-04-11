@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WildCard DEV</title>
+  <link rel="shortcut icon" href="./images/brands/favicon-wildcard.ico" type="image/x-icon">
+  <link rel="icon" href="./images/branding/favicon-wildcard.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: hsl(240, 6%, 10%);
+      --bg-2: hsl(240, 5%, 13%);
+      --panel: rgba(18, 20, 32, 0.9);
+      --panel-2: rgba(11, 13, 22, 0.95);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(171, 190, 255, 0.18);
+      --text: rgba(248, 248, 252, 0.96);
+      --text-soft: rgba(210, 214, 228, 0.72);
+      --text-dim: rgba(210, 214, 228, 0.56);
+      --gold-1: hsl(45, 100%, 72%);
+      --gold-2: hsl(35, 100%, 68%);
+      --blue: rgba(112, 170, 255, 0.98);
+      --violet: rgba(146, 92, 255, 0.98);
+      --pink: rgba(255, 52, 179, 1);
+      --pink-soft: rgba(255, 82, 195, 0.26);
+      --radius: 20px;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --shadow-soft: 0 14px 30px rgba(0, 0, 0, 0.24);
+      --transition: 0.25s ease;
+      --ff: "Poppins", sans-serif;
+      --fs-1: 32px;
+      --fs-2: 24px;
+      --fs-3: 18px;
+      --fs-4: 16px;
+      --fs-5: 14px;
+      --fs-6: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--ff); scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96, 132, 255, 0.12), transparent 26%),
+        radial-gradient(circle at top right, rgba(164, 94, 255, 0.11), transparent 26%),
+        radial-gradient(circle at 50% 14%, rgba(255, 106, 198, 0.08), transparent 26%),
+        linear-gradient(180deg, #09090f 0%, #0c0d15 36%, #08090f 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { border: 0; background: none; cursor: pointer; }
+    img, video, svg, span, time, ion-icon { display: block; }
+    li { list-style: none; }
+    ::selection { background: var(--gold-1); color: #101014; }
+
+    .container {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)),
+        linear-gradient(180deg, rgba(18,20,32,0.92), rgba(10,11,18,0.95));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(112, 152, 255, 0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(149, 92, 255, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 22%);
+    }
+    .container > * { position: relative; z-index: 1; }
+
+    main {
+      width: min(1400px, calc(100% - 24px));
+      margin: 18px auto 90px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .sidebar {
+      padding: 18px;
+      display: grid;
+      gap: 18px;
+    }
+   
+   .identity-shell {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.9fr) minmax(0, 1.35fr) minmax(92px, 0.9fr);
+  grid-template-areas: "matt copy beth";
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.identity-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.identity-media--matt { grid-area: matt; }
+.identity-media--beth { grid-area: beth; }
+
+.identity-media::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 26px;
+  background: radial-gradient(circle, rgba(112,152,255,0.16), transparent 66%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.avatar-box {
+  position: relative;
+  width: 100%;
+  max-width: 126px;
+  min-height: 172px;
+  aspect-ratio: 0.72;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)),
+    rgba(10, 12, 19, 0.96);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02) inset,
+    0 0 18px rgba(112,152,255,0.14),
+    0 0 34px rgba(149,92,255,0.1);
+}
+
+.avatar-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
+  pointer-events: none;
+}
+
+.avatar-box video,
+.avatar-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.identity-media--beth .avatar-box img {
+  object-position: center 18%;
+}
+
+.identity-badge {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: white;
+  background: rgba(8, 10, 16, 0.78);
+  border: 1px solid rgba(170,190,255,0.14);
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+.identity-badge::before {
+  content: "♠";
+  color: rgba(224,234,255,0.96);
+  text-shadow: 0 0 10px rgba(112,152,255,0.4), 0 0 16px rgba(149,92,255,0.25);
+}
+
+.avatar-contact-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(236, 244, 255, 0.98);
+  border: 1px solid rgba(126, 164, 255, 0.34);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14), rgba(255,255,255,0.03) 38%, rgba(255,255,255,0.01) 100%),
+    linear-gradient(180deg, rgba(20,26,46,0.96), rgba(10,14,26,0.98));
+  box-shadow:
+    0 0 14px rgba(112,170,255,0.22),
+    0 0 26px rgba(146,92,255,0.16);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.avatar-contact-btn:hover,
+.avatar-contact-btn:focus-visible,
+.avatar-contact-btn.is-open {
+  transform: translateX(-50%) translateY(-1px) scale(1.03);
+  border-color: rgba(255, 92, 196, 0.54);
+  box-shadow:
+    0 0 18px rgba(255, 52, 179, 0.3),
+    0 0 30px rgba(146,92,255,0.18);
+  outline: none;
+}
+
+.avatar-contact-btn--penny {
+  color: rgba(255, 232, 244, 1);
+  border-color: rgba(255, 92, 196, 0.48);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,214,236,0.18), rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.01) 100%),
+    linear-gradient(180deg, rgba(54,20,52,0.96), rgba(28,12,34,0.98));
+  box-shadow:
+    0 0 16px rgba(255, 52, 179, 0.24),
+    0 0 26px rgba(146,92,255,0.14);
+}
+
+.identity-copy {
+  grid-area: copy;
+  display: grid;
+  gap: 12px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  min-width: 0;
+  padding: 20px 18px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+    rgba(12, 13, 21, 0.78);
+  box-shadow: 0 0 18px rgba(112,170,255,0.08), 0 0 28px rgba(146,92,255,0.06);
+}
+
+.identity-logo-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.identity-logo-wordmark {
+  color: rgba(232, 238, 255, 0.98);
+  font-size: 0.92rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(112,170,255,0.18);
+}
+
+.identity-names {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+
+.identity-copy .name,
+.identity-copy .name2 {
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.08;
+  max-width: 10ch;
+}
+
+.identity-copy .name {
+  font-size: clamp(1.6rem, 2.3vw, 2.15rem);
+}
+
+.identity-copy .name2 {
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+}
+
+.identity-divider {
+  width: 72px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(112,152,255,0.7), rgba(149,92,255,0.7), transparent);
+  box-shadow: 0 0 12px rgba(112,152,255,0.2), 0 0 18px rgba(149,92,255,0.12);
+}
+
+.identity-title {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: rgba(236, 240, 255, 0.96);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(72,97,194,0.28), rgba(140,74,234,0.24));
+  border: 1px solid rgba(171,190,255,0.15);
+}
+
+.identity-subtitle {
+  max-width: 20ch;
+  margin: 0 auto;
+  color: var(--text-soft);
+  font-size: 0.96rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 1023px) {
+  .identity-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "matt"
+      "beth";
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .identity-copy {
+    width: 100%;
+    max-width: 420px;
+    padding: 18px 16px;
+  }
+
+  .identity-media {
+    width: 100%;
+  }
+
+  .avatar-box {
+    max-width: 148px;
+    min-height: 188px;
+  }
+}
+
+@media (max-width: 720px) {
+  .identity-copy {
+    max-width: 100%;
+    padding: 16px 14px;
+    gap: 10px;
+  }
+
+  .identity-logo-wordmark {
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+  }
+
+  .identity-copy .name {
+    font-size: 1.5rem;
+  }
+
+  .identity-copy .name2 {
+    font-size: 1rem;
+  }
+
+  .identity-subtitle {
+    max-width: 24ch;
+    font-size: 0.88rem;
+  }
+
+  .avatar-box {
+    max-width: 132px;
+    min-height: 168px;
+  }
+
+  .avatar-contact-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .identity-shell {
+    gap: 14px;
+  }
+
+  .identity-copy {
+    padding: 14px 12px;
+    border-radius: 24px;
+  }
+
+  .identity-logo-wordmark {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+
+  .identity-copy .name {
+    font-size: 1.28rem;
+  }
+
+  .identity-copy .name2 {
+    font-size: 0.92rem;
+  }
+
+  .identity-title {
+    font-size: 0.62rem;
+    padding: 6px 12px;
+  }
+
+  .identity-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .avatar-box {
+    max-width: 118px;
+    min-height: 150px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .identity-copy .name {
+    font-size: 1.16rem;
+  }
+
+  .identity-copy .name2 {
+    font-size: 0.86rem;
+  }
+
+  .identity-logo-wordmark {
+    font-size: 0.62rem;
+  }
+
+  .avatar-box {
+    max-width: 108px;
+    min-height: 140px;
+  }
+}
+      .avatar-box {
+        width: min(100%, 108px);
+        min-height: 134px;
+      }
+      .identity-copy .name,
+      .identity-copy .name2 {
+        font-size: 0.78rem;
+      }
+      .watch-shell { --watch-size: min(96vw, 220px); }
+    }
+  </style>
+</head>
+<body>
+  <svg class="wd-sprite" aria-hidden="true" focusable="false">
+    <symbol id="wd-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M7.2 3.2c.5-.5 1.2-.7 1.9-.5l2.2.7c.8.3 1.4 1 1.5 1.8l.3 2.3c.1.7-.1 1.4-.6 1.9l-1.5 1.5a13.8 13.8 0 0 0 4.2 4.2l1.5-1.5c.5-.5 1.2-.7 1.9-.6l2.3.3c.8.1 1.5.7 1.8 1.5l.7 2.2c.2.7 0 1.4-.5 1.9l-1.4 1.4c-.8.8-2 1.2-3.1 1C10.6 21.4 2.6 13.4 2 5.7c-.1-1.1.2-2.3 1-3.1l1.4-1.4Z"/></symbol>
+    <symbol id="wd-email" viewBox="0 0 24 24"><path fill="currentColor" d="M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.3l7 4.8 7-4.8V7H5Zm14 10V9.7l-6.4 4.4a1 1 0 0 1-1.2 0L5 9.7V17h14Z"/></symbol>
+    <symbol id="wd-text" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h12a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H10l-5.5 3.3c-.7.4-1.5-.1-1.5-.9V8a4 4 0 0 1 4-4Z"/></symbol>
+    <symbol id="wd-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M13.2 21v-7h2.4l.4-3h-2.8V9.2c0-.9.2-1.5 1.5-1.5H16V5.1c-.2 0-1-.1-2-.1-2.7 0-4.5 1.6-4.5 4.6V11H7v3h2.5v7h3.7Z"/></symbol>
+    <symbol id="wd-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 3H21l-6.5 7.4L22 21h-5.8l-4.5-6L6.4 21H4.3l7-8-7-10h5.9l4 5.6L18.9 3Z"/></symbol>
+    <symbol id="wd-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M6.1 8.3H2.8V21h3.3V8.3Zm.2-4A2 2 0 1 1 2.2 4a2 2 0 0 1 4.1.3ZM21 13.2V21h-3.3v-7.1c0-1.8-.7-3-2.3-3-1.2 0-1.9.8-2.2 1.6-.1.3-.1.8-.1 1.2V21H9.8s0-11.3 0-12.5H13v1.8c.4-.6 1.3-1.6 3.3-1.6 2.4 0 4.7 1.6 4.7 5Z"/></symbol>
+    <symbol id="wd-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .8A11.2 11.2 0 0 0 .8 12a11.2 11.2 0 0 0 7.7 10.6c.6.1.8-.3.8-.6v-2.2c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.7-2.5-.3-5.2-1.3-5.2-5.7 0-1.2.4-2.1 1.1-2.9-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.1 1.1a10.5 10.5 0 0 1 5.7 0c2.2-1.4 3.1-1.1 3.1-1.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.7 1.1 2.9 0 4.4-2.7 5.3-5.2 5.7.4.4.8 1.1.8 2.2V22c0 .3.2.7.8.6A11.2 11.2 0 0 0 23.2 12 11.2 11.2 0 0 0 12 .8Z"/></symbol>
+    <symbol id="wd-web-design" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16a2 2 0 0 1 2 2v3H2V7a2 2 0 0 1 2-2Zm-2 7h20v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5Zm4 2v3h5v-3H6Zm7 0v1h5v-1h-5Z"/></symbol>
+    <symbol id="wd-web-dev" viewBox="0 0 24 24"><path fill="currentColor" d="M8.4 6 3 12l5.4 6 1.5-1.3L5.7 12l4.2-4.7L8.4 6Zm7.2 0-1.5 1.3 4.2 4.7-4.2 4.7 1.5 1.3L21 12l-5.4-6ZM12.9 4l-3.4 16h1.7l3.4-16h-1.7Z"/></symbol>
+    <symbol id="wd-play-store" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 3.3c-.3.2-.5.6-.5 1V20c0 .4.2.8.5 1l9.1-9.1-9.1-8.6Zm10.3 9.8 2.9-2.7-9.8-5.6 6.9 8.3Zm3.9-1 2.9-1.6c.5-.3.5-1 0-1.3l-2.8-1.6-3.1 2.9 3 1.6Zm-3.9 1.2-6.9 8.3 9.8-5.6-2.9-2.7Z"/></symbol>
+    <symbol id="wd-mobile-app" viewBox="0 0 24 24"><path fill="currentColor" d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Zm0 3v14h8V5H8Zm3 12h2v1h-2v-1Z"/></symbol>
+    <symbol id="wd-apple-store" viewBox="0 0 24 24"><path fill="currentColor" d="M15.3 12.3c0-2 1.6-3 1.7-3.1-1-1.5-2.6-1.7-3.1-1.7-1.3-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.8.8-3.5 2.1-1.5 2.5-.4 6.3 1 8.4.7 1 1.5 2.1 2.7 2 .9 0 1.3-.6 2.5-.6s1.5.6 2.5.6c1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.4 1.1-2.4-.1 0-3.4-1.3-3.4-5.3Zm-2.3-6c.5-.6.9-1.5.8-2.3-.8 0-1.7.5-2.3 1.1-.5.6-.9 1.5-.8 2.3.9.1 1.8-.4 2.3-1.1Z"/></symbol>
+    <symbol id="wd-graphic-design" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5c-5.2 0-9.5 4-9.5 9.1 0 4.9 3.7 8.4 8.4 8.4h1.5a2.5 2.5 0 0 0 0-5h-1.3a1.2 1.2 0 1 1 0-2.4H13a8.5 8.5 0 1 0-1-10.1Zm-4 8a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm3.2-3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4.1 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm2.7 3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z"/></symbol>
+    <symbol id="wd-resume" viewBox="0 0 24 24"><path fill="currentColor" d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm6 1.5V9h4.5L13 4.5ZM8 11h8v1.5H8V11Zm0 3h8v1.5H8V14Zm0 3h5v1.5H8V17Z"/></symbol>
+    <symbol id="wd-education" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4 2 9l10 5 8-4v5h2V9L12 4Zm-6 8v3.5c0 .8.5 1.5 1.2 1.8L12 20l4.8-2.7c.7-.4 1.2-1 1.2-1.8V12l-6 3-6-3Z"/></symbol>
+    <symbol id="wd-experience" viewBox="0 0 24 24"><path fill="currentColor" d="M9 4h6a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9a2 2 0 0 1 2-2h3V6a2 2 0 0 1 2-2Zm0 3h6V6H9v1Zm11 5H4v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6Zm-6 1h-4v1.5h4V13Z"/></symbol>
+    <symbol id="wd-brand" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5 4.6 6.3v5.3c0 4.7 2.8 8.9 7.4 10 4.6-1.1 7.4-5.3 7.4-10V6.3L12 2.5Zm0 2.2 5.4 2.8v4.1c0 3.7-2.1 7-5.4 8-3.3-1-5.4-4.3-5.4-8V7.5L12 4.7Zm-2.8 3.5 1.8 6.1 1.3-2.3 2.5 4.1h2.1l-3.7-6.1-1.3 2.2-1.2-4Z"/></symbol>
+    <symbol id="wd-paper-plane" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 3.2c.3.2.5.6.4 1l-3.2 15.2c-.1.7-.9 1-1.5.7l-4.8-2.5-2.7 2.7c-.5.5-1.4.2-1.5-.6l-.4-4-4.1-2.1c-.7-.4-.6-1.4.1-1.7L20.9 3c.2-.1.5-.1.7.2ZM8.9 14.9l.2 2 1.3-1.3 7.2-8.1-8.7 7.4Zm1.6-.9 6.8 3.5 2.3-10.9L5.8 12.7l3.1 1.6 8.6-7.3-7 7Z"/></symbol>
+  </svg>
+
+  <main>
+    <aside class="sidebar container">
+      
+      <section class="identity-shell">
+  <div class="identity-media identity-media--matt">
+    <div class="avatar-box">
+      <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
+        <source src="./images/Ace6.webm" type="video/webm">
+        <img src="./images/jokerLedger2.webp" alt="Matt Tobaben">
+      </video>
+      <span class="identity-badge">Founder</span>
+      <button class="avatar-contact-btn" type="button" aria-expanded="false" aria-controls="avatar-contact-matt" data-avatar-contact-trigger="matt">
+        <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-phone"></use></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="identity-copy">
+    <div class="identity-logo-row">
+      <span class="identity-logo-wordmark">WILDCARD DEV</span>
+    </div>
+
+    <div class="identity-names">
+      <h1 class="name">Matt Tobaben</h1>
+      <h2 class="name2">E</h2>
+    </div>
+
+    <div class="identity-divider"></div>
+
+    <p class="identity-title">WildCard DEV</p>
+    <p class="identity-subtitle">
+      Websites, apps, holographic polish, and a memorable assistant presence people actually want to keep talking to.
+    </p>
+  </div>
+
+  <div class="identity-media identity-media--beth">
+    <div class="avatar-box">
+      <img src="./images/spaceBeth.png" alt="E">
+      <span class="identity-badge">Co-Founder</span>
+      <button class="avatar-contact-btn avatar-contact-btn--penny" type="button" aria-expanded="false" aria-controls="avatar-contact-beth" data-avatar-contact-trigger="beth">
+        <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-email"></use></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+      <div class="separator"></div>
+
+      <section class="contact-dropdowns" aria-label="Contact shortcuts">
+        <div class="contact-avatar-drawers" data-avatar-contact-root>
+          <section class="contact-avatar-drawer" id="avatar-contact-matt" data-avatar-contact-panel="matt" hidden>
+            <div class="contact-avatar-drawer-head">
+              <div class="contact-avatar-drawer-title">
+                <span class="brand-logo brand-logo--main" aria-hidden="true"></span>
+                <div>
+                  <strong>Matt</strong>
+                  <span>Phone, text, email, and WildCard DEV links.</span>
+                </div>
+              </div>
+              <button class="contact-avatar-close" type="button" aria-label="Close Matt contact panel" data-avatar-contact-close="matt">×</button>
+            </div>
+            <div class="contact-avatar-drawer-body">
+              <div class="contact-item">
+                <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-phone"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Phone</span><a href="tel:4029150789">(402) 915-0789</a></div>
+              </div>
+              <div class="contact-item">
+                <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-text"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Text</span><a href="sms:4029150789">Message Matt directly</a></div>
+              </div>
+              <div class="contact-item">
+                <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Email</span><a href="mailto:matt@wildcarddev.com">matt@wildcarddev.com</a></div>
+              </div>
+              <div class="contact-item">
+                <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-linkedin"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Shared socials</span>
+                  <div class="contact-social-grid">
+                    <a class="social-link" href="https://www.facebook.com/MattTobabenWildCardDev" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-facebook"></use></svg></span></a>
+                    <a class="social-link" href="https://x.com/@Dev_WildCard" target="_blank" rel="noopener noreferrer" aria-label="X"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-x"></use></svg></span></a>
+                    <a class="social-link" href="#" aria-label="LinkedIn placeholder"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-linkedin"></use></svg></span></a>
+                    <a class="social-link" href="https://github.com/mtobabendev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-github"></use></svg></span></a>
+                    <a class="social-link" href="mailto:matt@wildcarddev.com" aria-label="Email"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="contact-avatar-drawer is-penny" id="avatar-contact-beth" data-avatar-contact-panel="beth" hidden>
+            <div class="contact-avatar-drawer-head">
+              <div class="contact-avatar-drawer-title">
+                <span class="brand-logo brand-logo--penny" aria-hidden="true"></span>
+                <div>
+                  <strong>E</strong>
+                  <span>Phone, text, email, and the same shared WildCard DEV socials.</span>
+                </div>
+              </div>
+              <button class="contact-avatar-close" type="button" aria-label="Close E contact panel" data-avatar-contact-close="beth">×</button>
+            </div>
+            <div class="contact-avatar-drawer-body">
+              <div class="contact-item" data-penny-context>
+                <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-phone"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Phone</span><a href="tel:4029150789">WildCard DEV routed line</a></div>
+              </div>
+              <div class="contact-item" data-penny-context>
+                <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-text"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Text</span><a href="sms:4029150789?body=Hi%20Penny%2C%20please%20route%20this%20to%20E.">Text route to E</a></div>
+              </div>
+              <div class="contact-item" data-penny-context>
+                <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Email</span><a href="mailto:matt@wildcarddev.com?subject=E%20Inquiry">Email route to E</a></div>
+              </div>
+              <div class="contact-item" data-penny-context>
+                <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-linkedin"></use></svg></span>
+                <div class="contact-info"><span class="contact-title">Shared socials</span>
+                  <div class="contact-social-grid">
+                    <a class="social-link" href="https://www.facebook.com/MattTobabenWildCardDev" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><span class="wd-icon-chip wd-icon-chip--sm penny-signal"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-facebook"></use></svg></span></a>
+                    <a class="social-link" href="https://x.com/@Dev_WildCard" target="_blank" rel="noopener noreferrer" aria-label="X"><span class="wd-icon-chip wd-icon-chip--sm penny-signal"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-x"></use></svg></span></a>
+                    <a class="social-link" href="#" aria-label="LinkedIn placeholder"><span class="wd-icon-chip wd-icon-chip--sm penny-signal"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-linkedin"></use></svg></span></a>
+                    <a class="social-link" href="https://github.com/mtobabendev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><span class="wd-icon-chip wd-icon-chip--sm penny-signal"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-github"></use></svg></span></a>
+                    <a class="social-link" href="mailto:matt@wildcarddev.com" aria-label="Email"><span class="wd-icon-chip wd-icon-chip--sm penny-signal"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+    </aside>
+
+    <div class="main-content">
+      <nav class="navbar container">
+        <ul class="navbar-list">
+          <li><button class="navbar-link" data-nav-link="about"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>About</button></li>
+          <li><button class="navbar-link" data-nav-link="our-team"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Our Team</button></li>
+          <li><button class="navbar-link active" data-nav-link="portfolio"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Portfolio</button></li>
+<li><button class="navbar-link" data-nav-link="contact"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Contact</button></li>
+        </ul>
+      </nav>
+
+      <article class="container" data-page="about">
+        <div class="article-shell">
+          <h2 class="article-title">About Us</h2>
+          <div class="copy">
+            <p>We build web experiences that feel sharper, cleaner, and more alive than the usual brochure site. WildCard DEV is where strong frontend polish, practical development, and a little theatrical flair all work together.</p>
+            <p>The goal is simple: make your business feel memorable the moment someone lands on the page. Blue and violet establish the system. Penny’s pink arrives only where it matters. That contrast becomes the signature.</p>
+          </div>
+
+          <section class="service">
+            <h3 class="section-title">What we're doing</h3>
+            <ul class="service-list">
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-web-design"></use></svg></span><div><h4 class="service-item-title">Web Design</h4><p class="service-item-text">Modern interface direction, responsive layouts, and premium brand presentation designed to feel intentional instead of templated.</p></div></li>
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span><div><h4 class="service-item-title">Web Development</h4><p class="service-item-text">Self-contained builds, polished interactions, and production-minded code that stays readable instead of turning into a patchwork mess.</p></div></li>
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-play-store"></use></svg></span><div><h4 class="service-item-title">Play Store</h4><p class="service-item-text">Android-ready product surfaces and companion pages that make mobile launches feel cohesive across web and app touchpoints.</p></div></li>
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-mobile-app"></use></svg></span><div><h4 class="service-item-title">Mobile Apps</h4><p class="service-item-text">Phone-first and watch-aware thinking from the start, with UX patterns that still feel good once the screen gets tiny.</p></div></li>
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-apple-store"></use></svg></span><div><h4 class="service-item-title">Apple Store</h4><p class="service-item-text">Companion experiences and product framing for iPhone-first customers who expect the visual polish to match the platform.</p></div></li>
+              <li class="service-item"><span class="wd-icon-chip wd-icon-chip--lg wd-graphic-icon"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span><div><h4 class="service-item-title">Graphic Design</h4><p class="service-item-text">The flashy one on purpose. Brand marks, banners, key art, and high-impact service visuals designed to sell the work before anyone reads the paragraph.</p></div></li>
+            </ul>
+          </section>
+
+          <section class="about-intro-band">
+            <h3>Built for polished brands, but not only polished backgrounds.</h3>
+            <p>WildCard DEV can absolutely build the premium-tech stuff. We can also help serious people who are building the next chapter of their life — including trade businesses, field-service companies, and founders coming out of prison who need a site that looks legitimate on day one.</p>
+            <p class="auto-scroll-note">The rows below auto-scroll again so the page keeps moving even when the visitor does nothing.</p>
+          </section>
+
+          <section class="testimonials auto-scroll-row">
+            <h3 class="section-title">Testimonials</h3>
+            <ul class="testimonials-list" data-auto-scroll>
+              <li class="testimonials-item">
+                <div class="content-card">
+                  <div class="testimonials-avatar-box">
+                    <div class="wd-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg"><circle cx="31" cy="31" r="31" fill="rgba(18,20,32,1)"/><circle cx="31" cy="23" r="9" fill="rgba(255,255,255,0.9)"/><path d="M16 50c3-8 10-12 15-12s12 4 15 12" fill="rgba(255,255,255,0.84)"/><circle cx="31" cy="31" r="29" fill="none" stroke="rgba(255,52,179,0.66)"/></svg>
+                    </div>
+                  </div>
+                  <h4 class="testimonials-item-title">NeonVault</h4>
+                  <p class="testimonials-item-date">Creative Direction / Placeholder Client</p>
+                  <p class="testimonials-text">WildCard DEV gave our concept a much stronger visual identity than we walked in with. The polish alone made the project feel more expensive.</p>
+                </div>
+              </li>
+              <li class="testimonials-item">
+                <div class="content-card">
+                  <div class="testimonials-avatar-box">
+                    <div class="wd-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg"><circle cx="31" cy="31" r="31" fill="rgba(18,20,32,1)"/><circle cx="31" cy="23" r="9" fill="rgba(255,255,255,0.9)"/><path d="M16 50c3-8 10-12 15-12s12 4 15 12" fill="rgba(255,255,255,0.84)"/><circle cx="31" cy="31" r="29" fill="none" stroke="rgba(112,170,255,0.58)"/></svg>
+                    </div>
+                  </div>
+                  <h4 class="testimonials-item-title">PulseForge</h4>
+                  <p class="testimonials-item-date">Wearable UX / Placeholder Client</p>
+                  <p class="testimonials-text">The smartwatch angle sold us. It felt like somebody had finally designed for the weird edge-case screens instead of pretending they didn’t exist.</p>
+                </div>
+              </li>
+              <li class="testimonials-item">
+                <div class="content-card">
+                  <div class="testimonials-avatar-box">
+                    <div class="wd-avatar" aria-hidden="true">
+                      <svg viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg"><circle cx="31" cy="31" r="31" fill="rgba(18,20,32,1)"/><circle cx="31" cy="23" r="9" fill="rgba(255,255,255,0.9)"/><path d="M16 50c3-8 10-12 15-12s12 4 15 12" fill="rgba(255,255,255,0.84)"/><circle cx="31" cy="31" r="29" fill="none" stroke="rgba(146,92,255,0.6)"/></svg>
+                    </div>
+                  </div>
+                  <h4 class="testimonials-item-title">Second Chance Electric</h4>
+                  <p class="testimonials-item-date">Trade Build / Placeholder Client</p>
+                  <p class="testimonials-text">We needed a site that looked legitimate enough to win real bids without pretending we were some giant corporate outfit. WildCard DEV understood that immediately.</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section class="clients auto-scroll-row">
+            <h3 class="section-title">Showroom Concepts</h3>
+            <div class="trade-callout"><strong>Yes — this showroom is intentionally broader now.</strong><span>Some concepts stay premium and flashy. Some are built to signal that WildCard DEV is felon-business-owner friendly and serious about helping people launch the next chapter of their life in public-facing style.</span></div>
+            <ul class="clients-list" data-auto-scroll data-auto-scroll-reverse>
+              <li class="clients-item"><div class="showroom-card"><div class="showroom-meta"><span class="ace-logo-chip ace-logo-chip--sm"><span class="ace-logo-mark ace-logo-mark--sm"></span></span><div><h4>NeonVault</h4><p>Luxury portfolio interface</p></div></div><span class="showroom-tag">premium portfolio</span><p>Cyber-luxury showcase for creators, consultants, or boutique tech brands that need more presence than a normal gallery.</p></div></li>
+              <li class="clients-item"><div class="showroom-card"><div class="showroom-meta"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-mobile-app"></use></svg></span><div><h4>PulseForge</h4><p>Fitness + wearable flow</p></div></div><span class="showroom-tag">mobile / watch</span><p>A concept site showing how health, progress tracking, and wearable quick-actions can all live inside one cleaner product story.</p></div></li>
+              <li class="clients-item"><div class="showroom-card trade-card"><div class="showroom-meta"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span><div><h4>Second Chance Electric</h4><p>Residential / commercial electrician</p></div></div><span class="showroom-tag">trade business</span><p>Clean bid-request funnels, service-area coverage, before-and-after galleries, and copy built to earn trust fast instead of looking homemade.</p></div></li>
+              <li class="clients-item"><div class="showroom-card trade-card"><div class="showroom-meta"><span class="ace-logo-chip ace-logo-chip--sm"><span class="ace-logo-mark ace-logo-mark--sm"></span></span><div><h4>Freedom Flow Plumbing</h4><p>Emergency plumbing + installs</p></div></div><span class="showroom-tag">service calls</span><p>A practical local-business site concept designed for quick calls, quote forms, financing highlights, and visible service credibility.</p></div></li>
+              <li class="clients-item"><div class="showroom-card"><div class="showroom-meta"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-resume"></use></svg></span><div><h4>HoloResume</h4><p>Interactive personal brand</p></div></div><span class="showroom-tag">career build</span><p>A live resume concept with richer storytelling, downloadable assets, QR continuity, and a stronger case for why boring job surfaces need better design.</p></div></li>
+              <li class="clients-item"><div class="showroom-card trade-card"><div class="showroom-meta"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span><div><h4>Fresh Start Roofing</h4><p>Roofing / gutters / storm repair</p></div></div><span class="showroom-tag">field crews</span><p>Storm-response calls to action, financing highlights, trust badges, and visual structure built for the exact kind of visitor who lands in a hurry.</p></div></li>
+              <li class="clients-item"><div class="showroom-card trade-card"><div class="showroom-meta"><span class="wd-icon-chip wd-icon-chip--sm"><svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-x"></use></svg></span><div><h4>Iron Path Fabrication</h4><p>Welding / metal / custom builds</p></div></div><span class="showroom-tag">blue-collar premium</span><p>A tougher industrial look translated into a site that still feels polished enough to close better-paying commercial work.</p></div></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="container" data-page="our-team">
+        <div class="article-shell">
+          <h2 class="article-title">Our Team</h2>
+          <ul class="resume-list">
+            <li class="resume-card">
+              <div class="resume-header">
+                <div class="resume-header-media">
+                  <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp"><source src="./images/jokerProfile.webm" type="video/webm"><img src="./images/jokerLedger2.webp" alt="Matt Tobaben"></video>
+                </div>
+                <div class="resume-title-group">
+                  <div class="resume-title-row"><h3>Matt Tobaben</h3><span class="resume-badge">CEO &amp; Lead Developer</span></div>
+                  <p class="copy">Versatile professional with 20+ years across financial operations, compliance, warehouse/labor environments, and full-stack development. Systems-focused problem solver bridging operational and technical environments with proven leadership and modern execution.</p>
+                </div>
+                <a class="resume-link" href="./images/mtobabenResume.pdf" target="_blank" rel="noopener noreferrer"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-resume"></use></svg></span><span>Resume</span></a>
+              </div>
+              <div class="timeline-grid">
+                <section class="timeline-panel"><div class="timeline-head"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-education"></use></svg></span><h3>Education</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Computer Science — In Progress</h4><span>AI / Cybersecurity / Robotics Focus</span><p class="timeline-text">Current studies centered on computer science with an emphasis on AI, cybersecurity, and future robotics expansion.</p></li><li><h4 class="timeline-item-title">Business Management — In Progress</h4><span>Ongoing</span><p class="timeline-text">Business and leadership studies supporting company-building, client operations, and long-term expansion strategy.</p></li><li><h4 class="timeline-item-title">Forklift Certification</h4><span>Certified</span><p class="timeline-text">Operational credential supporting warehouse, labor, and logistics-side execution.</p></li></ol></section>
+                <section class="timeline-panel"><div class="timeline-head"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-experience"></use></svg></span><h3>Experience</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Wildcard DEV — CEO &amp; Lead Developer</h4><span>2024 — Present</span><p class="timeline-text">Building responsive web experiences, branded demos, and full-stack concepts that combine polished presentation with practical delivery.</p></li><li><h4 class="timeline-item-title">State of Nebraska — Sanitation Technician</h4><span>2021 — 2026</span><p class="timeline-text">Hands-on operational work in structured environments where consistency, pace, and accountability matter.</p></li><li><h4 class="timeline-item-title">PayPal — Assistant Manager, Debit Card Dept</h4><span>2007 — 2011</span><p class="timeline-text">Led a team of 13 while working across debit operations, dispute flow, customer issues, and card-regulation compliance.</p></li><li><h4 class="timeline-item-title">Commerce Bank — Chargeback Analyst</h4><span>2001 — 2007</span><p class="timeline-text">Processed dispute and chargeback work while remaining compliant with Regulation E, Regulation Z, and card-association requirements.</p></li></ol></section>
+                <section class="timeline-panel"><div class="timeline-head"><span class="ace-logo-chip"><span class="ace-logo-mark"></span></span><h3>Strengths</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Development Stack</h4><span>HTML5 / CSS3 / JavaScript / React / Node.js / SQL / Git</span><p class="timeline-text">Frontend polish, responsive layouts, and practical full-stack delivery that stays maintainable.</p></li><li><h4 class="timeline-item-title">Financial &amp; Operational Depth</h4><span>Reg E / Reg Z / chargebacks / fraud / warehouse</span><p class="timeline-text">A rare blend of technical build skill, compliance literacy, and operational experience that helps bridge business reality and product execution.</p></li></ol></section>
+              </div>
+            </li>
+
+            <li class="resume-card">
+              <div class="resume-header">
+                <div class="resume-header-media">
+                  <img src="./images/spaceBeth.jpg" alt="E">
+                </div>
+                <div class="resume-title-group">
+                  <div class="resume-title-row"><h3>E</h3><span class="resume-badge">Co-Founder / Trend Signal</span></div>
+                  <p class="copy">Sharper, younger-facing energy for the brand — sardonic, smart, and useful for keeping the company from feeling generic or stale.</p>
+                </div>
+                <a class="resume-link" href="./images/mtobabenResume.pdf" target="_blank" rel="noopener noreferrer"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-resume"></use></svg></span><span>Resume</span></a>
+              </div>
+              <div class="timeline-grid">
+                <section class="timeline-panel"><div class="timeline-head"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-education"></use></svg></span><h3>Education</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Washington State University — AI</h4><span>2025 — Present</span><p class="timeline-text">Future-facing focus on AI, simulation, and problem solving applied to real product environments.</p></li><li><h4 class="timeline-item-title">High School / Advanced Coursework</h4><span>Recent</span><p class="timeline-text">Strong academic base with design instincts and the exact kind of dry confidence brands remember.</p></li></ol></section>
+                <section class="timeline-panel"><div class="timeline-head"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-experience"></use></svg></span><h3>Experience</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Co-Owner — WildCard DEV</h4><span>Current</span><p class="timeline-text">Helps shape positioning, concept direction, and the more current edge of the company persona.</p></li><li><h4 class="timeline-item-title">Creative Product Voice</h4><span>Current</span><p class="timeline-text">Part inside joke, part brand differentiator, part proof that the company has a point of view.</p></li></ol></section>
+                <section class="timeline-panel"><div class="timeline-head"><span class="ace-logo-chip"><span class="ace-logo-mark"></span></span><h3>Strengths</h3></div><ol class="timeline-list"><li><h4 class="timeline-item-title">Brand Personality</h4><span>94%</span><p class="timeline-text">Keeps the company from sounding like every other dev shop.</p></li><li><h4 class="timeline-item-title">Design Taste</h4><span>90%</span><p class="timeline-text">Strong instincts for what feels current, clean, and just a little dangerous.</p></li></ol></section>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="container active" data-page="portfolio">
+        <div class="article-shell">
+          <h2 class="article-title">Portfolio</h2>
+          <section class="portfolio-holo">
+            <div class="portfolio-holo-head">
+              <div>
+                <h3 class="section-title" style="margin-bottom:6px;">Holographic Showroom</h3>
+                <p>The holo interface is back. Blue and violet hold the system. Penny’s panel breaks formation on purpose.</p>
+              </div>
+              <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-brand"></use></svg></span>
+            </div>
+            <div class="portfolio-holo-stage" id="Tony-Stark-Holo">
+              <div id="drag-container">
+                <div id="spin-container">
+                  <button class="holo-panel" type="button" data-holo-target="wildcard">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline poster="./images/customerService.webp">
+                        <source src="./images/Ace1.webm" type="video/webm">
+                        <img src="./images/customerService.webp" alt="WildCard DEV flagship panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Flagship</span>
+                      <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-web-design"></use></svg></span>
+                      <div><h3>WildCard DEV Mark VI</h3><p>The live flagship build with a cleaner identity strip, holographic depth, and smarter mobile behavior.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="studio">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
+                        <source src="./images/Ace2.webm" type="video/webm">
+                        <img src="./images/jokerLedger2.webp" alt="Studio motion panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Studio</span>
+                      <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span>
+                      <div><h3>Motion-Ready Panels</h3><p>Every holo card now supports animated .webm sources so the existing live-site assets can drop straight in.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel penny-panel" type="button" data-nav-shortcut="contact">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline preload="metadata" poster="./images/branding/wildcard-logo-main.png">
+                        <source src="./images/Ace3.webm" type="video/webm">
+                        <img src="./images/branding/wildcard-logo-main.png" alt="Penny office panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Penny</span>
+                      <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-paper-plane"></use></svg></span>
+                      <div><h3>Penny’s Office</h3><p>Her pink signal still cuts through the system on purpose, with message and payment actions side by side.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="watch">
+                    <span class="holo-panel-media holo-panel-media--system"></span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Watch</span>
+                      <div class="holo-panel-watch-card">
+                        <div class="holo-panel-watch-shell">
+                          <div class="holo-panel-watch-screen">
+                            <video class="holo-panel-watch-video" autoplay loop muted playsinline poster="./media/penny/images/Penny_Watch_Round_Base_v1.png">
+                              <source src="./media/penny/video/Penny_Watch_Square_Anim_v1.mp4" type="video/mp4">
+                            </video>
+                            <div class="holo-panel-watch-bubble">There you are, honey.</div>
+                            <div class="holo-panel-watch-time" id="watchUiTime">10:08</div>
+                            <div class="holo-panel-watch-caption">Built for your watch too.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div><h3>Penny Watch Demo</h3><p>The wearable panel stays in the ring at all costs and remains the tiny-screen flex piece.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="trade">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline poster="./images/customerService.webp">
+                        <source src="./images/Ace4.webm" type="video/webm">
+                        <img src="./images/customerService.webp" alt="Trade business panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Trade</span>
+                      <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span>
+                      <div><h3>Second Chance Electric</h3><p>Trust-first service-business presentation with enough polish to win serious commercial work fast.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="brand">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline preload="metadata" poster="./images/spaceBeth.jpg">
+                        <source src="./images/Ace5.webm" type="video/webm">
+                        <img src="./images/spaceBeth.jpg" alt="Brand identity panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Identity</span>
+                      <span class="wd-icon-chip wd-graphic-icon"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span>
+                      <div><h3>E Brand Lab</h3><p>Sharper visual direction, logos, favicons, and branded assets that do the selling before the pitch starts.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="resume">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
+                        <source src="./images/Ace6.webm" type="video/webm">
+                        <img src="./images/jokerLedger2.webp" alt="Career surface panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Career</span>
+                      <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-resume"></use></svg></span>
+                      <div><h3>HoloResume</h3><p>Career-facing surfaces now reflect Matt’s real resume story instead of placeholder school and work history.</p></div>
+                    </span>
+                  </button>
+                  <button class="holo-panel" type="button" data-holo-target="contact">
+                    <span class="holo-panel-media holo-panel-media--system">
+                      <video autoplay loop muted playsinline poster="./images/customerService.webp">
+                        <source src="./images/Ace7.webm" type="video/webm">
+                        <img src="./images/customerService.webp" alt="Client contact panel preview">
+                      </video>
+                    </span>
+                    <span class="holo-panel-content">
+                      <span class="panel-tag">Contact</span>
+                      <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span>
+                      <div><h3>Client Intake</h3><p>Contact routing, responsive forms, and the visual setup for Stripe card intake once the live account is connected.</p></div>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="holo-ground"></div>
+            </div>
+            <p class="portfolio-caption" id="holoCaption">The rotating panel ring is part showcase, part theater, part proof that WildCard DEV can make a portfolio page feel like an interface instead of a filing cabinet.</p>
+          </section>
+
+          <ul class="project-list">
+            <li class="project-item"><div class="project-card"><div class="project-media"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-web-design"></use></svg></span></div><h3 class="project-title">WildCard DEV Mark VI</h3><p class="project-category">Brand / Web Experience</p><p class="blog-text">The live flagship build: single-page architecture, watch-aware details, holographic glow language, and Penny-powered polish.</p></div></li>
+            <li class="project-item"><div class="project-card"><div class="project-media"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-mobile-app"></use></svg></span></div><h3 class="project-title">Penny Watch Demo</h3><p class="project-category">Watch / QR Experience</p><p class="blog-text">A true tiny-screen showcase proving the experience was designed for more than just desktop screenshots.</p></div></li>
+            <li class="project-item"><div class="project-card"><div class="project-media"><span class="wd-icon-chip wd-graphic-icon"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span></div><h3 class="project-title">VelvetSignal Identity Kit</h3><p class="project-category">Graphic / Brand Concept</p><p class="blog-text">Proof-of-style work meant to show the company can sell a concept visually before a client ever clicks deeper.</p></div></li>
+            <li class="project-item"><div class="project-card"><div class="project-media"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span></div><h3 class="project-title">Second Chance Electric</h3><p class="project-category">Trade / Service Business Concept</p><p class="blog-text">A trust-first local-service build concept aimed at founders rebuilding in public and needing a site that looks serious from day one.</p></div></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="container" data-page="contact">
+        <div class="article-shell">
+          <h2 class="article-title">Contact</h2>
+          <section class="contact-office">
+            <div class="penny-office-panel">
+              <div class="penny-office-video-wrap"><video src="./images/customerService.webm" autoplay loop muted playsinline poster="./images/customerService.webp"></video><div class="penny-office-brandmarks"><div class="penny-office-brandmark penny-office-brandmark--top"><span class="brand-logo brand-logo--penny brand-logo--sm" aria-hidden="true"></span><span>Penny Routed</span></div><div class="penny-office-brandmark penny-office-brandmark--bottom"><span class="brand-logo brand-logo--penny brand-logo--sm" aria-hidden="true"></span><span>Presence Live</span></div></div></div>
+              <div class="penny-presence-card" id="pennyPresenceCard">
+                <p class="penny-kicker penny-office-logo"><span class="brand-logo brand-logo--penny brand-logo--sm" aria-hidden="true"></span>Penny’s Office</p>
+                <h3 class="penny-title">Tell me what you need… I’ll make sure it lands exactly where it should.</h3>
+                <p class="penny-dialogue" id="pennyDialogue">Whenever you’re ready, honey… I’ve got you.</p>
+              </div>
+            </div>
+
+            <section class="contact-form">
+              <h3 class="section-title">Contact Form</h3>
+              <form class="form" id="contactForm" novalidate>
+                <div class="input-wrapper">
+                  <input id="name" type="text" name="fullname" class="form-input" placeholder="Your name" autocomplete="name">
+                  <input id="email" type="email" name="email" class="form-input" placeholder="Your email" autocomplete="email">
+                  <input id="phone" type="tel" name="phone" class="form-input" placeholder="Your phone (optional)" autocomplete="tel">
+                </div>
+                <textarea id="penny" name="message" class="form-input" placeholder="What are you looking to build, improve, or ask about?"></textarea>
+                <div class="penny-form-note">Penny is currently routing messages for Matt, E, and custom builds. Card payments will use Stripe once the live account handoff is finished.</div>
+                <div class="form-actions">
+                  <button class="form-btn form-btn--secondary form-btn--coming-soon" type="button" id="payComingSoon" aria-disabled="true">
+                    <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-brand"></use></svg></span>
+                    <span class="form-btn-copy"><strong>Pay by Card</strong><small>Stripe • Coming Soon</small></span>
+                  </button>
+                  <button class="form-btn" type="submit" id="sendEmail"><span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-paper-plane"></use></svg></span><span>Send Message</span></button>
+                </div>
+              </form>
+            </section>
+          </section>
+        </div>
+      </article>
+    </div>
+  </main>
+
+<!-- Penny Brain -->
+<script>
+(() => {
+  const PennyBrain = {
+    state: {
+      knownName: '',
+      activeField: '',
+      pauseTimer: null,
+      blurTimer: null,
+      messageLane: 'normal',
+      mashCount: 0,
+      lastInputAt: 0,
+      lastPasteAt: 0,
+      lastDialogueAt: 0,
+      sidebarHintTimer: null,
+      sidebarLineCooldown: 0,
+      fieldFirstTyped: {
+        name: false,
+        email: false,
+        phone: false,
+        penny: false
+      }
+    },
+
+    els: {
+      dialogue: document.getElementById('pennyDialogue'),
+      form: document.getElementById('contactForm'),
+      name: document.getElementById('name'),
+      email: document.getElementById('email'),
+      phone: document.getElementById('phone'),
+      message: document.getElementById('penny'),
+      presenceCard: document.getElementById('pennyPresenceCard'),
+
+      avatarRoot: document.querySelector('.sidebar'),
+      avatarTriggers: Array.from(document.querySelectorAll('[data-avatar-contact-trigger]')),
+      avatarPanels: Array.from(document.querySelectorAll('[data-avatar-contact-panel]')),
+      avatarClosers: Array.from(document.querySelectorAll('[data-avatar-contact-close]')),
+      mattPanel: document.querySelector('[data-avatar-contact-panel="matt"]'),
+      bethPanel: document.querySelector('[data-avatar-contact-panel="beth"]')
+    },
+
+    copy: {
+      idle: 'Whenever you’re ready, honey… I’ve got you.',
+      blur: 'Come back when you’re ready… I’ll be right here.',
+      nameFocus: 'Oh—manners… what should I call you, honey?',
+      emailFocus: 'And where exactly should I reach you?',
+      phoneFocus: 'Optional… unless you like a more direct line.',
+      messageFocus: 'Go on… give me the part that matters.',
+      firstTypeName: 'Now we’re getting somewhere.',
+      firstTypeEmail: 'Perfect… that gives me a way back to you.',
+      firstTypePhone: 'Mm. A little more direct… I like that.',
+      firstTypeMessage: 'That’s the part I wanted.',
+      fieldCleared: 'Let’s try that again, honey.',
+      pause: 'Don’t stop now… you’ve got me curious.',
+      emailValid: 'That’s exactly what I needed. Now I can reach you.',
+      longMessage: 'Mmm… details look good on you.',
+      invalidSubmit: 'Mm-mm. Name, email, and message first.',
+      validSubmit: 'Perfect. Leave the rest to me.',
+      sentFollowup: 'See? We work well together.',
+
+      paste1: 'Dragging something polished into my office? Efficient.',
+      paste2: 'You didn’t type that here, honey… but I can still work with it.',
+      paste3: 'That looked pre-written… convenient.',
+
+      mash1: 'Cute. Try words, honey.',
+      mash2: 'Still mashing? Mm. I noticed.',
+      mash3: 'If you’re going to tease me, at least make it readable.',
+
+      mattOpen: 'Matt’s line is open, honey.',
+      bethOpen: 'E routing is live.',
+      sidebarPhone: 'Direct line. Clean choice.',
+      sidebarEmail: 'Email works… when you want to be remembered properly.',
+      sidebarText: 'Text is faster. A little less subtle, though.',
+      sidebarClose: 'All tucked away again.',
+      sidebarOutside: 'You looked. I noticed.',
+
+      watchLine: 'Most sites weren’t built for your watch, honey. I was.'
+    },
+
+    init() {
+      this.initOffice();
+      this.initSidebarPresence();
+      this.setDialogue(this.copy.idle, true);
+    },
+
+    petName() {
+      return this.state.knownName || 'honey';
+    },
+
+    personalize(line) {
+      return line.replace(/\bhoney\b/g, this.petName());
+    },
+
+    setDialogue(line, force = false) {
+      if (!this.els.dialogue) return;
+      const now = Date.now();
+      if (!force && now - this.state.lastDialogueAt < 300) return;
+      this.state.lastDialogueAt = now;
+      this.els.dialogue.textContent = this.personalize(line);
+    },
+
+    activateField(fieldEl) {
+      [this.els.name, this.els.email, this.els.phone, this.els.message].forEach((el) => {
+        if (el) el.classList.remove('penny-active-field');
+      });
+      if (fieldEl) fieldEl.classList.add('penny-active-field');
+    },
+
+    clearPauseTimer() {
+      if (this.state.pauseTimer) {
+        clearTimeout(this.state.pauseTimer);
+        this.state.pauseTimer = null;
+      }
+    },
+
+    startPauseTimer() {
+      this.clearPauseTimer();
+      this.state.pauseTimer = setTimeout(() => {
+        if (this.state.messageLane === 'normal') {
+          this.setDialogue(this.copy.pause);
+        }
+      }, 2200);
+    },
+
+    handleKnownName() {
+      const raw = this.els.name ? this.els.name.value.trim() : '';
+      if (!raw) return;
+      const first = raw.split(/\s+/)[0].replace(/[^a-zA-Z'-]/g, '');
+      if (first && first.length >= 2) {
+        this.state.knownName = first;
+      }
+    },
+
+    looksLikeMash(value) {
+      if (!value) return false;
+      const stripped = value.trim();
+      if (stripped.length < 6) return false;
+
+      if (/^(.)\1{5,}$/i.test(stripped)) return true;
+      if (/^([a-z])\1{5,}$/i.test(stripped)) return true;
+      if (/^[asdfjkl;]{6,}$/i.test(stripped)) return true;
+      if (/^[qwertyuiop]{6,}$/i.test(stripped)) return true;
+      if (/^[zxcvbnm,./]{6,}$/i.test(stripped)) return true;
+      if (!/[aeiou]/i.test(stripped) && stripped.length > 10) return true;
+
+      return false;
+    },
+
+    handleMessageLane() {
+      if (!this.els.message) return;
+
+      const value = this.els.message.value;
+      const now = Date.now();
+
+      if (now - this.state.lastPasteAt < 180) {
+        this.state.messageLane = 'paste';
+        const pasteLines = [this.copy.paste1, this.copy.paste2, this.copy.paste3];
+        const pasteLine = pasteLines[Math.floor(Math.random() * pasteLines.length)];
+        this.setDialogue(pasteLine, true);
+        this.startPauseTimer();
+        return;
+      }
+
+      if (this.looksLikeMash(value)) {
+        if (this.state.messageLane !== 'mash') {
+          this.state.messageLane = 'mash';
+          this.state.mashCount = 1;
+          this.setDialogue(this.copy.mash1, true);
+        } else {
+          this.state.mashCount += 1;
+          if (this.state.mashCount === 3) this.setDialogue(this.copy.mash2, true);
+          if (this.state.mashCount === 6) this.setDialogue(this.copy.mash3, true);
+        }
+        this.clearPauseTimer();
+        return;
+      }
+
+      if (this.state.messageLane === 'mash' && !this.looksLikeMash(value)) {
+        this.state.messageLane = 'normal';
+        this.state.mashCount = 0;
+        if (value.trim().length > 0) {
+          this.setDialogue(this.copy.firstTypeMessage, true);
+        }
+      } else if (this.state.messageLane === 'paste' && value.trim().length > 0) {
+        this.state.messageLane = 'normal';
+      }
+    },
+
+    fieldFocusHandler(fieldKey) {
+      this.state.activeField = fieldKey;
+      this.activateField(this.els[fieldKey === 'penny' ? 'message' : fieldKey]);
+
+      const focusMap = {
+        name: this.copy.nameFocus,
+        email: this.copy.emailFocus,
+        phone: this.copy.phoneFocus,
+        penny: this.copy.messageFocus
+      };
+
+      this.setDialogue(focusMap[fieldKey], true);
+      this.startPauseTimer();
+    },
+
+    fieldBlurHandler() {
+      this.activateField(null);
+      this.clearPauseTimer();
+
+      if (this.state.blurTimer) clearTimeout(this.state.blurTimer);
+      this.state.blurTimer = setTimeout(() => {
+        this.setDialogue(this.copy.blur);
+      }, 220);
+    },
+
+    fieldInputHandler(fieldKey, fieldEl) {
+      if (!fieldEl) return;
+
+      if (this.state.blurTimer) clearTimeout(this.state.blurTimer);
+      this.state.lastInputAt = Date.now();
+
+      const value = fieldEl.value.trim();
+
+      if (fieldKey === 'name') {
+        this.handleKnownName();
+      }
+
+      if (fieldKey === 'penny') {
+        this.handleMessageLane();
+      }
+
+      if (!value) {
+        this.setDialogue(this.copy.fieldCleared);
+        this.startPauseTimer();
+        return;
+      }
+
+      if (!this.state.fieldFirstTyped[fieldKey] && this.state.messageLane === 'normal') {
+        this.state.fieldFirstTyped[fieldKey] = true;
+
+        const firstTypeMap = {
+          name: this.copy.firstTypeName,
+          email: this.copy.firstTypeEmail,
+          phone: this.copy.firstTypePhone,
+          penny: this.copy.firstTypeMessage
+        };
+
+        this.setDialogue(firstTypeMap[fieldKey], true);
+      }
+
+      if (fieldKey === 'email' && /\S+@\S+\.\S+/.test(value)) {
+        this.setDialogue(this.copy.emailValid);
+      }
+
+      if (fieldKey === 'penny' && value.length > 180 && this.state.messageLane === 'normal') {
+        this.setDialogue(this.copy.longMessage);
+      }
+
+      this.startPauseTimer();
+    },
+
+    fieldPasteHandler() {
+      this.state.lastPasteAt = Date.now();
+    },
+
+    submitHandler(event) {
+      event.preventDefault();
+      if (!this.els.form || !this.els.name || !this.els.email || !this.els.message) return;
+
+      const nameValue = this.els.name.value.trim();
+      const emailValue = this.els.email.value.trim();
+      const phoneValue = this.els.phone ? this.els.phone.value.trim() : '';
+      const messageValue = this.els.message.value.trim();
+
+      if (!nameValue || !emailValue || !messageValue) {
+        this.setDialogue(this.copy.invalidSubmit, true);
+        return;
+      }
+
+      this.handleKnownName();
+      this.setDialogue(this.copy.validSubmit, true);
+
+      const subject = encodeURIComponent('WildCard DEV Inquiry');
+      const body = encodeURIComponent(
+        `Name: ${nameValue}\nEmail: ${emailValue}\nPhone: ${phoneValue}\n\nMessage:\n${messageValue}`
+      );
+
+      setTimeout(() => {
+        this.setDialogue(this.copy.sentFollowup, true);
+      }, 450);
+
+      window.location.href = `mailto:matt@wildcarddev.com?subject=${subject}&body=${body}`;
+    },
+
+    initOffice() {
+      if (!this.els.form) return;
+
+      const fieldMap = [
+        ['name', this.els.name],
+        ['email', this.els.email],
+        ['phone', this.els.phone],
+        ['penny', this.els.message]
+      ];
+
+      fieldMap.forEach(([key, el]) => {
+        if (!el) return;
+
+        el.addEventListener('focus', () => this.fieldFocusHandler(key));
+        el.addEventListener('blur', () => this.fieldBlurHandler());
+        el.addEventListener('input', () => this.fieldInputHandler(key, el));
+        el.addEventListener('paste', () => this.fieldPasteHandler());
+
+        if (key === 'penny') {
+          el.addEventListener('keydown', (event) => {
+            if (event.repeat) {
+              this.handleMessageLane();
+            }
+          });
+        }
+      });
+
+      this.els.form.addEventListener('submit', (event) => this.submitHandler(event));
+    },
+
+    closeAllAvatarPanels() {
+      this.els.avatarTriggers.forEach((trigger) => {
+        trigger.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+
+      this.els.avatarPanels.forEach((panel) => {
+        panel.hidden = true;
+      });
+    },
+
+    openAvatarPanel(key) {
+      this.closeAllAvatarPanels();
+
+      this.els.avatarTriggers.forEach((trigger) => {
+        const match = trigger.getAttribute('data-avatar-contact-trigger') === key;
+        trigger.classList.toggle('is-open', match);
+        trigger.setAttribute('aria-expanded', String(match));
+      });
+
+      this.els.avatarPanels.forEach((panel) => {
+        panel.hidden = panel.getAttribute('data-avatar-contact-panel') !== key;
+      });
+    },
+
+    sidebarContextLine(panelKey) {
+      if (panelKey === 'matt') return this.copy.mattOpen;
+      if (panelKey === 'beth') return this.copy.bethOpen;
+      return this.copy.sidebarOutside;
+    },
+
+    sidebarActionLine(iconUseHref) {
+      if (iconUseHref === '#wd-phone') return this.copy.sidebarPhone;
+      if (iconUseHref === '#wd-email') return this.copy.sidebarEmail;
+      if (iconUseHref === '#wd-text') return this.copy.sidebarText;
+      return '';
+    },
+
+    initSidebarPresence() {
+      if (!this.els.avatarRoot) return;
+
+      this.closeAllAvatarPanels();
+
+      this.els.avatarTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const key = trigger.getAttribute('data-avatar-contact-trigger');
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+          if (isOpen) {
+            this.closeAllAvatarPanels();
+            this.setDialogue(this.copy.sidebarClose, true);
+          } else {
+            this.openAvatarPanel(key);
+            this.setDialogue(this.sidebarContextLine(key), true);
+          }
+        });
+
+        trigger.addEventListener('mouseenter', () => {
+          const key = trigger.getAttribute('data-avatar-contact-trigger');
+          this.setDialogue(this.sidebarContextLine(key));
+        });
+      });
+
+      this.els.avatarClosers.forEach((button) => {
+        button.addEventListener('click', () => {
+          this.closeAllAvatarPanels();
+          this.setDialogue(this.copy.sidebarClose, true);
+        });
+      });
+
+      this.els.avatarPanels.forEach((panel) => {
+        panel.querySelectorAll('.contact-item a').forEach((link) => {
+          link.addEventListener('mouseenter', () => {
+            const use = link.closest('.contact-item')?.querySelector('use');
+            const href = use ? (use.getAttribute('href') || use.getAttribute('xlink:href')) : '';
+            const line = this.sidebarActionLine(href);
+            if (line) this.setDialogue(line);
+          });
+
+          link.addEventListener('focus', () => {
+            const use = link.closest('.contact-item')?.querySelector('use');
+            const href = use ? (use.getAttribute('href') || use.getAttribute('xlink:href')) : '';
+            const line = this.sidebarActionLine(href);
+            if (line) this.setDialogue(line);
+          });
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        const clickedTrigger = this.els.avatarTriggers.some((trigger) => trigger.contains(event.target));
+        if (!this.els.avatarRoot.contains(event.target) && !clickedTrigger) {
+          const hadOpenPanel = this.els.avatarPanels.some((panel) => !panel.hidden);
+          this.closeAllAvatarPanels();
+          if (hadOpenPanel) this.setDialogue(this.copy.sidebarOutside, true);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          const hadOpenPanel = this.els.avatarPanels.some((panel) => !panel.hidden);
+          this.closeAllAvatarPanels();
+          if (hadOpenPanel) this.setDialogue(this.copy.sidebarClose, true);
+        }
+      });
+    }
+  };
+
+  window.PennyBrain = PennyBrain;
+  document.addEventListener('DOMContentLoaded', () => PennyBrain.init());
+})();
+</script>
+
+<!-- Site Utility Brain -->
+<script>
+(() => {
+  const navButtons = Array.from(document.querySelectorAll('[data-nav-link]'));
+  const pages = Array.from(document.querySelectorAll('[data-page]'));
+
+  function activatePage(pageName) {
+    navButtons.forEach((button) => {
+      const match = button.getAttribute('data-nav-link') === pageName;
+      button.classList.toggle('active', match);
+    });
+
+    pages.forEach((page) => {
+      const match = page.getAttribute('data-page') === pageName;
+      page.classList.toggle('active', match);
+    });
+  }
+
+  navButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-nav-link');
+      activatePage(target);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  const navShortcutButtons = document.querySelectorAll('[data-nav-shortcut]');
+  navShortcutButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-nav-shortcut');
+      const match = navButtons.find((btn) => btn.getAttribute('data-nav-link') === target);
+      if (match) match.click();
+    });
+  });
+
+  const watchUiTime = document.getElementById('watchUiTime');
+  function updateWatchTime() {
+    if (!watchUiTime) return;
+    const now = new Date();
+    watchUiTime.textContent = now.toLocaleTimeString([], {
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+  }
+  updateWatchTime();
+  setInterval(updateWatchTime, 30000);
+
+  const marqueeRows = Array.from(document.querySelectorAll('[data-auto-scroll]'));
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function buildAutoScrollLoop(row) {
+    if (row.dataset.autoScrollReady === 'true') return;
+    const originalItems = Array.from(row.children);
+
+    if (!originalItems.length) return;
+
+    originalItems.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a, button, input, textarea, select, video').forEach((el) => {
+        el.setAttribute('tabindex', '-1');
+      });
+      row.appendChild(clone);
+    });
+
+    row.dataset.autoScrollReady = 'true';
+  }
+
+  function createAutoScroller(row) {
+    buildAutoScrollLoop(row);
+
+    let isPaused = false;
+    let animationFrame = null;
+    let lastTime = 0;
+    const direction = row.hasAttribute('data-auto-scroll-reverse') ? -1 : 1;
+    const speed = 28;
+    const getLoopWidth = () => row.scrollWidth / 2;
+
+    function normalizeScrollPosition() {
+      const loopWidth = getLoopWidth();
+      if (!loopWidth) return;
+
+      if (direction < 0 && row.scrollLeft <= 1) {
+        row.scrollLeft += loopWidth;
+      }
+
+      if (direction > 0 && row.scrollLeft >= loopWidth) {
+        row.scrollLeft -= loopWidth;
+      }
+    }
+
+    function step(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const delta = timestamp - lastTime;
+      lastTime = timestamp;
+
+      if (!isPaused && !prefersReducedMotion.matches) {
+        row.scrollLeft += direction * ((speed * delta) / 1000);
+        normalizeScrollPosition();
+      }
+
+      animationFrame = window.requestAnimationFrame(step);
+    }
+
+    function pause() {
+      isPaused = true;
+    }
+
+    function resume() {
+      normalizeScrollPosition();
+      isPaused = false;
+    }
+
+    const initialLoopWidth = getLoopWidth();
+    if (direction < 0 && initialLoopWidth) {
+      row.scrollLeft = initialLoopWidth;
+    } else {
+      row.scrollLeft = 0;
+    }
+
+    row.addEventListener('mouseenter', pause);
+    row.addEventListener('mouseleave', resume);
+    row.addEventListener('focusin', pause);
+    row.addEventListener('focusout', resume);
+    row.addEventListener('touchstart', pause, { passive: true });
+    row.addEventListener('touchend', resume, { passive: true });
+    row.addEventListener('touchcancel', resume, { passive: true });
+
+    const handleVisibility = () => {
+      isPaused = document.hidden || prefersReducedMotion.matches;
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    prefersReducedMotion.addEventListener('change', handleVisibility);
+
+    animationFrame = window.requestAnimationFrame(step);
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      prefersReducedMotion.removeEventListener('change', handleVisibility);
+    };
+  }
+
+  marqueeRows.forEach((row) => {
+    createAutoScroller(row);
+  });
+
+  const holoCaption = document.getElementById('holoCaption');
+  const holoPanels = Array.from(document.querySelectorAll('.holo-panel'));
+  const panelCopy = {
+    wildcard: 'The flagship build now gives the landing view more breathing room while keeping the holo ring as the first real spectacle.',
+    studio: 'These holo cards are now structured to accept animated .webm media using the same style of file paths already in the live build.',
+    watch: 'Penny\'s watch panel stays in the ring and keeps the smartwatch-first promise visible immediately.',
+    trade: 'Trade-business concepts make it obvious that WildCard DEV can help serious founders look legitimate fast.',
+    brand: 'E\'s brand-facing panel keeps the graphic-design side of the company visible without feeling detached from the dev work.',
+    resume: 'The Our Team page now reflects Matt\'s actual resume background instead of placeholder education and work history.',
+    contact: 'Penny\'s office now includes the visual Stripe placeholder button while the real card flow waits for the live handoff.'
+  };
+
+  holoPanels.forEach((panel) => {
+    panel.addEventListener('mouseenter', () => {
+      const key = panel.dataset.holoTarget || panel.dataset.navShortcut || 'wildcard';
+      if (holoCaption && panelCopy[key]) holoCaption.textContent = panelCopy[key];
+    });
+  });
+
+  const dragContainer = document.getElementById('drag-container');
+  const spinContainer = document.getElementById('spin-container');
+
+  if (dragContainer && spinContainer && holoPanels.length) {
+    const radius = 320;
+    let tX = 0;
+    let tY = -12;
+    let desX = 0;
+    let desY = 0;
+    let autoRotateAngle = 0;
+    let pointerDown = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function applyTransform() {
+      dragContainer.style.transform = `translate(-50%, -50%) rotateX(${tY}deg) rotateY(${tX}deg)`;
+    }
+
+    function positionPanels() {
+      holoPanels.forEach((panel, index) => {
+        const angle = (360 / holoPanels.length) * index;
+        panel.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+      });
+    }
+
+    function animateRing() {
+      if (!pointerDown) {
+        autoRotateAngle += 0.12;
+        tX += 0.06;
+      } else {
+        tX += desX * 0.06;
+        tY -= desY * 0.06;
+        desX *= 0.92;
+        desY *= 0.92;
+      }
+
+      if (tY > 18) tY = 18;
+      if (tY < -38) tY = -38;
+
+      spinContainer.style.transform = `rotateY(${autoRotateAngle}deg)`;
+      applyTransform();
+      requestAnimationFrame(animateRing);
+    }
+
+    function pointerStart(clientX, clientY) {
+      pointerDown = true;
+      lastX = clientX;
+      lastY = clientY;
+    }
+
+    function pointerMove(clientX, clientY) {
+      if (!pointerDown) return;
+      desX = clientX - lastX;
+      desY = clientY - lastY;
+      lastX = clientX;
+      lastY = clientY;
+    }
+
+    function pointerEnd() {
+      pointerDown = false;
+    }
+
+    positionPanels();
+    applyTransform();
+    animateRing();
+
+    dragContainer.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+      pointerStart(event.clientX, event.clientY);
+    });
+
+    window.addEventListener('mousemove', (event) => {
+      pointerMove(event.clientX, event.clientY);
+    });
+
+    window.addEventListener('mouseup', pointerEnd);
+
+    dragContainer.addEventListener('touchstart', (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      pointerStart(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      pointerMove(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    window.addEventListener('touchend', pointerEnd, { passive: true });
+  }
+})();
+</script>
+<script id="holo-enhancement-engine">
+/* =========================
+   NEXT LEVEL HOLO SYSTEM
+========================= */
+
+const panels = document.querySelectorAll('.holo-panel');
+const dragContainer = document.getElementById('drag-container');
+
+/* =========================
+   DEPTH FADE
+========================= */
+
+function updateDepthFade() {
+  panels.forEach(panel => {
+    const rect = panel.getBoundingClientRect();
+    const center = window.innerWidth / 2;
+
+    const distance = Math.abs((rect.left + rect.width / 2) - center);
+    const max = window.innerWidth / 2;
+
+    const depth = distance / max;
+
+    panel.style.opacity = 1 - (depth * 0.5);
+    panel.style.filter = `brightness(${1 - depth * 0.3})`;
+  });
+}
+
+/* =========================
+   PENNY GLOW DOMINANCE
+========================= */
+
+const penny = document.querySelector('.penny-panel');
+
+if (penny) {
+  penny.addEventListener('mouseenter', () => {
+    panels.forEach(p => {
+      if (!p.classList.contains('penny-panel')) {
+        p.style.boxShadow = "0 0 10px rgba(120,160,255,0.2)";
+      }
+    });
+
+    penny.style.boxShadow = `
+      0 0 40px rgba(255,50,180,0.9),
+      0 0 80px rgba(255,50,180,0.5)
+    `;
+  });
+
+  penny.addEventListener('mouseleave', () => {
+    panels.forEach(p => {
+      p.style.boxShadow = "";
+    });
+  });
+}
+
+/* =========================
+   PARALLAX TILT (MOUSE)
+========================= */
+
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+  if (dragContainer) {
+    dragContainer.style.transform =
+      `translate(-50%, -50%) rotateX(${-y}deg) rotateY(${x}deg)`;
+  }
+
+  updateDepthFade();
+});
+
+/* =========================
+   TOUCH SUPPORT
+========================= */
+
+document.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+
+  const x = (touch.clientX / window.innerWidth - 0.5) * 20;
+  const y = (touch.clientY / window.innerHeight - 0.5) * 10;
+
+  if (dragContainer) {
+    dragContainer.style.transform =
+      `translate(-50%, -50%) rotateX(${-y}deg) rotateY(${x}deg)`;
+  }
+
+  updateDepthFade();
+});
+
+/* =========================
+   INITIAL RUN
+========================= */
+
+updateDepthFade();
+
+</script>
+</body>
+</html>
+

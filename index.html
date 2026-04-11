@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WildCard DEV</title>
-  <link rel="shortcut icon" href="./images/branding/favicon-wildcard.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./images/brands/favicon-wildcard.ico" type="image/x-icon">
   <link rel="icon" href="./images/branding/favicon-wildcard.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,10 +94,12 @@
     }
     .identity-shell {
       display: grid;
-      grid-template-columns: minmax(88px, 0.8fr) minmax(0, 1.18fr) minmax(88px, 0.8fr);
-      grid-template-areas: "matt copy beth";
-      gap: 10px;
-      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "copy copy"
+        "matt beth";
+      gap: 14px;
+      align-items: stretch;
     }
     .identity-media {
       position: relative;
@@ -119,9 +121,10 @@
     }
     .avatar-box {
       position: relative;
-      width: 100%;
-      min-height: 134px;
-      aspect-ratio: 0.76;
+      width: min(100%, 118px);
+      margin: 0 auto;
+      min-height: 152px;
+      aspect-ratio: 0.72;
       border-radius: 22px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
@@ -152,8 +155,9 @@
     }
     .identity-badge {
       position: absolute;
-      left: 8px;
+      left: 50%;
       top: 8px;
+      transform: translateX(-50%);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -179,7 +183,9 @@
       text-align: center;
       min-width: 0;
       align-content: center;
-      padding: 14px 12px;
+      justify-items: center;
+      max-width: 100%;
+      padding: 18px 16px;
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,0.08);
       background:
@@ -187,7 +193,7 @@
         rgba(12, 13, 21, 0.78);
       box-shadow: 0 0 18px rgba(112,170,255,0.08), 0 0 28px rgba(146,92,255,0.06);
     }
-    .identity-names { display: grid; gap: 4px; }
+    .identity-names { display: grid; gap: 6px; justify-items: center; }
     .identity-copy .name,
     .identity-copy .name2 {
       font-size: clamp(1rem, 2.8vw, 1.24rem);
@@ -214,7 +220,7 @@
       border: 1px solid rgba(171,190,255,0.15);
     }
     .identity-subtitle {
-      max-width: 30ch;
+      max-width: 22ch;
       margin: 0 auto;
       color: var(--text-soft);
       font-size: 0.8rem;
@@ -224,8 +230,9 @@
 
     .avatar-contact-btn {
       position: absolute;
-      left: 8px;
+      left: 50%;
       bottom: 8px;
+      transform: translateX(-50%);
       z-index: 3;
       min-width: 38px;
       height: 38px;
@@ -249,7 +256,7 @@
     .avatar-contact-btn:hover,
     .avatar-contact-btn:focus-visible,
     .avatar-contact-btn.is-open {
-      transform: translateY(-1px) scale(1.03);
+      transform: translateX(-50%) translateY(-1px) scale(1.03);
       border-color: rgba(255, 92, 196, 0.54);
       box-shadow:
         0 0 18px rgba(255, 52, 179, 0.3),
@@ -540,7 +547,7 @@
     #spin-container { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
     #drag-container { transform: translate(-50%, -50%) rotateX(-12deg); width: 0; height: 0; }
     #spin-container { transform-style: preserve-3d; }
-    .holo-panel {
+        .holo-panel {
       position: absolute;
       left: -110px;
       top: -154px;
@@ -552,15 +559,20 @@
       align-content: space-between;
       gap: 14px;
       background:
-        radial-gradient(circle at top left, rgba(212,226,255,0.1), rgba(255,255,255,0.02) 28%, rgba(255,255,255,0.01) 100%),
-        linear-gradient(180deg, rgba(23,28,46,0.96), rgba(10,12,22,0.98));
-      border: 1px solid rgba(126,164,255,0.28);
-      box-shadow: 0 0 18px rgba(112,170,255,0.18), 0 0 28px rgba(146,92,255,0.12);
+        radial-gradient(circle at top left, rgba(212,226,255,0.05), rgba(255,255,255,0.008) 28%, rgba(255,255,255,0.003) 100%),
+        linear-gradient(180deg, rgba(16,20,34,0.22), rgba(8,10,18,0.32));
+      backdrop-filter: blur(10px) saturate(1.08);
+      -webkit-backdrop-filter: blur(10px) saturate(1.08);
+      border: 1px solid rgba(126,164,255,0.34);
+      box-shadow:
+        0 0 22px rgba(112,170,255,0.28),
+        0 0 34px rgba(146,92,255,0.18),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
       color: var(--text);
       text-align: left;
-      -webkit-box-reflect: below 12px linear-gradient(transparent, transparent, rgba(0,0,0,0.18));
+      -webkit-box-reflect: below 12px linear-gradient(transparent, transparent, rgba(0,0,0,0.16));
       cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
       overflow: hidden;
       isolation: isolate;
     }
@@ -573,26 +585,50 @@
       height: 40px;
       background: center / contain no-repeat url('./images/branding/wildcard-logo-main.png');
       opacity: 0.95;
-      filter: drop-shadow(0 0 10px rgba(112,170,255,0.22)) drop-shadow(0 0 18px rgba(255, 52, 179, 0.14));
+      filter: drop-shadow(0 0 12px rgba(112,170,255,0.34)) drop-shadow(0 0 20px rgba(146,92,255,0.18));
       pointer-events: none;
     }
     .holo-panel::before { top: 12px; left: 12px; }
     .holo-panel::after { right: 12px; bottom: 12px; transform: rotate(180deg); }
     .holo-panel:hover {
-      border-color: rgba(255, 92, 196, 0.5);
-      box-shadow: 0 0 24px rgba(255, 52, 179, 0.24), 0 0 36px rgba(146,92,255,0.18);
+      border-color: rgba(171,190,255,0.46);
+      box-shadow:
+        0 0 26px rgba(112,170,255,0.36),
+        0 0 42px rgba(146,92,255,0.24),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
     }
-    .holo-panel h3 { font-size: 1rem; }
-    .holo-panel p { color: var(--text-soft); font-size: 0.82rem; line-height: 1.45; }
-    .holo-panel .panel-tag { display: inline-flex; width: fit-content; padding: 5px 8px; border-radius: 999px; background: rgba(112,170,255,0.12); color: rgba(222,234,255,0.96); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .holo-panel h3 { font-size: 1rem; text-shadow: 0 2px 14px rgba(0,0,0,0.45); }
+    .holo-panel p { color: rgba(232,236,245,0.84); font-size: 0.82rem; line-height: 1.45; text-shadow: 0 2px 12px rgba(0,0,0,0.46); }
+    .holo-panel .panel-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(112,170,255,0.16);
+      color: rgba(232,240,255,0.98);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
     .holo-panel.penny-panel {
-      border-color: rgba(255, 92, 196, 0.52);
+      border-color: rgba(255, 92, 196, 0.62);
       background:
-        radial-gradient(circle at top left, rgba(255,214,236,0.12), rgba(255,255,255,0.02) 28%, rgba(255,255,255,0.01) 100%),
-        linear-gradient(180deg, rgba(44,18,44,0.96), rgba(18,12,26,0.98));
-      box-shadow: 0 0 24px rgba(255, 52, 179, 0.26), 0 0 44px rgba(255, 52, 179, 0.18);
+        radial-gradient(circle at top left, rgba(255,214,236,0.07), rgba(255,255,255,0.008) 28%, rgba(255,255,255,0.003) 100%),
+        linear-gradient(180deg, rgba(42,16,40,0.22), rgba(18,10,26,0.32));
+      box-shadow:
+        0 0 24px rgba(255, 52, 179, 0.34),
+        0 0 46px rgba(255, 52, 179, 0.18),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
     }
-    .holo-panel.penny-panel .panel-tag { background: rgba(255, 52, 179, 0.18); }
+    .holo-panel.penny-panel:hover {
+      border-color: rgba(255, 130, 214, 0.74);
+      box-shadow:
+        0 0 28px rgba(255, 52, 179, 0.42),
+        0 0 56px rgba(255, 52, 179, 0.24),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .holo-panel.penny-panel .panel-tag { background: rgba(255, 52, 179, 0.2); }
     .holo-panel-media {
       position: absolute;
       inset: 0;
@@ -609,32 +645,32 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      opacity: 0.46;
-      filter: saturate(1.12) contrast(1.04) brightness(0.9);
+      opacity: 0.72;
+      filter: saturate(1.14) contrast(1.02) brightness(0.92);
     }
     .holo-panel-media img {
-      opacity: 0.34;
+      opacity: 0.62;
     }
     .holo-panel.penny-panel .holo-panel-media video,
     .holo-panel.penny-panel .holo-panel-media img {
-      opacity: 0.56;
+      opacity: 0.76;
     }
     .holo-panel-media::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(7,9,16,0.14), rgba(7,9,16,0.66) 76%, rgba(7,9,16,0.88)),
+        linear-gradient(180deg, rgba(7,9,16,0.04), rgba(7,9,16,0.2) 44%, rgba(7,9,16,0.52) 100%),
         linear-gradient(120deg, transparent, rgba(255,255,255,0.06) 38%, transparent 62%);
       transform: translateX(-130%);
       animation: holoSweep 6s ease-in-out infinite;
     }
     .holo-panel-media--system {
       background:
-        radial-gradient(circle at 22% 18%, rgba(112,170,255,0.2), transparent 24%),
-        radial-gradient(circle at 78% 22%, rgba(146,92,255,0.22), transparent 26%),
-        radial-gradient(circle at 50% 78%, rgba(255, 52, 179, 0.1), transparent 28%),
-        linear-gradient(180deg, rgba(18,24,40,0.82), rgba(6,8,14,0.94));
+        radial-gradient(circle at 22% 18%, rgba(112,170,255,0.14), transparent 24%),
+        radial-gradient(circle at 78% 22%, rgba(146,92,255,0.16), transparent 26%),
+        radial-gradient(circle at 50% 78%, rgba(255, 52, 179, 0.06), transparent 28%),
+        linear-gradient(180deg, rgba(18,24,40,0.12), rgba(6,8,14,0.26));
     }
     .holo-panel-content {
       position: relative;
@@ -1434,7 +1470,7 @@
       filter: drop-shadow(0 0 10px rgba(112,170,255,0.22)) drop-shadow(0 0 16px rgba(255, 52, 179, 0.14));
     }
     .brand-logo--penny {
-      background-image: url('./images/branding/wildcard-logo-penny.png');
+      background-image: url('./images/branding/wildcard-logo-main.png');
       filter: drop-shadow(0 0 10px rgba(255, 52, 179, 0.28)) drop-shadow(0 0 16px rgba(112,170,255,0.12));
     }
     .brand-logo--sm { width: 22px; height: 24px; }
@@ -1450,21 +1486,23 @@
       main { grid-template-columns: 330px minmax(0, 1fr); align-items: start; }
       .sidebar { position: sticky; top: 18px; }
       .identity-shell {
-        grid-template-columns: minmax(84px, 0.78fr) minmax(0, 1.2fr) minmax(84px, 0.78fr);
-        gap: 10px;
+        grid-template-columns: minmax(92px, 0.78fr) minmax(0, 1.16fr) minmax(92px, 0.78fr);
+        grid-template-areas: "matt copy beth";
+        gap: 12px;
       }
       .identity-copy {
-        padding: 12px 10px;
-        gap: 8px;
+        padding: 18px 14px;
+        gap: 10px;
       }
       .identity-subtitle {
-        max-width: 22ch;
-        font-size: 0.76rem;
-        line-height: 1.4;
+        max-width: 20ch;
+        font-size: 0.8rem;
+        line-height: 1.45;
       }
       .avatar-box {
-        min-height: 124px;
-        aspect-ratio: 0.75;
+        width: min(100%, 108px);
+        min-height: 158px;
+        aspect-ratio: 0.7;
       }
       .service-list { grid-template-columns: 1fr 1fr; }
       .blog-list { grid-template-columns: 1fr 1fr; }
@@ -1473,23 +1511,26 @@
     @media (max-width: 1023px) {
       .sidebar { gap: 14px; }
       .identity-shell {
-        grid-template-columns: minmax(78px, 0.82fr) minmax(0, 1.16fr) minmax(78px, 0.82fr);
-        grid-template-areas: "matt copy beth";
-        gap: 8px;
-        align-items: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "copy copy"
+          "matt beth";
+        gap: 12px;
+        align-items: stretch;
       }
       .identity-copy {
-        padding: 10px 8px;
-        gap: 6px;
+        padding: 16px 14px;
+        gap: 8px;
       }
       .identity-subtitle {
-        max-width: 19ch;
-        font-size: 0.68rem;
-        line-height: 1.35;
+        max-width: 24ch;
+        font-size: 0.8rem;
+        line-height: 1.45;
       }
       .avatar-box {
-        min-height: 110px;
-        aspect-ratio: 0.74;
+        width: min(100%, 112px);
+        min-height: 148px;
+        aspect-ratio: 0.72;
       }
       .portfolio-holo-stage,
       #Tony-Stark-Holo {
@@ -1500,11 +1541,14 @@
     }
     @media (max-width: 720px) {
       .identity-shell {
-        grid-template-columns: minmax(68px, 0.8fr) minmax(0, 1.12fr) minmax(68px, 0.8fr);
-        gap: 7px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "copy copy"
+          "matt beth";
+        gap: 10px;
       }
-      .identity-media { justify-content: stretch; }
-      .avatar-box { max-width: none; min-height: 96px; aspect-ratio: 0.72; }
+      .identity-media { justify-content: center; }
+      .avatar-box { width: min(100%, 102px); min-height: 138px; aspect-ratio: 0.72; }
       .identity-copy .name,
       .identity-copy .name2 {
         font-size: clamp(0.84rem, 3.2vw, 1rem);
@@ -1519,14 +1563,16 @@
       }
       .identity-divider { width: 46px; }
       .identity-badge {
-        left: 6px;
+        left: 50%;
         top: 6px;
+        transform: translateX(-50%);
         padding: 4px 7px;
         font-size: 0.5rem;
       }
       .avatar-contact-btn {
-        left: 6px;
+        left: 50%;
         bottom: 6px;
+        transform: translateX(-50%);
         min-width: 32px;
         height: 32px;
         padding: 0 9px;
@@ -1553,12 +1599,17 @@
       main { width: min(100% - 14px, 100%); }
       .article-shell, .sidebar { padding: 16px; }
       .identity-shell {
-        grid-template-columns: minmax(58px, 0.78fr) minmax(0, 1.06fr) minmax(58px, 0.78fr);
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "copy"
+          "matt"
+          "beth";
+        gap: 10px;
       }
-      .identity-copy { padding: 6px 4px; }
-      .avatar-box { min-height: 82px; aspect-ratio: 0.7; }
+      .identity-copy { padding: 14px 12px; }
+      .avatar-box { width: min(100%, 118px); min-height: 146px; aspect-ratio: 0.74; }
       .identity-subtitle,
-      .identity-divider { display: none; }
+      .identity-divider { display: block; }
       .identity-logo-wordmark { font-size: 0.58rem; letter-spacing: 0.12em; }
       .identity-title {
         font-size: 0.54rem;
@@ -1577,11 +1628,16 @@
     }
     @media (max-width: 390px) {
       .identity-shell {
-        grid-template-columns: 52px 1fr 52px;
-        gap: 6px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "copy"
+          "matt"
+          "beth";
+        gap: 8px;
       }
       .avatar-box {
-        min-height: 74px;
+        width: min(100%, 108px);
+        min-height: 134px;
       }
       .identity-copy .name,
       .identity-copy .name2 {
@@ -1617,40 +1673,47 @@
     <aside class="sidebar container">
       
       <section class="identity-shell">
-        <div class="identity-media identity-media--matt">
-          <div class="avatar-box">
-            <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
-              <source src="./images/joker3.webm" type="video/webm">
-              <img src="./images/jokerLedger2.webp" alt="Matt Tobaben">
-            </video>
-            <span class="identity-badge">Founder</span>
-            <button class="avatar-contact-btn" type="button" aria-expanded="false" aria-controls="avatar-contact-matt" data-avatar-contact-trigger="matt">
-              <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-phone"></use></svg>
-            </button>
-          </div>
-        </div>
+  <div class="identity-media identity-media--matt">
+    <div class="avatar-box">
+      <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
+        <source src="./images/Ace6.webm" type="video/webm">
+        <img src="./images/jokerLedger2.webp" alt="Matt Tobaben">
+      </video>
+      <span class="identity-badge">Founder</span>
+      <button class="avatar-contact-btn" type="button" aria-expanded="false" aria-controls="avatar-contact-matt" data-avatar-contact-trigger="matt">
+        <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-phone"></use></svg>
+      </button>
+    </div>
+  </div>
 
-        <div class="identity-copy">
-          <div class="identity-logo-row"><span class="brand-logo brand-logo--main brand-logo--sm" aria-hidden="true"></span><span class="identity-logo-wordmark">WildCard DEV</span></div>
-          <div class="identity-names">
-            <h1 class="name">Matt Tobaben</h1>
-            <h2 class="name2">Space Beth</h2>
-          </div>
-          <div class="identity-divider"></div>
-          <p class="identity-title">WildCard DEV</p>
-          <p class="identity-subtitle">Websites, apps, holographic polish, and a memorable assistant presence people actually want to keep talking to.</p>
-        </div>
+  <div class="identity-copy">
+    <div class="identity-logo-row">
+      <span class="identity-logo-wordmark">WILDCARD DEV</span>
+    </div>
 
-        <div class="identity-media identity-media--beth">
-          <div class="avatar-box">
-            <img src="./images/spaceBeth.jpg" alt="Space Beth">
-            <span class="identity-badge">Co-Founder</span>
-            <button class="avatar-contact-btn avatar-contact-btn--penny" type="button" aria-expanded="false" aria-controls="avatar-contact-beth" data-avatar-contact-trigger="beth">
-              <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-email"></use></svg>
-            </button>
-          </div>
-        </div>
-      </section>
+    <div class="identity-names">
+      <h1 class="name">Matt Tobaben</h1>
+      <h2 class="name2">E</h2>
+    </div>
+
+    <div class="identity-divider"></div>
+
+    <p class="identity-title">WildCard DEV</p>
+    <p class="identity-subtitle">
+      Websites, apps, holographic polish, and a memorable assistant presence people actually want to keep talking to.
+    </p>
+  </div>
+
+  <div class="identity-media identity-media--beth">
+    <div class="avatar-box">
+      <img src="./images/spaceBeth.png" alt="E">
+      <span class="identity-badge">Co-Founder</span>
+      <button class="avatar-contact-btn avatar-contact-btn--penny" type="button" aria-expanded="false" aria-controls="avatar-contact-beth" data-avatar-contact-trigger="beth">
+        <svg class="wd-icon wd-icon--sm" viewBox="0 0 24 24"><use href="#wd-email"></use></svg>
+      </button>
+    </div>
+  </div>
+</section>
 
       <div class="separator"></div>
 
@@ -1700,11 +1763,11 @@
               <div class="contact-avatar-drawer-title">
                 <span class="brand-logo brand-logo--penny" aria-hidden="true"></span>
                 <div>
-                  <strong>Space Beth</strong>
+                  <strong>E</strong>
                   <span>Phone, text, email, and the same shared WildCard DEV socials.</span>
                 </div>
               </div>
-              <button class="contact-avatar-close" type="button" aria-label="Close Space Beth contact panel" data-avatar-contact-close="beth">×</button>
+              <button class="contact-avatar-close" type="button" aria-label="Close E contact panel" data-avatar-contact-close="beth">×</button>
             </div>
             <div class="contact-avatar-drawer-body">
               <div class="contact-item" data-penny-context>
@@ -1713,11 +1776,11 @@
               </div>
               <div class="contact-item" data-penny-context>
                 <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-text"></use></svg></span>
-                <div class="contact-info"><span class="contact-title">Text</span><a href="sms:4029150789?body=Hi%20Penny%2C%20please%20route%20this%20to%20Space%20Beth.">Text route to Space Beth</a></div>
+                <div class="contact-info"><span class="contact-title">Text</span><a href="sms:4029150789?body=Hi%20Penny%2C%20please%20route%20this%20to%20E.">Text route to E</a></div>
               </div>
               <div class="contact-item" data-penny-context>
                 <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-email"></use></svg></span>
-                <div class="contact-info"><span class="contact-title">Email</span><a href="mailto:matt@wildcarddev.com?subject=Space%20Beth%20Inquiry">Email route to Space Beth</a></div>
+                <div class="contact-info"><span class="contact-title">Email</span><a href="mailto:matt@wildcarddev.com?subject=E%20Inquiry">Email route to E</a></div>
               </div>
               <div class="contact-item" data-penny-context>
                 <span class="wd-icon-chip penny-signal"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-linkedin"></use></svg></span>
@@ -1744,8 +1807,7 @@
           <li><button class="navbar-link" data-nav-link="about"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>About</button></li>
           <li><button class="navbar-link" data-nav-link="our-team"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Our Team</button></li>
           <li><button class="navbar-link active" data-nav-link="portfolio"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Portfolio</button></li>
-          <li><button class="navbar-link" data-nav-link="blog"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Blog</button></li>
-          <li><button class="navbar-link" data-nav-link="contact"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Contact</button></li>
+<li><button class="navbar-link" data-nav-link="contact"><span class="ace-logo-chip ace-logo-chip--sm wd-nav-brand-icon"><span class="ace-logo-mark ace-logo-mark--sm"></span></span>Contact</button></li>
         </ul>
       </nav>
 
@@ -1840,7 +1902,7 @@
             <li class="resume-card">
               <div class="resume-header">
                 <div class="resume-header-media">
-                  <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp"><source src="./images/joker3.webm" type="video/webm"><img src="./images/jokerLedger2.webp" alt="Matt Tobaben"></video>
+                  <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp"><source src="./images/jokerProfile.webm" type="video/webm"><img src="./images/jokerLedger2.webp" alt="Matt Tobaben"></video>
                 </div>
                 <div class="resume-title-group">
                   <div class="resume-title-row"><h3>Matt Tobaben</h3><span class="resume-badge">CEO &amp; Lead Developer</span></div>
@@ -1858,10 +1920,10 @@
             <li class="resume-card">
               <div class="resume-header">
                 <div class="resume-header-media">
-                  <img src="./images/spaceBeth.jpg" alt="Space Beth">
+                  <img src="./images/spaceBeth.jpg" alt="E">
                 </div>
                 <div class="resume-title-group">
-                  <div class="resume-title-row"><h3>Space Beth</h3><span class="resume-badge">Co-Founder / Trend Signal</span></div>
+                  <div class="resume-title-row"><h3>E</h3><span class="resume-badge">Co-Founder / Trend Signal</span></div>
                   <p class="copy">Sharper, younger-facing energy for the brand — sardonic, smart, and useful for keeping the company from feeling generic or stale.</p>
                 </div>
                 <a class="resume-link" href="./images/mtobabenResume.pdf" target="_blank" rel="noopener noreferrer"><span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-resume"></use></svg></span><span>Resume</span></a>
@@ -1893,7 +1955,7 @@
                   <button class="holo-panel" type="button" data-holo-target="wildcard">
                     <span class="holo-panel-media holo-panel-media--system">
                       <video autoplay loop muted playsinline poster="./images/customerService.webp">
-                        <source src="./images/customerService.webm" type="video/webm">
+                        <source src="./images/Ace1.webm" type="video/webm">
                         <img src="./images/customerService.webp" alt="WildCard DEV flagship panel preview">
                       </video>
                     </span>
@@ -1906,7 +1968,7 @@
                   <button class="holo-panel" type="button" data-holo-target="studio">
                     <span class="holo-panel-media holo-panel-media--system">
                       <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
-                        <source src="./images/joker3.webm" type="video/webm">
+                        <source src="./images/Ace2.webm" type="video/webm">
                         <img src="./images/jokerLedger2.webp" alt="Studio motion panel preview">
                       </video>
                     </span>
@@ -1918,7 +1980,10 @@
                   </button>
                   <button class="holo-panel penny-panel" type="button" data-nav-shortcut="contact">
                     <span class="holo-panel-media holo-panel-media--system">
-                      <img src="./images/branding/wildcard-logo-penny.png" alt="Penny office logo glow">
+                      <video autoplay loop muted playsinline preload="metadata" poster="./images/branding/wildcard-logo-main.png">
+                        <source src="./images/Ace3.webm" type="video/webm">
+                        <img src="./images/branding/wildcard-logo-main.png" alt="Penny office panel preview">
+                      </video>
                     </span>
                     <span class="holo-panel-content">
                       <span class="panel-tag">Penny</span>
@@ -1948,7 +2013,7 @@
                   <button class="holo-panel" type="button" data-holo-target="trade">
                     <span class="holo-panel-media holo-panel-media--system">
                       <video autoplay loop muted playsinline poster="./images/customerService.webp">
-                        <source src="./images/customerService.webm" type="video/webm">
+                        <source src="./images/Ace4.webm" type="video/webm">
                         <img src="./images/customerService.webp" alt="Trade business panel preview">
                       </video>
                     </span>
@@ -1960,18 +2025,21 @@
                   </button>
                   <button class="holo-panel" type="button" data-holo-target="brand">
                     <span class="holo-panel-media holo-panel-media--system">
-                      <img src="./images/spaceBeth.jpg" alt="Brand identity panel preview">
+                      <video autoplay loop muted playsinline preload="metadata" poster="./images/spaceBeth.jpg">
+                        <source src="./images/Ace5.webm" type="video/webm">
+                        <img src="./images/spaceBeth.jpg" alt="Brand identity panel preview">
+                      </video>
                     </span>
                     <span class="holo-panel-content">
                       <span class="panel-tag">Identity</span>
                       <span class="wd-icon-chip wd-graphic-icon"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span>
-                      <div><h3>Space Beth Brand Lab</h3><p>Sharper visual direction, logos, favicons, and branded assets that do the selling before the pitch starts.</p></div>
+                      <div><h3>E Brand Lab</h3><p>Sharper visual direction, logos, favicons, and branded assets that do the selling before the pitch starts.</p></div>
                     </span>
                   </button>
                   <button class="holo-panel" type="button" data-holo-target="resume">
                     <span class="holo-panel-media holo-panel-media--system">
                       <video autoplay loop muted playsinline poster="./images/jokerLedger2.webp">
-                        <source src="./images/joker3.webm" type="video/webm">
+                        <source src="./images/Ace6.webm" type="video/webm">
                         <img src="./images/jokerLedger2.webp" alt="Career surface panel preview">
                       </video>
                     </span>
@@ -1984,7 +2052,7 @@
                   <button class="holo-panel" type="button" data-holo-target="contact">
                     <span class="holo-panel-media holo-panel-media--system">
                       <video autoplay loop muted playsinline poster="./images/customerService.webp">
-                        <source src="./images/customerService.webm" type="video/webm">
+                        <source src="./images/Ace7.webm" type="video/webm">
                         <img src="./images/customerService.webp" alt="Client contact panel preview">
                       </video>
                     </span>
@@ -2010,18 +2078,6 @@
         </div>
       </article>
 
-      <article class="container" data-page="blog">
-        <div class="article-shell">
-          <h2 class="article-title">Blog</h2>
-          <div class="blog-list">
-            <article class="blog-item-card"><div class="blog-banner"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-web-dev"></use></svg></span></div><div class="blog-meta"><span>AI</span><span>May 26, 2025</span></div><h3 class="blog-item-title">What makes a product demo feel premium?</h3><p class="blog-text">Not just animation. It is consistent language, controlled restraint, and knowing where to let the visual system do the talking.</p></article>
-            <article class="blog-item-card"><div class="blog-banner"><span class="wd-icon-chip wd-icon-chip--lg"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-mobile-app"></use></svg></span></div><div class="blog-meta"><span>Wearables</span><span>April 20, 2025</span></div><h3 class="blog-item-title">Why smartwatch support is more than a gimmick</h3><p class="blog-text">Most people never expect a site to feel deliberate on a watch. That surprise becomes part of the sales story.</p></article>
-            <article class="blog-item-card"><div class="blog-banner"><span class="wd-icon-chip wd-icon-chip--lg wd-graphic-icon"><svg class="wd-icon wd-icon--lg" viewBox="0 0 24 24"><use href="#wd-graphic-design"></use></svg></span></div><div class="blog-meta"><span>Design</span><span>March 10, 2025</span></div><h3 class="blog-item-title">Graphic design that sells the service before the pitch</h3><p class="blog-text">A strong icon, banner, or hero panel should make the visitor trust the service before the supporting copy even loads.</p></article>
-            <article class="blog-item-card"><div class="blog-banner"><span class="ace-logo-chip ace-logo-chip--lg"><span class="ace-logo-mark"></span></span></div><div class="blog-meta"><span>Brand</span><span>February 3, 2025</span></div><h3 class="blog-item-title">System glow vs. Penny glow</h3><p class="blog-text">Blue and violet say system. Pink says presence. That one rule keeps the entire visual language from getting muddy.</p></article>
-          </div>
-        </div>
-      </article>
-
       <article class="container" data-page="contact">
         <div class="article-shell">
           <h2 class="article-title">Contact</h2>
@@ -2044,7 +2100,7 @@
                   <input id="phone" type="tel" name="phone" class="form-input" placeholder="Your phone (optional)" autocomplete="tel">
                 </div>
                 <textarea id="penny" name="message" class="form-input" placeholder="What are you looking to build, improve, or ask about?"></textarea>
-                <div class="penny-form-note">Penny is currently routing messages for Matt, Space Beth, and custom builds. Card payments will use Stripe once the live account handoff is finished.</div>
+                <div class="penny-form-note">Penny is currently routing messages for Matt, E, and custom builds. Card payments will use Stripe once the live account handoff is finished.</div>
                 <div class="form-actions">
                   <button class="form-btn form-btn--secondary form-btn--coming-soon" type="button" id="payComingSoon" aria-disabled="true">
                     <span class="wd-icon-chip"><svg class="wd-icon" viewBox="0 0 24 24"><use href="#wd-brand"></use></svg></span>
@@ -2129,7 +2185,7 @@
       mash3: 'If you’re going to tease me, at least make it readable.',
 
       mattOpen: 'Matt’s line is open, honey.',
-      bethOpen: 'Space Beth routing is live.',
+      bethOpen: 'E routing is live.',
       sidebarPhone: 'Direct line. Clean choice.',
       sidebarEmail: 'Email works… when you want to be remembered properly.',
       sidebarText: 'Text is faster. A little less subtle, though.',
@@ -2649,7 +2705,7 @@
     studio: 'These holo cards are now structured to accept animated .webm media using the same style of file paths already in the live build.',
     watch: 'Penny\'s watch panel stays in the ring and keeps the smartwatch-first promise visible immediately.',
     trade: 'Trade-business concepts make it obvious that WildCard DEV can help serious founders look legitimate fast.',
-    brand: 'Space Beth\'s brand-facing panel keeps the graphic-design side of the company visible without feeling detached from the dev work.',
+    brand: 'E\'s brand-facing panel keeps the graphic-design side of the company visible without feeling detached from the dev work.',
     resume: 'The Our Team page now reflects Matt\'s actual resume background instead of placeholder education and work history.',
     contact: 'Penny\'s office now includes the visual Stripe placeholder button while the real card flow waits for the live handoff.'
   };
@@ -2754,7 +2810,101 @@
   }
 })();
 </script>
+<script id="holo-enhancement-engine">
+/* =========================
+   NEXT LEVEL HOLO SYSTEM
+========================= */
 
+const panels = document.querySelectorAll('.holo-panel');
+const dragContainer = document.getElementById('drag-container');
+
+/* =========================
+   DEPTH FADE
+========================= */
+
+function updateDepthFade() {
+  panels.forEach(panel => {
+    const rect = panel.getBoundingClientRect();
+    const center = window.innerWidth / 2;
+
+    const distance = Math.abs((rect.left + rect.width / 2) - center);
+    const max = window.innerWidth / 2;
+
+    const depth = distance / max;
+
+    panel.style.opacity = 1 - (depth * 0.5);
+    panel.style.filter = `brightness(${1 - depth * 0.3})`;
+  });
+}
+
+/* =========================
+   PENNY GLOW DOMINANCE
+========================= */
+
+const penny = document.querySelector('.penny-panel');
+
+if (penny) {
+  penny.addEventListener('mouseenter', () => {
+    panels.forEach(p => {
+      if (!p.classList.contains('penny-panel')) {
+        p.style.boxShadow = "0 0 10px rgba(120,160,255,0.2)";
+      }
+    });
+
+    penny.style.boxShadow = `
+      0 0 40px rgba(255,50,180,0.9),
+      0 0 80px rgba(255,50,180,0.5)
+    `;
+  });
+
+  penny.addEventListener('mouseleave', () => {
+    panels.forEach(p => {
+      p.style.boxShadow = "";
+    });
+  });
+}
+
+/* =========================
+   PARALLAX TILT (MOUSE)
+========================= */
+
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+  if (dragContainer) {
+    dragContainer.style.transform =
+      `translate(-50%, -50%) rotateX(${-y}deg) rotateY(${x}deg)`;
+  }
+
+  updateDepthFade();
+});
+
+/* =========================
+   TOUCH SUPPORT
+========================= */
+
+document.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+
+  const x = (touch.clientX / window.innerWidth - 0.5) * 20;
+  const y = (touch.clientY / window.innerHeight - 0.5) * 10;
+
+  if (dragContainer) {
+    dragContainer.style.transform =
+      `translate(-50%, -50%) rotateX(${-y}deg) rotateY(${x}deg)`;
+  }
+
+  updateDepthFade();
+});
+
+/* =========================
+   INITIAL RUN
+========================= */
+
+updateDepthFade();
+
+</script>
 </body>
 </html>
 
