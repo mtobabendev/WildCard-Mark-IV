@@ -2366,6 +2366,194 @@
       box-shadow: 0 0 12px rgba(255, 79, 183, 0.16);
     }
 
+
+    /* ========================================
+       Future Hooks
+    ======================================== */
+    .future-hook-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .future-hook-card {
+      display: grid;
+      gap: 12px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(10, 14, 24, 0.86);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    .future-hook-card h3 {
+      font-size: 0.98rem;
+      line-height: 1.25;
+    }
+
+    .future-hook-card p {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.68;
+    }
+
+    .hook-slot-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hook-slot {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(134, 171, 255, 0.22);
+      background: rgba(255,255,255,0.02);
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .hook-slot strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .hook-slot--penny {
+      border-color: rgba(255, 79, 183, 0.28);
+      background: rgba(255, 79, 183, 0.06);
+      color: #ffd4ee;
+    }
+
+    .hook-slot--penny strong {
+      color: #ffe8f7;
+    }
+
+    /* QR Hooks */
+    .qr-hook-card {
+      border-color: rgba(134, 171, 255, 0.14);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(12, 17, 30, 0.94), rgba(8, 11, 20, 0.98));
+    }
+
+    .qr-hook-preview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .qr-hook-tile {
+      display: grid;
+      place-items: center;
+      min-height: 82px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.024);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Avatar Hooks */
+    .avatar-hook-card {
+      border-color: rgba(255, 79, 183, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(28, 14, 29, 0.94), rgba(12, 10, 18, 0.98));
+    }
+
+    .avatar-hook-stage {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .avatar-hook-shell {
+      min-height: 120px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 214, 236, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+        rgba(24, 11, 24, 0.64);
+      display: grid;
+      align-content: end;
+      gap: 6px;
+    }
+
+    .avatar-hook-shell strong {
+      font-size: 0.84rem;
+      line-height: 1.2;
+      color: #ffe4f5;
+    }
+
+    .avatar-hook-shell span {
+      color: #ffc8e9;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    /* Payment / Integration Hooks */
+    .integration-hook-card {
+      border-color: rgba(255, 200, 109, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(255, 200, 109, 0.08), transparent 30%),
+        linear-gradient(180deg, rgba(16, 18, 28, 0.95), rgba(9, 11, 18, 0.98));
+    }
+
+    .integration-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .integration-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 200, 109, 0.22);
+      color: rgba(255, 222, 177, 0.92);
+      background: rgba(255, 200, 109, 0.05);
+      font-size: 0.74rem;
+      line-height: 1.2;
+    }
+
+    .future-hook-band {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.08), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 79, 183, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 28, 0.96), rgba(8, 10, 18, 0.99));
+    }
+
+    .future-hook-band__head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .future-hook-band__head p {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      max-width: 70ch;
+    }
+
+    /* Future Responsive */
+
     /* ========================================
        Responsive 1024
     ======================================== */
@@ -2457,7 +2645,8 @@
         grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
       }
 
-      .watch-feature-grid {
+      .watch-feature-grid,
+      .future-hook-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -2529,7 +2718,8 @@
         grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
       }
 
-      .watch-feature-grid {
+      .watch-feature-grid,
+      .future-hook-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -2584,7 +2774,10 @@
       .penny-links-grid,
       .penny-status-grid,
       .watch-hero,
-      .watch-feature-grid {
+      .watch-feature-grid,
+      .future-hook-grid,
+      .avatar-hook-stage,
+      .qr-hook-preview {
         grid-template-columns: 1fr;
       }
 
@@ -2924,15 +3117,16 @@
         </div>
 
         <div class="identity-hero">
-          <span class="eyebrow eyebrow--penny">Phase 5 Rebuild</span>
-          <h1 class="identity-title">Contact + Interaction Refinement</h1>
+          <span class="eyebrow eyebrow--penny">Phase 6B Rebuild</span>
+          <h1 class="identity-title">Future-Facing Hooks</h1>
           <p class="identity-subtitle">
-            The rebuilt shell, Penny core, and holo stage stay intact while contact pathways and interaction states are refined to feel clearer, faster, and more intentional across every screen size.
+            The stable shell, Penny core, holo stage, contact lanes, and watch section stay intact while lightweight future-ready hooks are framed for later QR, avatar, payment, and wearable expansions.
           </p>
           <div class="chip-row">
             <span class="chip">Single-page architecture</span>
             <span class="chip">Responsive integrity</span>
-            <span class="chip chip--penny">Penny elevated</span>
+            <span class="chip">Future-ready framing</span>
+            <span class="chip chip--penny">Penny protected</span>
           </div>
         </div>
 
@@ -3807,6 +4001,75 @@
               </div>
             </div>
           </section>
+
+            <section class="future-hook-band" aria-labelledby="future-hooks-title">
+              <div class="future-hook-band__head">
+                <span class="eyebrow">Future-facing structure only</span>
+                <h3 class="section-title" id="future-hooks-title">Lightweight hook containers are now in place for the next expansion pass.</h3>
+                <p>
+                  These are intentionally framed as safe placeholders instead of active features, so the flagship build gains clean destinations for later QR utilities, avatar upgrades, Penny interaction lanes, Stripe-related flows, and watch-linked handoff content without disturbing the current navigation or interaction model.
+                </p>
+              </div>
+
+              <div class="future-hook-grid">
+                <article class="future-hook-card qr-hook-card">
+                  <h3>QR feature staging</h3>
+                  <p>Structured tiles now reserve space for future resume, business card, and direct-contact QR surfaces without forcing those assets into the live layout yet.</p>
+                  <div class="qr-hook-preview" aria-hidden="true">
+                    <div class="qr-hook-tile">Resume QR
+slot</div>
+                    <div class="qr-hook-tile">Business card
+slot</div>
+                    <div class="qr-hook-tile">Contact handoff
+slot</div>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot"><strong>QR Hooks</strong>Safe container for branded QR art, link targets, and scan-first layouts later.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card avatar-hook-card">
+                  <h3>Avatar / media upgrade containers</h3>
+                  <p>Dedicated shells are now present for future Matt, E, and Penny media upgrades so richer holographic stills or video assets have a predictable landing zone.</p>
+                  <div class="avatar-hook-stage" aria-hidden="true">
+                    <div class="avatar-hook-shell">
+                      <strong>Primary avatar shell</strong>
+                      <span>Flagship identity media upgrade</span>
+                    </div>
+                    <div class="avatar-hook-shell">
+                      <strong>Penny media shell</strong>
+                      <span>Pink-forward assistant presence lane</span>
+                    </div>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot hook-slot--penny"><strong>Avatar Hooks</strong>Prepared for higher-end stills, short loops, and later cinematic overlays.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card integration-hook-card">
+                  <h3>Stripe / integration framing</h3>
+                  <p>The layout now includes a clearly non-functional integration lane so future Stripe-backed deposits, paid build requests, or service checkout flows can be introduced without reworking the section structure again.</p>
+                  <div class="integration-pill-row" aria-label="Future integration placeholders">
+                    <span class="integration-pill">Stripe preferred</span>
+                    <span class="integration-pill">Request intake</span>
+                    <span class="integration-pill">Payment status</span>
+                    <span class="integration-pill">Client handoff</span>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot"><strong>Payment / Integration Hooks</strong>Reserved for future processor UI, status copy, and protected next-step messaging.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card">
+                  <h3>Advanced Penny + watch-linked slots</h3>
+                  <p>Small, structured placeholders now mark where later concierge prompts, wearable quick actions, and watch-to-site continuity cards can plug in without creating layout clutter at tiny widths.</p>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot hook-slot--penny"><strong>Penny Slot</strong>Reserved for higher-touch assistant prompts, task routing, and contextual micro-copy.</div>
+                    <div class="hook-slot"><strong>Watch-linked future content</strong>Reserved for mirrored cards, wearable triggers, and companion-flow summaries.</div>
+                  </div>
+                </article>
+              </div>
+            </section>
         </div>
       </article>
 
