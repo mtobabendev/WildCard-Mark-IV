@@ -25,7 +25,9 @@
       --blue: #6aa8ff;
       --violet: #8d6bff;
       --pink: #ff4fb7;
+      --pink-bright: #ffd6ec;
       --pink-soft: rgba(255, 79, 183, 0.18);
+      --pink-soft-2: rgba(255, 79, 183, 0.1);
       --gold: #ffc86d;
       --radius: 24px;
       --radius-sm: 18px;
@@ -196,6 +198,7 @@
       border-color: rgba(255, 79, 183, 0.3);
       color: #ffd4ee;
       background: rgba(255, 79, 183, 0.08);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
     }
 
     .headline {
@@ -238,7 +241,11 @@
     .portfolio-grid,
     .contact-grid,
     .holo-panel-grid,
-    .field-grid {
+    .field-grid,
+    .penny-grid,
+    .penny-ops-grid,
+    .penny-links-grid,
+    .penny-status-grid {
       display: grid;
       gap: 12px;
     }
@@ -276,6 +283,7 @@
       border-color: rgba(255, 79, 183, 0.28);
       color: #ffd5ef;
       background: rgba(255, 79, 183, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
     }
 
     /* ========================================
@@ -341,7 +349,7 @@
     }
 
     /* ========================================
-       Identity
+       Identity Strip
     ======================================== */
     .identity-panel {
       padding: 16px;
@@ -698,7 +706,7 @@
     }
 
     /* ========================================
-       Portfolio / Holo
+       Portfolio / Holo Panels
     ======================================== */
     .holo-stage {
       position: relative;
@@ -822,6 +830,102 @@
       gap: 14px;
     }
 
+    .penny-office {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.16), transparent 26%),
+        radial-gradient(circle at 86% 12%, rgba(255, 214, 236, 0.08), transparent 18%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(32, 14, 32, 0.96), rgba(14, 9, 18, 0.99));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 32px rgba(255, 79, 183, 0.12),
+        0 18px 44px rgba(0,0,0,0.34);
+    }
+
+    .penny-office::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 16%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      opacity: 0.65;
+    }
+
+    .penny-office::after {
+      content: "";
+      position: absolute;
+      inset: auto -24% 28% auto;
+      width: 58%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 214, 236, 0.6), transparent);
+      transform: rotate(-8deg);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .penny-office > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .penny-office__topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .penny-office__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .penny-mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      color: #ffd8ef;
+      background: rgba(255, 79, 183, 0.08);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-mini-chip--system {
+      color: var(--text-soft);
+      border-color: rgba(134, 171, 255, 0.14);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .penny-grid {
+      display: grid;
+      gap: 14px;
+    }
+
     .penny-hero {
       display: grid;
       gap: 16px;
@@ -832,10 +936,14 @@
         radial-gradient(circle at top left, rgba(255, 79, 183, 0.14), transparent 32%),
         radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 34%),
         linear-gradient(180deg, rgba(34, 15, 34, 0.94), rgba(17, 10, 21, 0.98));
-      box-shadow: 0 0 24px rgba(255, 79, 183, 0.12);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(255, 79, 183, 0.12);
+      overflow: hidden;
     }
 
     .penny-hero__media {
+      position: relative;
       min-height: 220px;
       border-radius: 18px;
       overflow: hidden;
@@ -843,6 +951,17 @@
       background:
         radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08), transparent 34%),
         linear-gradient(180deg, rgba(18, 11, 19, 0.95), rgba(8, 6, 12, 0.98));
+    }
+
+    .penny-hero__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 16%),
+        linear-gradient(120deg, transparent 12%, rgba(255,214,236,0.08) 48%, transparent 76%);
+      mix-blend-mode: screen;
     }
 
     .penny-hero__media video,
@@ -855,14 +974,14 @@
 
     .penny-hero__copy {
       display: grid;
-      gap: 10px;
+      gap: 12px;
       align-content: start;
     }
 
     .penny-hero__copy h3 {
       color: #ffd7ef;
-      font-size: 1.16rem;
-      line-height: 1.2;
+      font-size: 1.22rem;
+      line-height: 1.18;
       text-wrap: balance;
     }
 
@@ -872,12 +991,191 @@
       font-size: 0.95rem;
     }
 
+    .penny-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .penny-stat {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(22, 11, 22, 0.76);
+    }
+
+    .penny-stat span {
+      display: block;
+      color: rgba(255, 214, 236, 0.76);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .penny-stat strong {
+      display: block;
+      color: #fff2fa;
+      font-size: 1.02rem;
+      line-height: 1.2;
+    }
+
+    .penny-stat em {
+      display: block;
+      color: #ffc8e9;
+      font-style: normal;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+
+    .penny-ops-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .penny-op {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.14);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 36%),
+        linear-gradient(180deg, rgba(33, 14, 31, 0.92), rgba(15, 10, 20, 0.96));
+      transition: var(--transition);
+    }
+
+    .penny-op:hover,
+    .penny-op:focus-within {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.24);
+      box-shadow: 0 0 20px rgba(255, 79, 183, 0.1);
+    }
+
+    .penny-op strong {
+      color: #ffe0f3;
+      font-size: 0.94rem;
+      line-height: 1.25;
+    }
+
+    .penny-op p {
+      color: #ffc7e9;
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+
+    .penny-links-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .penny-link-card {
+      display: grid;
+      gap: 8px;
+      min-height: 100%;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(11, 13, 22, 0.88);
+      transition: var(--transition);
+    }
+
+    .penny-link-card:hover,
+    .penny-link-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+      outline: none;
+    }
+
+    .penny-link-card strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .penny-link-card span {
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .penny-pulse {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .penny-pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,214,236,0.08) 48%, transparent 72%);
+      transform: translateX(-125%);
+      transition: transform 420ms ease;
+      pointer-events: none;
+    }
+
+    .penny-pulse:hover::after,
+    .penny-pulse:focus-visible::after {
+      transform: translateX(120%);
+    }
+
+    .penny-console {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 40%),
+        linear-gradient(180deg, rgba(26, 12, 25, 0.96), rgba(12, 10, 18, 0.98));
+    }
+
+    .penny-console__label {
+      color: rgba(255, 214, 236, 0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-console__status {
+      color: #ffe6f6;
+      font-size: 1rem;
+      line-height: 1.35;
+      min-height: 2.7em;
+    }
+
+    .penny-console__sub {
+      color: #ffc7e9;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .penny-office-note {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
     /* ========================================
-       Contact
+       Penny Office
     ======================================== */
     .contact-list {
       display: grid;
       gap: 12px;
+    }
+
+    .contact-card--penny {
+      border-color: rgba(255, 79, 183, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 32%),
+        linear-gradient(180deg, rgba(24, 13, 24, 0.95), rgba(10, 10, 16, 0.98));
     }
 
     .contact-row {
@@ -887,6 +1185,13 @@
       border-radius: 16px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.025);
+      transition: var(--transition);
+    }
+
+    .contact-row:hover,
+    .contact-row:focus-within {
+      border-color: rgba(255, 79, 183, 0.18);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.06);
     }
 
     .contact-row strong {
@@ -999,7 +1304,7 @@
     }
 
     /* ========================================
-       Watch
+       Watch Experience
     ======================================== */
     .watch-stage {
       display: grid;
@@ -1138,8 +1443,13 @@
       }
 
       .penny-hero {
-        grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
+        grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
         align-items: stretch;
+      }
+
+      .penny-grid {
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        align-items: start;
       }
 
       .resume-top {
@@ -1177,13 +1487,16 @@
 
       .service-grid,
       .resume-grid,
-      .portfolio-grid {
+      .portfolio-grid,
+      .penny-ops-grid,
+      .penny-links-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .contact-grid,
       .penny-hero,
-      .split-grid {
+      .split-grid,
+      .penny-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1227,7 +1540,8 @@
       .hero-slab,
       .about-band,
       .holo-stage,
-      .penny-hero {
+      .penny-hero,
+      .penny-office {
         padding: 16px;
       }
 
@@ -1244,7 +1558,11 @@
       .contact-grid,
       .split-grid,
       .field-grid,
-      .penny-hero {
+      .penny-hero,
+      .penny-grid,
+      .penny-ops-grid,
+      .penny-links-grid,
+      .penny-status-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1387,7 +1705,7 @@
     }
 
     /* ========================================
-       Smartwatch-safe under 390
+       Penny Responsive / Smartwatch-safe under 390
     ======================================== */
     @media (max-width: 389.98px) {
       .site-shell {
@@ -1405,7 +1723,8 @@
       .hero-slab,
       .about-band,
       .holo-stage,
-      .penny-hero {
+      .penny-hero,
+      .penny-office {
         padding: var(--watch-safe-pad);
       }
 
@@ -1419,7 +1738,11 @@
       .contact-row,
       .timeline-item,
       .quick-link,
-      .holo-card {
+      .holo-card,
+      .penny-op,
+      .penny-console,
+      .penny-link-card,
+      .penny-stat {
         border-radius: 14px;
       }
 
@@ -1447,7 +1770,11 @@
       .watch-card p,
       .penny-hero__copy p,
       .submit-note,
-      .watch-meta {
+      .watch-meta,
+      .penny-op p,
+      .penny-link-card span,
+      .penny-office-note,
+      .penny-console__sub {
         font-size: 0.86rem;
         line-height: 1.6;
       }
@@ -1527,7 +1854,7 @@
 <body>
   <main class="site-shell">
     <!-- ========================================
-         Identity
+         Identity Strip
     ======================================== -->
     <aside class="sidebar">
       <section class="panel identity-panel">
@@ -1540,16 +1867,16 @@
         </div>
 
         <div class="identity-hero">
-          <span class="eyebrow">Phase 2 Rebuild</span>
-          <h1 class="identity-title">Responsive Mark IV Foundation</h1>
+          <span class="eyebrow eyebrow--penny">Phase 3 Rebuild</span>
+          <h1 class="identity-title">Penny Core Presence</h1>
           <p class="identity-subtitle">
-            The stable single-page shell stays intact while the layout gets more deliberate across desktop,
-            phones, narrow screens, and watch-like widths.
+            The shell stays stable and responsive, but Penny now becomes the unmistakable emotional and intelligent center of the brand:
+            premium, controlled, pink-forward, and deliberate.
           </p>
           <div class="chip-row">
             <span class="chip">Single-page architecture</span>
-            <span class="chip">Touch-safe navigation</span>
-            <span class="chip chip--penny">Penny preserved</span>
+            <span class="chip">Responsive integrity</span>
+            <span class="chip chip--penny">Penny elevated</span>
           </div>
         </div>
 
@@ -1597,16 +1924,16 @@
           <a class="quick-link" href="#contact" data-nav-link="contact">
             <div>
               <strong>Open Penny Office</strong>
-              <span>Contact hub + branded presence</span>
+              <span>Premium contact + concierge lane</span>
             </div>
             <span aria-hidden="true">→</span>
           </a>
         </div>
 
         <div class="status-card">
-          <strong>Penny is still the strongest lane on the board.</strong>
+          <strong>Penny now leads the room.</strong>
           <p>
-            Her space stays pink-forward, touch-friendly, and structurally stable even when the screen gets tiny.
+            Blue and violet still define the wider system, but Penny’s office is now treated like a premium command presence instead of a generic contact block.
           </p>
         </div>
       </section>
@@ -1621,26 +1948,23 @@
         <div class="article-shell">
           <header class="hero-slab">
             <span class="eyebrow">About</span>
-            <h2 class="headline" id="about-title">A controlled responsive rebuild for WildCard DEV.</h2>
+            <h2 class="headline" id="about-title">A premium system build with Penny at the center.</h2>
             <div class="accent-rule"></div>
             <div class="copy">
               <p>
-                WildCard DEV is built to feel like a premium holographic interface: cinematic enough to be memorable,
-                disciplined enough to remain usable, and flexible enough to scale from desktop all the way down to watch-like screens.
+                WildCard DEV is designed to feel like a high-end holographic interface: cinematic enough to be memorable, structured enough to stay dependable, and polished enough to carry a true flagship identity.
               </p>
               <p>
-                Phase 2 strengthens layout integrity first: cleaner stacking, safer spacing, stable tap targets, and containers that
-                remain intentional instead of collapsing once the viewport gets narrow.
+                Phase 3 does not destabilize the foundation. It preserves the stable responsive shell from earlier phases, then rebuilds Penny as the premium assistant intelligence that gives the site its personality, focus, and emotional gravity.
               </p>
             </div>
           </header>
 
           <section class="about-band">
-            <strong>What this phase improves right now</strong>
+            <strong>What changes in this phase</strong>
             <div class="copy">
               <p>
-                More resilient section spacing, cleaner identity stacking, stronger small-screen navigation, safer Penny/contact presentation,
-                and a watch-safe structural baseline that does not depend on hover, oversized fixed pieces, or fragile grids.
+                Penny’s office becomes one of the strongest sections on the page, her pink-forward visual system becomes more clearly separated from the wider blue/violet interface, and contact pathways feel more intentional, premium, and useful.
               </p>
             </div>
           </section>
@@ -1649,28 +1973,28 @@
             <article class="card service-card">
               <h3>Web Design</h3>
               <p>
-                Clear visual systems, premium layout language, and branded UI experiences that feel intentional instead of generic.
+                Premium layouts, polished framing, and brand-driven interfaces that feel deliberate instead of improvised.
               </p>
             </article>
 
             <article class="card service-card">
               <h3>Web Development</h3>
               <p>
-                Stable frontend architecture with readable, self-contained code that stays maintainable as the site evolves.
+                Stable self-contained architecture with clean single-file organization that remains easy to maintain and expand.
               </p>
             </article>
 
             <article class="card service-card">
-              <h3>App Experiences</h3>
+              <h3>Assistant-Led UX</h3>
               <p>
-                Mobile-first and watch-aware thinking are baked into the structure early so smaller devices never feel like afterthoughts.
+                Penny is treated as part concierge, part executive interface, and part branded intelligence rather than a decorative add-on.
               </p>
             </article>
 
             <article class="card service-card">
               <h3>Brand Systems</h3>
               <p>
-                Blue and violet define the system. Penny’s pink shows up where it matters most and keeps the experience emotionally distinct.
+                Blue and violet establish the system. Penny’s signature pink marks the moments where the intelligence inside that system takes control.
               </p>
             </article>
           </section>
@@ -1682,7 +2006,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow">Resume / Experience</span>
-            <h2 class="headline" id="resume-title">Experience and credibility, without layout drift.</h2>
+            <h2 class="headline" id="resume-title">Experience and execution, inside a cleaner flagship shell.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1732,10 +2056,10 @@
             </article>
 
             <article class="card resume-card">
-              <h3>Why this section matters in Phase 2</h3>
+              <h3>Why this section still matters</h3>
               <p>
-                The experience lane now scales more intentionally across widths so later resume polish, collateral, QR integrations,
-                and richer branded details can be layered in without reopening structural problems.
+                Phase 3 raises the brand presence without undoing the dependable foundation. Experience remains cleanly accessible so later collateral, QR links,
+                and deeper resume presentation can be added without reopening layout problems.
               </p>
             </article>
           </section>
@@ -1747,7 +2071,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow">Portfolio</span>
-            <h2 class="headline" id="portfolio-title">The holo stage is stable at every width.</h2>
+            <h2 class="headline" id="portfolio-title">The holo system stays stable while Penny becomes the signature layer.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1755,8 +2079,7 @@
             <div class="holo-stage__header">
               <h3 class="section-title">Portfolio / Holo Stage</h3>
               <p>
-                The portfolio space stays structurally intact while the panel system becomes more responsive and stack-safe
-                for narrow phones and future watch-adjacent experimentation.
+                The portfolio lane remains structurally dependable while preserving a premium presentation space for later holo expansion, richer media usage, and Penny-led showcase behavior.
               </p>
             </div>
 
@@ -1801,7 +2124,7 @@
                   <span class="holo-tag">Future Build</span>
                   <h3>Watch + QR + Premium Contact Flows</h3>
                   <p>
-                    Structural placeholder preserved now so advanced watch behavior can return later without destabilizing the site.
+                    Structural placeholder preserved now so advanced watch experience and branded utility flows can return later without destabilizing the site.
                   </p>
                 </div>
               </article>
@@ -1817,16 +2140,16 @@
             </article>
 
             <article class="card portfolio-card">
-              <h3>Brand-consistent containers</h3>
+              <h3>Penny-distinct visual language</h3>
               <p>
-                Blue / violet system energy stays distinct from Penny’s pink-forward identity instead of blending into generic neon.
+                The wider system stays blue and violet while Penny’s pink identity reads as a clearly elevated lane inside it.
               </p>
             </article>
 
             <article class="card portfolio-card">
               <h3>Safe expansion path</h3>
               <p>
-                This layout is intentionally resilient enough to support later holo restoration without sacrificing usability.
+                The structure remains strong enough to support later holo, avatar, and watch enhancements without sacrificing usability.
               </p>
             </article>
           </section>
@@ -1838,35 +2161,133 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow eyebrow--penny">Contact / Penny Office</span>
-            <h2 class="headline" id="contact-title">Penny’s office stays strong on desktop, phone, and tiny screens.</h2>
+            <h2 class="headline" id="contact-title">Penny now feels like the premium intelligence running the room.</h2>
             <div class="accent-rule"></div>
           </header>
 
           <section class="penny-stage">
-            <div class="penny-hero">
-              <div class="penny-hero__media" aria-hidden="true">
-                <video autoplay muted loop playsinline preload="metadata">
-                  <source src="./images/customerService.webm" type="video/webm" />
-                </video>
+            <!-- ========================================
+                 Penny Office
+            ======================================== -->
+            <div class="penny-office">
+              <div class="penny-office__topbar">
+                <div class="penny-office__meta">
+                  <span class="penny-mini-chip">Penny Office</span>
+                  <span class="penny-mini-chip penny-mini-chip--system">Executive Assistant Layer</span>
+                </div>
+                <div class="penny-office__meta">
+                  <span class="penny-mini-chip">Online</span>
+                  <span class="penny-mini-chip penny-mini-chip--system">WildCard System</span>
+                </div>
               </div>
 
-              <div class="penny-hero__copy">
-                <span class="eyebrow eyebrow--penny">Penny Presence</span>
-                <h3>The premium assistant energy survives responsiveness.</h3>
-                <p>
-                  Penny is not decorative filler. She is the emotional and intelligent core of the WildCard DEV experience:
-                  polished, confident, pink-forward, and clearly separated from the wider system glow.
-                </p>
-                <div class="chip-row">
-                  <span class="chip chip--penny">Executive-assistant energy</span>
-                  <span class="chip chip--penny">Distinct visual lane</span>
-                  <span class="chip chip--penny">Ready for later upgrades</span>
+              <div class="penny-grid">
+                <div class="penny-hero">
+                  <div class="penny-hero__media" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata">
+                      <source src="./images/customerService.webm" type="video/webm" />
+                    </video>
+                  </div>
+
+                  <div class="penny-hero__copy">
+                    <span class="eyebrow eyebrow--penny">Penny Presence</span>
+                    <h3>Controlled. Confident. Polished. A little dangerous in a perfectly professional way.</h3>
+                    <p>
+                      Penny is the premium assistant presence of WildCard DEV. She is not filler, not a gimmick, and not just a contact form skin.
+                      She is the interface voice that makes the system feel personal, high-end, and unmistakably alive.
+                    </p>
+
+                    <div class="chip-row">
+                      <span class="chip chip--penny">Pink-forward identity</span>
+                      <span class="chip chip--penny">Executive-assistant energy</span>
+                      <span class="chip chip--penny">Stable on small screens</span>
+                    </div>
+
+                    <div class="penny-status-grid" aria-label="Penny system highlights">
+                      <div class="penny-stat">
+                        <span>Role</span>
+                        <strong>Front desk intelligence</strong>
+                        <em>Guides contact, tone, and first impressions.</em>
+                      </div>
+                      <div class="penny-stat">
+                        <span>Signal</span>
+                        <strong>Pink control layer</strong>
+                        <em>Distinct from the base blue/violet system.</em>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <aside class="penny-console" aria-live="polite">
+                  <div class="penny-console__label">Penny Office Status</div>
+                  <div class="penny-console__status" id="pennyStatus">
+                    Ready to route project inquiries, handle polished introductions, and make the contact lane feel like a real premium experience.
+                  </div>
+                  <div class="penny-console__sub">
+                    Hover or focus the Penny action cards below to shift the office readout.
+                  </div>
+                </aside>
+              </div>
+
+              <div class="penny-ops-grid">
+                <article class="penny-op">
+                  <strong>Client Intake</strong>
+                  <p>
+                    Structured first contact without losing the cinematic feel that makes the brand memorable.
+                  </p>
+                </article>
+                <article class="penny-op">
+                  <strong>Concierge Routing</strong>
+                  <p>
+                    Clean pathways to Matt, company contact, and future Penny-driven flows like watch QR and branded utility drops.
+                  </p>
+                </article>
+                <article class="penny-op">
+                  <strong>Brand Tone Control</strong>
+                  <p>
+                    Confident, playful, and polished voice shaping the strongest emotional lane on the site.
+                  </p>
+                </article>
+              </div>
+
+              <div class="penny-links-grid" aria-label="Penny quick actions">
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="mailto:matt@wildcarddev.com"
+                  data-penny-message="Opening a direct line to Matt. Clean, immediate, and ready for serious project conversations."
+                >
+                  <strong>Email Matt</strong>
+                  <span>Best for proposals, build requests, and polished written intros.</span>
+                </a>
+
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="tel:+14029150789"
+                  data-penny-message="Routing to the company line now. Ideal when you want the fast lane instead of the inbox."
+                >
+                  <strong>Call WildCard DEV</strong>
+                  <span>Use the company line when speed matters more than ceremony.</span>
+                </a>
+
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="#watch"
+                  data-nav-link="watch"
+                  data-penny-message="Redirecting toward the watch lane. That sandbox stays preserved for later premium Penny utility flows."
+                >
+                  <strong>Open Watch Lane</strong>
+                  <span>Reserved for QR, wearable presence, and future Penny experiments.</span>
+                </a>
+              </div>
+
+              <div class="penny-office-note">
+                Penny’s office is intentionally framed as a premium control space rather than a generic utility section. The interaction layer here stays light and safe:
+                clearer glass styling, stronger visual hierarchy, refined hover/focus response, and one shared status readout instead of fragile heavy scripting.
               </div>
             </div>
 
             <div class="contact-grid">
-              <section class="card contact-card">
+              <section class="card contact-card contact-card--penny">
                 <h3>Contact WildCard DEV</h3>
                 <div class="contact-list">
                   <div class="contact-row">
@@ -1895,7 +2316,7 @@
                 </div>
               </section>
 
-              <section class="card contact-card">
+              <section class="card contact-card contact-card--penny">
                 <h3>Leave a message for Penny</h3>
                 <form class="contact-form" action="mailto:matt@wildcarddev.com" method="post" enctype="text/plain">
                   <div class="field-grid">
@@ -1922,12 +2343,12 @@
 
                   <label>
                     <span class="visually-hidden">Message</span>
-                    <textarea class="textarea" name="message" placeholder="Tell us what you need built. Penny is listening."></textarea>
+                    <textarea class="textarea" name="message" placeholder="Tell us what you want built. Penny is paying attention."></textarea>
                   </label>
 
                   <div class="submit-row">
                     <p class="submit-note">
-                      Phase 2 keeps this lane readable, touch-friendly, and stable so richer Penny interactions can be layered in later.
+                      This phase keeps the contact lane dependable while making Penny’s presence feel elevated, intentional, and clearly special within the wider system.
                     </p>
                     <button class="submit-btn" type="submit">Send Message</button>
                   </div>
@@ -1943,7 +2364,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow eyebrow--penny">Watch Experience</span>
-            <h2 class="headline" id="watch-title">The watch lane stays ready for a dedicated later phase.</h2>
+            <h2 class="headline" id="watch-title">The watch lane stays in place for the later Penny utility build.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1955,37 +2376,36 @@
                 </video>
 
                 <div class="watch-ui">
-                  <div class="watch-bubble">Hey honey. The watch experience is still part of the plan.</div>
+                  <div class="watch-bubble">Hey honey. The wearable lane is still on the board.</div>
                   <div class="watch-time" id="watchTime">12:00</div>
-                  <div class="watch-caption">Responsive foundation locked first. QR and richer Penny watch flows come later.</div>
+                  <div class="watch-caption">Foundation and Penny core first. QR and richer watch flows come later.</div>
                 </div>
               </div>
             </div>
 
             <p class="watch-meta">
-              This section remains lightweight on purpose, but it now behaves more safely at narrow widths so the later watch-specific build
-              has a cleaner structural base to work from.
+              This section remains intentionally lightweight, but the structure is still preserved so later QR sequences, watch-specific layouts, and Penny-driven utility flows have a stable place to land.
             </p>
 
             <div class="portfolio-grid">
               <article class="card watch-card">
                 <h3>Why it stays now</h3>
                 <p>
-                  Keeping the watch lane present preserves navigation, continuity, and future implementation space.
+                  Keeping the watch lane visible preserves continuity, navigation, and future implementation space.
                 </p>
               </article>
 
               <article class="card watch-card">
                 <h3>What returns later</h3>
                 <p>
-                  QR sequences, Penny-triggered flows, device-specific behavior, and richer branded media once the responsive shell is locked.
+                  QR sequences, Penny-triggered flows, wearable contact utilities, and stronger media integration once the current core is fully locked.
                 </p>
               </article>
 
               <article class="card watch-card">
-                <h3>What matters in Phase 2</h3>
+                <h3>What Phase 3 adds indirectly</h3>
                 <p>
-                  Small-screen safety, visible continuity, and a clean container that does not fight later enhancement.
+                  A clearer Penny identity system so the future watch experience inherits the same premium voice instead of feeling disconnected.
                 </p>
               </article>
             </div>
@@ -2012,6 +2432,8 @@
       const navButtons = Array.from(document.querySelectorAll('[data-page-target]'));
       const shortcutLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
       const watchTime = document.getElementById('watchTime');
+      const pennyStatus = document.getElementById('pennyStatus');
+      const pennyStatusCards = Array.from(document.querySelectorAll('[data-penny-message]'));
 
       function showPage(pageId, updateHash = true) {
         let found = false;
@@ -2080,6 +2502,27 @@
 
       updateWatchTime();
       setInterval(updateWatchTime, 30000);
+
+      if (pennyStatus && pennyStatusCards.length) {
+        const defaultStatus = pennyStatus.textContent.trim();
+
+        pennyStatusCards.forEach((card) => {
+          const message = card.getAttribute('data-penny-message') || defaultStatus;
+
+          const activate = function () {
+            pennyStatus.textContent = message;
+          };
+
+          const reset = function () {
+            pennyStatus.textContent = defaultStatus;
+          };
+
+          card.addEventListener('mouseenter', activate);
+          card.addEventListener('focus', activate);
+          card.addEventListener('mouseleave', reset);
+          card.addEventListener('blur', reset);
+        });
+      }
     })();
   </script>
 </body>
