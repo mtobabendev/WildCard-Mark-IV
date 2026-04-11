@@ -29,12 +29,14 @@
       --gold: #ffc86d;
       --radius: 24px;
       --radius-sm: 18px;
+      --radius-xs: 14px;
       --shadow-lg: 0 28px 90px rgba(0, 0, 0, 0.42);
       --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.28);
       --transition: 180ms ease;
       --max: 1380px;
       --sidebar: 320px;
       --nav-height: 72px;
+      --watch-safe-pad: 10px;
       --font: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -51,6 +53,7 @@
 
     body {
       min-height: 100vh;
+      overflow-x: hidden;
       font-family: var(--font);
       color: var(--text);
       background:
@@ -59,6 +62,7 @@
         radial-gradient(circle at 50% 16%, rgba(255, 79, 183, 0.09), transparent 24%),
         linear-gradient(180deg, #06070d 0%, #0a0d16 38%, #06080f 100%);
       line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
     }
 
     a {
@@ -95,6 +99,11 @@
       color: #1b1204;
     }
 
+    :focus-visible {
+      outline: 2px solid rgba(255, 79, 183, 0.5);
+      outline-offset: 2px;
+    }
+
     .visually-hidden {
       position: absolute !important;
       width: 1px;
@@ -111,10 +120,21 @@
        Layout
     ======================================== */
     .site-shell {
-      width: min(calc(100% - 20px), var(--max));
-      margin: 10px auto 88px;
+      width: min(calc(100% - 16px), var(--max));
+      margin: 8px auto 84px;
       display: grid;
-      gap: 16px;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .sidebar,
+    .content-shell {
+      display: grid;
+      gap: 12px;
+    }
+
+    .content-shell {
+      align-content: start;
     }
 
     .panel {
@@ -125,7 +145,8 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
-      overflow: hidden;
+      overflow: clip;
+      isolation: isolate;
     }
 
     .panel::before {
@@ -144,14 +165,14 @@
       z-index: 1;
     }
 
-    .sidebar,
-    .content-shell {
-      display: grid;
-      gap: 16px;
-    }
-
     .section-pad {
       padding: 20px;
+    }
+
+    .article-shell {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
     }
 
     .eyebrow {
@@ -159,6 +180,7 @@
       align-items: center;
       gap: 8px;
       width: fit-content;
+      max-width: 100%;
       padding: 7px 12px;
       border-radius: 999px;
       border: 1px solid rgba(134, 171, 255, 0.16);
@@ -167,6 +189,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .eyebrow--penny {
@@ -176,15 +199,17 @@
     }
 
     .headline {
-      font-size: clamp(1.9rem, 4vw, 2.65rem);
+      font-size: clamp(1.75rem, 4vw, 2.65rem);
       line-height: 1.08;
-      margin-top: 14px;
+      margin-top: 12px;
+      text-wrap: balance;
     }
 
     .section-title {
-      font-size: clamp(1.35rem, 2vw, 1.8rem);
+      font-size: clamp(1.25rem, 2vw, 1.8rem);
       line-height: 1.12;
       margin-bottom: 10px;
+      text-wrap: balance;
     }
 
     .copy {
@@ -206,9 +231,16 @@
       box-shadow: 0 0 12px rgba(255, 79, 183, 0.18);
     }
 
-    .card-grid {
+    .card-grid,
+    .split-grid,
+    .service-grid,
+    .resume-grid,
+    .portfolio-grid,
+    .contact-grid,
+    .holo-panel-grid,
+    .field-grid {
       display: grid;
-      gap: 14px;
+      gap: 12px;
     }
 
     .card {
@@ -237,6 +269,7 @@
       background: rgba(255, 255, 255, 0.03);
       color: var(--text-soft);
       font-size: 0.83rem;
+      line-height: 1.25;
     }
 
     .chip--penny {
@@ -246,12 +279,74 @@
     }
 
     /* ========================================
-       Sidebar / Identity
+       Navigation
+    ======================================== */
+    .nav-panel {
+      position: sticky;
+      bottom: 8px;
+      z-index: 25;
+      padding: 8px;
+      backdrop-filter: blur(14px);
+      background:
+        linear-gradient(180deg, rgba(18, 21, 34, 0.92), rgba(12, 15, 25, 0.96));
+    }
+
+    .nav-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .nav-btn {
+      min-height: 48px;
+      padding: 0 12px;
+      border-radius: 16px;
+      color: var(--text-soft);
+      border: 1px solid transparent;
+      transition: var(--transition);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .nav-btn:hover,
+    .nav-btn:focus-visible {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(134, 171, 255, 0.12);
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-btn.is-active {
+      color: var(--text);
+      border-color: rgba(134, 171, 255, 0.2);
+      background:
+        radial-gradient(circle at top, rgba(106, 168, 255, 0.12), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 16px rgba(106, 168, 255, 0.08);
+    }
+
+    .nav-btn--penny.is-active {
+      border-color: rgba(255, 79, 183, 0.26);
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 16px rgba(255, 79, 183, 0.1);
+    }
+
+    /* ========================================
+       Identity
     ======================================== */
     .identity-panel {
-      padding: 18px;
+      padding: 16px;
       display: grid;
-      gap: 16px;
+      gap: 14px;
     }
 
     .brand-mark-row {
@@ -261,9 +356,10 @@
     }
 
     .brand-logo {
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       object-fit: contain;
+      flex: 0 0 auto;
       filter: drop-shadow(0 0 12px rgba(106, 168, 255, 0.22)) drop-shadow(0 0 18px rgba(255, 79, 183, 0.12));
     }
 
@@ -276,6 +372,7 @@
       font-size: 0.98rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+      line-height: 1.1;
     }
 
     .brand-wordmark span {
@@ -283,6 +380,7 @@
       font-size: 0.76rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      line-height: 1.25;
     }
 
     .identity-hero {
@@ -298,13 +396,14 @@
     }
 
     .identity-title {
-      font-size: 1.65rem;
-      line-height: 1.02;
+      font-size: clamp(1.45rem, 3vw, 1.78rem);
+      line-height: 1.04;
+      text-wrap: balance;
     }
 
     .identity-subtitle {
       color: var(--text-soft);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       line-height: 1.65;
     }
 
@@ -315,7 +414,7 @@
 
     .person-card {
       display: grid;
-      grid-template-columns: 84px 1fr;
+      grid-template-columns: 72px 1fr;
       gap: 12px;
       align-items: center;
       padding: 12px;
@@ -327,7 +426,7 @@
     }
 
     .person-card__media {
-      width: 84px;
+      width: 72px;
       aspect-ratio: 0.78;
       border-radius: 16px;
       overflow: hidden;
@@ -351,7 +450,8 @@
     }
 
     .person-card__copy strong {
-      font-size: 1rem;
+      font-size: 0.98rem;
+      line-height: 1.2;
     }
 
     .person-card__copy span {
@@ -390,11 +490,13 @@
 
     .quick-link strong {
       font-size: 0.92rem;
+      line-height: 1.2;
     }
 
     .quick-link span {
       color: var(--text-dim);
       font-size: 0.78rem;
+      line-height: 1.25;
     }
 
     .status-card {
@@ -412,6 +514,7 @@
     .status-card strong {
       color: #ffd9f1;
       font-size: 0.96rem;
+      line-height: 1.2;
     }
 
     .status-card p {
@@ -421,67 +524,7 @@
     }
 
     /* ========================================
-       Navigation
-    ======================================== */
-    .nav-panel {
-      position: sticky;
-      bottom: 10px;
-      z-index: 20;
-      padding: 8px;
-      backdrop-filter: blur(14px);
-      background:
-        linear-gradient(180deg, rgba(18, 21, 34, 0.92), rgba(12, 15, 25, 0.96));
-    }
-
-    .nav-list {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .nav-btn {
-      min-height: 52px;
-      padding: 0 12px;
-      border-radius: 16px;
-      color: var(--text-soft);
-      border: 1px solid transparent;
-      transition: var(--transition);
-      font-size: 0.84rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-
-    .nav-btn:hover,
-    .nav-btn:focus-visible {
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(134, 171, 255, 0.12);
-      color: var(--text);
-      outline: none;
-    }
-
-    .nav-btn.is-active {
-      color: var(--text);
-      border-color: rgba(134, 171, 255, 0.2);
-      background:
-        radial-gradient(circle at top, rgba(106, 168, 255, 0.12), transparent 40%),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.02),
-        0 0 16px rgba(106, 168, 255, 0.08);
-    }
-
-    .nav-btn--penny.is-active {
-      border-color: rgba(255, 79, 183, 0.26);
-      background:
-        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.02),
-        0 0 16px rgba(255, 79, 183, 0.1);
-    }
-
-    /* ========================================
-       Articles / Sections
+       Content Sections
     ======================================== */
     .article {
       display: none;
@@ -503,35 +546,16 @@
       }
     }
 
-    .article-shell {
-      padding: 22px;
-      display: grid;
-      gap: 22px;
-    }
-
     .hero-slab {
       display: grid;
       gap: 14px;
-      padding: 20px;
+      padding: 18px;
       border-radius: 22px;
       border: 1px solid var(--line);
       background:
         radial-gradient(circle at top left, rgba(106, 168, 255, 0.12), transparent 30%),
         radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 30%),
         linear-gradient(180deg, rgba(14, 18, 30, 0.96), rgba(9, 12, 20, 0.98));
-    }
-
-    .split-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .service-grid,
-    .resume-grid,
-    .portfolio-grid,
-    .contact-grid {
-      display: grid;
-      gap: 14px;
     }
 
     .service-card,
@@ -549,6 +573,7 @@
     .watch-card h3 {
       font-size: 1rem;
       margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .service-card p,
@@ -561,9 +586,6 @@
       font-size: 0.92rem;
     }
 
-    /* ========================================
-       About
-    ======================================== */
     .about-band {
       display: grid;
       gap: 14px;
@@ -577,10 +599,11 @@
 
     .about-band strong {
       font-size: 1rem;
+      line-height: 1.25;
     }
 
     /* ========================================
-       Resume / Experience
+       Resume
     ======================================== */
     .resume-top {
       display: grid;
@@ -618,6 +641,7 @@
     .action-link {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       min-height: 42px;
       padding: 0 14px;
@@ -627,6 +651,7 @@
       transition: var(--transition);
       font-size: 0.88rem;
       font-weight: 600;
+      text-align: center;
     }
 
     .action-link:hover,
@@ -654,6 +679,7 @@
       display: block;
       font-size: 0.95rem;
       margin-bottom: 4px;
+      line-height: 1.25;
     }
 
     .timeline-item span {
@@ -662,6 +688,7 @@
       font-size: 0.8rem;
       margin-bottom: 8px;
       letter-spacing: 0.04em;
+      line-height: 1.3;
     }
 
     .timeline-item p {
@@ -671,12 +698,12 @@
     }
 
     /* ========================================
-       Portfolio / Holo Stage
+       Portfolio / Holo
     ======================================== */
     .holo-stage {
       position: relative;
       min-height: 280px;
-      padding: 20px;
+      padding: 18px;
       border-radius: 22px;
       border: 1px solid rgba(134, 171, 255, 0.18);
       overflow: hidden;
@@ -701,20 +728,13 @@
       gap: 8px;
       position: relative;
       z-index: 2;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .holo-stage__header p {
       color: var(--text-soft);
       line-height: 1.7;
       max-width: 68ch;
-    }
-
-    .holo-panel-grid {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      gap: 14px;
     }
 
     .holo-card {
@@ -745,6 +765,7 @@
     .holo-card h3 {
       font-size: 1rem;
       margin-bottom: 10px;
+      line-height: 1.25;
     }
 
     .holo-card p {
@@ -768,6 +789,7 @@
       color: var(--text-soft);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .holo-card__media {
@@ -793,7 +815,7 @@
     }
 
     /* ========================================
-       Penny Presence / Contact
+       Penny Presence
     ======================================== */
     .penny-stage {
       display: grid;
@@ -814,7 +836,7 @@
     }
 
     .penny-hero__media {
-      min-height: 240px;
+      min-height: 220px;
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
@@ -839,8 +861,9 @@
 
     .penny-hero__copy h3 {
       color: #ffd7ef;
-      font-size: 1.2rem;
+      font-size: 1.16rem;
       line-height: 1.2;
+      text-wrap: balance;
     }
 
     .penny-hero__copy p {
@@ -849,6 +872,9 @@
       font-size: 0.95rem;
     }
 
+    /* ========================================
+       Contact
+    ======================================== */
     .contact-list {
       display: grid;
       gap: 12px;
@@ -865,6 +891,7 @@
 
     .contact-row strong {
       font-size: 0.95rem;
+      line-height: 1.2;
     }
 
     .contact-row span,
@@ -884,6 +911,7 @@
     .contact-action {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       min-height: 40px;
       padding: 0 12px;
       border-radius: 999px;
@@ -892,6 +920,7 @@
       font-size: 0.84rem;
       font-weight: 600;
       transition: var(--transition);
+      text-align: center;
     }
 
     .contact-action:hover,
@@ -903,11 +932,6 @@
     }
 
     .contact-form {
-      display: grid;
-      gap: 12px;
-    }
-
-    .field-grid {
       display: grid;
       gap: 12px;
     }
@@ -941,11 +965,9 @@
     }
 
     .submit-row {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       gap: 10px;
       align-items: center;
-      justify-content: space-between;
     }
 
     .submit-note {
@@ -955,6 +977,7 @@
     }
 
     .submit-btn {
+      width: 100%;
       min-height: 48px;
       padding: 0 18px;
       border-radius: 16px;
@@ -985,7 +1008,7 @@
     }
 
     .watch-shell {
-      width: min(92vw, 330px);
+      width: min(92vw, 320px);
       aspect-ratio: 1;
       padding: 10px;
       border-radius: 999px;
@@ -1035,6 +1058,7 @@
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.06em;
+      line-height: 1.1;
     }
 
     .watch-bubble,
@@ -1068,12 +1092,14 @@
     }
 
     /* ========================================
-       Responsive
+       Responsive 1024
     ======================================== */
-    @media (min-width: 900px) {
+    @media (min-width: 1024px) {
       .site-shell {
-        grid-template-columns: minmax(280px, var(--sidebar)) minmax(0, 1fr);
-        align-items: start;
+        grid-template-columns: minmax(290px, var(--sidebar)) minmax(0, 1fr);
+        gap: 16px;
+        width: min(calc(100% - 20px), var(--max));
+        margin: 10px auto 88px;
       }
 
       .sidebar {
@@ -1081,30 +1107,38 @@
         top: 10px;
       }
 
+      .identity-panel {
+        padding: 18px;
+        gap: 16px;
+      }
+
+      .article-shell {
+        padding: 22px;
+        gap: 22px;
+      }
+
       .split-grid {
         grid-template-columns: 1.25fr 0.95fr;
         align-items: start;
       }
 
-      .service-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
+      .service-grid,
       .resume-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .portfolio-grid {
+      .portfolio-grid,
+      .holo-panel-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .contact-grid {
-        grid-template-columns: 1.08fr 0.92fr;
+        grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
         align-items: start;
       }
 
       .penny-hero {
-        grid-template-columns: minmax(0, 1.05fr) minmax(290px, 0.95fr);
+        grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
         align-items: stretch;
       }
 
@@ -1112,74 +1146,380 @@
         grid-template-columns: 120px 1fr;
       }
 
-      .holo-panel-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+      .nav-list {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .submit-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .submit-btn {
+        width: auto;
       }
     }
 
-    @media (max-width: 899px) {
+    /* ========================================
+       Responsive 768
+    ======================================== */
+    @media (min-width: 768px) and (max-width: 1023.98px) {
+      .site-shell {
+        width: min(calc(100% - 18px), var(--max));
+      }
+
+      .identity-people {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quick-links {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .service-grid,
+      .resume-grid,
+      .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-grid,
+      .penny-hero,
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .holo-panel-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .resume-top {
+        grid-template-columns: 120px 1fr;
+      }
+
       .nav-list {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-    }
 
-    @media (max-width: 640px) {
-      .site-shell {
-        width: min(calc(100% - 12px), var(--max));
-        margin-top: 6px;
+      .submit-row {
+        grid-template-columns: 1fr auto;
       }
 
-      .section-pad,
+      .submit-btn {
+        width: auto;
+      }
+    }
+
+    /* ========================================
+       Responsive 480
+    ======================================== */
+    @media (max-width: 767.98px) {
+      .site-shell {
+        width: min(calc(100% - 12px), var(--max));
+        margin: 6px auto 82px;
+      }
+
+      .identity-panel,
       .article-shell,
-      .identity-panel {
+      .service-card,
+      .resume-card,
+      .portfolio-card,
+      .contact-card,
+      .watch-card,
+      .hero-slab,
+      .about-band,
+      .holo-stage,
+      .penny-hero {
         padding: 16px;
+      }
+
+      .brand-mark-row {
+        align-items: flex-start;
+      }
+
+      .identity-people,
+      .quick-links,
+      .service-grid,
+      .resume-grid,
+      .portfolio-grid,
+      .holo-panel-grid,
+      .contact-grid,
+      .split-grid,
+      .field-grid,
+      .penny-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .resume-media {
+        max-width: 112px;
+      }
+
+      .resume-top {
+        justify-items: start;
       }
 
       .nav-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .nav-btn {
-        min-height: 48px;
-        font-size: 0.8rem;
-      }
-
-      .person-card {
-        grid-template-columns: 72px 1fr;
-      }
-
-      .person-card__media {
-        width: 72px;
-      }
-
-      .submit-row {
-        align-items: stretch;
-      }
-
-      .submit-btn {
-        width: 100%;
-      }
-
       .watch-shell {
-        width: min(96vw, 280px);
+        width: min(94vw, 280px);
       }
     }
 
-    @media (max-width: 420px) {
+    /* ========================================
+       Responsive 390
+    ======================================== */
+    @media (max-width: 479.98px) {
+      :root {
+        --radius: 20px;
+        --radius-sm: 16px;
+      }
+
+      .site-shell {
+        width: min(calc(100% - 10px), var(--max));
+        gap: 10px;
+        margin: 5px auto 76px;
+      }
+
       .headline {
-        font-size: 1.7rem;
+        font-size: clamp(1.48rem, 8vw, 1.82rem);
+      }
+
+      .section-title {
+        font-size: 1.15rem;
       }
 
       .identity-title {
-        font-size: 1.42rem;
+        font-size: 1.34rem;
+      }
+
+      .identity-subtitle,
+      .copy,
+      .service-card p,
+      .resume-card p,
+      .portfolio-card p,
+      .contact-card p,
+      .watch-card p,
+      .penny-hero__copy p,
+      .watch-meta {
+        font-size: 0.91rem;
+      }
+
+      .brand-wordmark strong {
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+      }
+
+      .brand-wordmark span {
+        font-size: 0.72rem;
+      }
+
+      .person-card {
+        grid-template-columns: 64px 1fr;
+        gap: 10px;
+      }
+
+      .person-card__media {
+        width: 64px;
+      }
+
+      .quick-link {
+        padding: 12px 14px;
+        min-height: 56px;
+      }
+
+      .quick-link strong {
+        font-size: 0.88rem;
       }
 
       .nav-list {
         grid-template-columns: 1fr;
       }
 
+      .nav-btn {
+        min-height: 46px;
+        font-size: 0.8rem;
+      }
+
+      .chip {
+        min-height: 36px;
+        font-size: 0.78rem;
+      }
+
+      .contact-actions,
+      .resume-links {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .action-link,
+      .contact-action {
+        width: 100%;
+      }
+
+      .penny-hero__media {
+        min-height: 180px;
+      }
+
+      .holo-card {
+        min-height: 160px;
+      }
+
       .watch-shell {
-        width: min(96vw, 235px);
+        width: min(94vw, 232px);
+        padding: 8px;
+      }
+
+      .watch-ui {
+        padding: 14px 10px 12px;
+      }
+
+      .watch-bubble,
+      .watch-caption {
+        width: min(88%, 180px);
+        padding: 8px 10px;
+        font-size: 0.7rem;
+        border-radius: 14px;
+      }
+
+      .watch-time {
+        font-size: 0.92rem;
+      }
+    }
+
+    /* ========================================
+       Smartwatch-safe under 390
+    ======================================== */
+    @media (max-width: 389.98px) {
+      .site-shell {
+        width: min(calc(100% - 8px), var(--max));
+        margin: 4px auto 70px;
+      }
+
+      .identity-panel,
+      .article-shell,
+      .service-card,
+      .resume-card,
+      .portfolio-card,
+      .contact-card,
+      .watch-card,
+      .hero-slab,
+      .about-band,
+      .holo-stage,
+      .penny-hero {
+        padding: var(--watch-safe-pad);
+      }
+
+      .panel {
+        border-radius: 18px;
+      }
+
+      .identity-hero,
+      .person-card,
+      .status-card,
+      .contact-row,
+      .timeline-item,
+      .quick-link,
+      .holo-card {
+        border-radius: 14px;
+      }
+
+      .eyebrow {
+        font-size: 0.62rem;
+        padding: 6px 10px;
+        letter-spacing: 0.08em;
+      }
+
+      .headline {
+        font-size: clamp(1.2rem, 8vw, 1.45rem);
+        margin-top: 10px;
+      }
+
+      .identity-title {
+        font-size: 1.14rem;
+      }
+
+      .copy,
+      .identity-subtitle,
+      .service-card p,
+      .resume-card p,
+      .portfolio-card p,
+      .contact-card p,
+      .watch-card p,
+      .penny-hero__copy p,
+      .submit-note,
+      .watch-meta {
+        font-size: 0.86rem;
+        line-height: 1.6;
+      }
+
+      .person-card {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .person-card__media {
+        width: 72px;
+      }
+
+      .brand-mark-row {
+        gap: 10px;
+      }
+
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+      }
+
+      .quick-link {
+        align-items: flex-start;
+      }
+
+      .quick-link span:last-child {
+        display: none;
+      }
+
+      .contact-row,
+      .resume-links,
+      .contact-actions {
+        gap: 8px;
+      }
+
+      .input,
+      .textarea {
+        padding: 12px 13px;
+        border-radius: 14px;
+      }
+
+      .submit-btn,
+      .nav-btn {
+        min-height: 44px;
+      }
+
+      .watch-shell {
+        width: min(92vw, 205px);
+      }
+
+      .watch-bubble,
+      .watch-caption {
+        width: min(90%, 156px);
+      }
+    }
+
+    /* ========================================
+       Motion Preferences
+    ======================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
@@ -1187,7 +1527,7 @@
 <body>
   <main class="site-shell">
     <!-- ========================================
-         Sidebar / Identity
+         Identity
     ======================================== -->
     <aside class="sidebar">
       <section class="panel identity-panel">
@@ -1200,15 +1540,15 @@
         </div>
 
         <div class="identity-hero">
-          <span class="eyebrow">Flagship Build</span>
-          <h1 class="identity-title">Stable Mark IV Skeleton</h1>
+          <span class="eyebrow">Phase 2 Rebuild</span>
+          <h1 class="identity-title">Responsive Mark IV Foundation</h1>
           <p class="identity-subtitle">
-            The foundation is back where it belongs: single-page, section-driven, mobile-safe,
-            smartwatch-aware, and ready for richer Penny and holo restoration in later phases.
+            The stable single-page shell stays intact while the layout gets more deliberate across desktop,
+            phones, narrow screens, and watch-like widths.
           </p>
           <div class="chip-row">
             <span class="chip">Single-page architecture</span>
-            <span class="chip">Responsive-first</span>
+            <span class="chip">Touch-safe navigation</span>
             <span class="chip chip--penny">Penny preserved</span>
           </div>
         </div>
@@ -1264,10 +1604,9 @@
         </div>
 
         <div class="status-card">
-          <strong>Penny is still here.</strong>
+          <strong>Penny is still the strongest lane on the board.</strong>
           <p>
-            This phase keeps her clearly visible and pink-forward without risking fragile
-            flourishes. The premium assistant energy stays intact while the structure gets stable again.
+            Her space stays pink-forward, touch-friendly, and structurally stable even when the screen gets tiny.
           </p>
         </div>
       </section>
@@ -1282,26 +1621,26 @@
         <div class="article-shell">
           <header class="hero-slab">
             <span class="eyebrow">About</span>
-            <h2 class="headline" id="about-title">A controlled rebuild foundation for WildCard DEV.</h2>
+            <h2 class="headline" id="about-title">A controlled responsive rebuild for WildCard DEV.</h2>
             <div class="accent-rule"></div>
             <div class="copy">
               <p>
                 WildCard DEV is built to feel like a premium holographic interface: cinematic enough to be memorable,
-                disciplined enough to remain usable, and flexible enough to grow without tearing itself apart.
+                disciplined enough to remain usable, and flexible enough to scale from desktop all the way down to watch-like screens.
               </p>
               <p>
-                This Phase 1 structure focuses on core shell integrity first: fake-page navigation, section isolation,
-                responsive stacking, clear branding, and safe containers for later Penny, holo, and watch enhancements.
+                Phase 2 strengthens layout integrity first: cleaner stacking, safer spacing, stable tap targets, and containers that
+                remain intentional instead of collapsing once the viewport gets narrow.
               </p>
             </div>
           </header>
 
           <section class="about-band">
-            <strong>What this rebuild restores right now</strong>
+            <strong>What this phase improves right now</strong>
             <div class="copy">
               <p>
-                A dependable page shell, stable section switching, a preserved identity area, a simplified but present
-                portfolio / holo zone, a distinct Penny office, and a watch placeholder that still feels deliberate.
+                More resilient section spacing, cleaner identity stacking, stronger small-screen navigation, safer Penny/contact presentation,
+                and a watch-safe structural baseline that does not depend on hover, oversized fixed pieces, or fragile grids.
               </p>
             </div>
           </section>
@@ -1317,21 +1656,21 @@
             <article class="card service-card">
               <h3>Web Development</h3>
               <p>
-                Stable frontend architecture with clean hierarchy, maintainable code, and safer foundations for iteration.
+                Stable frontend architecture with readable, self-contained code that stays maintainable as the site evolves.
               </p>
             </article>
 
             <article class="card service-card">
               <h3>App Experiences</h3>
               <p>
-                Mobile-first and watch-aware thinking built into the structure from the beginning, not bolted on later.
+                Mobile-first and watch-aware thinking are baked into the structure early so smaller devices never feel like afterthoughts.
               </p>
             </article>
 
             <article class="card service-card">
               <h3>Brand Systems</h3>
               <p>
-                Interface identity, story-driven presentation, and signature touches like Penny’s presence layered over usable structure.
+                Blue and violet define the system. Penny’s pink shows up where it matters most and keeps the experience emotionally distinct.
               </p>
             </article>
           </section>
@@ -1343,7 +1682,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow">Resume / Experience</span>
-            <h2 class="headline" id="resume-title">Experience and credibility, without the layout drama.</h2>
+            <h2 class="headline" id="resume-title">Experience and credibility, without layout drift.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1386,18 +1725,17 @@
                   <strong>Production-minded frontend work</strong>
                   <span>Ongoing</span>
                   <p>
-                    Prioritizing layouts that stay stable across desktop, phone, and very small screens before
-                    layering in higher-risk polish.
+                    Prioritizing layouts that stay stable across desktop, phone, and very small screens before layering in higher-risk polish.
                   </p>
                 </div>
               </div>
             </article>
 
             <article class="card resume-card">
-              <h3>Why this section exists in Phase 1</h3>
+              <h3>Why this section matters in Phase 2</h3>
               <p>
-                The resume / experience section is structurally restored now so later phases can safely refine copy,
-                visuals, QR flows, downloads, and richer branded collateral without re-breaking navigation or layout.
+                The experience lane now scales more intentionally across widths so later resume polish, collateral, QR integrations,
+                and richer branded details can be layered in without reopening structural problems.
               </p>
             </article>
           </section>
@@ -1409,7 +1747,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow">Portfolio</span>
-            <h2 class="headline" id="portfolio-title">The holo stage is simplified, not removed.</h2>
+            <h2 class="headline" id="portfolio-title">The holo stage is stable at every width.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1417,8 +1755,8 @@
             <div class="holo-stage__header">
               <h3 class="section-title">Portfolio / Holo Stage</h3>
               <p>
-                This phase keeps the portfolio space alive as a clean, stable container. It is ready for later
-                restoration of richer holographic panels, media rotation, and Penny-specific showcase behavior.
+                The portfolio space stays structurally intact while the panel system becomes more responsive and stack-safe
+                for narrow phones and future watch-adjacent experimentation.
               </p>
             </div>
 
@@ -1463,7 +1801,7 @@
                   <span class="holo-tag">Future Build</span>
                   <h3>Watch + QR + Premium Contact Flows</h3>
                   <p>
-                    Structural placeholder preserved now so the advanced watch experience can return later without destabilizing the site.
+                    Structural placeholder preserved now so advanced watch behavior can return later without destabilizing the site.
                   </p>
                 </div>
               </article>
@@ -1488,7 +1826,7 @@
             <article class="card portfolio-card">
               <h3>Safe expansion path</h3>
               <p>
-                This layout is intentionally plain enough to trust and strong enough to support later holo enhancements.
+                This layout is intentionally resilient enough to support later holo restoration without sacrificing usability.
               </p>
             </article>
           </section>
@@ -1500,7 +1838,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow eyebrow--penny">Contact / Penny Office</span>
-            <h2 class="headline" id="contact-title">Penny’s office remains distinct, pink-forward, and structurally safe.</h2>
+            <h2 class="headline" id="contact-title">Penny’s office stays strong on desktop, phone, and tiny screens.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1514,7 +1852,7 @@
 
               <div class="penny-hero__copy">
                 <span class="eyebrow eyebrow--penny">Penny Presence</span>
-                <h3>The premium assistant energy stays on the board.</h3>
+                <h3>The premium assistant energy survives responsiveness.</h3>
                 <p>
                   Penny is not decorative filler. She is the emotional and intelligent core of the WildCard DEV experience:
                   polished, confident, pink-forward, and clearly separated from the wider system glow.
@@ -1589,7 +1927,7 @@
 
                   <div class="submit-row">
                     <p class="submit-note">
-                      Phase 1 keeps this contact lane simple and reliable so later interactions can be layered in safely.
+                      Phase 2 keeps this lane readable, touch-friendly, and stable so richer Penny interactions can be layered in later.
                     </p>
                     <button class="submit-btn" type="submit">Send Message</button>
                   </div>
@@ -1605,7 +1943,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow eyebrow--penny">Watch Experience</span>
-            <h2 class="headline" id="watch-title">The watch lane stays in the architecture from day one.</h2>
+            <h2 class="headline" id="watch-title">The watch lane stays ready for a dedicated later phase.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -1619,35 +1957,35 @@
                 <div class="watch-ui">
                   <div class="watch-bubble">Hey honey. The watch experience is still part of the plan.</div>
                   <div class="watch-time" id="watchTime">12:00</div>
-                  <div class="watch-caption">Phase 1 placeholder preserved for later QR, media, and Penny interaction flows.</div>
+                  <div class="watch-caption">Responsive foundation locked first. QR and richer Penny watch flows come later.</div>
                 </div>
               </div>
             </div>
 
             <p class="watch-meta">
-              This section is intentionally lightweight for now, but it remains present and branded so the smartwatch
-              experience stays a first-class part of the site architecture rather than getting shoved off to the side.
+              This section remains lightweight on purpose, but it now behaves more safely at narrow widths so the later watch-specific build
+              has a cleaner structural base to work from.
             </p>
 
             <div class="portfolio-grid">
               <article class="card watch-card">
                 <h3>Why it stays now</h3>
                 <p>
-                  Removing the watch lane would make future work harder. Keeping it present preserves structure, navigation, and intent.
+                  Keeping the watch lane present preserves navigation, continuity, and future implementation space.
                 </p>
               </article>
 
               <article class="card watch-card">
                 <h3>What returns later</h3>
                 <p>
-                  QR sequences, Penny-triggered flows, device-specific behavior, and richer branded media once the core shell is locked.
+                  QR sequences, Penny-triggered flows, device-specific behavior, and richer branded media once the responsive shell is locked.
                 </p>
               </article>
 
               <article class="card watch-card">
-                <h3>What matters in Phase 1</h3>
+                <h3>What matters in Phase 2</h3>
                 <p>
-                  Small-screen safety, visible continuity, and a clean container that won’t fight later implementation.
+                  Small-screen safety, visible continuity, and a clean container that does not fight later enhancement.
                 </p>
               </article>
             </div>
@@ -1698,6 +2036,10 @@
             window.location.hash = pageId;
           }
         }
+
+        if (found) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
 
       navButtons.forEach((button) => {
@@ -1712,8 +2054,15 @@
           if (!target) return;
           event.preventDefault();
           showPage(target);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+      });
+
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '').trim();
+        const validPages = new Set(articles.map((article) => article.dataset.page));
+        if (validPages.has(hash)) {
+          showPage(hash, false);
+        }
       });
 
       const initialHash = window.location.hash.replace('#', '').trim();
