@@ -1,0 +1,5306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WildCard DEV</title>
+  <link rel="shortcut icon" href="./images/brands/favicon-wildcard.ico" type="image/x-icon" />
+  <link rel="icon" href="./images/brands/favicon-wildcard.png" type="image/png" />
+  <style>
+    /* ========================================
+       Base
+    ======================================== */
+    :root {
+      --bg: #070910;
+      --bg-soft: #0c1020;
+      --panel: rgba(15, 20, 34, 0.9);
+      --panel-strong: rgba(10, 14, 24, 0.96);
+      --panel-glass: rgba(255, 255, 255, 0.03);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(134, 171, 255, 0.2);
+      --text: rgba(245, 247, 255, 0.96);
+      --text-soft: rgba(209, 217, 235, 0.76);
+      --text-dim: rgba(190, 199, 220, 0.58);
+      --blue: #6aa8ff;
+      --violet: #8d6bff;
+      --pink: #ff4fb7;
+      --pink-bright: #ffd6ec;
+      --pink-soft: rgba(255, 79, 183, 0.18);
+      --pink-soft-2: rgba(255, 79, 183, 0.1);
+      --gold: #ffc86d;
+      --radius: 24px;
+      --radius-sm: 18px;
+      --radius-xs: 14px;
+      --shadow-lg: 0 28px 90px rgba(0, 0, 0, 0.42);
+      --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.28);
+      --transition: 180ms ease;
+      --max: 1380px;
+      --sidebar: 320px;
+      --nav-height: 72px;
+      --watch-safe-pad: 10px;
+      --font: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.14), transparent 26%),
+        radial-gradient(circle at top right, rgba(141, 107, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 50% 16%, rgba(255, 79, 183, 0.09), transparent 24%),
+        linear-gradient(180deg, #06070d 0%, #0a0d16 38%, #06080f 100%);
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      background: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    ::selection {
+      background: rgba(255, 200, 109, 0.88);
+      color: #1b1204;
+    }
+
+    :focus-visible {
+      outline: 2px solid rgba(255, 79, 183, 0.5);
+      outline-offset: 2px;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ========================================
+       Layout
+    ======================================== */
+    .site-shell {
+      width: min(calc(100% - 16px), var(--max));
+      margin: 8px auto 84px;
+      display: grid;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .sidebar,
+    .content-shell {
+      display: grid;
+      gap: 12px;
+    }
+
+    .content-shell {
+      align-content: start;
+    }
+
+    .panel {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012)),
+        linear-gradient(180deg, rgba(15, 20, 34, 0.92), rgba(9, 12, 20, 0.97));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      overflow: clip;
+      isolation: isolate;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.07), transparent 24%),
+        radial-gradient(circle at top right, rgba(141, 107, 255, 0.07), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 16%);
+    }
+
+    .panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-pad {
+      padding: 20px;
+    }
+
+    .article-shell {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      max-width: 100%;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .eyebrow--penny {
+      border-color: rgba(255, 79, 183, 0.3);
+      color: #ffd4ee;
+      background: rgba(255, 79, 183, 0.08);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+    }
+
+    .headline {
+      font-size: clamp(1.75rem, 4vw, 2.65rem);
+      line-height: 1.08;
+      margin-top: 12px;
+      text-wrap: balance;
+    }
+
+    .section-title {
+      font-size: clamp(1.25rem, 2vw, 1.8rem);
+      line-height: 1.12;
+      margin-bottom: 10px;
+      text-wrap: balance;
+    }
+
+    .copy {
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 0.96rem;
+    }
+
+    .copy p + p {
+      margin-top: 12px;
+    }
+
+    .accent-rule {
+      width: 54px;
+      height: 4px;
+      border-radius: 999px;
+      margin: 12px 0 18px;
+      background: linear-gradient(90deg, var(--gold), var(--pink));
+      box-shadow: 0 0 12px rgba(255, 79, 183, 0.18);
+    }
+
+    .card-grid,
+    .split-grid,
+    .service-grid,
+    .resume-grid,
+    .portfolio-grid,
+    .contact-grid,
+    .holo-panel-grid,
+    .field-grid,
+    .penny-grid,
+    .penny-ops-grid,
+    .penny-links-grid,
+    .penny-status-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015)),
+        rgba(10, 14, 24, 0.82);
+      box-shadow: var(--shadow-md);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-soft);
+      font-size: 0.83rem;
+      line-height: 1.25;
+    }
+
+    .chip--penny {
+      border-color: rgba(255, 79, 183, 0.28);
+      color: #ffd5ef;
+      background: rgba(255, 79, 183, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    /* ========================================
+       Navigation
+    ======================================== */
+    .nav-panel {
+      position: sticky;
+      bottom: 8px;
+      z-index: 25;
+      padding: 8px;
+      backdrop-filter: blur(14px);
+      background:
+        linear-gradient(180deg, rgba(18, 21, 34, 0.92), rgba(12, 15, 25, 0.96));
+    }
+
+    .nav-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .nav-btn {
+      min-height: 48px;
+      padding: 0 12px;
+      border-radius: 16px;
+      color: var(--text-soft);
+      border: 1px solid transparent;
+      transition: var(--transition);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .nav-btn:hover,
+    .nav-btn:focus-visible {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(134, 171, 255, 0.12);
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-btn.is-active {
+      color: var(--text);
+      border-color: rgba(134, 171, 255, 0.2);
+      background:
+        radial-gradient(circle at top, rgba(106, 168, 255, 0.12), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 16px rgba(106, 168, 255, 0.08);
+    }
+
+    .nav-btn--penny.is-active {
+      border-color: rgba(255, 79, 183, 0.26);
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 16px rgba(255, 79, 183, 0.1);
+    }
+
+    /* ========================================
+       Identity Strip
+    ======================================== */
+    .identity-panel {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .brand-mark-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 12px rgba(106, 168, 255, 0.22)) drop-shadow(0 0 18px rgba(255, 79, 183, 0.12));
+    }
+
+    .brand-wordmark {
+      display: grid;
+      gap: 3px;
+    }
+
+    .brand-wordmark strong {
+      font-size: 0.98rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .brand-wordmark span {
+      color: var(--text-dim);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .identity-hero {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.1), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(13, 17, 29, 0.96), rgba(9, 12, 20, 0.96));
+    }
+
+    .identity-title {
+      font-size: clamp(1.45rem, 3vw, 1.78rem);
+      line-height: 1.04;
+      text-wrap: balance;
+    }
+
+    .identity-subtitle {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .identity-people {
+      display: grid;
+      gap: 12px;
+    }
+
+    .person-card {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.015)),
+        rgba(11, 14, 23, 0.9);
+    }
+
+    .person-card__media {
+      width: 72px;
+      aspect-ratio: 0.78;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 50% 24%, rgba(255,255,255,0.08), rgba(255,255,255,0.02) 40%, rgba(0,0,0,0.22) 100%),
+        linear-gradient(180deg, rgba(18, 22, 36, 0.95), rgba(8, 10, 16, 0.98));
+    }
+
+    .person-card__media img,
+    .person-card__media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .person-card__copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .person-card__copy strong {
+      font-size: 0.98rem;
+      line-height: 1.2;
+    }
+
+    .person-card__copy span {
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .person-card--matt,
+    .person-card--e {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .person-card--e {
+      text-align: left;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .person-card--e:hover,
+    .person-card--e:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.24);
+      box-shadow: 0 0 22px rgba(255, 79, 183, 0.12);
+      outline: none;
+    }
+
+    .person-card__media--avatar {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.14), transparent 36%),
+        radial-gradient(circle at 50% 80%, rgba(106, 168, 255, 0.16), transparent 46%),
+        linear-gradient(180deg, rgba(20, 25, 40, 0.96), rgba(8, 10, 16, 0.99));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.035),
+        0 0 22px rgba(106, 168, 255, 0.08);
+    }
+
+    .person-card__media--avatar::before,
+    .person-card__media--avatar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .person-card__media--avatar::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 18%);
+      mix-blend-mode: screen;
+    }
+
+    .person-card__media--avatar::after {
+      background: linear-gradient(180deg, transparent 0%, rgba(4, 7, 14, 0.16) 42%, rgba(4, 7, 14, 0.5) 100%);
+    }
+
+    .person-card__media--avatar img {
+      object-fit: contain;
+      object-position: center bottom;
+      padding: 6px 2px 0;
+      filter: drop-shadow(0 0 14px rgba(106, 168, 255, 0.14));
+    }
+
+    .person-card__media--e {
+      border-color: rgba(255, 79, 183, 0.18);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.035),
+        0 0 26px rgba(255, 79, 183, 0.12);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,214,236,0.16), transparent 34%),
+        radial-gradient(circle at 50% 78%, rgba(255, 79, 183, 0.18), transparent 44%),
+        linear-gradient(180deg, rgba(42, 18, 40, 0.96), rgba(12, 10, 18, 0.99));
+    }
+
+    .person-card__hint {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      min-height: 24px;
+      margin-top: 4px;
+      padding: 0 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.16);
+      background: rgba(255, 79, 183, 0.06);
+      color: #ffd5ef;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+
+    .quick-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.012)),
+        rgba(10, 14, 24, 0.82);
+      transition: var(--transition);
+    }
+
+    .quick-link:hover,
+    .quick-link:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(134, 171, 255, 0.24);
+      box-shadow: 0 0 18px rgba(106, 168, 255, 0.12);
+      outline: none;
+    }
+
+    .quick-link strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .quick-link span {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      line-height: 1.25;
+    }
+
+    .status-card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.14), transparent 36%),
+        linear-gradient(180deg, rgba(38, 15, 35, 0.96), rgba(19, 12, 25, 0.98));
+      box-shadow: 0 0 20px rgba(255, 79, 183, 0.12);
+    }
+
+    .status-card strong {
+      color: #ffd9f1;
+      font-size: 0.96rem;
+      line-height: 1.2;
+    }
+
+    .status-card p {
+      color: #ffc6e8;
+      line-height: 1.7;
+      font-size: 0.88rem;
+    }
+
+    /* ========================================
+       Content Sections
+    ======================================== */
+    .article {
+      display: none;
+    }
+
+    .article.is-active {
+      display: block;
+      animation: articleFade 220ms ease;
+    }
+
+    @keyframes articleFade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .hero-slab {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(14, 18, 30, 0.96), rgba(9, 12, 20, 0.98));
+    }
+
+    .service-card,
+    .resume-card,
+    .portfolio-card,
+    .contact-card,
+    .watch-card {
+      padding: 18px;
+    }
+
+    .service-card h3,
+    .resume-card h3,
+    .portfolio-card h3,
+    .contact-card h3,
+    .watch-card h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .service-card p,
+    .resume-card p,
+    .portfolio-card p,
+    .contact-card p,
+    .watch-card p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .about-band {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(15, 20, 34, 0.95), rgba(10, 13, 22, 0.97));
+    }
+
+    .about-band strong {
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    /* ========================================
+       Resume
+    ======================================== */
+    .resume-top {
+      display: grid;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .resume-media {
+      width: 100%;
+      max-width: 120px;
+      aspect-ratio: 0.78;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(11, 14, 23, 0.9);
+    }
+
+    .resume-media img,
+    .resume-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .resume-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .action-link:hover,
+    .action-link:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.24);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.1);
+      outline: none;
+    }
+
+    .timeline-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .timeline-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .timeline-item strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .timeline-item span {
+      display: block;
+      color: rgba(255, 200, 109, 0.92);
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+
+    .timeline-item p {
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+
+    /* ========================================
+       Landing Wow Factor
+    ======================================== */
+    .holo-stage {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      min-height: 360px;
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(134, 171, 255, 0.2);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(106, 168, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 86% 10%, rgba(141, 107, 255, 0.2), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(106, 168, 255, 0.11), transparent 34%),
+        linear-gradient(180deg, rgba(9, 13, 25, 0.98), rgba(5, 7, 14, 0.995));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 34px rgba(106, 168, 255, 0.08);
+    }
+
+    .holo-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), transparent 16%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 24px
+        );
+      opacity: 0.6;
+    }
+
+    .holo-stage::after {
+      content: "";
+      position: absolute;
+      inset: 6% -28% auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(106, 168, 255, 0.64), transparent);
+      transform: rotate(-7deg);
+      opacity: 0.44;
+      pointer-events: none;
+    }
+
+    .holo-orb {
+      position: absolute;
+      right: -36px;
+      top: -34px;
+      width: 180px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), rgba(255,255,255,0.02) 28%, transparent 58%),
+        radial-gradient(circle at 50% 50%, rgba(106, 168, 255, 0.2), transparent 62%);
+      filter: blur(2px);
+      opacity: 0.78;
+    }
+
+    .holo-stage__header {
+      display: grid;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .holo-stage__header p {
+      color: var(--text-soft);
+      line-height: 1.75;
+      max-width: 70ch;
+    }
+
+    .holo-stage__frame {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      z-index: 2;
+    }
+
+    .holo-stage__frame--spinner {
+      align-items: start;
+    }
+
+    /* ========================================
+       Holo Spinner System
+    ======================================== */
+    .holo-spinner-panel,
+    .holo-spinner-info {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(18, 24, 40, 0.58), rgba(8, 12, 22, 0.86));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(106, 168, 255, 0.08);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .holo-spinner-panel::before,
+    .holo-spinner-info::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(122deg, transparent 8%, rgba(255,255,255,0.08) 48%, transparent 74%);
+      opacity: 0.28;
+    }
+
+    .holo-spinner-panel {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      min-height: 100%;
+    }
+
+    .holo-spinner-statusbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .holo-spinner-shell {
+      position: relative;
+      min-height: clamp(340px, 44vw, 580px);
+      border-radius: 20px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.08), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(106, 168, 255, 0.18), transparent 30%),
+        linear-gradient(180deg, rgba(10, 15, 28, 0.98), rgba(4, 8, 16, 0.995));
+      perspective: 1400px;
+      transform-style: preserve-3d;
+      touch-action: none;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .holo-spinner-shell.is-dragging {
+      cursor: grabbing;
+    }
+
+    .holo-spinner-shell::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(134, 171, 255, 0.1);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .holo-spinner-atmosphere,
+    .holo-spinner-atmosphere::before,
+    .holo-spinner-atmosphere::after {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .holo-spinner-atmosphere {
+      inset: auto auto 12% 50%;
+      width: min(64%, 360px);
+      aspect-ratio: 1;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(106, 168, 255, 0.14), transparent 68%);
+      filter: blur(10px);
+      opacity: 0.9;
+    }
+
+    .holo-spinner-atmosphere::before,
+    .holo-spinner-atmosphere::after {
+      content: "";
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .holo-spinner-atmosphere::before {
+      width: 62%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(106, 168, 255, 0.18);
+      box-shadow: 0 0 28px rgba(106, 168, 255, 0.08);
+    }
+
+    .holo-spinner-atmosphere::after {
+      width: 92%;
+      aspect-ratio: 1;
+      border: 1px dashed rgba(141, 107, 255, 0.12);
+      opacity: 0.55;
+    }
+
+    .holo-spinner-drag,
+    .holo-spinner-ring {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .holo-spinner-drag {
+      display: grid;
+      place-items: center;
+      transform: rotateX(-11deg) rotateY(0deg);
+      will-change: transform;
+    }
+
+    .holo-spinner-ring {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .holo-spin-card {
+      --card-width: clamp(180px, 20vw, 240px);
+      --card-height: clamp(240px, 26vw, 320px);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--card-width);
+      height: var(--card-height);
+      margin-left: calc(var(--card-width) / -2);
+      margin-top: calc(var(--card-height) / -2);
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.2);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      pointer-events: auto;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 28%),
+        linear-gradient(180deg, rgba(18, 24, 40, 0.78), rgba(8, 12, 22, 0.9));
+      box-shadow:
+        0 0 26px rgba(106, 168, 255, 0.12),
+        0 18px 44px rgba(0, 0, 0, 0.34);
+      transition:
+        box-shadow 180ms ease,
+        border-color 180ms ease,
+        opacity 180ms ease,
+        filter 180ms ease;
+      text-decoration: none;
+      color: inherit;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    .holo-spin-card:hover,
+    .holo-spin-card:focus-visible {
+      border-color: rgba(255,255,255,0.34);
+      box-shadow:
+        0 0 36px rgba(106, 168, 255, 0.18),
+        0 24px 56px rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
+
+    .holo-spin-card--penny {
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow:
+        0 0 26px rgba(255, 79, 183, 0.16),
+        0 18px 44px rgba(0, 0, 0, 0.34);
+    }
+
+    .holo-spin-card__media,
+    .holo-spin-card__media video,
+    .holo-spin-card__media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .holo-spin-card__media video,
+    .holo-spin-card__media img {
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.04);
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .holo-spin-card__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(6, 9, 18, 0.02), rgba(5, 7, 14, 0.44) 54%, rgba(5, 7, 14, 0.86) 100%),
+        linear-gradient(122deg, transparent 14%, rgba(255,255,255,0.08) 48%, transparent 76%);
+      z-index: 1;
+    }
+
+    .holo-spin-card__copy {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      transform: translateZ(24px);
+    }
+
+    .holo-spin-card__copy strong {
+      font-size: 1rem;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    .holo-spin-card__copy span {
+      color: rgba(223, 231, 255, 0.82);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .holo-spin-card__chip {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 28px;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(7, 12, 22, 0.45);
+      color: rgba(234, 239, 255, 0.9);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      backdrop-filter: blur(6px);
+    }
+
+    .holo-spin-card--penny .holo-spin-card__chip {
+      border-color: rgba(255, 79, 183, 0.22);
+      color: #ffd9f1;
+      background: rgba(44, 16, 40, 0.48);
+    }
+
+    .holo-spinner-core-label {
+      position: absolute;
+      left: 50%;
+      bottom: 10%;
+      transform: translateX(-50%) rotateX(82deg);
+      color: rgba(205, 220, 255, 0.8);
+      font-size: 0.78rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(106, 168, 255, 0.34);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .holo-spinner-ground {
+      position: absolute;
+      left: 50%;
+      top: 76%;
+      width: min(74%, 500px);
+      height: min(74%, 500px);
+      transform: translate(-50%, -50%) rotateX(90deg);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(106, 168, 255, 0.22), rgba(106, 168, 255, 0.05) 34%, transparent 70%);
+      filter: blur(2px);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .holo-spinner-ground::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      border: 1px solid rgba(141, 107, 255, 0.16);
+      opacity: 0.8;
+    }
+
+    .holo-spinner-instructions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .holo-spinner-info {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .holo-spinner-info__copy {
+      display: grid;
+      gap: 10px;
+      max-width: 52ch;
+      min-height: clamp(228px, 25vw, 272px);
+      align-content: start;
+      grid-auto-rows: min-content;
+    }
+
+    .holo-spinner-info__copy h3 {
+      font-size: clamp(1.12rem, 2vw, 1.45rem);
+      line-height: 1.12;
+      text-wrap: balance;
+      min-height: calc(1.12em * 2);
+    }
+
+    .holo-spinner-info__copy p {
+      color: var(--text-soft);
+      line-height: 1.72;
+      font-size: 0.92rem;
+      min-height: calc(1.72em * 5);
+    }
+
+    .holo-spinner-readout {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(8, 11, 20, 0.82);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+      min-height: 154px;
+      align-content: start;
+    }
+
+    .holo-spinner-readout__grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .holo-spinner-readout__item span {
+      display: block;
+      color: rgba(186, 206, 255, 0.74);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .holo-spinner-readout__item strong {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.3;
+      min-height: calc(1.3em * 2.3);
+    }
+
+    .holo-control-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .holo-control {
+      display: grid;
+      gap: 4px;
+      min-height: 72px;
+      padding: 12px;
+      text-align: left;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(7, 10, 18, 0.8);
+      color: var(--text-soft);
+      transition: var(--transition);
+    }
+
+    .holo-control:hover,
+    .holo-control:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(134, 171, 255, 0.24);
+      box-shadow: 0 0 18px rgba(106, 168, 255, 0.08);
+      outline: none;
+    }
+
+    .holo-control.is-active {
+      color: var(--text);
+      border-color: rgba(134, 171, 255, 0.24);
+      background:
+        radial-gradient(circle at top, rgba(106, 168, 255, 0.12), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+        rgba(7, 10, 18, 0.86);
+      box-shadow: 0 0 20px rgba(106, 168, 255, 0.09);
+    }
+
+    .holo-control--penny.is-active {
+      border-color: rgba(255, 79, 183, 0.28);
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+        rgba(24, 10, 22, 0.92);
+      box-shadow: 0 0 20px rgba(255, 79, 183, 0.12);
+    }
+
+    .holo-control strong {
+      font-size: 0.84rem;
+      line-height: 1.25;
+    }
+
+    .holo-control span {
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    /* ========================================
+       Spinner Interaction
+    ======================================== */
+    .holo-spinner-shell.is-idle .holo-spin-card {
+      transition: box-shadow 180ms ease, border-color 180ms ease, opacity 180ms ease, filter 180ms ease, transform 0.2s linear;
+    }
+
+    .holo-spinner-shell.is-dragging .holo-spin-card {
+      transition: none;
+    }
+
+    /* ========================================
+       Holo Responsive
+    ======================================== */
+    .holo-metric-strip {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .holo-metric {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(8, 11, 20, 0.82);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    .holo-metric span {
+      display: block;
+      color: rgba(186, 206, 255, 0.74);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .holo-metric strong {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .holo-metric em {
+      display: block;
+      color: var(--text-soft);
+      font-style: normal;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    /* ========================================
+       Holo Panels
+    ======================================== */
+    .holo-panel-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .holo-card {
+      position: relative;
+      min-height: 240px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 28%),
+        linear-gradient(180deg, rgba(18, 24, 40, 0.7), rgba(8, 12, 22, 0.84));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 22px rgba(106, 168, 255, 0.08),
+        0 0 32px rgba(141, 107, 255, 0.06);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .holo-card:hover,
+    .holo-card:focus-within {
+      transform: translateY(-2px);
+      border-color: rgba(134, 171, 255, 0.28);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 28px rgba(106, 168, 255, 0.12),
+        0 12px 36px rgba(0, 0, 0, 0.28);
+    }
+
+    .holo-card--penny {
+      border-color: rgba(255, 79, 183, 0.24);
+      background:
+        radial-gradient(circle at top left, rgba(255, 214, 236, 0.08), transparent 26%),
+        linear-gradient(180deg, rgba(40, 17, 38, 0.76), rgba(16, 10, 21, 0.9));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(255, 79, 183, 0.1),
+        0 0 30px rgba(141, 107, 255, 0.06);
+    }
+
+    .holo-card__media {
+      position: absolute;
+      inset: 0;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .holo-card__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(6, 9, 18, 0.1), rgba(5, 7, 14, 0.55)),
+        linear-gradient(125deg, transparent 10%, rgba(255,255,255,0.06) 52%, transparent 78%);
+    }
+
+    .holo-card__media video,
+    .holo-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.03);
+    }
+
+    .holo-card__content {
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      display: grid;
+      align-content: space-between;
+      gap: 14px;
+    }
+
+    .holo-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .holo-card__index {
+      color: rgba(196, 212, 255, 0.52);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .holo-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7, 12, 22, 0.45);
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      backdrop-filter: blur(6px);
+    }
+
+    .holo-tag--penny {
+      border-color: rgba(255, 79, 183, 0.24);
+      color: #ffd9f1;
+      background: rgba(44, 16, 40, 0.46);
+    }
+
+    .holo-card h3 {
+      font-size: 1rem;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      max-width: 24ch;
+      text-wrap: balance;
+    }
+
+    .holo-card p {
+      color: var(--text-soft);
+      line-height: 1.68;
+      font-size: 0.9rem;
+      max-width: 34ch;
+    }
+
+    .holo-card__footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .holo-footer-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      line-height: 1.2;
+    }
+
+    /* ========================================
+       Holo Responsive
+    ======================================== */
+    /* ========================================
+       Penny Presence
+    ======================================== */
+    .penny-stage {
+      display: grid;
+      gap: 14px;
+    }
+
+    .penny-office {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.16), transparent 26%),
+        radial-gradient(circle at 86% 12%, rgba(255, 214, 236, 0.08), transparent 18%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(32, 14, 32, 0.96), rgba(14, 9, 18, 0.99));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 32px rgba(255, 79, 183, 0.12),
+        0 18px 44px rgba(0,0,0,0.34);
+    }
+
+    .penny-office::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 16%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      opacity: 0.65;
+    }
+
+    .penny-office::after {
+      content: "";
+      position: absolute;
+      inset: auto -24% 28% auto;
+      width: 58%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 214, 236, 0.6), transparent);
+      transform: rotate(-8deg);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .penny-office > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .penny-office__topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .penny-office__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .penny-mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      color: #ffd8ef;
+      background: rgba(255, 79, 183, 0.08);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-mini-chip--system {
+      color: var(--text-soft);
+      border-color: rgba(134, 171, 255, 0.14);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .penny-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .penny-hero {
+      display: grid;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 79, 183, 0.26);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.14), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(34, 15, 34, 0.94), rgba(17, 10, 21, 0.98));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(255, 79, 183, 0.12);
+      overflow: hidden;
+    }
+
+    .penny-hero__media {
+      position: relative;
+      min-height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08), transparent 34%),
+        linear-gradient(180deg, rgba(18, 11, 19, 0.95), rgba(8, 6, 12, 0.98));
+    }
+
+    .penny-hero__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 16%),
+        linear-gradient(120deg, transparent 12%, rgba(255,214,236,0.08) 48%, transparent 76%);
+      mix-blend-mode: screen;
+    }
+
+    .penny-hero__media video,
+    .penny-hero__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .penny-hero__copy {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .penny-hero__copy h3 {
+      color: #ffd7ef;
+      font-size: 1.22rem;
+      line-height: 1.18;
+      text-wrap: balance;
+    }
+
+    .penny-hero__copy p {
+      color: #ffc5e7;
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .penny-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .penny-stat {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(22, 11, 22, 0.76);
+    }
+
+    .penny-stat span {
+      display: block;
+      color: rgba(255, 214, 236, 0.76);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .penny-stat strong {
+      display: block;
+      color: #fff2fa;
+      font-size: 1.02rem;
+      line-height: 1.2;
+    }
+
+    .penny-stat em {
+      display: block;
+      color: #ffc8e9;
+      font-style: normal;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+
+    .penny-ops-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .penny-op {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.14);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 36%),
+        linear-gradient(180deg, rgba(33, 14, 31, 0.92), rgba(15, 10, 20, 0.96));
+      transition: var(--transition);
+    }
+
+    .penny-op:hover,
+    .penny-op:focus-within {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.24);
+      box-shadow: 0 0 20px rgba(255, 79, 183, 0.1);
+    }
+
+    .penny-op strong {
+      color: #ffe0f3;
+      font-size: 0.94rem;
+      line-height: 1.25;
+    }
+
+    .penny-op p {
+      color: #ffc7e9;
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+
+    .penny-links-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .penny-link-card {
+      display: grid;
+      gap: 8px;
+      min-height: 100%;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(11, 13, 22, 0.88);
+      transition: var(--transition);
+    }
+
+    .penny-link-card:hover,
+    .penny-link-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+      outline: none;
+    }
+
+    .penny-link-card strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .penny-link-card span {
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .penny-pulse {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .penny-pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,214,236,0.08) 48%, transparent 72%);
+      transform: translateX(-125%);
+      transition: transform 420ms ease;
+      pointer-events: none;
+    }
+
+    .penny-pulse:hover::after,
+    .penny-pulse:focus-visible::after {
+      transform: translateX(120%);
+    }
+
+    .penny-console {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 40%),
+        linear-gradient(180deg, rgba(26, 12, 25, 0.96), rgba(12, 10, 18, 0.98));
+    }
+
+    .penny-console__label {
+      color: rgba(255, 214, 236, 0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-console__status {
+      color: #ffe6f6;
+      font-size: 1rem;
+      line-height: 1.35;
+      min-height: 2.7em;
+    }
+
+    .penny-console__sub {
+      color: #ffc7e9;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .penny-office-note {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    
+
+    /* ========================================
+       E Projection Overlay
+    ======================================== */
+    .projection-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(3, 5, 10, 0.74);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .projection-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .projection-overlay__backdrop {
+      position: absolute;
+      inset: 0;
+    }
+
+    .projection-modal {
+      position: relative;
+      width: min(100%, 460px);
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 34%),
+        radial-gradient(circle at bottom, rgba(106, 168, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(20, 12, 24, 0.96), rgba(8, 10, 18, 0.99));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.03),
+        0 24px 70px rgba(0,0,0,0.42),
+        0 0 34px rgba(255, 79, 183, 0.12);
+      overflow: hidden;
+      transform: translateY(12px) scale(0.97);
+      transition: transform 240ms ease;
+      isolation: isolate;
+    }
+
+    .projection-overlay.is-open .projection-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .projection-modal::before,
+    .projection-modal::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .projection-modal::before {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), transparent 16%),
+        repeating-linear-gradient(180deg, rgba(255,255,255,0.022) 0, rgba(255,255,255,0.022) 1px, transparent 1px, transparent 18px);
+      opacity: 0.7;
+    }
+
+    .projection-modal::after {
+      background: linear-gradient(115deg, transparent 12%, rgba(255,255,255,0.08) 50%, transparent 76%);
+      transform: translateX(-110%);
+    }
+
+    .projection-overlay.is-open .projection-modal::after {
+      animation: projectionSweep 900ms ease 120ms 1 both;
+    }
+
+    .projection-modal__topbar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .projection-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffd9f1;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .projection-close {
+      min-width: 42px;
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .projection-close:hover,
+    .projection-close:focus-visible {
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.1);
+      outline: none;
+    }
+
+    .projection-figure {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+    }
+
+    .projection-figure__media {
+      position: relative;
+      width: min(100%, 320px);
+      aspect-ratio: 0.86;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 79, 183, 0.2);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(255,214,236,0.16), transparent 36%),
+        radial-gradient(circle at 50% 82%, rgba(106, 168, 255, 0.14), transparent 46%),
+        linear-gradient(180deg, rgba(34, 15, 34, 0.96), rgba(9, 10, 18, 0.99));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.04),
+        0 0 28px rgba(255, 79, 183, 0.12);
+    }
+
+    .projection-figure__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      padding: 10px 8px 0;
+      filter: drop-shadow(0 0 18px rgba(255, 79, 183, 0.18));
+    }
+
+    .projection-figure__media::before,
+    .projection-figure__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .projection-figure__media::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent 20%);
+      mix-blend-mode: screen;
+    }
+
+    .projection-figure__media::after {
+      background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 14, 0.2) 42%, rgba(5, 7, 14, 0.56) 100%);
+    }
+
+    .projection-figure__copy {
+      width: 100%;
+      display: grid;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .projection-figure__copy h3 {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      line-height: 1.12;
+      color: #ffe6f6;
+    }
+
+    .projection-figure__copy p {
+      color: #ffcbe9;
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .projection-overlay.is-open .projection-figure__media,
+    .projection-overlay.is-open .projection-figure__copy {
+      animation: projectionBoot 420ms steps(5, end) 1 both, projectionResolve 520ms ease 180ms 1 both;
+    }
+
+    @keyframes projectionSweep {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(115%); }
+    }
+
+    @keyframes projectionBoot {
+      0%, 14%, 30%, 46% { opacity: 0.1; filter: blur(7px); }
+      8%, 22%, 38% { opacity: 0.9; filter: blur(2px); }
+      100% { opacity: 1; filter: none; }
+    }
+
+    @keyframes projectionResolve {
+      from { transform: translateY(8px) scale(0.985); }
+      to { transform: none; }
+    }
+
+    /* ========================================
+       Interaction States
+    ======================================== */
+    .interactive-surface,
+    .quick-link,
+    .action-link,
+    .contact-action,
+    .contact-row,
+    .nav-btn,
+    .holo-control,
+    .penny-link-card,
+    .submit-btn {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .interactive-surface::after,
+    .quick-link::after,
+    .action-link::after,
+    .contact-action::after,
+    .contact-row::after,
+    .nav-btn::after,
+    .holo-control::after,
+    .penny-link-card::after,
+    .submit-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 180ms ease;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+      mix-blend-mode: screen;
+    }
+
+    .interactive-surface:hover::after,
+    .interactive-surface:focus-visible::after,
+    .quick-link:hover::after,
+    .quick-link:focus-visible::after,
+    .action-link:hover::after,
+    .action-link:focus-visible::after,
+    .contact-action:hover::after,
+    .contact-action:focus-visible::after,
+    .contact-row:hover::after,
+    .contact-row:focus-within::after,
+    .nav-btn:hover::after,
+    .nav-btn:focus-visible::after,
+    .holo-control:hover::after,
+    .holo-control:focus-visible::after,
+    .penny-link-card:hover::after,
+    .penny-link-card:focus-visible::after,
+    .submit-btn:hover::after,
+    .submit-btn:focus-visible::after {
+      opacity: 1;
+    }
+
+    .is-engaged {
+      border-color: rgba(255, 79, 183, 0.26) !important;
+      box-shadow: 0 0 24px rgba(255, 79, 183, 0.12) !important;
+    }
+
+    /* ========================================
+       Contact
+    ======================================== */
+    .contact-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-card--penny {
+      border-color: rgba(255, 79, 183, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 32%),
+        linear-gradient(180deg, rgba(24, 13, 24, 0.95), rgba(10, 10, 16, 0.98));
+    }
+
+    .contact-card__head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .contact-card__head p {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .contact-priority-strip {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .priority-action {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(12, 14, 22, 0.86);
+      transition: var(--transition);
+    }
+
+    .priority-action:hover,
+    .priority-action:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+      outline: none;
+    }
+
+    .priority-action strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .priority-action span {
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .contact-row {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
+      transition: var(--transition);
+    }
+
+    .contact-row:hover,
+    .contact-row:focus-within {
+      border-color: rgba(255, 79, 183, 0.18);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.06);
+    }
+
+    .contact-row__top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .contact-row strong {
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .contact-route-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      color: #ffd9f1;
+      background: rgba(255, 79, 183, 0.08);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .contact-row span,
+    .contact-row a {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .contact-detail-stack {
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      line-height: 1.2;
+    }
+
+    /* ========================================
+       Contact Actions
+    ======================================== */
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.84rem;
+      font-weight: 700;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .contact-action:hover,
+    .contact-action:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.26);
+      box-shadow: 0 0 16px rgba(255, 79, 183, 0.08);
+      outline: none;
+    }
+
+    .contact-action--penny {
+      border-color: rgba(255, 79, 183, 0.24);
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.12), transparent 46%),
+        linear-gradient(180deg, rgba(53, 20, 49, 0.9), rgba(24, 12, 28, 0.96));
+      color: #ffe3f5;
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+    }
+
+    .contact-action--ghost {
+      color: var(--text-soft);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .contact-notes {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .contact-note {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       Social Links
+    ======================================== */
+    .social-links-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .social-link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 56px;
+      padding: 0 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(10, 13, 22, 0.86);
+      transition: var(--transition);
+    }
+
+    .social-link-card:hover,
+    .social-link-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(134, 171, 255, 0.24);
+      box-shadow: 0 0 18px rgba(106, 168, 255, 0.08);
+      outline: none;
+    }
+
+    .social-link-card__copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .social-link-card strong {
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+
+    .social-link-card span {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
+    .social-link-card__icon {
+      color: rgba(221, 230, 255, 0.72);
+      font-size: 1rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    /* ========================================
+       Penny Contact
+    ======================================== */
+    .penny-priority-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .penny-link-card {
+      display: grid;
+      gap: 8px;
+      min-height: 100%;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(11, 13, 22, 0.88);
+      transition: var(--transition);
+    }
+
+    .penny-link-card:hover,
+    .penny-link-card:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 79, 183, 0.22);
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+      outline: none;
+    }
+
+    .penny-link-card strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .penny-link-card span {
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .penny-link-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .penny-link-card__meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.14);
+      color: rgba(255, 214, 236, 0.78);
+      background: rgba(255, 79, 183, 0.06);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-pulse {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .penny-pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,214,236,0.08) 48%, transparent 72%);
+      transform: translateX(-125%);
+      transition: transform 420ms ease;
+      pointer-events: none;
+    }
+
+    .penny-pulse:hover::after,
+    .penny-pulse:focus-visible::after {
+      transform: translateX(120%);
+    }
+
+    .penny-console {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 40%),
+        linear-gradient(180deg, rgba(26, 12, 25, 0.96), rgba(12, 10, 18, 0.98));
+    }
+
+    .penny-console__label {
+      color: rgba(255, 214, 236, 0.72);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-console__status {
+      color: #ffe6f6;
+      font-size: 1rem;
+      line-height: 1.35;
+      min-height: 2.7em;
+    }
+
+    .penny-console__sub {
+      color: #ffc7e9;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .penny-office-note {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding: 14px 16px;
+      transition: var(--transition);
+    }
+
+    .textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: rgba(209, 217, 235, 0.42);
+    }
+
+    .input:focus,
+    .textarea:focus {
+      outline: none;
+      border-color: rgba(255, 79, 183, 0.26);
+      box-shadow: 0 0 16px rgba(255, 79, 183, 0.08);
+    }
+
+    .submit-row {
+      display: grid;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .submit-note {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 79, 183, 0.26);
+      color: #ffe3f5;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 40%),
+        linear-gradient(180deg, rgba(58, 21, 54, 0.96), rgba(24, 12, 27, 0.98));
+      box-shadow: 0 0 20px rgba(255, 79, 183, 0.1);
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .submit-btn:hover,
+    .submit-btn:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(255, 79, 183, 0.16);
+      outline: none;
+    }
+
+
+    /* ========================================
+       Watch Experience
+    ======================================== */
+    .watch-stage {
+      display: grid;
+      gap: 16px;
+    }
+
+    .watch-hero {
+      display: grid;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.12), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 79, 183, 0.1), transparent 30%),
+        linear-gradient(180deg, rgba(12, 17, 30, 0.96), rgba(8, 11, 20, 0.98));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 28px rgba(106, 168, 255, 0.08);
+    }
+
+    .watch-copy {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .watch-copy h3 {
+      font-size: clamp(1.08rem, 2vw, 1.42rem);
+      line-height: 1.14;
+      text-wrap: balance;
+    }
+
+    .watch-copy p {
+      color: var(--text-soft);
+      line-height: 1.72;
+      font-size: 0.94rem;
+    }
+
+    /* Watch Shell */
+    .watch-shell-wrap {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      padding: 8px 0 2px;
+    }
+
+    .watch-shell-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background: rgba(255,255,255,0.035);
+      color: rgba(221, 230, 255, 0.84);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .watch-shell {
+      position: relative;
+      width: min(92vw, 320px);
+      aspect-ratio: 1;
+      padding: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.014)),
+        linear-gradient(180deg, rgba(24,25,34,0.98), rgba(8,8,12,0.995));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 24px 46px rgba(0,0,0,0.46),
+        0 0 30px rgba(106, 168, 255, 0.08);
+      overflow: visible;
+    }
+
+    .watch-shell::before,
+    .watch-shell::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(0,0,0,0.48));
+      transform: translateY(-50%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .watch-shell::before {
+      left: -5px;
+      height: 46px;
+    }
+
+    .watch-shell::after {
+      right: -7px;
+      height: 62px;
+    }
+
+    .watch-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.14), transparent 30%),
+        radial-gradient(circle at bottom, rgba(106, 168, 255, 0.16), transparent 36%),
+        linear-gradient(180deg, rgba(18, 12, 22, 0.96), rgba(8, 8, 14, 0.99));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .watch-screen::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: inherit;
+      border: 1px solid rgba(255,255,255,0.06);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .watch-screen video,
+    .watch-screen img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      opacity: 0.86;
+    }
+
+    .watch-ui {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: grid;
+      align-content: space-between;
+      justify-items: center;
+      text-align: center;
+      padding: 18px 14px 16px;
+    }
+
+    .watch-topbar,
+    .watch-dock {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .watch-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7, 10, 18, 0.5);
+      color: rgba(233, 239, 255, 0.82);
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      backdrop-filter: blur(6px);
+    }
+
+    .watch-pill--penny {
+      border-color: rgba(255, 79, 183, 0.24);
+      background: rgba(45, 16, 41, 0.56);
+      color: #ffd7ef;
+    }
+
+    .watch-center {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .watch-time {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      color: #f7f8ff;
+      text-shadow: 0 0 12px rgba(106, 168, 255, 0.16);
+    }
+
+    .watch-bubble,
+    .watch-caption {
+      width: min(82%, 220px);
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 169, 225, 0.24);
+      background:
+        linear-gradient(180deg, rgba(44, 18, 40, 0.9), rgba(20, 13, 24, 0.94));
+      box-shadow: 0 0 14px rgba(255, 79, 183, 0.08);
+      color: #ffd3ec;
+      font-size: 0.76rem;
+      line-height: 1.45;
+    }
+
+    .watch-caption {
+      border-color: rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        rgba(12, 12, 18, 0.84);
+      color: var(--text-soft);
+    }
+
+    .watch-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .watch-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px rgba(106, 168, 255, 0.1);
+    }
+
+    .watch-dots span:nth-child(2) {
+      background: rgba(106, 168, 255, 0.42);
+    }
+
+    .watch-dots span:nth-child(3) {
+      background: rgba(255, 79, 183, 0.46);
+      box-shadow: 0 0 10px rgba(255, 79, 183, 0.18);
+    }
+
+    .watch-meta {
+      text-align: left;
+      max-width: 62ch;
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 0.94rem;
+    }
+
+    .watch-meta strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.96rem;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .watch-feature-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-card {
+      display: grid;
+      gap: 10px;
+      min-height: 100%;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(10, 14, 24, 0.84);
+    }
+
+    .watch-card p {
+      margin: 0;
+    }
+
+    /* Future Watch Hooks */
+    .watch-hook-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .watch-hook {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .watch-hook::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 0.42rem;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--blue), var(--pink));
+      box-shadow: 0 0 12px rgba(255, 79, 183, 0.16);
+    }
+
+
+    /* ========================================
+       Future Hooks
+    ======================================== */
+    .future-hook-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .future-hook-card {
+      display: grid;
+      gap: 12px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(10, 14, 24, 0.86);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    .future-hook-card h3 {
+      font-size: 0.98rem;
+      line-height: 1.25;
+    }
+
+    .future-hook-card p {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.68;
+    }
+
+    .hook-slot-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hook-slot {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(134, 171, 255, 0.22);
+      background: rgba(255,255,255,0.02);
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .hook-slot strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .hook-slot--penny {
+      border-color: rgba(255, 79, 183, 0.28);
+      background: rgba(255, 79, 183, 0.06);
+      color: #ffd4ee;
+    }
+
+    .hook-slot--penny strong {
+      color: #ffe8f7;
+    }
+
+    /* QR Hooks */
+    .qr-hook-card {
+      border-color: rgba(134, 171, 255, 0.14);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(12, 17, 30, 0.94), rgba(8, 11, 20, 0.98));
+    }
+
+    .qr-hook-preview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .qr-hook-tile {
+      display: grid;
+      place-items: center;
+      min-height: 82px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.024);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Avatar Hooks */
+    .avatar-hook-card {
+      border-color: rgba(255, 79, 183, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(28, 14, 29, 0.94), rgba(12, 10, 18, 0.98));
+    }
+
+    .avatar-hook-stage {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .avatar-hook-shell {
+      min-height: 120px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 214, 236, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+        rgba(24, 11, 24, 0.64);
+      display: grid;
+      align-content: end;
+      gap: 6px;
+    }
+
+    .avatar-hook-shell strong {
+      font-size: 0.84rem;
+      line-height: 1.2;
+      color: #ffe4f5;
+    }
+
+    .avatar-hook-shell span {
+      color: #ffc8e9;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    /* Payment / Integration Hooks */
+    .integration-hook-card {
+      border-color: rgba(255, 200, 109, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(255, 200, 109, 0.08), transparent 30%),
+        linear-gradient(180deg, rgba(16, 18, 28, 0.95), rgba(9, 11, 18, 0.98));
+    }
+
+    .integration-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .integration-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 200, 109, 0.22);
+      color: rgba(255, 222, 177, 0.92);
+      background: rgba(255, 200, 109, 0.05);
+      font-size: 0.74rem;
+      line-height: 1.2;
+    }
+
+    .future-hook-band {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.08), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 79, 183, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 28, 0.96), rgba(8, 10, 18, 0.99));
+    }
+
+    .future-hook-band__head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .future-hook-band__head p {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      max-width: 70ch;
+    }
+
+    /* Future Responsive */
+
+    /* ========================================
+       Responsive 1024
+    ======================================== */
+    @media (min-width: 1024px) {
+      .site-shell {
+        grid-template-columns: minmax(290px, var(--sidebar)) minmax(0, 1fr);
+        gap: 16px;
+        width: min(calc(100% - 20px), var(--max));
+        margin: 10px auto 88px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 10px;
+      }
+
+      .identity-panel {
+        padding: 18px;
+        gap: 16px;
+      }
+
+      .article-shell {
+        padding: 22px;
+        gap: 22px;
+      }
+
+      .split-grid {
+        grid-template-columns: 1.25fr 0.95fr;
+        align-items: start;
+      }
+
+      .service-grid,
+      .resume-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .portfolio-grid,
+      .holo-panel-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .holo-stage__frame {
+        grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+        align-items: stretch;
+      }
+
+      .holo-metric-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-grid {
+        grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+        align-items: start;
+      }
+
+      .social-links-grid,
+      .contact-priority-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .penny-hero {
+        grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+        align-items: stretch;
+      }
+
+      .penny-grid {
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        align-items: start;
+      }
+
+      .resume-top {
+        grid-template-columns: 120px 1fr;
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .submit-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .submit-btn {
+        width: auto;
+      }
+
+      /* Watch Responsive */
+      .watch-hero {
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      }
+
+      .watch-feature-grid,
+      .future-hook-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ========================================
+       Spinner Responsive
+    ======================================== */
+    @media (min-width: 1024px) {
+      .holo-stage__frame--spinner {
+        grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      }
+
+      .holo-spinner-shell {
+        min-height: 520px;
+      }
+    }
+
+    /* ========================================
+       Responsive 768
+    ======================================== */
+    @media (min-width: 768px) and (max-width: 1023.98px) {
+      .site-shell {
+        width: min(calc(100% - 18px), var(--max));
+      }
+
+      .identity-people {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quick-links {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .service-grid,
+      .resume-grid,
+      .portfolio-grid,
+      .penny-ops-grid,
+      .penny-links-grid,
+      .social-links-grid,
+      .contact-priority-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-grid,
+      .penny-hero,
+      .split-grid,
+      .penny-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .holo-stage__frame--spinner,
+      .holo-metric-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .holo-panel-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .holo-control-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .resume-top {
+        grid-template-columns: 120px 1fr;
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .submit-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .submit-btn {
+        width: auto;
+      }
+
+      /* Watch Responsive */
+      .watch-hero {
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      }
+
+      .watch-feature-grid,
+      .future-hook-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ========================================
+       Responsive 480
+    ======================================== */
+    @media (max-width: 767.98px) {
+      .site-shell {
+        width: min(calc(100% - 12px), var(--max));
+        margin: 6px auto 82px;
+      }
+
+      .identity-panel,
+      .article-shell,
+      .service-card,
+      .resume-card,
+      .portfolio-card,
+      .contact-card,
+      .watch-card,
+      .hero-slab,
+      .about-band,
+      .holo-stage,
+      .penny-hero,
+      .penny-office {
+        padding: 16px;
+      }
+
+      .holo-spotlight,
+      .holo-card {
+        padding: 16px;
+      }
+
+      .brand-mark-row {
+        align-items: flex-start;
+      }
+
+      .identity-people,
+      .quick-links,
+      .service-grid,
+      .resume-grid,
+      .portfolio-grid,
+      .holo-stage__frame,
+      .holo-stage__frame--spinner,
+      .holo-panel-grid,
+      .holo-metric-strip,
+      .contact-grid,
+      .split-grid,
+      .field-grid,
+      .penny-hero,
+      .penny-grid,
+      .penny-ops-grid,
+      .penny-links-grid,
+      .penny-status-grid,
+      .watch-hero,
+      .watch-feature-grid,
+      .future-hook-grid,
+      .avatar-hook-stage,
+      .qr-hook-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .holo-control-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .holo-spinner-shell {
+        min-height: 420px;
+      }
+
+      .holo-spinner-info__copy h3 {
+        font-size: 1.24rem;
+        min-height: 0;
+      }
+
+      .resume-media {
+        max-width: 112px;
+      }
+
+      .resume-top {
+        justify-items: start;
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .watch-shell {
+        width: min(94vw, 280px);
+      }
+
+      .holo-spinner-shell {
+        min-height: 360px;
+      }
+
+      .holo-spinner-instructions {
+        gap: 6px;
+        font-size: 0.74rem;
+      }
+    }
+
+    /* ========================================
+       Responsive 390
+    ======================================== */
+    @media (max-width: 479.98px) {
+      :root {
+        --radius: 20px;
+        --radius-sm: 16px;
+      }
+
+      .site-shell {
+        width: min(calc(100% - 10px), var(--max));
+        gap: 10px;
+        margin: 5px auto 76px;
+      }
+
+      .headline {
+        font-size: clamp(1.48rem, 8vw, 1.82rem);
+      }
+
+      .section-title {
+        font-size: 1.15rem;
+      }
+
+      .identity-title {
+        font-size: 1.34rem;
+      }
+
+      .identity-subtitle,
+      .copy,
+      .service-card p,
+      .resume-card p,
+      .portfolio-card p,
+      .contact-card p,
+      .watch-card p,
+      .penny-hero__copy p,
+      .watch-meta {
+        font-size: 0.91rem;
+      }
+
+      .brand-wordmark strong {
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+      }
+
+      .brand-wordmark span {
+        font-size: 0.72rem;
+      }
+
+      .person-card {
+        grid-template-columns: 64px 1fr;
+        gap: 10px;
+      }
+
+      .person-card__media {
+        width: 64px;
+      }
+
+      .quick-link {
+        padding: 12px 14px;
+        min-height: 56px;
+      }
+
+      .quick-link strong {
+        font-size: 0.88rem;
+      }
+
+      .nav-list {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-btn {
+        min-height: 46px;
+        font-size: 0.8rem;
+      }
+
+      .chip {
+        min-height: 36px;
+        font-size: 0.78rem;
+      }
+
+      .contact-actions,
+      .resume-links {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .action-link,
+      .contact-action {
+        width: 100%;
+      }
+
+      .penny-hero__media {
+        min-height: 180px;
+      }
+
+      .holo-control-row {
+        grid-template-columns: 1fr;
+      }
+
+      .holo-control {
+        min-height: 62px;
+      }
+
+      .holo-spotlight__screen {
+        min-height: 200px;
+      }
+
+      .holo-card {
+        min-height: 190px;
+      }
+
+      /* Watch Responsive */
+      .watch-hero {
+        padding: 16px;
+      }
+
+      .watch-copy h3 {
+        font-size: 1rem;
+      }
+
+      .watch-shell-label {
+        font-size: 0.64rem;
+      }
+
+      .watch-shell {
+        width: min(94vw, 232px);
+        padding: 8px;
+      }
+
+      .watch-ui {
+        padding: 14px 10px 12px;
+      }
+
+      .watch-bubble,
+      .watch-caption {
+        width: min(88%, 180px);
+        padding: 8px 10px;
+        font-size: 0.7rem;
+        border-radius: 14px;
+      }
+
+      .watch-time {
+        font-size: 0.92rem;
+      }
+    }
+
+    /* ========================================
+       Penny Responsive / Smartwatch-safe under 390
+    ======================================== */
+    @media (max-width: 389.98px) {
+      .site-shell {
+        width: min(calc(100% - 8px), var(--max));
+        margin: 4px auto 70px;
+      }
+
+      .identity-panel,
+      .article-shell,
+      .service-card,
+      .resume-card,
+      .portfolio-card,
+      .contact-card,
+      .watch-card,
+      .hero-slab,
+      .about-band,
+      .holo-stage,
+      .penny-hero,
+      .penny-office {
+        padding: var(--watch-safe-pad);
+      }
+
+      .panel {
+        border-radius: 18px;
+      }
+
+      .identity-hero,
+      .person-card,
+      .status-card,
+      .contact-row,
+      .timeline-item,
+      .quick-link,
+      .holo-card,
+      .penny-op,
+      .penny-console,
+      .penny-link-card,
+      .penny-stat {
+        border-radius: 14px;
+      }
+
+      .eyebrow {
+        font-size: 0.62rem;
+        padding: 6px 10px;
+        letter-spacing: 0.08em;
+      }
+
+      .headline {
+        font-size: clamp(1.2rem, 8vw, 1.45rem);
+        margin-top: 10px;
+      }
+
+      .identity-title {
+        font-size: 1.14rem;
+      }
+
+      .copy,
+      .identity-subtitle,
+      .service-card p,
+      .resume-card p,
+      .portfolio-card p,
+      .contact-card p,
+      .watch-card p,
+      .penny-hero__copy p,
+      .submit-note,
+      .watch-meta,
+      .penny-op p,
+      .penny-link-card span,
+      .penny-office-note,
+      .penny-console__sub {
+        font-size: 0.86rem;
+        line-height: 1.6;
+      }
+
+      .person-card {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .person-card__media {
+        width: 72px;
+      }
+
+      .brand-mark-row {
+        gap: 10px;
+      }
+
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+      }
+
+      .quick-link {
+        align-items: flex-start;
+      }
+
+      .quick-link span:last-child {
+        display: none;
+      }
+
+      .contact-row,
+      .resume-links,
+      .contact-actions {
+        gap: 8px;
+      }
+
+      .holo-spinner-shell {
+        min-height: 320px;
+      }
+
+      .holo-spinner-readout__grid,
+      .holo-control-row {
+        grid-template-columns: 1fr;
+      }
+
+      .input,
+      .textarea {
+        padding: 12px 13px;
+        border-radius: 14px;
+      }
+
+      .submit-btn,
+      .nav-btn {
+        min-height: 44px;
+      }
+
+      /* Watch Responsive */
+      .watch-shell-label,
+      .watch-pill {
+        font-size: 0.58rem;
+      }
+
+      .watch-shell {
+        width: min(92vw, 205px);
+      }
+
+      .watch-bubble,
+      .watch-caption {
+        width: min(90%, 156px);
+      }
+    }
+
+    /* ========================================
+       Motion Preferences
+    ======================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <!-- ========================================
+         Identity Strip
+    ======================================== -->
+    <aside class="sidebar">
+      <section class="panel identity-panel">
+        <div class="brand-mark-row">
+          <img class="brand-logo" src="./media/penny/images/wildcard-logo.png" alt="WildCard DEV logo" />
+          <div class="brand-wordmark">
+            <strong>WildCard DEV</strong>
+            <span>Premium web + app systems</span>
+          </div>
+        </div>
+
+        <div class="identity-hero">
+          <span class="eyebrow eyebrow--penny">Phase 7A.2 refinement</span>
+          <h1 class="identity-title">Spinner refined. Avatars online. Penny still in command.</h1>
+          <p class="identity-subtitle">
+            The latest working spinner build stays intact while the landing hero is tightened up, the branding mark is corrected, and Matt and E are introduced as static holo-ready identity anchors.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Single-page architecture</span>
+            <span class="chip">Responsive integrity</span>
+            <span class="chip">Stable spinner readout</span>
+            <span class="chip chip--penny">E projection online</span>
+          </div>
+        </div>
+
+        <div class="identity-people">
+          <article class="person-card person-card--matt">
+            <div class="person-card__media person-card__media--avatar" aria-hidden="true">
+              <img src="./media/penny/images/matt-avatar.png" alt="" />
+            </div>
+            <div class="person-card__copy">
+              <strong>Matt Tobaben</strong>
+              <span>CEO / Full Stack Developer / brand system builder</span>
+            </div>
+          </article>
+
+          <button class="person-card person-card--e" type="button" id="eProjectionTrigger" aria-haspopup="dialog" aria-controls="eProjectionOverlay">
+            <span class="person-card__media person-card__media--avatar person-card__media--e" aria-hidden="true">
+              <img src="./media/penny/images/e-avatar.png" alt="" />
+            </span>
+            <span class="person-card__copy">
+              <strong>E</strong>
+              <span>Partner / developer / projection-ready collaborative force</span>
+              <span class="person-card__hint">Tap for holo projection</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="quick-links" aria-label="Quick actions">
+          <a class="quick-link" href="mailto:matt@wildcarddev.com">
+            <div>
+              <strong>Email Matt</strong>
+              <span>matt@wildcarddev.com</span>
+            </div>
+            <span aria-hidden="true">↗</span>
+          </a>
+
+          <a class="quick-link" href="tel:+14029150789">
+            <div>
+              <strong>Call WildCard DEV</strong>
+              <span>(402) 915-0789</span>
+            </div>
+            <span aria-hidden="true">↗</span>
+          </a>
+
+          <a class="quick-link" href="#contact" data-nav-link="contact">
+            <div>
+              <strong>Open Penny Office</strong>
+              <span>Premium contact + concierge lane</span>
+            </div>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="status-card">
+          <strong>Contact lanes are now sharpened.</strong>
+          <p>
+            Mail, phone, text, and social actions now read more clearly at a glance, with stronger focus feedback, cleaner grouping, and a more deliberate Penny-forward contact experience.
+          </p>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ========================================
+         Main Content
+    ======================================== -->
+    <div class="content-shell">
+      <!-- About -->
+      <article class="panel article is-active" id="about" data-page="about" aria-labelledby="about-title">
+        <div class="article-shell">
+          <header class="hero-slab">
+            <span class="eyebrow">About</span>
+            <h2 class="headline" id="about-title">A premium system build with Penny at the center.</h2>
+            <div class="accent-rule"></div>
+            <div class="copy">
+              <p>
+                WildCard DEV is designed to feel like a high-end holographic interface: cinematic enough to be memorable, structured enough to stay dependable, and polished enough to carry a true flagship identity.
+              </p>
+              <p>
+                This phase keeps the rebuilt foundation intact and focuses on how the site feels in use. The contact lane becomes easier to understand, quicker to act on, and more polished under mouse, keyboard, and touch without introducing risky interaction patterns.
+              </p>
+            </div>
+          </header>
+
+          <section class="about-band">
+            <strong>What changes in this phase</strong>
+            <div class="copy">
+              <p>
+                The biggest changes land in the contact experience: clearer action grouping, elevated Penny routing, stronger interactive language, and safer responsive behavior for high-intent actions like email, calling, texting, and profile visits.
+              </p>
+            </div>
+          </section>
+
+          <section class="service-grid">
+            <article class="card service-card">
+              <h3>Web Design</h3>
+              <p>
+                Premium layouts, polished framing, and brand-driven interfaces that feel deliberate instead of improvised.
+              </p>
+            </article>
+
+            <article class="card service-card">
+              <h3>Web Development</h3>
+              <p>
+                Stable self-contained architecture with clean single-file organization that remains easy to maintain and expand.
+              </p>
+            </article>
+
+            <article class="card service-card">
+              <h3>Assistant-Led UX</h3>
+              <p>
+                Penny is treated as part concierge, part executive interface, and part branded intelligence rather than a decorative add-on.
+              </p>
+            </article>
+
+            <article class="card service-card">
+              <h3>Brand Systems</h3>
+              <p>
+                Blue and violet establish the system. Penny’s signature pink marks the moments where the intelligence inside that system takes control.
+              </p>
+            </article>
+          </section>
+        </div>
+      </article>
+
+      <!-- Resume / Experience -->
+      <article class="panel article" id="resume" data-page="resume" aria-labelledby="resume-title">
+        <div class="article-shell">
+          <header>
+            <span class="eyebrow">Resume / Experience</span>
+            <h2 class="headline" id="resume-title">Experience and execution, inside a cleaner flagship shell.</h2>
+            <div class="accent-rule"></div>
+          </header>
+
+          <section class="card resume-card">
+            <div class="resume-top">
+              <div class="resume-media" aria-hidden="true">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="./images/jokerProfile.webm" type="video/webm" />
+                </video>
+              </div>
+
+              <div>
+                <h3>Matt Tobaben — Full Stack Developer / CEO</h3>
+                <p>
+                  WildCard DEV leadership, frontend architecture, UX direction, branded systems thinking,
+                  and practical build execution across web and app experiences.
+                </p>
+                <div class="resume-links">
+                  <a class="action-link" href="./images/mtobabenResume.pdf" target="_blank" rel="noopener noreferrer">Open Resume PDF</a>
+                  <a class="action-link" href="mailto:matt@wildcarddev.com">Email Matt</a>
+                  <a class="action-link" href="tel:+14029150789">Call Company Line</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="resume-grid">
+            <article class="card resume-card">
+              <h3>Current Focus</h3>
+              <div class="timeline-list">
+                <div class="timeline-item">
+                  <strong>WildCard DEV</strong>
+                  <span>2024 — Current</span>
+                  <p>
+                    Building the flagship company site, premium contact experience, responsive UX systems,
+                    and Penny-centered brand interactions.
+                  </p>
+                </div>
+                <div class="timeline-item">
+                  <strong>Production-minded frontend work</strong>
+                  <span>Ongoing</span>
+                  <p>
+                    Prioritizing layouts that stay stable across desktop, phone, and very small screens before layering in higher-risk polish.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="card resume-card">
+              <h3>Why this section still matters</h3>
+              <p>
+                The earlier rebuild phases raised the brand presence without undoing the dependable foundation. Experience remains cleanly accessible so later collateral, QR links,
+                and deeper resume presentation can be added without reopening layout problems.
+              </p>
+            </article>
+          </section>
+        </div>
+      </article>
+
+
+      <!-- Portfolio -->
+      <article class="panel article" id="portfolio" data-page="portfolio" aria-labelledby="portfolio-title">
+        <div class="article-shell">
+          <header>
+            <span class="eyebrow">Portfolio / Holo Stage</span>
+            <h2 class="headline" id="portfolio-title">The real spinner is back: orbital motion, drag steering, inertia, and a proper flagship showcase.</h2>
+            <div class="accent-rule"></div>
+            <div class="copy">
+              <p>
+                This pass ports the original behavior model forward into the rebuilt architecture instead of falling back to another premium-but-static layout. The stage now uses a scoped 3D-feeling ring with translateZ-style placement, continuous auto-rotation, drag steering, inertial release, and graceful auto-spin recovery.
+              </p>
+            </div>
+          </header>
+
+          <section class="holo-stage" aria-label="Featured holo portfolio stage">
+            <div class="holo-orb" aria-hidden="true"></div>
+
+            <div class="holo-stage__header">
+              <span class="eyebrow">Tony Stark inspired / motion restored</span>
+              <h3 class="section-title">Landing wow-factor refined as a true interactive holo spinner</h3>
+              <p>
+                The current working spinner remains the base, but the subsystem is tightened up here with a more stable readout footprint, calmer desktop steering, and cleaner supporting identity pieces around the stage.
+              </p>
+            </div>
+
+            <div class="holo-stage__frame holo-stage__frame--spinner">
+              <section class="holo-spinner-panel" aria-labelledby="spinner-stage-title">
+                <div class="holo-spinner-statusbar">
+                  <span class="holo-mini-label" id="spinnerFrontLabel">Core System Panel</span>
+                  <span class="holo-mini-label" id="spinnerFrontIndex">Panel 01</span>
+                </div>
+
+                <div
+                  class="holo-spinner-shell is-idle"
+                  id="holoSpinnerStage"
+                  aria-describedby="spinner-stage-title spinnerInstructions"
+                >
+                  <div class="holo-spinner-atmosphere" aria-hidden="true"></div>
+
+                  <div class="holo-spinner-drag" id="holoSpinnerDrag">
+                    <div class="holo-spinner-ring" id="holoSpinnerRing">
+                      <a
+                        class="holo-spin-card"
+                        href="./images/mtobabenResume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-spinner-id="core-shell"
+                        data-spinner-title="WildCard DEV flagship shell"
+                        data-spinner-text="Stable single-page architecture, fake-page navigation, and premium framing still anchor the entire site. This card keeps the build foundation in the front position even while the ring is moving."
+                        data-spinner-label="Core System Panel"
+                        data-spinner-index="Panel 01"
+                        data-spinner-status="System glow / blue-violet"
+                        data-spinner-mode="Flagship shell / stable base"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/Ace1.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Core shell</span>
+                          <strong>Flagship shell</strong>
+                          <span>Open resume / build credibility lane</span>
+                        </span>
+                      </a>
+
+                      <a
+                        class="holo-spin-card"
+                        href="#resume"
+                        data-nav-link="resume"
+                        data-spinner-id="resume-lane"
+                        data-spinner-title="Resume and execution lane"
+                        data-spinner-text="The spinner now behaves like the old showcase while still feeding the rebuilt sections. This lane keeps experience, execution, and credibility only one click away."
+                        data-spinner-label="Execution Surface"
+                        data-spinner-index="Panel 02"
+                        data-spinner-status="Resume / proof lane"
+                        data-spinner-mode="Experience-forward access"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/jokerProfile.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Execution</span>
+                          <strong>Resume lane</strong>
+                          <span>Proof, background, and current focus</span>
+                        </span>
+                      </a>
+
+                      <a
+                        class="holo-spin-card"
+                        href="#contact"
+                        data-nav-link="contact"
+                        data-spinner-id="client-facing"
+                        data-spinner-title="Client-facing build presentation"
+                        data-spinner-text="The old spinner energy now carries a cleaner portfolio story. Cinematic motion returns without broad page-level handlers or fragile layout tricks."
+                        data-spinner-label="Portfolio Surface"
+                        data-spinner-index="Panel 03"
+                        data-spinner-status="Glass panel / layered"
+                        data-spinner-mode="Client-facing showcase"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/Ace6.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Showcase</span>
+                          <strong>Client-facing lane</strong>
+                          <span>Motion-first flagship presentation</span>
+                        </span>
+                      </a>
+
+                      <a
+                        class="holo-spin-card holo-spin-card--penny"
+                        href="#contact"
+                        data-nav-link="contact"
+                        data-spinner-id="penny-command"
+                        data-spinner-title="Penny command presence"
+                        data-spinner-text="Penny still reads as a distinct pink control layer instead of getting swallowed by the base system. Her panel remains clearly separate even while it orbits inside the same stage."
+                        data-spinner-label="Penny Distinction"
+                        data-spinner-index="Panel 04"
+                        data-spinner-status="Pink control layer"
+                        data-spinner-mode="Assistant-led signature panel"
+                        data-spinner-penny="true"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/Ace4.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Penny</span>
+                          <strong>Command intelligence</strong>
+                          <span>Pink-forward assistant signature lane</span>
+                        </span>
+                      </a>
+
+                      <a
+                        class="holo-spin-card"
+                        href="#watch"
+                        data-nav-link="watch"
+                        data-spinner-id="watch-utility"
+                        data-spinner-title="Watch and utility lane"
+                        data-spinner-text="Wearable and QR experiments still have a polished future home, but now they sit behind a real motion-driven centerpiece instead of a static stage."
+                        data-spinner-label="Expansion Lane"
+                        data-spinner-index="Panel 05"
+                        data-spinner-status="Watch / QR route"
+                        data-spinner-mode="Future utility path"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/Ace7.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Future lane</span>
+                          <strong>Watch + QR route</strong>
+                          <span>Wearable and utility growth path</span>
+                        </span>
+                      </a>
+
+                      <a
+                        class="holo-spin-card holo-spin-card--penny"
+                        href="#contact"
+                        data-nav-link="contact"
+                        data-spinner-id="concierge"
+                        data-spinner-title="Concierge service and intake lane"
+                        data-spinner-text="The ring now feeds directly into your strongest live conversion surface: Penny’s office. That keeps the spinner theatrical without making it disconnected from the rest of the build."
+                        data-spinner-label="Concierge Route"
+                        data-spinner-index="Panel 06"
+                        data-spinner-status="Intake / contact ready"
+                        data-spinner-mode="Conversion-forward lane"
+                        data-spinner-penny="true"
+                      >
+                        <span class="holo-spin-card__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata">
+                            <source src="./images/customerService.webm" type="video/webm" />
+                          </video>
+                        </span>
+                        <span class="holo-spin-card__overlay" aria-hidden="true"></span>
+                        <span class="holo-spin-card__copy">
+                          <span class="holo-spin-card__chip">Concierge</span>
+                          <strong>Service intake lane</strong>
+                          <span>Penny-first contact and routing</span>
+                        </span>
+                      </a>
+                    </div>
+
+                    <div class="holo-spinner-ground" aria-hidden="true"></div>
+                    <div class="holo-spinner-core-label" aria-hidden="true">WildCard DEV</div>
+                  </div>
+                </div>
+
+                <div class="holo-spinner-instructions" id="spinnerInstructions">
+                  <span>Drag or swipe to steer the ring.</span>
+                  <span>Release for inertia.</span>
+                  <span>Use the wheel over the stage to widen or tighten the orbit.</span>
+                </div>
+              </section>
+
+              <div class="holo-spinner-info">
+                <div class="holo-hud-top">
+                  <span class="holo-mini-label" id="spinnerInfoLabel">Core System Panel</span>
+                  <span class="holo-mini-label" id="spinnerInfoStatus">System glow / blue-violet</span>
+                </div>
+
+                <div class="holo-spinner-info__copy">
+                  <div class="holo-scanline" aria-hidden="true"></div>
+                  <h3 id="spinnerInfoTitle">WildCard DEV flagship shell</h3>
+                  <p id="spinnerInfoText">
+                    Stable single-page architecture, fake-page navigation, and premium framing still anchor the entire site. This card keeps the build foundation in the front position even while the ring is moving.
+                  </p>
+                </div>
+
+                <div class="holo-spinner-readout" aria-label="Active spinner readout">
+                  <div class="holo-spinner-readout__grid">
+                    <div class="holo-spinner-readout__item">
+                      <span>Front card</span>
+                      <strong id="spinnerInfoIndex">Panel 01</strong>
+                    </div>
+                    <div class="holo-spinner-readout__item">
+                      <span>Mode</span>
+                      <strong id="spinnerInfoMode">Flagship shell / stable base</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="holo-control-row" role="tablist" aria-label="Holo spinner controls">
+                  <button class="holo-control is-active" type="button" role="tab" aria-selected="true" data-spinner-target="core-shell">
+                    <strong>Core shell</strong>
+                    <span>Structure first</span>
+                  </button>
+
+                  <button class="holo-control" type="button" role="tab" aria-selected="false" data-spinner-target="resume-lane">
+                    <strong>Resume lane</strong>
+                    <span>Execution surface</span>
+                  </button>
+
+                  <button class="holo-control" type="button" role="tab" aria-selected="false" data-spinner-target="client-facing">
+                    <strong>Showcase lane</strong>
+                    <span>Client-facing motion</span>
+                  </button>
+
+                  <button class="holo-control holo-control--penny" type="button" role="tab" aria-selected="false" data-spinner-target="penny-command">
+                    <strong>Penny panel</strong>
+                    <span>Pink dominance</span>
+                  </button>
+
+                  <button class="holo-control" type="button" role="tab" aria-selected="false" data-spinner-target="watch-utility">
+                    <strong>Future lane</strong>
+                    <span>Watch + QR path</span>
+                  </button>
+
+                  <button class="holo-control holo-control--penny" type="button" role="tab" aria-selected="false" data-spinner-target="concierge">
+                    <strong>Concierge route</strong>
+                    <span>Contact conversion</span>
+                  </button>
+                </div>
+
+                <aside class="holo-metric-strip" aria-label="Holo system metrics">
+                  <div class="holo-metric">
+                    <span>Behavior</span>
+                    <strong>True orbital motion restored</strong>
+                    <em>Perspective stage, translateZ ring placement, auto rotation, and scoped input handling instead of a static substitute.</em>
+                  </div>
+                  <div class="holo-metric">
+                    <span>Interaction</span>
+                    <strong>Drag steering with momentum</strong>
+                    <em>Pointer drag steers the carousel, release carries inertia, and the idle state glides back into automatic spin.</em>
+                  </div>
+                  <div class="holo-metric">
+                    <span>Containment</span>
+                    <strong>Responsive simplification stays intact</strong>
+                    <em>Desktop gets the strongest wow-factor while smaller screens reduce density and orbit size without breaking the rest of the build.</em>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </section>
+
+          <section class="holo-panel-grid" aria-label="Holo panel portfolio cards">
+            <article class="holo-card">
+              <div class="holo-card__media" aria-hidden="true">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="./images/Ace1.webm" type="video/webm" />
+                </video>
+              </div>
+
+              <div class="holo-card__content">
+                <div>
+                  <div class="holo-card__header">
+                    <span class="holo-tag">Flagship interface</span>
+                    <span class="holo-card__index">Panel 01</span>
+                  </div>
+                  <h3>WildCard DEV core experience</h3>
+                  <p>
+                    The spinner is now the primary wow-factor again, but the supporting glass cards still keep the portfolio lane readable when users want calmer browsing below the main stage.
+                  </p>
+                </div>
+
+                <div class="holo-card__footer">
+                  <span class="holo-footer-chip">Single page</span>
+                  <span class="holo-footer-chip">3D ring</span>
+                  <span class="holo-footer-chip">Responsive</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="holo-card">
+              <div class="holo-card__media" aria-hidden="true">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="./images/Ace6.webm" type="video/webm" />
+                </video>
+              </div>
+
+              <div class="holo-card__content">
+                <div>
+                  <div class="holo-card__header">
+                    <span class="holo-tag">Service showcase</span>
+                    <span class="holo-card__index">Panel 02</span>
+                  </div>
+                  <h3>Client-facing presentation lane</h3>
+                  <p>
+                    Motion is back where it belongs: in the centerpiece. The supporting cards now reinforce that story instead of trying to replace it.
+                  </p>
+                </div>
+
+                <div class="holo-card__footer">
+                  <span class="holo-footer-chip">Motion-first</span>
+                  <span class="holo-footer-chip">HUD labels</span>
+                  <span class="holo-footer-chip">Contained media</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="holo-card holo-card--penny">
+              <div class="holo-card__media" aria-hidden="true">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="./images/Ace4.webm" type="video/webm" />
+                </video>
+              </div>
+
+              <div class="holo-card__content">
+                <div>
+                  <div class="holo-card__header">
+                    <span class="holo-tag holo-tag--penny">Penny signature panel</span>
+                    <span class="holo-card__index">Panel 03</span>
+                  </div>
+                  <h3>Penny command intelligence</h3>
+                  <p>
+                    Penny remains visually distinct in orbit and in the supporting panel stack, preserving her role as the heart of the brand rather than a color accent inside the system.
+                  </p>
+                </div>
+
+                <div class="holo-card__footer">
+                  <span class="holo-footer-chip">Pink-forward</span>
+                  <span class="holo-footer-chip">Distinct layer</span>
+                  <span class="holo-footer-chip">Brand core</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="holo-card">
+              <div class="holo-card__media" aria-hidden="true">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="./images/Ace7.webm" type="video/webm" />
+                </video>
+              </div>
+
+              <div class="holo-card__content">
+                <div>
+                  <div class="holo-card__header">
+                    <span class="holo-tag">Expansion route</span>
+                    <span class="holo-card__index">Panel 04</span>
+                  </div>
+                  <h3>Watch, QR, and future utility flows</h3>
+                  <p>
+                    The supporting grid still protects future utility lanes, but now they live underneath a centerpiece that actually moves the way the original reference intended.
+                  </p>
+                </div>
+
+                <div class="holo-card__footer">
+                  <span class="holo-footer-chip">Wearables</span>
+                  <span class="holo-footer-chip">QR flows</span>
+                  <span class="holo-footer-chip">Future-safe</span>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section class="portfolio-grid">
+            <article class="card portfolio-card">
+              <h3>True motion, scoped safely</h3>
+              <p>
+                Pointer, swipe, and wheel interaction are limited to the spinner subsystem so the rest of the page keeps the same stable navigation and section behavior.
+              </p>
+            </article>
+
+            <article class="card portfolio-card">
+              <h3>Brand-consistent glow language</h3>
+              <p>
+                Blue and violet still define the main system stage, while Penny’s pink lane stays clearly separated both in orbit and in the supporting information stack.
+              </p>
+            </article>
+
+            <article class="card portfolio-card">
+              <h3>Responsive simplification</h3>
+              <p>
+                Desktop gets the strongest orbit depth. Smaller screens reduce radius and density while preserving the same interactive logic instead of flattening everything into static cards.
+              </p>
+            </article>
+          </section>
+        </div>
+      </article>
+
+
+      <!-- Contact / Penny Office -->
+      <article class="panel article" id="contact" data-page="contact" aria-labelledby="contact-title">
+        <div class="article-shell">
+          <header>
+            <span class="eyebrow eyebrow--penny">Contact / Penny Office</span>
+            <h2 class="headline" id="contact-title">Penny now feels like the premium intelligence running the room.</h2>
+            <div class="accent-rule"></div>
+          </header>
+
+          <section class="penny-stage">
+            <!-- ========================================
+                 Penny Office
+            ======================================== -->
+            <div class="penny-office">
+              <div class="penny-office__topbar">
+                <div class="penny-office__meta">
+                  <span class="penny-mini-chip">Penny Office</span>
+                  <span class="penny-mini-chip penny-mini-chip--system">Executive Assistant Layer</span>
+                </div>
+                <div class="penny-office__meta">
+                  <span class="penny-mini-chip">Online</span>
+                  <span class="penny-mini-chip penny-mini-chip--system">WildCard System</span>
+                </div>
+              </div>
+
+              <div class="penny-grid">
+                <div class="penny-hero">
+                  <div class="penny-hero__media" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-hero">
+                      <source src="./images/customerService.webm" type="video/webm" />
+                    </video>
+                  </div>
+
+                  <div class="penny-hero__copy">
+                    <span class="eyebrow eyebrow--penny">Penny Presence</span>
+                    <h3>Controlled. Confident. Polished. A little dangerous in a perfectly professional way.</h3>
+                    <p>
+                      Penny is the premium assistant presence of WildCard DEV. She is not filler, not a gimmick, and not just a contact form skin.
+                      She is the interface voice that makes the system feel personal, high-end, and unmistakably alive.
+                    </p>
+
+                    <div class="chip-row">
+                      <span class="chip chip--penny">Pink-forward identity</span>
+                      <span class="chip chip--penny">Executive-assistant energy</span>
+                      <span class="chip chip--penny">Stable on small screens</span>
+                    </div>
+
+                    <div class="penny-status-grid" aria-label="Penny system highlights">
+                      <div class="penny-stat">
+                        <span>Role</span>
+                        <strong>Front desk intelligence</strong>
+                        <em>Guides contact, tone, and first impressions.</em>
+                      </div>
+                      <div class="penny-stat">
+                        <span>Signal</span>
+                        <strong>Pink control layer</strong>
+                        <em>Distinct from the base blue/violet system.</em>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <aside class="penny-console" aria-live="polite">
+                  <div class="penny-console__label">Penny Office Status</div>
+                  <div class="penny-console__status" id="pennyStatus">
+                    Ready to route project inquiries, handle polished introductions, and make the contact lane feel like a real premium experience.
+                  </div>
+                  <div class="penny-console__sub">
+                    Hover or focus the Penny action cards below to shift the office readout.
+                  </div>
+                </aside>
+              </div>
+
+              
+              <div class="penny-ops-grid">
+                <article class="penny-op">
+                  <strong>Client Intake</strong>
+                  <p>
+                    Clear first-contact routing for proposals, builds, rescue work, and premium branded experiences without making visitors hunt for the right lane.
+                  </p>
+                </article>
+                <article class="penny-op">
+                  <strong>Fast Response Paths</strong>
+                  <p>
+                    Phone, text, and email all stay visible and tappable, with stronger feedback so the site feels intentional instead of passive.
+                  </p>
+                </article>
+                <article class="penny-op">
+                  <strong>Brand Tone Control</strong>
+                  <p>
+                    Penny’s lane stays elevated, pink-forward, and controlled so the contact experience feels polished rather than generic.
+                  </p>
+                </article>
+              </div>
+
+              <div class="penny-links-grid penny-priority-grid" aria-label="Penny quick actions">
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry"
+                  data-penny-message="Opening the polished written lane now. Best for proposals, project scope, assets, timelines, and all the details worth putting in writing."
+                >
+                  <strong>Email Matt</strong>
+                  <span>Best for serious project conversations, scope notes, and clean written intros.</span>
+                  <div class="penny-link-card__meta">
+                    <span>Written lane</span>
+                    <span>Project scope</span>
+                  </div>
+                </a>
+
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="sms:+14029150789"
+                  data-penny-message="Switching to the faster lane. Text is best when you want a quick first touch without the full inbox ceremony."
+                >
+                  <strong>Text the company line</strong>
+                  <span>Ideal for quick outreach, first-touch questions, and lightweight follow-up.</span>
+                  <div class="penny-link-card__meta">
+                    <span>Fast lane</span>
+                    <span>Phone-first</span>
+                  </div>
+                </a>
+
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="tel:+14029150789"
+                  data-penny-message="Routing straight to the direct line. Best when speed matters and you want to skip the back-and-forth."
+                >
+                  <strong>Call WildCard DEV</strong>
+                  <span>Use the direct line when timing matters more than ceremony.</span>
+                  <div class="penny-link-card__meta">
+                    <span>Direct line</span>
+                    <span>High urgency</span>
+                  </div>
+                </a>
+
+                <a
+                  class="penny-link-card penny-pulse"
+                  href="#watch"
+                  data-nav-link="watch"
+                  data-penny-message="Redirecting toward the watch lane. That sandbox stays preserved for future QR, wearable presence, and Penny utility flows."
+                >
+                  <strong>Open Watch Lane</strong>
+                  <span>Reserved for QR, wearable presence, and future Penny experiments.</span>
+                  <div class="penny-link-card__meta">
+                    <span>Future utility</span>
+                    <span>Wearables</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="penny-office-note">
+                Penny’s office now emphasizes decision clarity: the fastest route, the cleanest written route, and the future utility route are all visible immediately, while the interaction layer stays safe, lightweight, and mobile-friendly.
+              </div>
+            </div>
+
+            <div class="contact-grid">
+              <section class="card contact-card contact-card--penny">
+                <div class="contact-card__head">
+                  <h3>Contact WildCard DEV</h3>
+                  <p>
+                    Choose the lane that fits how you like to move. Email handles fuller project detail, text keeps things quick, and the direct line stays visible when speed matters.
+                  </p>
+                </div>
+
+                <div class="contact-priority-strip">
+                  <a class="priority-action interactive-surface" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry" data-penny-message="Opening the detailed written lane. This is where proposals, assets, timelines, and real build notes belong.">
+                    <strong>Email for proposals and scope</strong>
+                    <span>Best for polished written intros, asset delivery, and detailed project notes.</span>
+                  </a>
+                  <a class="priority-action interactive-surface" href="sms:+14029150789" data-penny-message="Switching to the fast lane. Best for quick outreach, phone-first follow-up, and lighter first contact.">
+                    <strong>Text for the fastest first touch</strong>
+                    <span>Quick outreach on phone-friendly devices with less friction than a formal email.</span>
+                  </a>
+                </div>
+
+                <div class="contact-list">
+                  <div class="contact-row interactive-surface">
+                    <div class="contact-row__top">
+                      <strong>Matt Tobaben</strong>
+                      <span class="contact-route-chip">Primary build lane</span>
+                    </div>
+                    <div class="contact-detail-stack">
+                      <a href="mailto:matt@wildcarddev.com">matt@wildcarddev.com</a>
+                      <span>(402) 915-0789</span>
+                    </div>
+                    <div class="contact-meta">
+                      <span>CEO</span>
+                      <span>Full Stack Development</span>
+                      <span>Project Intake</span>
+                    </div>
+                    <div class="contact-actions">
+                      <a class="contact-action contact-action--penny" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry" data-penny-message="Matt route engaged. You are heading into the main build lane now.">Email Matt</a>
+                      <a class="contact-action" href="sms:+14029150789" data-penny-message="Text route engaged. Quick, direct, and phone-friendly.">Text</a>
+                      <a class="contact-action contact-action--ghost" href="tel:+14029150789" data-penny-message="Call route engaged. Direct line open.">Call</a>
+                    </div>
+                  </div>
+
+                  <div class="contact-row interactive-surface">
+                    <div class="contact-row__top">
+                      <strong>E</strong>
+                      <span class="contact-route-chip">Partner lane</span>
+                    </div>
+                    <div class="contact-detail-stack">
+                      <a href="mailto:SpaceBeth@wildcarddev.com">SpaceBeth@wildcarddev.com</a>
+                      <span>Partner / developer / collaborative build force</span>
+                    </div>
+                    <div class="contact-meta">
+                      <span>Partner</span>
+                      <span>Development</span>
+                    </div>
+                    <div class="contact-actions">
+                      <a class="contact-action" href="mailto:SpaceBeth@wildcarddev.com?subject=WildCard%20DEV%20Inquiry" data-penny-message="E route engaged. Collaborative build lane opening now.">Email E</a>
+                    </div>
+                  </div>
+
+                  <div class="contact-row interactive-surface">
+                    <div class="contact-row__top">
+                      <strong>Company line</strong>
+                      <span class="contact-route-chip">Fastest response lane</span>
+                    </div>
+                    <div class="contact-detail-stack">
+                      <a href="tel:+14029150789">(402) 915-0789</a>
+                      <span>Primary direct contact for current site, app, and rescue-build inquiries.</span>
+                    </div>
+                    <div class="contact-actions">
+                      <a class="contact-action contact-action--penny" href="tel:+14029150789" data-penny-message="Company line engaged. Fastest direct route selected.">Call now</a>
+                      <a class="contact-action" href="sms:+14029150789" data-penny-message="Company text lane engaged. Clean first touch from a phone-friendly path.">Text now</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-notes">
+                  <div class="contact-note">
+                    On phones, every primary contact control remains thumb-friendly and visible without requiring hover.
+                  </div>
+                  <div class="contact-note">
+                    Penny’s pink lane highlights priority actions, while the rest of the system keeps the blue/violet WildCard DEV framing intact.
+                  </div>
+                </div>
+              </section>
+
+              <section class="card contact-card contact-card--penny">
+                <div class="contact-card__head">
+                  <h3>Leave a message for Penny</h3>
+                  <p>
+                    Send the polished version here. This keeps the current contact flow dependable while making the intake experience feel more like a premium concierge handoff than a generic form.
+                  </p>
+                </div>
+
+                <form class="contact-form" action="mailto:matt@wildcarddev.com" method="post" enctype="text/plain">
+                  <div class="field-grid">
+                    <label>
+                      <span class="visually-hidden">Your name</span>
+                      <input class="input" type="text" name="name" placeholder="Your name" />
+                    </label>
+
+                    <label>
+                      <span class="visually-hidden">Your email</span>
+                      <input class="input" type="email" name="email" placeholder="Your email" />
+                    </label>
+
+                    <label>
+                      <span class="visually-hidden">Your phone</span>
+                      <input class="input" type="tel" name="phone" placeholder="Your phone (optional)" />
+                    </label>
+
+                    <label>
+                      <span class="visually-hidden">Project type</span>
+                      <input class="input" type="text" name="project" placeholder="Project type" />
+                    </label>
+                  </div>
+
+                  <label>
+                    <span class="visually-hidden">Message</span>
+                    <textarea class="textarea" name="message" placeholder="Tell us what you want built. Penny is paying attention."></textarea>
+                  </label>
+
+                  <div class="submit-row">
+                    <p class="submit-note">
+                      Email, phone, text, and form pathways all stay live here, but this lane is tuned for the cleanest handoff when you want to explain exactly what you need.
+                    </p>
+                    <button class="submit-btn interactive-surface" type="submit">Send Message</button>
+                  </div>
+                </form>
+
+                <div class="social-links-grid" aria-label="WildCard DEV profile links">
+                  <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev/WildCard-Mark-IV" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the public project repo. Good for baseline visibility and live build context.">
+                    <div class="social-link-card__copy">
+                      <strong>GitHub</strong>
+                      <span>View the live WildCard DEV repo and project baseline.</span>
+                    </div>
+                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                  </a>
+
+                  <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev" target="_blank" rel="noopener noreferrer" data-penny-message="Opening Matt’s GitHub profile. This is the broader profile lane for code-facing credibility and public work context.">
+                    <div class="social-link-card__copy">
+                      <strong>GitHub Profile</strong>
+                      <span>Public code-facing profile lane for broader work context and credibility.</span>
+                    </div>
+                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                  </a>
+
+                  <a class="social-link-card interactive-surface" href="https://wildcarddev.com/" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the live WildCard DEV site. Good for the public-facing brand and contact context.">
+                    <div class="social-link-card__copy">
+                      <strong>Live Site</strong>
+                      <span>Public-facing WildCard DEV presence kept nearby without cluttering the main contact lane.</span>
+                    </div>
+                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </section>
+            </div>
+        </div>
+      </article>
+
+      <!-- Watch -->
+      <article class="panel article" id="watch" data-page="watch" aria-labelledby="watch-title">
+        <div class="article-shell">
+          <header>
+            <span class="eyebrow eyebrow--penny">Watch Experience</span>
+            <h2 class="headline" id="watch-title">A clearer wearable demo lane with room for Penny-first utility later.</h2>
+            <div class="accent-rule"></div>
+          </header>
+
+          <section class="watch-stage">
+            <div class="watch-hero">
+              <div class="watch-copy">
+                <span class="eyebrow">Future-facing / small-screen intentional</span>
+                <h3>The watch section now reads like a real product preview instead of a placeholder.</h3>
+                <p>
+                  This pass keeps the architecture stable and the navigation untouched, while giving the wearable lane a more deliberate shell, clearer framing, and safer content density across desktop, phone, and very narrow widths.
+                </p>
+                <div class="chip-row">
+                  <span class="chip">Wearable-first thinking</span>
+                  <span class="chip">Future QR-ready</span>
+                  <span class="chip chip--penny">Penny-adjacent</span>
+                </div>
+              </div>
+
+              <div class="watch-shell-wrap">
+                <div class="watch-shell-label">Live watch concept shell</div>
+                <div class="watch-shell" aria-hidden="true">
+                  <div class="watch-screen">
+                    <video autoplay muted loop playsinline preload="metadata" data-managed-video="watch-shell">
+                      <source src="./media/penny/video/Penny_Watch_Square_Anim_v1.mp4" type="video/mp4" />
+                    </video>
+
+                    <div class="watch-ui">
+                      <div class="watch-topbar">
+                        <span class="watch-pill">Wildcard link</span>
+                        <span class="watch-pill watch-pill--penny">Penny live</span>
+                      </div>
+
+                      <div class="watch-center">
+                        <div class="watch-bubble">Hey honey. Your wearable lane is now framed like it belongs in the flagship build.</div>
+                        <div class="watch-time" id="watchTime">12:00</div>
+                        <div class="watch-caption">Stable now for demo framing. Open later for QR flows, contact shortcuts, and concierge actions.</div>
+                      </div>
+
+                      <div class="watch-dock">
+                        <span class="watch-pill">Demo shell</span>
+                        <div class="watch-dots" aria-hidden="true">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="watch-feature-grid">
+              <article class="card watch-card">
+                <h3>What improved in 6A</h3>
+                <p>
+                  The shell feels more intentional, the supporting copy explains the product lane more clearly, and the layout now reads like a future-facing wearable demo instead of a parking spot.
+                </p>
+              </article>
+
+              <article class="card watch-card">
+                <h3>Why it stays lightweight</h3>
+                <p>
+                  The stable Phase 5 navigation and section logic remain untouched. This is a visual and structural lift, not a risky interaction rewrite.
+                </p>
+              </article>
+            </div>
+
+            <div class="split-grid">
+              <div class="watch-meta">
+                <strong>Built to stay clean at narrow widths.</strong>
+                The watch lane keeps its place in the flagship architecture so later Penny-triggered shortcuts, branded QR entry points, wearable contact flows, and utility surfaces have a dependable home without forcing another structural rebuild.
+              </div>
+
+              <div class="watch-hook-list" aria-label="Future watch hooks">
+                <div class="watch-hook">Quick-action QR cards for resume, business card, and contact handoff flows.</div>
+                <div class="watch-hook">Penny concierge prompts that feel native to a tiny screen instead of squeezed down from desktop.</div>
+                <div class="watch-hook">Device-aware demo containers for square and circular wearable presentation later on.</div>
+              </div>
+            </div>
+          </section>
+
+            <section class="future-hook-band" aria-labelledby="future-hooks-title">
+              <div class="future-hook-band__head">
+                <span class="eyebrow">Future-facing structure only</span>
+                <h3 class="section-title" id="future-hooks-title">Lightweight hook containers are now in place for the next expansion pass.</h3>
+                <p>
+                  These are intentionally framed as safe placeholders instead of active features, so the flagship build gains clean destinations for later QR utilities, avatar upgrades, Penny interaction lanes, Stripe-related flows, and watch-linked handoff content without disturbing the current navigation or interaction model.
+                </p>
+              </div>
+
+              <div class="future-hook-grid">
+                <article class="future-hook-card qr-hook-card">
+                  <h3>QR feature staging</h3>
+                  <p>Structured tiles now reserve space for future resume, business card, and direct-contact QR surfaces without forcing those assets into the live layout yet.</p>
+                  <div class="qr-hook-preview" aria-hidden="true">
+                    <div class="qr-hook-tile">Resume QR
+slot</div>
+                    <div class="qr-hook-tile">Business card
+slot</div>
+                    <div class="qr-hook-tile">Contact handoff
+slot</div>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot"><strong>QR Hooks</strong>Safe container for branded QR art, link targets, and scan-first layouts later.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card avatar-hook-card">
+                  <h3>Avatar / media upgrade containers</h3>
+                  <p>Dedicated shells are now present for future Matt, E, and Penny media upgrades so richer holographic stills or video assets have a predictable landing zone.</p>
+                  <div class="avatar-hook-stage" aria-hidden="true">
+                    <div class="avatar-hook-shell">
+                      <strong>Primary avatar shell</strong>
+                      <span>Flagship identity media upgrade</span>
+                    </div>
+                    <div class="avatar-hook-shell">
+                      <strong>Penny media shell</strong>
+                      <span>Pink-forward assistant presence lane</span>
+                    </div>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot hook-slot--penny"><strong>Avatar Hooks</strong>Prepared for higher-end stills, short loops, and later cinematic overlays.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card integration-hook-card">
+                  <h3>Stripe / integration framing</h3>
+                  <p>The layout now includes a clearly non-functional integration lane so future Stripe-backed deposits, paid build requests, or service checkout flows can be introduced without reworking the section structure again.</p>
+                  <div class="integration-pill-row" aria-label="Future integration placeholders">
+                    <span class="integration-pill">Stripe preferred</span>
+                    <span class="integration-pill">Request intake</span>
+                    <span class="integration-pill">Payment status</span>
+                    <span class="integration-pill">Client handoff</span>
+                  </div>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot"><strong>Payment / Integration Hooks</strong>Reserved for future processor UI, status copy, and protected next-step messaging.</div>
+                  </div>
+                </article>
+
+                <article class="future-hook-card">
+                  <h3>Advanced Penny + watch-linked slots</h3>
+                  <p>Small, structured placeholders now mark where later concierge prompts, wearable quick actions, and watch-to-site continuity cards can plug in without creating layout clutter at tiny widths.</p>
+                  <div class="hook-slot-list">
+                    <div class="hook-slot hook-slot--penny"><strong>Penny Slot</strong>Reserved for higher-touch assistant prompts, task routing, and contextual micro-copy.</div>
+                    <div class="hook-slot"><strong>Watch-linked future content</strong>Reserved for mirrored cards, wearable triggers, and companion-flow summaries.</div>
+                  </div>
+                </article>
+              </div>
+            </section>
+        </div>
+      </article>
+
+
+      <div class="projection-overlay" id="eProjectionOverlay" aria-hidden="true">
+        <div class="projection-overlay__backdrop" data-projection-close="true"></div>
+        <section class="projection-modal" role="dialog" aria-modal="true" aria-labelledby="eProjectionTitle">
+          <div class="projection-modal__topbar">
+            <span class="projection-badge">E projection online</span>
+            <button class="projection-close" type="button" id="eProjectionClose" aria-label="Close E projection">✕</button>
+          </div>
+          <div class="projection-figure">
+            <div class="projection-figure__media" aria-hidden="true">
+              <img src="./media/penny/images/e-avatar.png" alt="" />
+            </div>
+            <div class="projection-figure__copy">
+              <h3 id="eProjectionTitle">E // Collaborative build projection</h3>
+              <p>Lightweight holo overlay only. Tap or click anywhere outside the frame to dismiss and drop back into the live site without disturbing navigation, Penny, or the spinner stage.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="panel nav-panel" aria-label="Primary section navigation">
+        <div class="nav-list">
+          <button class="nav-btn is-active" type="button" data-page-target="about">About</button>
+          <button class="nav-btn" type="button" data-page-target="resume">Resume</button>
+          <button class="nav-btn" type="button" data-page-target="portfolio">Portfolio</button>
+          <button class="nav-btn nav-btn--penny" type="button" data-page-target="contact">Penny Office</button>
+          <button class="nav-btn" type="button" data-page-target="watch">Watch</button>
+        </div>
+      </nav>
+    </div>
+  </main>
+
+  
+  <script>
+    (function () {
+      const articles = Array.from(document.querySelectorAll('.article[data-page]'));
+      const navButtons = Array.from(document.querySelectorAll('[data-page-target]'));
+      const shortcutLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+      const watchTime = document.getElementById('watchTime');
+      const pennyStatus = document.getElementById('pennyStatus');
+      const pennyStatusCards = Array.from(document.querySelectorAll('[data-penny-message]'));
+      const managedVideos = Array.from(document.querySelectorAll('video[data-managed-video]'));
+      const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const eProjectionTrigger = document.getElementById('eProjectionTrigger');
+      const eProjectionOverlay = document.getElementById('eProjectionOverlay');
+      const eProjectionClose = document.getElementById('eProjectionClose');
+
+
+
+      function openEProjection() {
+        if (!eProjectionOverlay) return;
+        eProjectionOverlay.classList.add('is-open');
+        eProjectionOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (eProjectionClose) {
+          window.setTimeout(() => eProjectionClose.focus({ preventScroll: true }), 40);
+        }
+      }
+
+      function closeEProjection() {
+        if (!eProjectionOverlay) return;
+        eProjectionOverlay.classList.remove('is-open');
+        eProjectionOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (eProjectionTrigger) {
+          eProjectionTrigger.focus({ preventScroll: true });
+        }
+      }
+
+      if (eProjectionTrigger && eProjectionOverlay) {
+        eProjectionTrigger.addEventListener('click', openEProjection);
+        if (eProjectionClose) {
+          eProjectionClose.addEventListener('click', closeEProjection);
+        }
+
+        eProjectionOverlay.addEventListener('click', (event) => {
+          if (event.target === eProjectionOverlay || event.target.hasAttribute('data-projection-close')) {
+            closeEProjection();
+          }
+        });
+
+        window.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && eProjectionOverlay.classList.contains('is-open')) {
+            closeEProjection();
+          }
+        });
+      }
+
+      function syncManagedVideos(activePage) {
+        managedVideos.forEach((video) => {
+          const parentArticle = video.closest('.article[data-page]');
+          const shouldPlay = !parentArticle || parentArticle.dataset.page === activePage;
+
+          if (shouldPlay) {
+            const playAttempt = video.play();
+            if (playAttempt && typeof playAttempt.catch === 'function') {
+              playAttempt.catch(() => {});
+            }
+          } else {
+            video.pause();
+            if (video.hasAttribute('data-managed-video')) {
+              video.currentTime = 0;
+            }
+          }
+        });
+      }
+
+      function showPage(pageId, updateHash = true) {
+        let found = false;
+
+        articles.forEach((article) => {
+          const isMatch = article.dataset.page === pageId;
+          article.classList.toggle('is-active', isMatch);
+          article.setAttribute('aria-hidden', String(!isMatch));
+          if (isMatch) found = true;
+        });
+
+        navButtons.forEach((button) => {
+          const isMatch = button.dataset.pageTarget === pageId;
+          button.classList.toggle('is-active', isMatch);
+          button.setAttribute('aria-pressed', String(isMatch));
+        });
+
+        if (found && updateHash) {
+          try {
+            history.replaceState(null, '', '#' + pageId);
+          } catch (error) {
+            window.location.hash = pageId;
+          }
+        }
+
+        if (found) {
+          syncManagedVideos(pageId);
+          window.scrollTo({ top: 0, behavior: reduceMotionQuery.matches ? 'auto' : 'smooth' });
+        }
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          showPage(button.dataset.pageTarget);
+        });
+      });
+
+      shortcutLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const target = link.dataset.navLink;
+          if (!target) return;
+          event.preventDefault();
+          showPage(target);
+        });
+      });
+
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '').trim();
+        const validPages = new Set(articles.map((article) => article.dataset.page));
+        if (validPages.has(hash)) {
+          showPage(hash, false);
+        }
+      });
+
+      const initialHash = window.location.hash.replace('#', '').trim();
+      const validPages = new Set(articles.map((article) => article.dataset.page));
+      showPage(validPages.has(initialHash) ? initialHash : 'about', false);
+
+      /* ========================================
+         Spinner Interaction
+      ======================================== */
+      const spinnerStage = document.getElementById('holoSpinnerStage');
+      const spinnerDrag = document.getElementById('holoSpinnerDrag');
+      const spinnerRing = document.getElementById('holoSpinnerRing');
+      const spinnerCards = spinnerRing ? Array.from(spinnerRing.querySelectorAll('.holo-spin-card')) : [];
+      const spinnerControls = Array.from(document.querySelectorAll('[data-spinner-target]'));
+      const spinnerFrontLabel = document.getElementById('spinnerFrontLabel');
+      const spinnerFrontIndex = document.getElementById('spinnerFrontIndex');
+      const spinnerInfoLabel = document.getElementById('spinnerInfoLabel');
+      const spinnerInfoStatus = document.getElementById('spinnerInfoStatus');
+      const spinnerInfoTitle = document.getElementById('spinnerInfoTitle');
+      const spinnerInfoText = document.getElementById('spinnerInfoText');
+      const spinnerInfoIndex = document.getElementById('spinnerInfoIndex');
+      const spinnerInfoMode = document.getElementById('spinnerInfoMode');
+
+      function initHoloSpinner() {
+        if (!spinnerStage || !spinnerDrag || !spinnerRing || !spinnerCards.length) {
+          return;
+        }
+
+        const state = {
+          rotationY: -20,
+          tiltX: -11,
+          velocityY: 0,
+          velocityX: 0,
+          autoSpeed: reduceMotionQuery.matches ? 0 : -0.02,
+          autoBlend: reduceMotionQuery.matches ? 0 : 1,
+          cardRadius: 280,
+          lastTime: performance.now(),
+          dragging: false,
+          lastPointerX: 0,
+          lastPointerY: 0,
+          lastPointerTime: 0,
+          activeId: '',
+          settleTarget: null,
+          resizeQueued: false,
+          activePointerType: 'touch'
+        };
+
+        function clamp(value, min, max) {
+          return Math.min(max, Math.max(min, value));
+        }
+
+        function normalizeAngle(angle) {
+          let normalized = angle % 360;
+          if (normalized > 180) normalized -= 360;
+          if (normalized < -180) normalized += 360;
+          return normalized;
+        }
+
+        function updateSpinnerCopy(card) {
+          if (!card) return;
+
+          const label = card.getAttribute('data-spinner-label') || '';
+          const index = card.getAttribute('data-spinner-index') || '';
+          const title = card.getAttribute('data-spinner-title') || '';
+          const text = card.getAttribute('data-spinner-text') || '';
+          const status = card.getAttribute('data-spinner-status') || '';
+          const mode = card.getAttribute('data-spinner-mode') || '';
+          const isPenny = card.getAttribute('data-spinner-penny') === 'true';
+          const activeId = card.getAttribute('data-spinner-id') || '';
+
+          if (spinnerFrontLabel) {
+            spinnerFrontLabel.textContent = label;
+            spinnerFrontLabel.classList.toggle('holo-mini-label--penny', isPenny);
+          }
+
+          if (spinnerFrontIndex) {
+            spinnerFrontIndex.textContent = index;
+          }
+
+          if (spinnerInfoLabel) {
+            spinnerInfoLabel.textContent = label;
+            spinnerInfoLabel.classList.toggle('holo-mini-label--penny', isPenny);
+          }
+
+          if (spinnerInfoStatus) {
+            spinnerInfoStatus.textContent = status;
+            spinnerInfoStatus.classList.toggle('holo-mini-label--penny', isPenny);
+          }
+
+          if (spinnerInfoTitle) spinnerInfoTitle.textContent = title;
+          if (spinnerInfoText) spinnerInfoText.textContent = text;
+          if (spinnerInfoIndex) spinnerInfoIndex.textContent = index;
+          if (spinnerInfoMode) spinnerInfoMode.textContent = mode;
+
+          spinnerControls.forEach((control) => {
+            const isActive = control.getAttribute('data-spinner-target') === activeId;
+            control.classList.toggle('is-active', isActive);
+            control.setAttribute('aria-selected', String(isActive));
+          });
+
+          state.activeId = activeId;
+        }
+
+        function positionCards() {
+          const stageRect = spinnerStage.getBoundingClientRect();
+          const stageWidth = stageRect.width || spinnerStage.clientWidth || 640;
+          const stageHeight = stageRect.height || spinnerStage.clientHeight || 420;
+          const compact = window.innerWidth < 768;
+          const verySmall = window.innerWidth < 480;
+
+          const radiusBase = compact ? stageWidth * 0.34 : stageWidth * 0.42;
+          state.cardRadius = clamp(radiusBase, verySmall ? 110 : 150, compact ? 210 : 320);
+
+          const cardWidth = clamp(stageWidth * (compact ? 0.42 : 0.29), verySmall ? 140 : 180, compact ? 210 : 240);
+          const cardHeight = clamp(stageHeight * (compact ? 0.52 : 0.58), verySmall ? 190 : 230, compact ? 280 : 320);
+
+          spinnerCards.forEach((card, index) => {
+            const angle = index * (360 / spinnerCards.length);
+            card.style.setProperty('--card-width', cardWidth + 'px');
+            card.style.setProperty('--card-height', cardHeight + 'px');
+            card.dataset.spinnerAngle = String(angle);
+          });
+        }
+
+        function applyTransforms() {
+          const compact = window.innerWidth < 768;
+          state.tiltX = clamp(state.tiltX, compact ? -18 : -22, compact ? 3 : 6);
+          spinnerDrag.style.transform = 'rotateX(' + state.tiltX + 'deg) rotateY(' + state.rotationY + 'deg)';
+
+          let bestCard = null;
+          let bestDistance = Infinity;
+
+          spinnerCards.forEach((card) => {
+            const baseAngle = Number(card.dataset.spinnerAngle || 0);
+            const worldAngle = normalizeAngle(baseAngle + state.rotationY);
+            const distance = Math.abs(worldAngle);
+            const depthFactor = (Math.cos(worldAngle * Math.PI / 180) + 1) / 2;
+            const opacity = 0.34 + depthFactor * 0.66;
+            const blur = (1 - depthFactor) * 1.6;
+            const scale = 0.86 + depthFactor * 0.16;
+
+            card.style.transform = 'rotateY(' + baseAngle + 'deg) translateZ(' + state.cardRadius + 'px) scale(' + scale.toFixed(3) + ')';
+            card.style.opacity = opacity.toFixed(3);
+            card.style.filter = 'blur(' + blur.toFixed(2) + 'px)';
+            card.style.zIndex = String(Math.round(depthFactor * 100));
+
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestCard = card;
+            }
+          });
+
+          if (bestCard && bestCard.getAttribute('data-spinner-id') !== state.activeId) {
+            updateSpinnerCopy(bestCard);
+          }
+        }
+
+        function settleToCard(targetId) {
+          const targetCard = spinnerCards.find((card) => card.getAttribute('data-spinner-id') === targetId);
+          if (!targetCard) return;
+          const baseAngle = Number(targetCard.dataset.spinnerAngle || 0);
+          state.settleTarget = -baseAngle;
+          state.autoBlend = 0;
+        }
+
+        spinnerControls.forEach((control) => {
+          control.addEventListener('click', () => {
+            settleToCard(control.getAttribute('data-spinner-target') || '');
+          });
+
+          control.addEventListener('focus', () => {
+            settleToCard(control.getAttribute('data-spinner-target') || '');
+          });
+        });
+
+        spinnerCards.forEach((card) => {
+          card.addEventListener('focus', () => {
+            const targetId = card.getAttribute('data-spinner-id') || '';
+            settleToCard(targetId);
+          });
+
+          card.addEventListener('mouseenter', () => {
+            updateSpinnerCopy(card);
+          });
+
+          card.addEventListener('click', (event) => {
+            const navTarget = card.getAttribute('data-nav-link');
+            if (navTarget) {
+              event.preventDefault();
+              showPage(navTarget);
+            }
+          });
+        });
+
+        function onPointerDown(event) {
+          if (event.pointerType === 'mouse' && event.button !== 0) {
+            return;
+          }
+
+          state.dragging = true;
+          state.settleTarget = null;
+          state.autoBlend = 0;
+          state.velocityY = 0;
+          state.velocityX = 0;
+          state.activePointerType = event.pointerType || 'mouse';
+          state.lastPointerX = event.clientX;
+          state.lastPointerY = event.clientY;
+          state.lastPointerTime = performance.now();
+
+          spinnerStage.classList.remove('is-idle');
+          spinnerStage.classList.add('is-dragging');
+
+          if (spinnerStage.setPointerCapture) {
+            try {
+              spinnerStage.setPointerCapture(event.pointerId);
+            } catch (error) {}
+          }
+        }
+
+        function onPointerMove(event) {
+          if (!state.dragging) return;
+
+          const now = performance.now();
+          const dx = event.clientX - state.lastPointerX;
+          const dy = event.clientY - state.lastPointerY;
+          const dt = Math.max(16, now - state.lastPointerTime);
+          const isMouse = state.activePointerType === 'mouse';
+          const rotationGain = isMouse ? 0.09 : 0.22;
+          const tiltGain = isMouse ? 0.03 : 0.085;
+          const velocityGainY = isMouse ? 2.1 : 6.2;
+          const velocityGainX = isMouse ? 0.72 : 2.1;
+
+          state.rotationY += dx * rotationGain;
+          state.tiltX -= dy * tiltGain;
+          state.velocityY = clamp(dx / dt * velocityGainY, isMouse ? -0.24 : -0.9, isMouse ? 0.24 : 0.9);
+          state.velocityX = clamp(-dy / dt * velocityGainX, isMouse ? -0.08 : -0.28, isMouse ? 0.08 : 0.28);
+
+          state.lastPointerX = event.clientX;
+          state.lastPointerY = event.clientY;
+          state.lastPointerTime = now;
+        }
+
+        function onPointerUp(event) {
+          if (!state.dragging) return;
+          state.dragging = false;
+          spinnerStage.classList.remove('is-dragging');
+          spinnerStage.classList.add('is-idle');
+
+          if (state.activePointerType === 'mouse') {
+            state.velocityY = clamp(state.velocityY, -0.24, 0.24);
+            state.velocityX = clamp(state.velocityX, -0.08, 0.08);
+          }
+
+          if (spinnerStage.releasePointerCapture) {
+            try {
+              spinnerStage.releasePointerCapture(event.pointerId);
+            } catch (error) {}
+          }
+        }
+
+        spinnerStage.addEventListener('pointerdown', onPointerDown);
+        spinnerStage.addEventListener('pointermove', onPointerMove);
+        spinnerStage.addEventListener('pointerup', onPointerUp);
+        spinnerStage.addEventListener('pointercancel', onPointerUp);
+        spinnerStage.addEventListener('lostpointercapture', onPointerUp);
+
+        spinnerStage.addEventListener('wheel', (event) => {
+          event.preventDefault();
+          const delta = event.deltaY || 0;
+          state.cardRadius = clamp(state.cardRadius + (delta > 0 ? -8 : 8), window.innerWidth < 480 ? 110 : 140, window.innerWidth < 768 ? 210 : 320);
+          spinnerCards.forEach((card) => {
+            card.style.transform = 'rotateY(' + Number(card.dataset.spinnerAngle || 0) + 'deg) translateZ(' + state.cardRadius + 'px)';
+          });
+          state.autoBlend = 0;
+        }, { passive: false });
+
+        function handleResize() {
+          positionCards();
+          applyTransforms();
+        }
+
+        window.addEventListener('resize', handleResize);
+        reduceMotionQuery.addEventListener('change', () => {
+          state.autoSpeed = reduceMotionQuery.matches ? 0 : -0.018;
+          state.autoBlend = reduceMotionQuery.matches ? 0 : 1;
+        });
+
+        function animate(now) {
+          const delta = Math.min(32, now - state.lastTime || 16);
+          state.lastTime = now;
+
+          if (!state.dragging) {
+            if (state.settleTarget !== null) {
+              const diff = normalizeAngle(state.settleTarget - state.rotationY);
+              state.rotationY += diff * 0.12;
+
+              if (Math.abs(diff) < 0.18) {
+                state.rotationY = state.settleTarget;
+                state.settleTarget = null;
+              }
+            } else {
+              const isMouseMomentum = state.activePointerType === 'mouse';
+              state.rotationY += state.velocityY * delta;
+              state.tiltX += state.velocityX * delta;
+              state.velocityY *= isMouseMomentum ? 0.84 : 0.94;
+              state.velocityX *= isMouseMomentum ? 0.78 : 0.9;
+
+              if (Math.abs(state.velocityY) < 0.002) state.velocityY = 0;
+              if (Math.abs(state.velocityX) < 0.002) state.velocityX = 0;
+
+              if (!reduceMotionQuery.matches) {
+                state.autoBlend = Math.min(1, state.autoBlend + delta * 0.0008);
+                state.rotationY += state.autoSpeed * delta * state.autoBlend;
+              }
+            }
+          }
+
+          applyTransforms();
+          window.requestAnimationFrame(animate);
+        }
+
+        positionCards();
+        updateSpinnerCopy(spinnerCards[0]);
+        applyTransforms();
+        window.requestAnimationFrame(animate);
+      }
+
+      initHoloSpinner();
+
+      function updateWatchTime() {
+        if (!watchTime) return;
+        const now = new Date();
+        watchTime.textContent = now.toLocaleTimeString([], {
+          hour: 'numeric',
+          minute: '2-digit'
+        });
+      }
+
+      updateWatchTime();
+      window.setInterval(updateWatchTime, 30000);
+
+      if (pennyStatus && pennyStatusCards.length) {
+        const defaultStatus = pennyStatus.textContent.trim();
+
+        pennyStatusCards.forEach((card) => {
+          const message = card.getAttribute('data-penny-message') || defaultStatus;
+
+          const activate = function () {
+            pennyStatus.textContent = message;
+            card.classList.add('is-engaged');
+          };
+
+          const reset = function () {
+            pennyStatus.textContent = defaultStatus;
+            card.classList.remove('is-engaged');
+          };
+
+          card.addEventListener('mouseenter', activate);
+          card.addEventListener('focus', activate);
+          card.addEventListener('mouseleave', reset);
+          card.addEventListener('blur', reset);
+          card.addEventListener('touchstart', activate, { passive: true });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
