@@ -2549,6 +2549,147 @@
       to { transform: none; }
     }
 
+
+    /* ========================================
+       Penny Contact Interaction Overlay
+    ======================================== */
+    .penny-contact-overlay {
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom, 0px) + 10px);
+      z-index: 90;
+      width: min(calc(100% - 24px), 360px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(-50%, 12px) scale(0.96);
+      transition: opacity 180ms ease, transform 220ms ease, visibility 180ms ease;
+    }
+
+    .penny-contact-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0) scale(1);
+    }
+
+    .penny-contact-overlay__card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.14), transparent 38%),
+        linear-gradient(180deg, rgba(33, 14, 32, 0.96), rgba(12, 10, 18, 0.985));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.03),
+        0 0 28px rgba(255, 79, 183, 0.14),
+        0 18px 42px rgba(0,0,0,0.32);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .penny-contact-overlay__card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), transparent 18%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 18px
+        );
+      opacity: 0.72;
+    }
+
+    .penny-contact-overlay__media,
+    .penny-contact-overlay__bubble {
+      position: relative;
+      z-index: 1;
+    }
+
+    .penny-contact-overlay__media {
+      width: 92px;
+      aspect-ratio: 0.82;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 79, 183, 0.16);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.08), transparent 32%),
+        linear-gradient(180deg, rgba(42, 18, 40, 0.96), rgba(10, 8, 16, 0.99));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.03),
+        0 0 18px rgba(255, 79, 183, 0.12);
+    }
+
+    .penny-contact-overlay__media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .penny-contact-overlay__bubble {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 214, 236, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .penny-contact-overlay__label {
+      color: rgba(255, 214, 236, 0.76);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-contact-overlay__text {
+      color: #ffe7f6;
+      font-size: 0.93rem;
+      line-height: 1.45;
+      text-wrap: balance;
+    }
+
+    @media (max-width: 560px) {
+      .penny-contact-overlay {
+        width: min(calc(100% - 18px), 340px);
+        bottom: max(12px, env(safe-area-inset-bottom, 0px) + 8px);
+      }
+
+      .penny-contact-overlay__card {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 10px;
+        padding: 10px;
+        border-radius: 20px;
+      }
+
+      .penny-contact-overlay__media {
+        width: 76px;
+        border-radius: 14px;
+      }
+
+      .penny-contact-overlay__bubble {
+        padding: 10px 12px;
+      }
+
+      .penny-contact-overlay__text {
+        font-size: 0.88rem;
+      }
+    }
+
     /* ========================================
        Interaction States
     ======================================== */
@@ -4474,7 +4615,7 @@
         </div>
 
         <div class="quick-links" aria-label="Quick actions">
-          <a class="quick-link" href="mailto:matt@wildcarddev.com">
+          <a class="quick-link" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email">
             <div>
               <strong>Email Matt</strong>
               <span>matt@wildcarddev.com</span>
@@ -4482,7 +4623,7 @@
             <span aria-hidden="true">↗</span>
           </a>
 
-          <a class="quick-link" href="tel:+14029150789">
+          <a class="quick-link" href="tel:(402)%20915-0789" data-penny-assist="phone">
             <div>
               <strong>Call WildCard DEV</strong>
               <span>(402) 915-0789</span>
@@ -4645,8 +4786,8 @@
                 </div>
                 <div class="resume-links">
                   <a class="action-link" href="./images/mtobabenResume.pdf" target="_blank" rel="noopener noreferrer">Open Resume PDF</a>
-                  <a class="action-link" href="mailto:matt@wildcarddev.com">Email Matt</a>
-                  <a class="action-link" href="tel:+14029150789">Call Company Line</a>
+                  <a class="action-link" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email">Email Matt</a>
+                  <a class="action-link" href="tel:(402)%20915-0789" data-penny-assist="phone">Call Company Line</a>
                   <a class="action-link action-link--penny" href="mailto:penny@wildcarddev.com?subject=Resume%20Request%20%2F%20Reference%20Coordination">Route through Penny</a>
                 </div>
                 <div class="resume-network-block" aria-label="Supporting professional links">
@@ -4791,7 +4932,7 @@
               </div>
               <div class="resume-links">
                 <a class="action-link action-link--penny" href="mailto:penny@wildcarddev.com?subject=Reference%20Request%20for%20Matt%20Tobaben">Request references</a>
-                <a class="action-link" href="tel:+14029150789">Call company line</a>
+                <a class="action-link" href="tel:(402)%20915-0789" data-penny-assist="phone">Call company line</a>
               </div>
             </article>
           </section>
@@ -5320,7 +5461,8 @@
               <div class="penny-links-grid penny-priority-grid" aria-label="Penny quick actions">
                 <a
                   class="penny-link-card penny-pulse"
-                  href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry"
+                  href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss"
+                  data-penny-assist="email"
                   data-penny-message="Opening the polished written lane now. Best for proposals, project scope, assets, timelines, and all the details worth putting in writing."
                 >
                   <strong>Email Matt</strong>
@@ -5346,7 +5488,8 @@
 
                 <a
                   class="penny-link-card penny-pulse"
-                  href="tel:+14029150789"
+                  href="tel:(402)%20915-0789"
+                  data-penny-assist="phone"
                   data-penny-message="Routing straight to the direct line. Best when speed matters and you want to skip the back-and-forth."
                 >
                   <strong>Call WildCard DEV</strong>
@@ -5387,7 +5530,7 @@
                 </div>
 
                 <div class="contact-priority-strip">
-                  <a class="priority-action interactive-surface" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry" data-penny-message="Opening the detailed written lane. This is where proposals, assets, timelines, and real build notes belong.">
+                  <a class="priority-action interactive-surface" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Opening the detailed written lane. This is where proposals, assets, timelines, and real build notes belong.">
                     <strong>Email for proposals and scope</strong>
                     <span>Best for polished written intros, asset delivery, and detailed project notes.</span>
                   </a>
@@ -5413,9 +5556,9 @@
                       <span>Project Intake</span>
                     </div>
                     <div class="contact-actions">
-                      <a class="contact-action contact-action--penny" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Project%20Inquiry" data-penny-message="Matt route engaged. You are heading into the main build lane now.">Email Matt</a>
+                      <a class="contact-action contact-action--penny" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Matt route engaged. You are heading into the main build lane now.">Email Matt</a>
                       <a class="contact-action" href="sms:+14029150789" data-penny-message="Text route engaged. Quick, direct, and phone-friendly.">Text</a>
-                      <a class="contact-action contact-action--ghost" href="tel:+14029150789" data-penny-message="Call route engaged. Direct line open.">Call</a>
+                      <a class="contact-action contact-action--ghost" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Call route engaged. Direct line open.">Call</a>
                     </div>
                   </div>
 
@@ -5447,7 +5590,7 @@
                       <span>Primary direct contact for current site, app, and rescue-build inquiries.</span>
                     </div>
                     <div class="contact-actions">
-                      <a class="contact-action contact-action--penny" href="tel:+14029150789" data-penny-message="Company line engaged. Fastest direct route selected.">Call now</a>
+                      <a class="contact-action contact-action--penny" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Company line engaged. Fastest direct route selected.">Call now</a>
                       <a class="contact-action" href="sms:+14029150789" data-penny-message="Company text lane engaged. Clean first touch from a phone-friendly path.">Text now</a>
                     </div>
                   </div>
@@ -5716,6 +5859,18 @@ slot</div>
         </section>
       </div>
 
+      <div class="penny-contact-overlay" id="pennyContactOverlay" aria-hidden="true">
+        <div class="penny-contact-overlay__card">
+          <div class="penny-contact-overlay__media" aria-hidden="true">
+            <video id="pennyContactOverlayVideo" muted playsinline preload="metadata"></video>
+          </div>
+          <div class="penny-contact-overlay__bubble" role="status" aria-live="polite" aria-atomic="true">
+            <span class="penny-contact-overlay__label">Penny assist</span>
+            <span class="penny-contact-overlay__text" id="pennyContactOverlayText">One moment, honey.</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Navigation -->
       <nav class="panel nav-panel" aria-label="Primary section navigation">
         <div class="nav-list">
@@ -5794,6 +5949,95 @@ slot</div>
           networkLinks.hidden = expanded;
         });
       }
+
+      const pennyContactOverlay = document.getElementById('pennyContactOverlay');
+      const pennyContactOverlayVideo = document.getElementById('pennyContactOverlayVideo');
+      const pennyContactOverlayText = document.getElementById('pennyContactOverlayText');
+      const pennyAssistLinks = Array.from(document.querySelectorAll('[data-penny-assist]'));
+      const pennyAssistRoutes = {
+        phone: {
+          href: 'tel:(402) 915-0789',
+          video: './media/penny/video/penny_phone_pop.webm',
+          message: 'Let me put you through, honey.',
+          delay: 1500
+        },
+        email: {
+          href: 'mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss',
+          video: './media/penny/video/penny_email_pop.webm',
+          message: 'Let me get that ready for you, honey.',
+          delay: 1800
+        }
+      };
+      let pennyAssistTimer = 0;
+      let pennyAssistResetTimer = 0;
+      let pennyAssistBusy = false;
+
+      function resetPennyContactOverlay() {
+        if (!pennyContactOverlay) return;
+        window.clearTimeout(pennyAssistResetTimer);
+        pennyContactOverlay.classList.remove('is-visible');
+        pennyContactOverlay.setAttribute('aria-hidden', 'true');
+        if (pennyContactOverlayVideo) {
+          pennyContactOverlayVideo.pause();
+          pennyContactOverlayVideo.removeAttribute('src');
+          pennyContactOverlayVideo.load();
+        }
+      }
+
+      function finishPennyAssist(href) {
+        window.clearTimeout(pennyAssistTimer);
+        pennyAssistBusy = false;
+        pennyAssistResetTimer = window.setTimeout(resetPennyContactOverlay, 220);
+        window.location.href = href;
+      }
+
+      function runPennyAssist(type) {
+        const route = pennyAssistRoutes[type];
+        if (!route || !pennyContactOverlay || !pennyContactOverlayVideo || !pennyContactOverlayText || pennyAssistBusy) {
+          return false;
+        }
+
+        pennyAssistBusy = true;
+        window.clearTimeout(pennyAssistTimer);
+        window.clearTimeout(pennyAssistResetTimer);
+        pennyContactOverlayText.textContent = route.message;
+        pennyContactOverlay.classList.add('is-visible');
+        pennyContactOverlay.setAttribute('aria-hidden', 'false');
+
+        const video = pennyContactOverlayVideo;
+        const handleError = function () {
+          finishPennyAssist(route.href);
+        };
+
+        video.onerror = handleError;
+        video.onabort = handleError;
+        video.src = route.video;
+        video.currentTime = 0;
+
+        const playAttempt = video.play();
+        if (playAttempt && typeof playAttempt.catch === 'function') {
+          playAttempt.catch(handleError);
+        }
+
+        pennyAssistTimer = window.setTimeout(() => finishPennyAssist(route.href), route.delay);
+        return true;
+      }
+
+      pennyAssistLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const type = link.getAttribute('data-penny-assist');
+          if (!type) return;
+          if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
+            return;
+          }
+
+          if (!runPennyAssist(type)) {
+            return;
+          }
+
+          event.preventDefault();
+        });
+      });
 
       function syncManagedVideos(activePage) {
         managedVideos.forEach((video) => {
