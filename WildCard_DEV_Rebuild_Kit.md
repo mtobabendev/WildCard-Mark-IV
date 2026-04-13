@@ -61,6 +61,25 @@ Always use current index.html as working base.
 
 ---
 
+Penny Lockout Protocol — Expanded
+
+Protected Penny subsystems now include:
+
+Penny Office core
+Penny status messaging
+Penny console / hover messaging
+Penny pop interaction overlays
+Penny-assisted outbound contact actions
+Penny media-trigger flows tied to phone/email/contact CTA behavior
+
+Rules:
+
+do not modify Penny interaction flows unless the task explicitly targets them
+do not reuse Penny pop logic for unrelated features
+do not alter timing, trigger logic, fallback behavior, or message routing during unrelated updates
+do not touch contact-trigger Penny media systems during layout-only or visual-only passes
+preserve graceful fallback behavior if video/media fails
+
 ## 🔥 PHASE 7+ DEVELOPMENT MODE
 
 This project is NO LONGER in rebuild mode.
