@@ -4679,7 +4679,7 @@
     ======================================== -->
     <div class="content-shell">
       <!-- About -->
-      <article class="panel article is-active" id="about" data-page="about" aria-labelledby="about-title">
+      <article class="panel article" id="about" data-page="about" aria-labelledby="about-title">
         <div class="article-shell">
           <header class="hero-slab">
             <span class="eyebrow">About</span>
@@ -4927,29 +4927,10 @@
 
 
       <!-- Portfolio -->
-      <article class="panel article" id="portfolio" data-page="portfolio" aria-labelledby="portfolio-title">
+      <article class="panel article is-active" id="portfolio" data-page="portfolio" aria-labelledby="portfolio-title">
         <div class="article-shell">
-          <header>
-            <span class="eyebrow">Portfolio / Holo Stage</span>
-            <h2 class="headline" id="portfolio-title">The real spinner is back: orbital motion, drag steering, inertia, and a proper flagship showcase.</h2>
-            <div class="accent-rule"></div>
-            <div class="copy">
-              <p>
-                This pass ports the original behavior model forward into the rebuilt architecture instead of falling back to another premium-but-static layout. The stage now uses a scoped 3D-feeling ring with translateZ-style placement, continuous auto-rotation, drag steering, inertial release, and graceful auto-spin recovery.
-              </p>
-            </div>
-          </header>
-
           <section class="holo-stage" aria-label="Featured holo portfolio stage">
             <div class="holo-orb" aria-hidden="true"></div>
-
-            <div class="holo-stage__header">
-              <span class="eyebrow">Tony Stark inspired / motion restored</span>
-              <h3 class="section-title">Landing wow-factor refined as a true interactive holo spinner</h3>
-              <p>
-                The current working spinner remains the base, but the subsystem is tightened up here with a more stable readout footprint, calmer desktop steering, and cleaner supporting identity pieces around the stage.
-              </p>
-            </div>
 
             <div class="holo-stage__frame holo-stage__frame--spinner">
               <section class="holo-spinner-panel" aria-labelledby="spinner-stage-title">
@@ -5210,6 +5191,24 @@
                   </div>
                 </aside>
               </div>
+            </div>
+
+            <div class="holo-stage__header">
+              <span class="eyebrow">Portfolio / Holo Stage</span>
+              <h2 class="headline" id="portfolio-title">The real spinner is back: orbital motion, drag steering, inertia, and a proper flagship showcase.</h2>
+              <div class="accent-rule"></div>
+              <p>
+                This pass restores the spinner as the first thing visitors see inside Portfolio. The ring loads up front, the supporting copy stays secondary, and the rest of the showcase now sits underneath the motion-first hero instead of competing with it.
+              </p>
+            </div>
+          </section>
+
+          <section class="about-band">
+            <strong>Landing hierarchy corrected</strong>
+            <div class="copy">
+              <p>
+                The current working spinner remains the base subsystem. It now leads the page again with scoped 3D ring placement, continuous auto-rotation, drag steering, inertial release, and graceful recovery back into idle motion without touching Penny, navigation, or the underlying interaction model.
+              </p>
             </div>
           </section>
 
@@ -5860,9 +5859,9 @@ slot</div>
       <!-- Navigation -->
       <nav class="panel nav-panel" aria-label="Primary section navigation">
         <div class="nav-list">
-          <button class="nav-btn is-active" type="button" data-page-target="about">About</button>
+          <button class="nav-btn" type="button" data-page-target="about">About</button>
           <button class="nav-btn" type="button" data-page-target="resume">Resume</button>
-          <button class="nav-btn" type="button" data-page-target="portfolio">Portfolio</button>
+          <button class="nav-btn is-active" type="button" data-page-target="portfolio">Portfolio</button>
           <button class="nav-btn nav-btn--penny" type="button" data-page-target="contact">Penny Office</button>
           <button class="nav-btn" type="button" data-page-target="watch">Watch</button>
         </div>
@@ -6099,7 +6098,7 @@ slot</div>
 
       const initialHash = window.location.hash.replace('#', '').trim();
       const validPages = new Set(articles.map((article) => article.dataset.page));
-      showPage(validPages.has(initialHash) ? initialHash : 'about', false);
+      showPage(validPages.has(initialHash) ? initialHash : 'portfolio', false);
 
       /* ========================================
          Spinner Interaction
