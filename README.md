@@ -1,302 +1,182 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:140B24,100:3E1A63&height=220&section=header&text=WILDCARD%20DEV%20CORE%20SYSTEM&fontSize=30&fontColor=72E5FF" />
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:0A0614,100:8A2BE2&height=220&section=header&text=WILDCARD%20MARK%20IV&fontSize=34&fontColor=72E5FF&animation=fadeIn" />
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=22&duration=2400&pause=700&color=72E5FF&center=true&vCenter=true&width=980&lines=Initializing+Core+System...;Loading+Interface+Layer...;Integrating+Penny+Node...;Linking+Watch+Subsystem...;Calibrating+Holographic+Panels...;System+Status%3A+ACTIVE" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=2400&pause=500&color=72E5FF&center=true&vCenter=true&width=980&lines=Initializing+System...;Loading+Interface...;Activating+Penny+Node...;System+Online." />
+</p>
+
+---
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0A0614,100:8A2BE2&height=110&section=header&text=SYSTEM%20INTERFACE&fontSize=22&fontColor=72E5FF" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/STATE-ACTIVE-72E5FF?style=for-the-badge&labelColor=140B24" />
-  <img src="https://img.shields.io/badge/ARCHITECTURE-SINGLE--PAGE-8A2BE2?style=for-the-badge&labelColor=140B24" />
-  <img src="https://img.shields.io/badge/DEPENDENCIES-NONE-FF49C9?style=for-the-badge&labelColor=140B24" />
+  <img src="https://img.shields.io/badge/ARCHITECTURE-SYSTEM%20DRIVEN-72E5FF?style=for-the-badge&labelColor=0A0614" />
+  <img src="https://img.shields.io/badge/STATUS-ACTIVE-8A2BE2?style=for-the-badge&labelColor=0A0614" />
+  <img src="https://img.shields.io/badge/MODE-PRODUCTION%20BUILD-FF49C9?style=for-the-badge&labelColor=0A0614" />
 </p>
 
 ---
 
-```txt
-SYSTEM: WILDCARD DEV CORE
-STATE: ACTIVE
-ARCHITECTURE: SINGLE-FILE PLATFORM
-DEPENDENCIES: NONE
-CONTROL: FULL
+```txt id="coreblk1"
+SYSTEM NAME:   WildCard Mark IV
+TYPE:          Full-Stack Interface Platform
+ARCHITECTURE:  Self-Contained Single Page System
+DEPENDENCIES:  NONE (INTENTIONAL)
+STATE:         ACTIVE DEVELOPMENT
 ```
 
-# ⚡ WildCard Mark IV // Core System
+# 🧠 SYSTEM OVERVIEW
 
-> The primary interface system for WildCard DEV — engineered as a self-contained, interactive platform.
+> This is not a website.
+> This is a **controlled interface system**.
+
+WildCard Mark IV is built as a **self-contained system layer**, designed to behave like an interface—not a static page.
+
+No frameworks.
+No fragmented dependencies.
+No black-box UI behavior.
+
+Everything is intentional.
 
 ---
 
-## 🧠 SYSTEM PHILOSOPHY
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=CORE%20PRINCIPLES&fontSize=18&fontColor=0A0614" />
+</p>
 
-```txt
-SYSTEMS > STATIC SITES
-CONTROL > DEPENDENCIES
-EXECUTION > THEORY
-FUNCTION > FLASH
-```
-
-> If you don’t control the system, you don’t control the outcome.
-
----
-
-## 🧩 SYSTEM ARCHITECTURE MAP
-
-```text
-┌───────────────────────────────────────┐
-│         WILDCARD DEV CORE             │
-│             index.html                │
-└─────────────────┬─────────────────────┘
-                  │
-      ┌───────────┼───────────┐
-      │           │           │
-      ▼           ▼           ▼
-  /media/penny   /watch      /images
-      │           │           │
-      ▼           ▼           ▼
-  PENNY NODE   WATCH UI    UI ASSETS
-
-      ┌───────────────────────────────┐
-      │      INTERNAL LOGIC LAYER     │
-      │   JS + HOLO UI BEHAVIORS      │
-      └───────────────────────────────┘
+```txt id="coreblk2"
+CONTROL THE STACK
+ELIMINATE DEPENDENCIES
+DESIGN FOR INTERACTION
+BUILD FOR REAL USE
 ```
 
 ---
 
-## 🛰️ LIVE CONSOLE
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=ARCHITECTURE&fontSize=18&fontColor=0A0614" />
+</p>
 
-```txt
-[BOOT] Core runtime initialized
-[SYNC] Holographic interface layer online
-[LINK] Penny node handshake complete
-[LINK] Watch subsystem connected
-[CHECK] Dependency surface = zero
-[STATE] Platform integrity stable
-```
+## 🧩 SYSTEM STRUCTURE
+
+* Single-page architecture (no routing frameworks)
+* Section-based navigation system
+* Fully self-contained `index.html`
+* Inline JavaScript scoped to components
+* Centralized CSS inside a unified `<style>` block
 
 ---
 
-## 🏗️ CORE ARCHITECTURE
+## 🎨 UI SYSTEM
 
-```txt
-STRUCTURE: SINGLE PAGE SYSTEM
-FILE CORE: index.html
-STYLE: INLINE (CONTROLLED)
-LOGIC: EMBEDDED SCRIPT LAYERS
-ROUTING: INTERNAL (FAKE NAVIGATION)
-```
-
-- ⚡ Entire platform runs from a single controlled environment
-- 🧬 No frameworks, no external dependencies
-- 🌀 Holographic UI + motion-driven interaction
-- 📱 Mobile-first, responsive design
-- 🎯 Built as a system, not a site
+* Holographic panel-based layout
+* Motion-driven interaction layers
+* Dynamic glow system (blue/purple core, pink = Penny)
+* Context-aware UI response
 
 ---
 
-## 🧭 MODULE ACCESS
-
 <p align="center">
-  <a href="#-penny--system-layer">
-    <img src="https://img.shields.io/badge/PENNY-SYSTEM%20LAYER-FF49C9?style=for-the-badge&labelColor=140B24" />
-  </a>
-  <a href="#-watch-interface--embedded-module">
-    <img src="https://img.shields.io/badge/WATCH-EMBEDDED%20MODULE-72E5FF?style=for-the-badge&labelColor=140B24" />
-  </a>
-  <a href="#-core-features">
-    <img src="https://img.shields.io/badge/FEATURES-CORE%20SYSTEM-8A2BE2?style=for-the-badge&labelColor=140B24" />
-  </a>
-  <a href="#-stack">
-    <img src="https://img.shields.io/badge/STACK-HTML%20%2F%20CSS%20%2F%20JS-72E5FF?style=for-the-badge&labelColor=140B24" />
-  </a>
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FF49C9,100:FFD6EC&height=70&section=header&text=PENNY%20NODE&fontSize=18&fontColor=140B24" />
 </p>
 
----
-
-## 🤖 PENNY // SYSTEM LAYER
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FF49C9,100:FFD6EC&height=70&section=header&text=PENNY%20SYSTEM%20ACTIVE&fontSize=18&fontColor=140B24" />
-</p>
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=18&duration=2600&pause=1200&color=FF49C9&center=true&vCenter=true&width=920&lines=Monitoring+inputs...;Routing+communication...;Maintaining+presence...;Handling+follow-ups...;Nothing+slips+through+me." />
-</p>
-
-```txt
+```txt id="coreblk3"
 STATUS: ONLINE
-TYPE: PERSISTENT SYSTEM LAYER
-MODE: ENGAGED
+ROLE: EXECUTIVE ASSISTANT
+FUNCTION: INTERFACE / COMMUNICATION / RESPONSE
+AWARENESS: HIGH
 ```
 
-Penny is not a UI flourish.
+Penny is not a feature.
 
-She is a live system layer embedded across the platform.
+She is a **system layer** embedded into the UI.
 
-### Core Functions
+### Capabilities:
 
-- 📡 Communication routing
-- 📎 Reference handling
-- 💬 Interaction feedback
-- 🎯 Follow-through logic
-- 👁️ Persistent presence
-
-> “I handle communication, coordination, and follow-ups—so nothing slips through.”
+* contextual interaction
+* user behavior response
+* communication routing
+* visual presence integration
 
 ---
 
-## ⌚ WATCH INTERFACE // EMBEDDED MODULE
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=WATCH%20INTERFACE%20R%26D&fontSize=18&fontColor=0A0614" />
+</p>
 
-```txt
-LOCATION: INTERNAL MODULE
-STATUS: ACTIVE R&D
-INTEGRATION: CORE SYSTEM
-```
-
-The watch system exists inside the platform, not as a separate repo.
-
-Designed for:
-
-- QR-based real-world interaction
-- micro-interface UX
-- rapid-access workflows
-- next-gen interface experimentation
-
-> Built into the system — not bolted on later.
+* smartwatch UX experimentation
+* micro-interface design
+* QR-based interaction
+* adaptive display logic
 
 ---
 
-## ⚙️ CORE FEATURES
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=DEVELOPMENT%20PHILOSOPHY&fontSize=18&fontColor=0A0614" />
+</p>
 
-- 🌀 Holographic panel system
-- ⚡ Spinner interaction engine
-- 🤖 Penny integration layer
-- 📱 Responsive multi-device UX
-- ⌚ Embedded watch subsystem
-- 🎯 System-level interaction design
-
----
-
-## 🧬 STACK
-
-```txt
-HTML / CSS / JavaScript
+```txt id="coreblk4"
+BUILD > TALK
+TEST > ASSUME
+ITERATE > PERFECT
+SYSTEMS > FEATURES
 ```
 
 ---
 
-## 🧠 SYSTEM BEHAVIOR
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=SYSTEM%20STATUS&fontSize=18&fontColor=0A0614" />
+</p>
 
-```txt
-STATE MANAGEMENT: INTERNAL
-INTERACTION MODEL: EVENT-DRIVEN
-RENDERING: DOM + CSS EFFECTS
-FLOW: NON-LINEAR CONTROLLED NAV
+```txt id="coreblk5"
+CORE SYSTEM:        STABLE
+UI LAYER:           ACTIVE
+PENNY INTEGRATION:  EXPANDING
+WATCH MODULE:       EXPERIMENTAL
 ```
 
 ---
 
-## 🧪 LIVE STATUS
-
-```txt
-SYSTEM HEALTH:      ██████████ 100%
-CONTROL LEVEL:      ██████████ MAX
-DEPENDENCY RISK:    ░░░░░░░░░░ NONE
-INTERFACE STATE:    ACTIVE
-PENNY STATUS:       WATCHING 👁️
-```
-
----
-
-## 🌐 ACCESS PORTAL
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=LIVE%20SYSTEM&fontSize=18&fontColor=0A0614" />
+</p>
 
 <p align="center">
   <a href="https://www.wildcarddev.com">
-    <img src="https://img.shields.io/badge/ENTER-WILDCARDDEV.COM-72E5FF?style=for-the-badge&labelColor=140B24" />
+    <img src="https://img.shields.io/badge/ENTER%20SYSTEM-WILDCARDDEV.COM-72E5FF?style=for-the-badge&labelColor=0A0614" />
   </a>
 </p>
 
 ---
 
-## 🧠 ROLE IN SYSTEM
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:72E5FF,100:8A2BE2&height=70&section=header&text=EVOLUTION%20CONTEXT&fontSize=18&fontColor=0A0614" />
+</p>
 
-This repository is the:
+This system is the result of iterative builds focused on:
 
-> **Core system layer of the WildCard DEV platform**
+* UI control experimentation
+* inline styling systems
+* real-time interaction design
+* system-first thinking
 
-Everything else either:
-- plugs into it
-- extends from it
-- or evolves inside it
-
----
-
-<details>
-<summary>🔒 Expand System Layer</summary>
-
-<br>
-
-```txt
-USER TRACE DETECTED
-SCROLL DEPTH: HIGH
-INTERACTION: INTENTIONAL
-```
-
-You didn’t skim.
-
-You explored.
-
-That tells me everything.
-
-</details>
-
-<details>
-<summary>🛰️ Expand Deep Diagnostics</summary>
-
-<br>
-
-```txt
-SIGNAL TRACE: CLEAN
-STRUCTURE: COHERENT
-SURFACE COMPLEXITY: CONTROLLED
-SYSTEM INTENT: DELIBERATE
-```
-
-This build is intentionally centralized.
-
-Not because it lacks structure —
-but because control, continuity, and behavior consistency matter more than artificial separation.
-
-</details>
-
-<details>
-<summary>🤖 Penny Response Layer</summary>
-
-<br>
-
-**Penny:**  
-You looked deeper.
-
-Most people don’t.
-
-That usually means you know the difference between decoration and design.
-
-Good.
-
-</details>
+WildCard Mark IV represents the current evolution of that process.
 
 ---
 
-## ⚡ FINAL TRANSMISSION
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rounded&color=0:0A0614,100:8A2BE2&height=100&section=header&text=FINAL%20TRANSMISSION&fontSize=20&fontColor=72E5FF" />
+</p>
 
-```txt
-This is not a website.
+```txt id="coreblk6"
+This is not a template.
 
-It is a controlled system designed to perform.
+This is a controlled system built from the ground up.
 ```
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:72E5FF,100:8A2BE2&height=160&section=footer" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:72E5FF,100:8A2BE2&height=150&section=footer" />
 </p>
