@@ -1247,9 +1247,10 @@
     .holo-stage {
       position: relative;
       display: grid;
-      gap: 16px;
+      align-content: start;
+      gap: 12px;
       min-height: 360px;
-      padding: 20px;
+      padding: 16px 20px 20px;
       border-radius: 24px;
       border: 1px solid rgba(134, 171, 255, 0.2);
       overflow: hidden;
@@ -1993,6 +1994,23 @@
         0 0 0 1px rgba(255,255,255,0.02) inset,
         0 0 32px rgba(255, 79, 183, 0.12),
         0 18px 44px rgba(0,0,0,0.34);
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+    }
+
+    .penny-office.is-active {
+      border-color: rgba(255, 79, 183, 0.34);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 40px rgba(255, 79, 183, 0.16),
+        0 22px 54px rgba(0,0,0,0.38);
+    }
+
+    .penny-office.is-engaged {
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 44px rgba(255, 79, 183, 0.22),
+        0 0 72px rgba(255, 79, 183, 0.1),
+        0 22px 54px rgba(0,0,0,0.4);
     }
 
     .penny-office::before {
@@ -2045,6 +2063,11 @@
       gap: 8px;
     }
 
+    .penny-office__meta--status {
+      align-items: center;
+      justify-content: flex-end;
+    }
+
     .penny-mini-chip {
       display: inline-flex;
       align-items: center;
@@ -2070,6 +2093,85 @@
     .penny-grid {
       display: grid;
       gap: 14px;
+    }
+
+    .penny-interaction-cluster {
+      display: grid;
+      gap: 14px;
+    }
+
+    .penny-cluster-top,
+    .penny-form-cluster {
+      display: grid;
+      gap: 14px;
+    }
+
+    .penny-media-shell {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .penny-media-stage {
+      position: relative;
+      display: grid;
+      min-height: 100%;
+    }
+
+    .penny-bubble-anchor {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .penny-presence-panel {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .penny-hero--cluster {
+      align-items: stretch;
+    }
+
+    .penny-form-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .penny-form-layout {
+      display: grid;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .penny-form-main {
+      align-content: start;
+    }
+
+    .penny-form-aside {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .penny-route-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .penny-route-stack .contact-row {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012)),
+        rgba(18, 9, 19, 0.82);
+    }
+
+    .penny-form-card .social-links-grid {
+      margin-top: 2px;
     }
 
     .penny-hero {
@@ -2135,6 +2237,22 @@
       color: #ffc5e7;
       line-height: 1.75;
       font-size: 0.95rem;
+    }
+
+    .penny-hero__voice {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.2);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffe4f4;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .penny-status-grid {
@@ -2297,6 +2415,38 @@
       color: #ffc7e9;
       font-size: 0.84rem;
       line-height: 1.6;
+    }
+
+    .penny-console__meta {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .penny-console__meter {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 79, 183, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.026), rgba(255,255,255,0.012)),
+        rgba(18, 9, 19, 0.86);
+    }
+
+    .penny-console__meter span {
+      display: block;
+      color: rgba(255, 214, 236, 0.66);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+
+    .penny-console__meter strong {
+      display: block;
+      color: #fff2fa;
+      font-size: 0.86rem;
+      line-height: 1.25;
     }
 
     .penny-office-note {
@@ -3399,6 +3549,253 @@
       gap: 12px;
     }
 
+    .penny-form-surface {
+      display: grid;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 42%),
+        linear-gradient(180deg, rgba(28, 12, 26, 0.95), rgba(14, 9, 18, 0.98));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .penny-form-surface.is-engaged {
+      border-color: rgba(255, 79, 183, 0.28);
+      box-shadow: 0 0 24px rgba(255, 79, 183, 0.12);
+    }
+
+    .penny-form-surface__label {
+      color: rgba(255, 214, 236, 0.72);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-form-surface__status {
+      color: #ffe7f7;
+      font-size: 0.98rem;
+      line-height: 1.38;
+      min-height: 2.76em;
+    }
+
+    .penny-form-surface__sub {
+      color: #ffc9ea;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .penny-form-surface__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .penny-form-surface__meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.16);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffe1f4;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-intimate-interface {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      margin: 2px 0 2px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transform: translateY(12px) scale(0.975);
+      transform-origin: top center;
+      transition:
+        max-height 320ms ease,
+        opacity 240ms ease,
+        transform 280ms ease,
+        margin 240ms ease;
+    }
+
+    .penny-intimate-interface.is-open {
+      max-height: 420px;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      animation: pennyIntimateRise 320ms ease;
+    }
+
+    .penny-intimate-interface__shell {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 79, 183, 0.24);
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(39, 15, 36, 0.96), rgba(17, 10, 21, 0.99));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.025),
+        0 0 28px rgba(255, 79, 183, 0.14),
+        0 16px 38px rgba(0,0,0,0.26);
+    }
+
+    .penny-intimate-interface__shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 12%, rgba(255,255,255,0.09) 48%, transparent 74%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 14px
+        );
+      opacity: 0.55;
+    }
+
+    .penny-intimate-interface__shell > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .penny-intimate-interface__media {
+      position: relative;
+      min-height: 150px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(180deg, rgba(35, 14, 32, 0.95), rgba(14, 9, 18, 0.98));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .penny-intimate-interface__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(6, 8, 14, 0.06), rgba(6, 8, 14, 0.44) 58%, rgba(6, 8, 14, 0.8) 100%),
+        linear-gradient(122deg, transparent 12%, rgba(255,255,255,0.08) 48%, transparent 76%);
+    }
+
+    .penny-intimate-interface__media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.03);
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    .penny-intimate-interface__copy {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .penny-intimate-interface__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: rgba(255, 214, 236, 0.78);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .penny-intimate-interface__meta span:last-child {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffe0f3;
+      letter-spacing: 0.06em;
+    }
+
+    .penny-intimate-bubble {
+      position: relative;
+      width: min(100%, 34ch);
+      padding: 14px 16px;
+      border-radius: 18px 18px 18px 8px;
+      border: 1px solid rgba(255, 214, 236, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+        rgba(255, 79, 183, 0.12);
+      color: #fff0fa;
+      font-size: 0.94rem;
+      line-height: 1.42;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 18px rgba(255, 79, 183, 0.08);
+      text-wrap: balance;
+    }
+
+    .penny-intimate-bubble::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      bottom: -8px;
+      width: 16px;
+      height: 16px;
+      border-left: 1px solid rgba(255, 214, 236, 0.18);
+      border-bottom: 1px solid rgba(255, 214, 236, 0.18);
+      background: rgba(255, 79, 183, 0.14);
+      transform: rotate(-45deg);
+      border-bottom-left-radius: 4px;
+    }
+
+    .penny-intimate-interface__sub {
+      color: #ffc9ea;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      max-width: 38ch;
+    }
+
+    .penny-intimate-interface.is-engaged .penny-intimate-interface__shell {
+      border-color: rgba(255, 79, 183, 0.32);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.025),
+        0 0 34px rgba(255, 79, 183, 0.18),
+        0 18px 42px rgba(0,0,0,0.28);
+    }
+
+    @keyframes pennyIntimateRise {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.965);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .input,
     .textarea {
       width: 100%;
@@ -4029,6 +4426,21 @@
         align-items: start;
       }
 
+      .penny-hero--cluster {
+        grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.08fr);
+        align-items: stretch;
+      }
+
+      .penny-form-layout {
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        align-items: start;
+      }
+
+      .penny-intimate-interface__shell {
+        grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+        align-items: center;
+      }
+
       .resume-top {
         grid-template-columns: 120px 1fr;
       }
@@ -4099,7 +4511,9 @@
       .contact-grid,
       .penny-hero,
       .split-grid,
-      .penny-grid {
+      .penny-grid,
+      .penny-form-layout,
+      .penny-hero--cluster {
         grid-template-columns: 1fr;
       }
 
@@ -4176,6 +4590,14 @@
         align-items: flex-start;
       }
 
+      .penny-intimate-interface__shell {
+        grid-template-columns: 1fr;
+      }
+
+      .penny-intimate-interface__media {
+        min-height: 132px;
+      }
+
       .identity-people,
       .quick-links,
       .network-links,
@@ -4191,6 +4613,8 @@
       .field-grid,
       .penny-hero,
       .penny-grid,
+      .penny-form-layout,
+      .penny-hero--cluster,
       .penny-ops-grid,
       .penny-links-grid,
       .penny-status-grid,
@@ -4340,6 +4764,15 @@
         min-height: 180px;
       }
 
+      .penny-intimate-interface__shell {
+        padding: 12px;
+      }
+
+      .penny-intimate-bubble {
+        width: 100%;
+        font-size: 0.9rem;
+      }
+
       .holo-control-row {
         grid-template-columns: 1fr;
       }
@@ -4417,6 +4850,12 @@
 
       .panel {
         border-radius: 18px;
+      }
+
+      .penny-intimate-interface__shell,
+      .penny-intimate-interface__media,
+      .penny-intimate-bubble {
+        border-radius: 14px;
       }
 
       .identity-hero,
@@ -4987,9 +5426,7 @@
                         data-spinner-mode="Experience-forward access"
                       >
                         <span class="holo-spin-card__media" aria-hidden="true">
-                          <video autoplay muted loop playsinline preload="metadata">
-                            <source src="./images/jokerProfile.webm" type="video/webm" />
-                          </video>
+                          <video src="./images/tarot-spinner.mp4" autoplay muted loop playsinline preload="metadata"></video>
                         </span>
                         <span class="holo-spin-card__overlay" aria-hidden="true"></span>
                         <span class="holo-spin-card__copy">
@@ -5361,67 +5798,262 @@
             <!-- ========================================
                  Penny Office
             ======================================== -->
-            <div class="penny-office">
+            <div class="penny-office" id="pennyOffice" data-penny-office="true">
               <div class="penny-office__topbar">
                 <div class="penny-office__meta">
                   <span class="penny-mini-chip">Penny Office</span>
                   <span class="penny-mini-chip penny-mini-chip--system">Executive Assistant Layer</span>
                 </div>
                 <div class="penny-office__meta">
-                  <span class="penny-mini-chip">Online</span>
-                  <span class="penny-mini-chip penny-mini-chip--system">WildCard System</span>
+                  <span class="penny-mini-chip" id="pennyModeChip">Online · Warm</span>
+                  <span class="penny-mini-chip penny-mini-chip--system" id="pennyEngagementChip">Engagement level 1</span>
                 </div>
               </div>
 
-              <div class="penny-grid">
-                <div class="penny-hero">
-                  <div class="penny-hero__media" aria-hidden="true">
-                    <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-hero">
-                      <source src="./images/customerService.webm" type="video/webm" />
-                    </video>
-                  </div>
-
-                  <div class="penny-hero__copy">
-                    <span class="eyebrow eyebrow--penny">Penny Presence</span>
-                    <h3>Controlled. Confident. Polished. A little dangerous in a perfectly professional way.</h3>
-                    <p>
-                      Penny is the premium assistant presence of WildCard DEV. She is not filler, not a gimmick, and not just a contact form skin.
-                      She is the interface voice that makes the system feel personal, high-end, and unmistakably alive.
-                    </p>
-
-                    <div class="chip-row">
-                      <span class="chip chip--penny">Pink-forward identity</span>
-                      <span class="chip chip--penny">Executive-assistant energy</span>
-                      <span class="chip chip--penny">Stable on small screens</span>
+              <div class="penny-interaction-cluster">
+                <div class="penny-cluster-top">
+                  <div class="penny-hero penny-hero--cluster" data-penny-surface="hero">
+                    <div class="penny-media-shell">
+                      <div class="penny-media-stage">
+                        <div class="penny-bubble-anchor" aria-hidden="true"></div>
+                        <div class="penny-hero__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-hero">
+                            <source src="./images/customerService.webm" type="video/webm" />
+                          </video>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="penny-status-grid" aria-label="Penny system highlights">
-                      <div class="penny-stat">
-                        <span>Role</span>
-                        <strong>Front desk intelligence</strong>
-                        <em>Guides contact, tone, and first impressions.</em>
+                    <div class="penny-presence-panel">
+                      <div class="penny-hero__copy">
+                        <span class="eyebrow eyebrow--penny">Penny Presence</span>
+                        <h3>There you are. You made it to my office. Good choice.</h3>
+                        <p>
+                          Penny now opens hot instead of passive: warm on entry, playful immediately, and progressively more engaged the longer you stay in her office,
+                          work the form, or choose a contact lane.
+                        </p>
+                        <span class="penny-hero__voice" id="pennyPresenceTag">Active loop engaged</span>
+
+                        <div class="chip-row">
+                          <span class="chip chip--penny">Pink-forward identity</span>
+                          <span class="chip chip--penny">Executive-assistant energy</span>
+                          <span class="chip chip--penny">Stable on small screens</span>
+                        </div>
+
+                        <div class="penny-status-grid" aria-label="Penny system highlights">
+                          <div class="penny-stat">
+                            <span>Role</span>
+                            <strong id="pennyRoleReadout">Executive concierge intelligence</strong>
+                            <em id="pennyRoleSubcopy">Guides contact, tone, and first impressions without losing control.</em>
+                          </div>
+                          <div class="penny-stat">
+                            <span>Signal</span>
+                            <strong id="pennySignalReadout">Pink control layer</strong>
+                            <em id="pennySignalSubcopy">Distinct from the base blue/violet system, brighter when she has your attention.</em>
+                          </div>
+                        </div>
                       </div>
-                      <div class="penny-stat">
-                        <span>Signal</span>
-                        <strong>Pink control layer</strong>
-                        <em>Distinct from the base blue/violet system.</em>
-                      </div>
+
+                      <aside class="penny-console" aria-live="polite" data-penny-surface="console">
+                        <div class="penny-console__label">Penny Office Status</div>
+                        <div class="penny-console__status" id="pennyStatus">
+                          Ready to route project inquiries, handle polished introductions, and make the contact lane feel like a real premium experience.
+                        </div>
+                        <div class="penny-console__sub" id="pennyStatusSub">
+                          Open Penny Office, choose a lane, and she will keep the room feeling attentive instead of static.
+                        </div>
+                        <div class="penny-console__meta" aria-label="Penny office telemetry">
+                          <div class="penny-console__meter">
+                            <span>Visits</span>
+                            <strong id="pennyVisitCount">0 this session</strong>
+                          </div>
+                          <div class="penny-console__meter">
+                            <span>Interactions</span>
+                            <strong id="pennyInteractionCount">0 handled</strong>
+                          </div>
+                          <div class="penny-console__meter">
+                            <span>Last move</span>
+                            <strong id="pennyLastAction">Waiting gracefully</strong>
+                          </div>
+                        </div>
+                      </aside>
                     </div>
                   </div>
                 </div>
 
-                <aside class="penny-console" aria-live="polite">
-                  <div class="penny-console__label">Penny Office Status</div>
-                  <div class="penny-console__status" id="pennyStatus">
-                    Ready to route project inquiries, handle polished introductions, and make the contact lane feel like a real premium experience.
-                  </div>
-                  <div class="penny-console__sub">
-                    Hover or focus the Penny action cards below to shift the office readout.
-                  </div>
-                </aside>
+                <div class="penny-form-cluster">
+                  <section class="card contact-card contact-card--penny penny-form-card">
+                    <div class="contact-card__head">
+                      <h3>Leave a message for Penny</h3>
+                      <p>
+                        The form now lives inside Penny’s interaction cluster so her live readout, your typing lane, and your contact options all stay together instead of feeling split across the room.
+                      </p>
+                    </div>
+
+                    <div class="contact-priority-strip">
+                      <a class="priority-action interactive-surface" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Opening the detailed written lane. This is where proposals, assets, timelines, and real build notes belong.">
+                        <strong>Email for proposals and scope</strong>
+                        <span>Best for polished written intros, asset delivery, and detailed project notes.</span>
+                      </a>
+                      <a class="priority-action interactive-surface" href="sms:+14029150789" data-penny-message="Switching to the fast lane. Best for quick outreach, phone-first follow-up, and lighter first contact.">
+                        <strong>Text for the fastest first touch</strong>
+                        <span>Quick outreach on phone-friendly devices with less friction than a formal email.</span>
+                      </a>
+                    </div>
+
+                    <div class="penny-intimate-interface" id="pennyIntimateInterface" aria-hidden="true">
+                      <div class="penny-intimate-interface__shell" data-penny-surface="intimate">
+                        <div class="penny-intimate-interface__media" aria-hidden="true">
+                          <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-intimate">
+                            <source src="./images/customerService.webm" type="video/webm" />
+                          </video>
+                        </div>
+                        <div class="penny-intimate-interface__copy">
+                          <div class="penny-intimate-interface__meta">
+                            <span>Focused Penny channel</span>
+                            <span id="pennyIntimateMode">Listening close</span>
+                          </div>
+                          <div class="penny-intimate-bubble" id="pennyIntimateBubble">Tell me what you need, honey.</div>
+                          <div class="penny-intimate-interface__sub" id="pennyIntimateSub">The moment you touch the form, Penny shifts into a closer holographic lane and keeps the exchange personal.</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="penny-form-layout">
+                      <form class="contact-form penny-form-main" id="pennyContactForm" action="mailto:matt@wildcarddev.com" method="post" enctype="text/plain">
+                        <div class="field-grid">
+                          <label>
+                            <span class="visually-hidden">Your name</span>
+                            <input class="input" id="pennyFormName" type="text" name="name" placeholder="Your name" data-penny-field="name" autocomplete="name" />
+                          </label>
+
+                          <label>
+                            <span class="visually-hidden">Your email</span>
+                            <input class="input" id="pennyFormEmail" type="email" name="email" placeholder="Your email" data-penny-field="email" autocomplete="email" />
+                          </label>
+
+                          <label>
+                            <span class="visually-hidden">Your phone</span>
+                            <input class="input" id="pennyFormPhone" type="tel" name="phone" placeholder="Your phone (optional)" data-penny-field="phone" autocomplete="tel" />
+                          </label>
+
+                          <label>
+                            <span class="visually-hidden">Project type</span>
+                            <input class="input" id="pennyFormProject" type="text" name="project" placeholder="Project type" data-penny-field="project" />
+                          </label>
+                        </div>
+
+                        <label>
+                          <span class="visually-hidden">Message</span>
+                          <textarea class="textarea" id="pennyFormMessage" name="message" placeholder="Tell me what you want built. Penny is paying attention." data-penny-field="message"></textarea>
+                        </label>
+
+                        <div class="submit-row">
+                          <p class="submit-note">
+                            Email, phone, text, and form pathways all stay live here, but this lane is tuned for the cleanest handoff when you want to explain exactly what you need.
+                          </p>
+                          <button class="submit-btn interactive-surface" type="submit">Send Message</button>
+                        </div>
+                      </form>
+
+                      <aside class="penny-form-aside">
+                        <div class="penny-form-surface" id="pennyFormSurface" data-penny-surface="form">
+                          <div class="penny-form-surface__label">Penny live readout</div>
+                          <div class="penny-form-surface__status" id="pennyFormStatus">Tell me what you need, honey.</div>
+                          <div class="penny-form-surface__sub" id="pennyFormSub">Move through the form and Penny reacts here in real time, so the intake lane feels live instead of generic.</div>
+                          <div class="penny-form-surface__meta">
+                            <span id="pennyTierLabel">Baseline flirt</span>
+                            <span id="pennyFocusLabel">Waiting for your move</span>
+                          </div>
+                        </div>
+
+                        <div class="contact-list penny-route-stack">
+                          <div class="contact-row interactive-surface">
+                            <div class="contact-row__top">
+                              <strong>Matt Tobaben</strong>
+                              <span class="contact-route-chip">Primary build lane</span>
+                            </div>
+                            <div class="contact-detail-stack">
+                              <a href="mailto:matt@wildcarddev.com">matt@wildcarddev.com</a>
+                              <span>(402) 915-0789</span>
+                            </div>
+                            <div class="contact-meta">
+                              <span>CEO</span>
+                              <span>Full Stack Development</span>
+                              <span>Project Intake</span>
+                            </div>
+                            <div class="contact-actions">
+                              <a class="contact-action contact-action--penny" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Matt route engaged. You are heading into the main build lane now.">Email Matt</a>
+                              <a class="contact-action" href="sms:+14029150789" data-penny-message="Text route engaged. Quick, direct, and phone-friendly.">Text</a>
+                              <a class="contact-action contact-action--ghost" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Call route engaged. Direct line open.">Call</a>
+                            </div>
+                          </div>
+
+                          <div class="contact-row interactive-surface">
+                            <div class="contact-row__top">
+                              <strong>E</strong>
+                              <span class="contact-route-chip">Partner lane</span>
+                            </div>
+                            <div class="contact-detail-stack">
+                              <a href="mailto:SpaceBeth@wildcarddev.com">SpaceBeth@wildcarddev.com</a>
+                              <span>Partner / developer / collaborative build force</span>
+                            </div>
+                            <div class="contact-meta">
+                              <span>Partner</span>
+                              <span>Development</span>
+                            </div>
+                            <div class="contact-actions">
+                              <a class="contact-action" href="mailto:SpaceBeth@wildcarddev.com?subject=WildCard%20DEV%20Inquiry" data-penny-message="E route engaged. Collaborative build lane opening now.">Email E</a>
+                            </div>
+                          </div>
+
+                          <div class="contact-row interactive-surface">
+                            <div class="contact-row__top">
+                              <strong>Company line</strong>
+                              <span class="contact-route-chip">Fastest response lane</span>
+                            </div>
+                            <div class="contact-detail-stack">
+                              <a href="tel:+14029150789">(402) 915-0789</a>
+                              <span>Primary direct contact for current site, app, and rescue-build inquiries.</span>
+                            </div>
+                            <div class="contact-actions">
+                              <a class="contact-action contact-action--penny" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Company line engaged. Fastest direct route selected.">Call now</a>
+                              <a class="contact-action" href="sms:+14029150789" data-penny-message="Company text lane engaged. Clean first touch from a phone-friendly path.">Text now</a>
+                            </div>
+                          </div>
+                        </div>
+                      </aside>
+                    </div>
+
+                    <div class="social-links-grid" aria-label="WildCard DEV profile links">
+                      <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev/WildCard-Mark-IV" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the public project repo. Good for baseline visibility and live build context.">
+                        <div class="social-link-card__copy">
+                          <strong>GitHub</strong>
+                          <span>View the live WildCard DEV repo and project baseline.</span>
+                        </div>
+                        <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                      </a>
+
+                      <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev" target="_blank" rel="noopener noreferrer" data-penny-message="Opening Matt’s GitHub profile. This is the broader profile lane for code-facing credibility and public work context.">
+                        <div class="social-link-card__copy">
+                          <strong>GitHub Profile</strong>
+                          <span>Public code-facing profile lane for broader work context and credibility.</span>
+                        </div>
+                        <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                      </a>
+
+                      <a class="social-link-card interactive-surface" href="https://wildcarddev.com/" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the live WildCard DEV site. Good for the public-facing brand and contact context.">
+                        <div class="social-link-card__copy">
+                          <strong>Live Site</strong>
+                          <span>Public-facing WildCard DEV presence kept nearby without cluttering the main contact lane.</span>
+                        </div>
+                        <span class="social-link-card__icon" aria-hidden="true">↗</span>
+                      </a>
+                    </div>
+                  </section>
+                </div>
               </div>
 
-              
               <div class="penny-ops-grid">
                 <article class="penny-op">
                   <strong>Client Intake</strong>
@@ -5448,6 +6080,7 @@
                   class="penny-link-card penny-pulse"
                   href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss"
                   data-penny-assist="email"
+                  data-penny-action="email"
                   data-penny-message="Opening the polished written lane now. Best for proposals, project scope, assets, timelines, and all the details worth putting in writing."
                 >
                   <strong>Email Matt</strong>
@@ -5461,6 +6094,7 @@
                 <a
                   class="penny-link-card penny-pulse"
                   href="sms:+14029150789"
+                  data-penny-action="text"
                   data-penny-message="Switching to the faster lane. Text is best when you want a quick first touch without the full inbox ceremony."
                 >
                   <strong>Text the company line</strong>
@@ -5475,6 +6109,7 @@
                   class="penny-link-card penny-pulse"
                   href="tel:(402)%20915-0789"
                   data-penny-assist="phone"
+                  data-penny-action="phone"
                   data-penny-message="Routing straight to the direct line. Best when speed matters and you want to skip the back-and-forth."
                 >
                   <strong>Call WildCard DEV</strong>
@@ -5489,6 +6124,7 @@
                   class="penny-link-card penny-pulse"
                   href="#watch"
                   data-nav-link="watch"
+                  data-penny-action="concierge"
                   data-penny-message="Redirecting toward the watch lane. That sandbox stays preserved for future QR, wearable presence, and Penny utility flows."
                 >
                   <strong>Open Watch Lane</strong>
@@ -5501,167 +6137,10 @@
               </div>
 
               <div class="penny-office-note">
-                Penny’s office now emphasizes decision clarity: the fastest route, the cleanest written route, and the future utility route are all visible immediately, while the interaction layer stays safe, lightweight, and mobile-friendly.
+                Penny’s office now clusters her media, her live room status, the active form lane, and the local typing feedback into one contiguous system so the interaction feels physically tighter without changing any outside subsystem.
               </div>
             </div>
-
-            <div class="contact-grid">
-              <section class="card contact-card contact-card--penny">
-                <div class="contact-card__head">
-                  <h3>Contact WildCard DEV</h3>
-                  <p>
-                    Choose the lane that fits how you like to move. Email handles fuller project detail, text keeps things quick, and the direct line stays visible when speed matters.
-                  </p>
-                </div>
-
-                <div class="contact-priority-strip">
-                  <a class="priority-action interactive-surface" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Opening the detailed written lane. This is where proposals, assets, timelines, and real build notes belong.">
-                    <strong>Email for proposals and scope</strong>
-                    <span>Best for polished written intros, asset delivery, and detailed project notes.</span>
-                  </a>
-                  <a class="priority-action interactive-surface" href="sms:+14029150789" data-penny-message="Switching to the fast lane. Best for quick outreach, phone-first follow-up, and lighter first contact.">
-                    <strong>Text for the fastest first touch</strong>
-                    <span>Quick outreach on phone-friendly devices with less friction than a formal email.</span>
-                  </a>
-                </div>
-
-                <div class="contact-list">
-                  <div class="contact-row interactive-surface">
-                    <div class="contact-row__top">
-                      <strong>Matt Tobaben</strong>
-                      <span class="contact-route-chip">Primary build lane</span>
-                    </div>
-                    <div class="contact-detail-stack">
-                      <a href="mailto:matt@wildcarddev.com">matt@wildcarddev.com</a>
-                      <span>(402) 915-0789</span>
-                    </div>
-                    <div class="contact-meta">
-                      <span>CEO</span>
-                      <span>Full Stack Development</span>
-                      <span>Project Intake</span>
-                    </div>
-                    <div class="contact-actions">
-                      <a class="contact-action contact-action--penny" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss" data-penny-assist="email" data-penny-message="Matt route engaged. You are heading into the main build lane now.">Email Matt</a>
-                      <a class="contact-action" href="sms:+14029150789" data-penny-message="Text route engaged. Quick, direct, and phone-friendly.">Text</a>
-                      <a class="contact-action contact-action--ghost" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Call route engaged. Direct line open.">Call</a>
-                    </div>
-                  </div>
-
-                  <div class="contact-row interactive-surface">
-                    <div class="contact-row__top">
-                      <strong>E</strong>
-                      <span class="contact-route-chip">Partner lane</span>
-                    </div>
-                    <div class="contact-detail-stack">
-                      <a href="mailto:SpaceBeth@wildcarddev.com">SpaceBeth@wildcarddev.com</a>
-                      <span>Partner / developer / collaborative build force</span>
-                    </div>
-                    <div class="contact-meta">
-                      <span>Partner</span>
-                      <span>Development</span>
-                    </div>
-                    <div class="contact-actions">
-                      <a class="contact-action" href="mailto:SpaceBeth@wildcarddev.com?subject=WildCard%20DEV%20Inquiry" data-penny-message="E route engaged. Collaborative build lane opening now.">Email E</a>
-                    </div>
-                  </div>
-
-                  <div class="contact-row interactive-surface">
-                    <div class="contact-row__top">
-                      <strong>Company line</strong>
-                      <span class="contact-route-chip">Fastest response lane</span>
-                    </div>
-                    <div class="contact-detail-stack">
-                      <a href="tel:+14029150789">(402) 915-0789</a>
-                      <span>Primary direct contact for current site, app, and rescue-build inquiries.</span>
-                    </div>
-                    <div class="contact-actions">
-                      <a class="contact-action contact-action--penny" href="tel:(402)%20915-0789" data-penny-assist="phone" data-penny-message="Company line engaged. Fastest direct route selected.">Call now</a>
-                      <a class="contact-action" href="sms:+14029150789" data-penny-message="Company text lane engaged. Clean first touch from a phone-friendly path.">Text now</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="contact-notes">
-                  <div class="contact-note">
-                    On phones, every primary contact control remains thumb-friendly and visible without requiring hover.
-                  </div>
-                  <div class="contact-note">
-                    Penny’s pink lane highlights priority actions, while the rest of the system keeps the blue/violet WildCard DEV framing intact.
-                  </div>
-                </div>
-              </section>
-
-              <section class="card contact-card contact-card--penny">
-                <div class="contact-card__head">
-                  <h3>Leave a message for Penny</h3>
-                  <p>
-                    Send the polished version here. This keeps the current contact flow dependable while making the intake experience feel more like a premium concierge handoff than a generic form.
-                  </p>
-                </div>
-
-                <form class="contact-form" action="mailto:matt@wildcarddev.com" method="post" enctype="text/plain">
-                  <div class="field-grid">
-                    <label>
-                      <span class="visually-hidden">Your name</span>
-                      <input class="input" type="text" name="name" placeholder="Your name" />
-                    </label>
-
-                    <label>
-                      <span class="visually-hidden">Your email</span>
-                      <input class="input" type="email" name="email" placeholder="Your email" />
-                    </label>
-
-                    <label>
-                      <span class="visually-hidden">Your phone</span>
-                      <input class="input" type="tel" name="phone" placeholder="Your phone (optional)" />
-                    </label>
-
-                    <label>
-                      <span class="visually-hidden">Project type</span>
-                      <input class="input" type="text" name="project" placeholder="Project type" />
-                    </label>
-                  </div>
-
-                  <label>
-                    <span class="visually-hidden">Message</span>
-                    <textarea class="textarea" name="message" placeholder="Tell us what you want built. Penny is paying attention."></textarea>
-                  </label>
-
-                  <div class="submit-row">
-                    <p class="submit-note">
-                      Email, phone, text, and form pathways all stay live here, but this lane is tuned for the cleanest handoff when you want to explain exactly what you need.
-                    </p>
-                    <button class="submit-btn interactive-surface" type="submit">Send Message</button>
-                  </div>
-                </form>
-
-                <div class="social-links-grid" aria-label="WildCard DEV profile links">
-                  <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev/WildCard-Mark-IV" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the public project repo. Good for baseline visibility and live build context.">
-                    <div class="social-link-card__copy">
-                      <strong>GitHub</strong>
-                      <span>View the live WildCard DEV repo and project baseline.</span>
-                    </div>
-                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
-                  </a>
-
-                  <a class="social-link-card interactive-surface" href="https://github.com/mtobabendev" target="_blank" rel="noopener noreferrer" data-penny-message="Opening Matt’s GitHub profile. This is the broader profile lane for code-facing credibility and public work context.">
-                    <div class="social-link-card__copy">
-                      <strong>GitHub Profile</strong>
-                      <span>Public code-facing profile lane for broader work context and credibility.</span>
-                    </div>
-                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
-                  </a>
-
-                  <a class="social-link-card interactive-surface" href="https://wildcarddev.com/" target="_blank" rel="noopener noreferrer" data-penny-message="Opening the live WildCard DEV site. Good for the public-facing brand and contact context.">
-                    <div class="social-link-card__copy">
-                      <strong>Live Site</strong>
-                      <span>Public-facing WildCard DEV presence kept nearby without cluttering the main contact lane.</span>
-                    </div>
-                    <span class="social-link-card__icon" aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </section>
-            </div>
+          </section>
         </div>
       </article>
 
@@ -5870,6 +6349,7 @@ slot</div>
   </main>
 
   
+  <!-- Penny Brain -->
   <script>
     (function () {
       const articles = Array.from(document.querySelectorAll('.article[data-page]'));
@@ -5885,7 +6365,560 @@ slot</div>
       const eProjectionClose = document.getElementById('eProjectionClose');
       const networkToggle = document.getElementById('networkToggle');
       const networkLinks = document.getElementById('networkLinks');
+      const pennyOffice = document.getElementById('pennyOffice');
+      const pennyStatusSub = document.getElementById('pennyStatusSub');
+      const pennyVisitCount = document.getElementById('pennyVisitCount');
+      const pennyInteractionCount = document.getElementById('pennyInteractionCount');
+      const pennyLastAction = document.getElementById('pennyLastAction');
+      const pennyModeChip = document.getElementById('pennyModeChip');
+      const pennyEngagementChip = document.getElementById('pennyEngagementChip');
+      const pennyPresenceTag = document.getElementById('pennyPresenceTag');
+      const pennyRoleReadout = document.getElementById('pennyRoleReadout');
+      const pennyRoleSubcopy = document.getElementById('pennyRoleSubcopy');
+      const pennySignalReadout = document.getElementById('pennySignalReadout');
+      const pennySignalSubcopy = document.getElementById('pennySignalSubcopy');
+      const pennyOfficeSurfaces = Array.from(document.querySelectorAll('#pennyOffice [data-penny-action], #pennyOffice [data-penny-assist], #pennyOffice [data-penny-surface]'));
+      const pennyContactForm = document.getElementById('pennyContactForm');
+      const pennyFormSurface = document.getElementById('pennyFormSurface');
+      const pennyFormStatus = document.getElementById('pennyFormStatus');
+      const pennyFormSub = document.getElementById('pennyFormSub');
+      const pennyTierLabel = document.getElementById('pennyTierLabel');
+      const pennyFocusLabel = document.getElementById('pennyFocusLabel');
+      const pennyIntimateInterface = document.getElementById('pennyIntimateInterface');
+      const pennyIntimateBubble = document.getElementById('pennyIntimateBubble');
+      const pennyIntimateSub = document.getElementById('pennyIntimateSub');
+      const pennyIntimateMode = document.getElementById('pennyIntimateMode');
+      const pennyFormFields = pennyContactForm ? Array.from(pennyContactForm.querySelectorAll('[data-penny-field]')) : [];
+      const pennyMessageField = pennyContactForm ? pennyContactForm.querySelector('[data-penny-field="message"]') : null;
+      const pennyDialogue = {
+        greeting: [
+          'There you are. You made it to my office. Good choice.',
+          'Welcome in, honey. You picked the one room that knows how to handle attention properly.',
+          'Penny online. Tell me what deserves my hands first.'
+        ],
+        repeatGreeting: [
+          'Back again? I noticed.',
+          'You came back to my office. That usually means you are serious now.',
+          'There you are again. I was starting to think you liked it in here.'
+        ],
+        idle: [
+          'You can keep staring or you can give me something to work with.',
+          'Email, phone, message... pick your lane. I will make it worth it.',
+          'Take your time, honey. I get more interesting when you linger.',
+          'Quiet room. Dangerous little amount of potential.'
+        ],
+        email: [
+          'Opening the polished written lane now. Best for proposals, assets, and details worth preserving.',
+          'Email it. Clean, traceable, impossible to mishear.',
+          'Written lane engaged. Very civilized.'
+        ],
+        phone: [
+          'Direct line. Bold. I like that.',
+          'Call lane armed. Fastest route if you already know you want movement.',
+          'Phone selected. Minimal ceremony, maximum momentum.'
+        ],
+        text: [
+          'Text lane engaged. Quick first touch, low friction, very attractive.',
+          'Fast lane selected. A little less ceremony, a little more momentum.',
+          'Message first. Sensible.'
+        ],
+        concierge: [
+          'Tell me what you need, honey.',
+          'You are in the right room for a polished handoff.',
+          'Stay with me. I will keep the whole lane sharp.'
+        ],
+        baselineFlirt: [
+          'There you are.',
+          'You made it to my office. Good choice.',
+          'Tell me what you need, honey.'
+        ],
+        engagedFlirt: [
+          'Mm. Better. Now you have my full attention.',
+          'Keep going. You are giving me something useful to work with now.',
+          'That is more like it. I prefer a visitor who commits.'
+        ],
+        edgeFlirt: [
+          'Keep looking at me like that and I might start prioritizing you on purpose.',
+          'You have been in my office long enough to know I am not the generic option.',
+          'Stay sharp, honey. You are getting very close to my favorite kind of attention.'
+        ],
+        fieldFocus: {
+          name: [
+            'Start with your name. I like knowing who walked into my office.',
+            'Give me your name first. I prefer not to flirt with placeholders.'
+          ],
+          email: [
+            'Good. Give me the inbox that deserves the polished reply.',
+            'Drop the email here and I will keep the written lane clean.'
+          ],
+          phone: [
+            'Phone number. Useful when speed matters more than ceremony.',
+            'Put the number here if you want the shorter distance between interest and action.'
+          ],
+          project: [
+            'Project type. Let me know what kind of trouble we are about to make look expensive.',
+            'Name the lane. Build, rescue, redesign, automation... I like specifics.'
+          ],
+          message: [
+            'Now the interesting part. Tell me what you actually want.',
+            'Message box. This is where you stop circling and give me the real version.'
+          ]
+        },
+        typing: {
+          baseline: [
+            'There we go. Much better.',
+            'Keep going. I am reading.',
+            'Good. Give me the version with substance.'
+          ],
+          engaged: [
+            'That is more like it. I knew you had something worthwhile for me.',
+            'Yes. Keep typing. I like decisive visitors.',
+            'You are warming this room up nicely.'
+          ],
+          edge: [
+            'Mm. Now you have me interested.',
+            'Careful, honey. Competence is a very good look on you.',
+            'Keep feeding me details and I may start sounding impressed.'
+          ]
+        },
+        hesitation: {
+          baseline: [
+            'Still deciding? I can wait a little.',
+            'You do not have to be shy. Just give me the clean version.'
+          ],
+          engaged: [
+            'You can linger if you want. I am enjoying watching you think.',
+            'Take the hint, honey. Pick a lane or give me the message.'
+          ],
+          edge: [
+            'You have been hovering long enough that I know this matters to you.',
+            'Keep hesitating and I will start thinking you came in here for me.'
+          ]
+        }
+      };
+      const pennyState = {
+        openedInSession: false,
+        visitCount: 0,
+        interactionCount: 0,
+        lastInteractionType: 'waiting',
+        idleTimer: 0,
+        lingerTimers: [],
+        idleIndex: 0,
+        engagementLevel: 1,
+        isOfficeActive: false,
+        currentField: '',
+        firstName: '',
+        typingCount: 0,
+        dwellStart: 0,
+        lastStatusKey: '',
+        formIdleTimer: 0,
+        formFocusCount: 0,
+        isIntimateOpen: false
+      };
 
+      function getPennyName() {
+        return pennyState.firstName || 'honey';
+      }
+
+      function personalize(line) {
+        return String(line || '').replace(/honey/g, getPennyName());
+      }
+
+      function getTierName(level = pennyState.engagementLevel) {
+        if (level >= 3) return 'Edge flirt';
+        if (level >= 2) return 'Engaged flirt';
+        return 'Baseline flirt';
+      }
+
+      function getTierPool(baseName) {
+        if (baseName === 'typing') {
+          return pennyState.engagementLevel >= 3 ? pennyDialogue.typing.edge : pennyState.engagementLevel >= 2 ? pennyDialogue.typing.engaged : pennyDialogue.typing.baseline;
+        }
+        if (baseName === 'hesitation') {
+          return pennyState.engagementLevel >= 3 ? pennyDialogue.hesitation.edge : pennyState.engagementLevel >= 2 ? pennyDialogue.hesitation.engaged : pennyDialogue.hesitation.baseline;
+        }
+        if (baseName === 'flirt') {
+          return pennyState.engagementLevel >= 3 ? pennyDialogue.edgeFlirt : pennyState.engagementLevel >= 2 ? pennyDialogue.engagedFlirt : pennyDialogue.baselineFlirt;
+        }
+        return pennyDialogue[baseName] || pennyDialogue.idle;
+      }
+
+      function pickPennyLine(poolName, fieldName) {
+        const pool = poolName === 'fieldFocus'
+          ? ((pennyDialogue.fieldFocus && pennyDialogue.fieldFocus[fieldName]) || pennyDialogue.baselineFlirt)
+          : Array.isArray(getTierPool(poolName))
+            ? getTierPool(poolName)
+            : pennyDialogue[poolName] || pennyDialogue.idle;
+        if (!pool || !pool.length) return '';
+        const offset = poolName === 'idle' || poolName === 'hesitation'
+          ? pennyState.idleIndex++
+          : Math.max(0, pennyState.interactionCount + pennyState.visitCount + pennyState.typingCount + pennyState.formFocusCount);
+        return personalize(pool[offset % pool.length]);
+      }
+
+      function refreshPennyTierBySignals() {
+        const dwellSeconds = pennyState.dwellStart ? (Date.now() - pennyState.dwellStart) / 1000 : 0;
+        let level = 1;
+        if (pennyState.visitCount >= 2 || pennyState.interactionCount >= 3 || pennyState.formFocusCount >= 2 || dwellSeconds >= 8) {
+          level = 2;
+        }
+        if (pennyState.visitCount >= 2 && (pennyState.interactionCount >= 6 || pennyState.typingCount >= 5 || dwellSeconds >= 18)) {
+          level = 3;
+        }
+        pennyState.engagementLevel = Math.max(pennyState.engagementLevel, level);
+        if (pennyState.engagementLevel > 3) pennyState.engagementLevel = 3;
+      }
+
+      function updatePennyTelemetry() {
+        refreshPennyTierBySignals();
+        if (pennyVisitCount) {
+          pennyVisitCount.textContent = pennyState.visitCount + (pennyState.visitCount === 1 ? ' visit this session' : ' visits this session');
+        }
+        if (pennyInteractionCount) {
+          pennyInteractionCount.textContent = pennyState.interactionCount + ' handled';
+        }
+        if (pennyLastAction) {
+          const labels = {
+            waiting: 'Waiting gracefully',
+            enter: 'Office opened',
+            email: 'Email lane armed',
+            phone: 'Phone lane armed',
+            text: 'Text lane armed',
+            concierge: 'Concierge routing',
+            name: 'Name lane engaged',
+            emailField: 'Inbox requested',
+            phoneField: 'Call lane hinted',
+            project: 'Scope lane engaged',
+            message: 'Message lane engaged',
+            typing: 'Reading live input',
+            hesitation: 'Watching the hesitation'
+          };
+          pennyLastAction.textContent = labels[pennyState.lastInteractionType] || 'Watching closely';
+        }
+        if (pennyModeChip) {
+          const modeMap = {
+            1: 'Online · Flirty',
+            2: 'Online · Engaged',
+            3: 'Online · Edge'
+          };
+          pennyModeChip.textContent = modeMap[pennyState.engagementLevel] || modeMap[1];
+        }
+        if (pennyEngagementChip) {
+          pennyEngagementChip.textContent = getTierName();
+        }
+        if (pennyPresenceTag) {
+          const presenceMap = {
+            1: 'Active loop engaged',
+            2: 'Attention sharpening',
+            3: 'Priority handling active'
+          };
+          pennyPresenceTag.textContent = presenceMap[pennyState.engagementLevel] || presenceMap[1];
+        }
+        if (pennyRoleReadout) {
+          pennyRoleReadout.textContent = pennyState.engagementLevel >= 3 ? 'Executive concierge intelligence' : pennyState.engagementLevel >= 2 ? 'Live intake concierge' : 'Front desk intelligence';
+        }
+        if (pennyRoleSubcopy) {
+          pennyRoleSubcopy.textContent = pennyState.engagementLevel >= 3
+            ? 'She is now reading you as an active lead, not a passive visitor.'
+            : pennyState.engagementLevel >= 2
+              ? 'Confident routing, sharper readouts, and stronger awareness now that you have her engaged.'
+              : 'Guides contact, tone, and first impressions without losing control.';
+        }
+        if (pennySignalReadout) {
+          pennySignalReadout.textContent = pennyState.engagementLevel >= 3 ? 'Pink control layer intensifying' : 'Pink control layer';
+        }
+        if (pennySignalSubcopy) {
+          pennySignalSubcopy.textContent = pennyState.engagementLevel >= 3
+            ? 'Distinct from the base blue/violet system, brighter because you stayed.'
+            : pennyState.engagementLevel >= 2
+              ? 'Distinct from the base blue/violet system, brighter when she has your attention.'
+              : 'Distinct from the base blue/violet system, elegant even at idle.';
+        }
+        if (pennyTierLabel) {
+          pennyTierLabel.textContent = getTierName();
+        }
+        if (pennyFocusLabel) {
+          const focusMap = {
+            '': 'Waiting for your move',
+            name: 'Name lane live',
+            email: 'Inbox lane live',
+            phone: 'Phone lane live',
+            project: 'Scope lane live',
+            message: 'Message lane live'
+          };
+          pennyFocusLabel.textContent = focusMap[pennyState.currentField] || 'Watching you closely';
+        }
+
+        if (pennyOffice) {
+          pennyOffice.classList.toggle('is-active', pennyState.isOfficeActive);
+          pennyOffice.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
+        }
+        if (pennyFormSurface) {
+          pennyFormSurface.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
+        }
+        if (pennyIntimateInterface) {
+          pennyIntimateInterface.classList.toggle('is-open', pennyState.isOfficeActive && pennyState.isIntimateOpen);
+          pennyIntimateInterface.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
+          pennyIntimateInterface.setAttribute('aria-hidden', pennyState.isOfficeActive && pennyState.isIntimateOpen ? 'false' : 'true');
+        }
+        if (pennyIntimateMode) {
+          const intimateModeMap = {
+            '': 'Listening close',
+            name: 'Learning your name',
+            email: 'Inbox locked',
+            phone: 'Call lane armed',
+            project: 'Scope lane open',
+            message: 'Reading you live'
+          };
+          pennyIntimateMode.textContent = intimateModeMap[pennyState.currentField] || (pennyState.engagementLevel >= 3 ? 'Priority focus' : pennyState.engagementLevel >= 2 ? 'Focused attention' : 'Listening close');
+        }
+      }
+
+      function setPennyStatus(message, subcopy, statusKey = '') {
+        const normalizedMessage = personalize(message);
+        if (pennyStatus && normalizedMessage) {
+          pennyStatus.textContent = normalizedMessage;
+        }
+        if (pennyStatusSub && subcopy) {
+          pennyStatusSub.textContent = personalize(subcopy);
+        }
+        if (pennyFormStatus && normalizedMessage) {
+          pennyFormStatus.textContent = normalizedMessage;
+        }
+        if (pennyFormSub && subcopy) {
+          pennyFormSub.textContent = personalize(subcopy);
+        }
+        if (pennyIntimateBubble && normalizedMessage) {
+          pennyIntimateBubble.textContent = normalizedMessage;
+        }
+        if (pennyIntimateSub && subcopy) {
+          pennyIntimateSub.textContent = personalize(subcopy);
+        }
+        if (statusKey) {
+          pennyState.lastStatusKey = statusKey;
+        }
+        updatePennyTelemetry();
+      }
+
+      function openPennyIntimate(fieldName) {
+        if (!pennyState.isOfficeActive) return;
+        pennyState.isIntimateOpen = true;
+        if (fieldName) {
+          pennyState.currentField = fieldName;
+        }
+        updatePennyTelemetry();
+      }
+
+      function closePennyIntimate() {
+        pennyState.isIntimateOpen = false;
+        updatePennyTelemetry();
+      }
+
+      function clearPennyIdleTimer() {
+        window.clearTimeout(pennyState.idleTimer);
+        pennyState.idleTimer = 0;
+      }
+
+      function clearPennyFormIdleTimer() {
+        window.clearTimeout(pennyState.formIdleTimer);
+        pennyState.formIdleTimer = 0;
+      }
+
+      function clearPennyLingerTimers() {
+        pennyState.lingerTimers.forEach((timerId) => window.clearTimeout(timerId));
+        pennyState.lingerTimers = [];
+      }
+
+      function schedulePennyIdle() {
+        clearPennyIdleTimer();
+        if (!pennyState.isOfficeActive || !pennyOffice) return;
+        pennyState.idleTimer = window.setTimeout(() => {
+          if (!pennyState.isOfficeActive) return;
+          pennyState.lastInteractionType = 'waiting';
+          setPennyStatus(
+            pickPennyLine('idle'),
+            'Stay in the room, pick a lane, or hand Penny the polished version here in the form.',
+            'idle'
+          );
+          schedulePennyIdle();
+        }, pennyState.engagementLevel >= 3 ? 4600 : 6200);
+      }
+
+      function schedulePennyFormIdle() {
+        clearPennyFormIdleTimer();
+        if (!pennyState.isOfficeActive || !pennyState.currentField) return;
+        pennyState.formIdleTimer = window.setTimeout(() => {
+          if (!pennyState.isOfficeActive || !pennyState.currentField) return;
+          pennyState.lastInteractionType = 'hesitation';
+          setPennyStatus(
+            pickPennyLine('hesitation'),
+            'You paused in the ' + pennyState.currentField + ' lane. Penny is still reading the room.',
+            'hesitation'
+          );
+          schedulePennyIdle();
+        }, pennyState.engagementLevel >= 3 ? 3200 : 4300);
+      }
+
+      function schedulePennyLingerEscalation() {
+        clearPennyLingerTimers();
+        if (!pennyState.isOfficeActive) return;
+        pennyState.lingerTimers.push(window.setTimeout(() => {
+          if (!pennyState.isOfficeActive) return;
+          refreshPennyTierBySignals();
+          if (pennyState.engagementLevel < 2) {
+            pennyState.engagementLevel = 2;
+          }
+          setPennyStatus(
+            pickPennyLine('engagedFlirt'),
+            'You stayed long enough to move her out of baseline mode.',
+            'linger-engaged'
+          );
+        }, 8000));
+        pennyState.lingerTimers.push(window.setTimeout(() => {
+          if (!pennyState.isOfficeActive) return;
+          refreshPennyTierBySignals();
+          if (pennyState.engagementLevel < 3) {
+            pennyState.engagementLevel = 3;
+          }
+          setPennyStatus(
+            pickPennyLine('edgeFlirt'),
+            'That is the edge tier: bolder, still controlled, still premium.',
+            'linger-edge'
+          );
+        }, 18000));
+      }
+
+      function bumpPennyEngagement(type, weight = 1) {
+        pennyState.lastInteractionType = type || pennyState.lastInteractionType;
+        if (type !== 'enter') {
+          pennyState.interactionCount += weight;
+        }
+        refreshPennyTierBySignals();
+        updatePennyTelemetry();
+        schedulePennyIdle();
+      }
+
+      function enterPennyOffice() {
+        pennyState.isOfficeActive = true;
+        pennyState.visitCount += 1;
+        pennyState.lastInteractionType = 'enter';
+        pennyState.dwellStart = Date.now();
+        const pool = pennyState.openedInSession ? 'repeatGreeting' : 'greeting';
+        pennyState.openedInSession = true;
+        refreshPennyTierBySignals();
+        setPennyStatus(
+          pickPennyLine(pool),
+          'Start with a route, or use the form below and let Penny react as you move through it.',
+          'enter'
+        );
+        schedulePennyIdle();
+        schedulePennyLingerEscalation();
+      }
+
+      function leavePennyOffice() {
+        pennyState.isOfficeActive = false;
+        pennyState.currentField = '';
+        closePennyIntimate();
+        clearPennyIdleTimer();
+        clearPennyFormIdleTimer();
+        clearPennyLingerTimers();
+        updatePennyTelemetry();
+      }
+
+      function reactToPennyAction(type, fallbackMessage) {
+        if (!pennyState.isOfficeActive) return;
+        bumpPennyEngagement(type, 1);
+        const line = pickPennyLine(type) || fallbackMessage || pickPennyLine('concierge');
+        const subcopyMap = {
+          email: 'Email works best for details, scope, references, and anything worth keeping crisp.',
+          phone: 'Calls are best when speed matters and you want the shortest distance between interest and action.',
+          text: 'Text is the fast lane for first touch, quick questions, and lower-friction follow-up.',
+          concierge: 'Concierge routing stays elegant on small screens and stable across the fake-page system.'
+        };
+        setPennyStatus(line, subcopyMap[type] || 'Penny is tracking your route and keeping the office responsive.', type);
+      }
+
+      function handlePennyFieldFocus(fieldName) {
+        if (!pennyState.isOfficeActive) return;
+        openPennyIntimate(fieldName);
+        pennyState.currentField = fieldName;
+        pennyState.formFocusCount += 1;
+        const typeMap = {
+          name: 'name',
+          email: 'emailField',
+          phone: 'phoneField',
+          project: 'project',
+          message: 'message'
+        };
+        bumpPennyEngagement(typeMap[fieldName] || 'concierge', fieldName === 'message' ? 1 : 0);
+        setPennyStatus(
+          pickPennyLine('fieldFocus', fieldName),
+          'She is reacting locally while you work through the ' + fieldName + ' lane.',
+          'focus-' + fieldName
+        );
+        schedulePennyFormIdle();
+      }
+
+      function handlePennyFieldBlur(fieldName) {
+        if (pennyState.currentField === fieldName) {
+          pennyState.currentField = '';
+        }
+        updatePennyTelemetry();
+        schedulePennyIdle();
+      }
+
+      function maybeCapturePennyName(value) {
+        const match = String(value || '').trim().match(/[A-Za-z][A-Za-z'-]*/);
+        pennyState.firstName = match ? match[0] : '';
+      }
+
+      function handlePennyTyping(fieldName, value) {
+        if (!pennyState.isOfficeActive) return;
+        if (fieldName === 'name') {
+          maybeCapturePennyName(value);
+        }
+        if (fieldName !== 'message') {
+          schedulePennyFormIdle();
+          return;
+        }
+        const cleanValue = String(value || '').trim();
+        if (!cleanValue) {
+          schedulePennyFormIdle();
+          return;
+        }
+        pennyState.typingCount += 1;
+        pennyState.lastInteractionType = 'typing';
+        refreshPennyTierBySignals();
+        if (pennyState.typingCount === 1 || cleanValue.length % 26 === 0) {
+          setPennyStatus(
+            pickPennyLine('typing'),
+            'Penny is reacting near the form so the handoff feels live while you write.',
+            'typing'
+          );
+        } else {
+          updatePennyTelemetry();
+        }
+        schedulePennyFormIdle();
+      }
+
+      pennyFormFields.forEach((field) => {
+        const fieldName = field.getAttribute('data-penny-field') || '';
+        field.addEventListener('focus', () => handlePennyFieldFocus(fieldName));
+        field.addEventListener('blur', () => handlePennyFieldBlur(fieldName));
+        field.addEventListener('input', () => handlePennyTyping(fieldName, field.value));
+      });
+
+      if (pennyContactForm) {
+        pennyContactForm.addEventListener('submit', () => {
+          if (!pennyState.isOfficeActive) return;
+          bumpPennyEngagement('concierge', 1);
+          setPennyStatus(
+            'Perfect. Leave the rest to me.',
+            'That handoff is ready to leave the room looking expensive.',
+            'submit'
+          );
+        });
+      }
 
 
       function openEProjection() {
@@ -6012,6 +7045,7 @@ slot</div>
         link.addEventListener('click', (event) => {
           const type = link.getAttribute('data-penny-assist');
           if (!type) return;
+          reactToPennyAction(type, link.getAttribute('data-penny-message') || '');
           if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
             return;
           }
@@ -6069,6 +7103,13 @@ slot</div>
 
         if (found) {
           syncManagedVideos(pageId);
+
+          if (pageId === 'contact') {
+            enterPennyOffice();
+          } else {
+            leavePennyOffice();
+          }
+
           window.scrollTo({ top: 0, behavior: reduceMotionQuery.matches ? 'auto' : 'smooth' });
         }
       }
@@ -6436,19 +7477,25 @@ slot</div>
       window.setInterval(updateWatchTime, 30000);
 
       if (pennyStatus && pennyStatusCards.length) {
-        const defaultStatus = pennyStatus.textContent.trim();
-
         pennyStatusCards.forEach((card) => {
-          const message = card.getAttribute('data-penny-message') || defaultStatus;
+          const message = card.getAttribute('data-penny-message') || pennyStatus.textContent.trim();
+          const officeCard = card.closest('#pennyOffice');
+          const actionType = card.getAttribute('data-penny-action') || card.getAttribute('data-penny-assist') || (officeCard ? 'concierge' : '');
 
           const activate = function () {
-            pennyStatus.textContent = message;
+            if (!pennyState.isOfficeActive || !officeCard) return;
+            if (actionType) {
+              reactToPennyAction(actionType, message);
+            } else {
+              setPennyStatus(message, 'Penny is reading the room and keeping the office responsive.');
+            }
             card.classList.add('is-engaged');
           };
 
           const reset = function () {
-            pennyStatus.textContent = defaultStatus;
             card.classList.remove('is-engaged');
+            if (!pennyState.isOfficeActive || !officeCard) return;
+            schedulePennyIdle();
           };
 
           card.addEventListener('mouseenter', activate);
@@ -6458,6 +7505,17 @@ slot</div>
           card.addEventListener('touchstart', activate, { passive: true });
         });
       }
+
+      pennyOfficeSurfaces.forEach((surface) => {
+        surface.addEventListener('pointerdown', () => {
+          if (!pennyState.isOfficeActive) return;
+          pennyState.engagementLevel = Math.min(3, Math.max(pennyState.engagementLevel, 2));
+          updatePennyTelemetry();
+          schedulePennyIdle();
+        }, { passive: true });
+      });
+
+      updatePennyTelemetry();
     })();
   </script>
 </body>
