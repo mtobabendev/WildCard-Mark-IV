@@ -5527,7 +5527,7 @@
                       >
                         <span class="holo-spin-card__media" aria-hidden="true">
                           <video autoplay muted loop playsinline preload="metadata">
-                            <source src="./images/customerService.webm" type="video/webm" />
+                            <source src="./media/penny/video/penny_office_loop_v1.mp4" type="video/mp4" />
                           </video>
                         </span>
                         <span class="holo-spin-card__overlay" aria-hidden="true"></span>
@@ -5818,7 +5818,7 @@
                         <div class="penny-bubble-anchor" aria-hidden="true"></div>
                         <div class="penny-hero__media" aria-hidden="true">
                           <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-hero">
-                            <source src="./images/customerService.webm" type="video/webm" />
+                            <source src="./media/penny/video/penny_office_loop_v1.mp4" type="video/mp4" />
                           </video>
                         </div>
                       </div>
@@ -5905,7 +5905,8 @@
                       <div class="penny-intimate-interface__shell" data-penny-surface="intimate">
                         <div class="penny-intimate-interface__media" aria-hidden="true">
                           <video autoplay muted loop playsinline preload="metadata" data-managed-video="penny-intimate">
-                            <source src="./images/customerService.webm" type="video/webm" />
+                            <source src="./media/penny/video/penny_office_working_v2.mp4" type="video/mp4" />
+                            <source src="./media/penny/video/penny_office_working_v1.webm" type="video/webm" />
                           </video>
                         </div>
                         <div class="penny-intimate-interface__copy">
@@ -7518,5 +7519,562 @@ slot</div>
       updatePennyTelemetry();
     })();
   </script>
+
+<script>
+/* ========================================
+   Penny Brain v1.2 — Drift State Engine
+   Full replacement block
+   Paste directly above </body>
+======================================== */
+(function () {
+  "use strict";
+
+  const onReady = (fn) => {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn, { once: true });
+    } else {
+      fn();
+    }
+  };
+
+  onReady(() => {
+    const intimateWrap = document.getElementById("pennyIntimateInterface");
+    const intimateBubble = document.getElementById("pennyIntimateBubble");
+    const intimateSub = document.getElementById("pennyIntimateSub");
+    const intimateMode = document.getElementById("pennyIntimateMode");
+
+    const form = document.getElementById("pennyContactForm");
+    const formStatus = document.getElementById("pennyFormStatus");
+    const tierLabel = document.getElementById("pennyTierLabel");
+    const focusLabel = document.getElementById("pennyFocusLabel");
+
+    const nameField = document.getElementById("pennyFormName");
+    const emailField = document.getElementById("pennyFormEmail");
+    const phoneField = document.getElementById("pennyFormPhone");
+    const projectField = document.getElementById("pennyFormProject");
+    const messageField = document.getElementById("pennyFormMessage");
+
+    const intimateVideo = document.querySelector('[data-managed-video="penny-intimate"]');
+    const priorityActions = Array.from(document.querySelectorAll(".interactive-surface, .priority-action, [data-penny-action], [data-penny-assist]"));
+    const inputs = [nameField, emailField, phoneField, projectField, messageField].filter(Boolean);
+
+    if (
+      !intimateWrap ||
+      !intimateBubble ||
+      !intimateSub ||
+      !intimateMode ||
+      !form ||
+      !formStatus ||
+      !tierLabel ||
+      !focusLabel ||
+      !intimateVideo ||
+      !inputs.length
+    ) {
+      console.warn("Penny Brain: required Penny elements were not found. Brain not initialized.");
+      return;
+    }
+
+    const VIDEO_BASE = "./media/penny/video/";
+
+    const TIMING = {
+      minHoldIdle: 5000,
+      minHoldEngaged: 3200,
+      minHoldFocused: 4800,
+      minHoldReward: 5200,
+      minHoldEscalated: 6500,
+      minHoldCorrective: 5200,
+      idleReturn: 16000,
+      rewardPauseMin: 4200,
+      escalatedPauseMin: 8200,
+      correctiveCooldown: 3200,
+      monitorInterval: 900,
+      maxNonsenseWindow: 8
+    };
+
+    const STATES = {
+      idle: {
+        label: "Idle presence",
+        tier: "Baseline flirt",
+        focus: "Waiting for your move",
+        bubble: "I’m here when you’re ready, honey.",
+        sub: "Penny is present, calm, and watching for a real signal before she leans in closer.",
+        files: {
+          webm: "penny_holo_idle_v1.webm",
+          mp4: "penny_holo_idle_v1.mp4"
+        }
+      },
+      engaged: {
+        label: "Engaged",
+        tier: "She noticed you",
+        focus: "Attention captured",
+        bubble: "There you are.",
+        sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
+        files: {
+          webm: "penny_holo_engaged_v1.webm",
+          mp4: "penny_holo_engaged_v1.mp4"
+        }
+      },
+      focused: {
+        label: "Focused",
+        tier: "Working with you",
+        focus: "Processing your input",
+        bubble: "Go on. I’m listening.",
+        sub: "Now she’s in it with you — reading, processing, and staying close to the intake lane.",
+        files: {
+          webm: "penny_holo_focused_v1.webm",
+          mp4: "penny_holo_focused_v1.mp4"
+        }
+      },
+      reward: {
+        label: "Reward",
+        tier: "Positive response",
+        focus: "You have her attention",
+        bubble: "Mm. That works.",
+        sub: "You said something useful. Penny rewards clean momentum and real intent.",
+        files: {
+          webm: "penny_holo_reward_v1.webm",
+          mp4: "penny_holo_reward_v1.mp4"
+        }
+      },
+      escalated: {
+        label: "Escalated",
+        tier: "Locked in",
+        focus: "Fully tuned to you",
+        bubble: "Now you really have my attention.",
+        sub: "This is the close-attention lane — deliberate, intense, and fully keyed in.",
+        files: {
+          webm: "penny_holo_escalated_v1.webm",
+          mp4: "penny_holo_escalated_v1.mp4"
+        }
+      },
+      corrective: {
+        label: "Corrective",
+        tier: "Mild correction",
+        focus: "Behave yourself",
+        bubble: "Careful, honey. I do notice.",
+        sub: "Penny is still engaged, just quietly unimpressed with unserious behavior.",
+        files: {
+          webm: "penny_holo_corrective_v1.webm",
+          mp4: "penny_holo_corrective_v1.mp4"
+        }
+      }
+    };
+
+    const routeMessages = {
+      email: {
+        bubble: "Opening the written lane.",
+        sub: "Email is where proposals, assets, scope notes, timelines, and the serious details belong."
+      },
+      phone: {
+        bubble: "Direct line. Faster heartbeat.",
+        sub: "Phone-first is for urgency, momentum, and skipping some of the ceremony."
+      },
+      text: {
+        bubble: "Quick lane unlocked.",
+        sub: "Text is lighter, faster, and perfect for a cleaner first touch on mobile."
+      },
+      concierge: {
+        bubble: "Redirecting you, honey.",
+        sub: "Penny can hand you into another lane when the situation fits better somewhere else."
+      }
+    };
+
+    let currentState = "idle";
+    let targetState = "idle";
+    let currentOverride = null;
+    let stateEnteredAt = Date.now();
+    let lastVideoBase = "";
+    let engagedOnce = false;
+    let behaviorScore = 0;
+    let lastInputAt = 0;
+    let lastMeaningfulInputAt = 0;
+    let lastPenaltyAt = 0;
+    let activeField = "";
+    let nonsenseBuffer = [];
+    let deleteBurst = 0;
+    let lastLengths = new Map();
+
+    function clamp(num, min, max) {
+      return Math.max(min, Math.min(max, num));
+    }
+
+    function setAriaVisible(isVisible) {
+      intimateWrap.setAttribute("aria-hidden", isVisible ? "false" : "true");
+    }
+
+    function ensureVisible() {
+      intimateWrap.classList.add("is-active");
+      setAriaVisible(true);
+    }
+
+    function stateHoldFor(stateKey) {
+      switch (stateKey) {
+        case "engaged": return TIMING.minHoldEngaged;
+        case "focused": return TIMING.minHoldFocused;
+        case "reward": return TIMING.minHoldReward;
+        case "escalated": return TIMING.minHoldEscalated;
+        case "corrective": return TIMING.minHoldCorrective;
+        default: return TIMING.minHoldIdle;
+      }
+    }
+
+    function updateText(stateKey, override = null) {
+      const state = STATES[stateKey];
+      const text = {
+        mode: override?.mode || state.label,
+        bubble: override?.bubble || state.bubble,
+        sub: override?.sub || state.sub,
+        tier: override?.tier || state.tier,
+        focus: override?.focus || state.focus
+      };
+
+      intimateMode.textContent = text.mode;
+      intimateBubble.textContent = text.bubble;
+      intimateSub.textContent = text.sub;
+      formStatus.textContent = text.bubble;
+      tierLabel.textContent = text.tier;
+      focusLabel.textContent = text.focus;
+    }
+
+    function setVideo(stateKey) {
+      const state = STATES[stateKey];
+      const webm = VIDEO_BASE + state.files.webm;
+      const mp4 = VIDEO_BASE + state.files.mp4;
+      const newBase = webm + "|" + mp4;
+
+      if (newBase === lastVideoBase) return;
+      lastVideoBase = newBase;
+
+      intimateVideo.innerHTML = "";
+
+      const webmSource = document.createElement("source");
+      webmSource.src = webm;
+      webmSource.type = "video/webm";
+
+      const mp4Source = document.createElement("source");
+      mp4Source.src = mp4;
+      mp4Source.type = "video/mp4";
+
+      intimateVideo.appendChild(webmSource);
+      intimateVideo.appendChild(mp4Source);
+
+      try {
+        intimateVideo.load();
+        const promise = intimateVideo.play();
+        if (promise && typeof promise.catch === "function") {
+          promise.catch(() => {});
+        }
+      } catch (err) {
+        console.warn("Penny Brain: video switch issue", err);
+      }
+    }
+
+    function applyState(stateKey, override = null) {
+      currentState = stateKey;
+      stateEnteredAt = Date.now();
+      currentOverride = override;
+      ensureVisible();
+      setVideo(stateKey);
+      updateText(stateKey, override);
+    }
+
+    function requestState(stateKey, override = null) {
+      targetState = stateKey;
+      currentOverride = override || null;
+    }
+
+    function canTransition() {
+      return Date.now() - stateEnteredAt >= stateHoldFor(currentState);
+    }
+
+    function maybeTransition() {
+      if (targetState === currentState) return;
+      if (!canTransition()) return;
+      applyState(targetState, currentOverride);
+    }
+
+    function addBehavior(amount) {
+      behaviorScore = clamp(behaviorScore + amount, -100, 100);
+    }
+
+    function decayBehavior() {
+      if (behaviorScore > 0) behaviorScore = Math.max(0, behaviorScore - 0.6);
+      if (behaviorScore < 0) behaviorScore = Math.min(0, behaviorScore + 0.5);
+    }
+
+    function isMeaningfulValue(value) {
+      if (!value) return false;
+      const trimmed = value.trim();
+      if (trimmed.length < 2) return false;
+      if (/^(.)\1{4,}$/.test(trimmed)) return false;
+      if (/^[^a-zA-Z0-9]+$/.test(trimmed)) return false;
+      return true;
+    }
+
+    function evaluateNonsense(value) {
+      const trimmed = (value || "").trim();
+      if (!trimmed) return false;
+      if (/^(.)\1{6,}$/.test(trimmed)) return true;
+      if (/^[asdfjkl;]{7,}$/i.test(trimmed)) return true;
+      if (/^[qwertyuiop]{7,}$/i.test(trimmed)) return true;
+      if (/^[zxcvbnm,./]{7,}$/i.test(trimmed)) return true;
+      if (/^[^a-zA-Z0-9\s]{7,}$/.test(trimmed)) return true;
+      return false;
+    }
+
+    function fieldLabel(field) {
+      return field?.dataset?.pennyField || field?.name || "input";
+    }
+
+    function setRouteState(kind) {
+      const route = routeMessages[kind] || routeMessages.concierge;
+      requestState("engaged", {
+        mode: kind.charAt(0).toUpperCase() + kind.slice(1) + " route",
+        bubble: route.bubble,
+        sub: route.sub,
+        tier: "Route assist",
+        focus: "Handling a direct lane"
+      });
+      maybeTransition();
+    }
+
+    function handleFocus(field) {
+      activeField = fieldLabel(field);
+      ensureVisible();
+
+      if (!engagedOnce) {
+        engagedOnce = true;
+        requestState("engaged", {
+          bubble: `Starting with ${activeField}. Good.`,
+          sub: "Penny has moved out of ambient mode and into your immediate intake lane.",
+          focus: "Initial contact made"
+        });
+        applyState("engaged", currentOverride);
+        return;
+      }
+
+      if (currentState === "idle") {
+        requestState("engaged", {
+          bubble: `Back with me on the ${activeField}.`,
+          sub: "Penny has resumed the tighter interaction lane.",
+          focus: `Re-engaged on ${activeField}`
+        });
+        maybeTransition();
+      }
+    }
+
+    function handleInput(field) {
+      const value = field.value || "";
+      const label = fieldLabel(field);
+      const previousLength = lastLengths.get(field) || 0;
+      const nextLength = value.length;
+
+      activeField = label;
+      lastInputAt = Date.now();
+      lastLengths.set(field, nextLength);
+
+      if (nextLength < previousLength) {
+        deleteBurst += 1;
+      } else {
+        deleteBurst = Math.max(0, deleteBurst - 0.4);
+      }
+
+      const nonsense = evaluateNonsense(value);
+      nonsenseBuffer.push(nonsense ? 1 : 0);
+      if (nonsenseBuffer.length > TIMING.maxNonsenseWindow) nonsenseBuffer.shift();
+
+      const nonsenseCount = nonsenseBuffer.reduce((sum, n) => sum + n, 0);
+
+      if ((deleteBurst >= 7 || nonsenseCount >= 4) && (Date.now() - lastPenaltyAt > TIMING.correctiveCooldown)) {
+        lastPenaltyAt = Date.now();
+        addBehavior(-22);
+        requestState("corrective", {
+          bubble: "Mmm. That was messy.",
+          sub: "Penny is still with you. She just prefers signal over chaos.",
+          focus: "Unimpressed, still engaged"
+        });
+        maybeTransition();
+        return;
+      }
+
+      if (isMeaningfulValue(value)) {
+        engagedOnce = true;
+        lastMeaningfulInputAt = Date.now();
+        addBehavior(label === "message" ? 8 : 4);
+
+        if (currentState === "idle") {
+          requestState("engaged", {
+            bubble: `There you are.`,
+            sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
+            focus: "Attention captured"
+          });
+          maybeTransition();
+          return;
+        }
+
+        requestState("focused", {
+          bubble: label === "message" ? "Stay with me." : `Stay with me on the ${label}.`,
+          sub: "She’s reading what you give her and adjusting in real time.",
+          focus: `Tracking ${label}`
+        });
+        maybeTransition();
+        return;
+      }
+
+      addBehavior(-0.5);
+    }
+
+    function handlePaste(field) {
+      const label = fieldLabel(field);
+      activeField = label;
+      engagedOnce = true;
+      lastInputAt = Date.now();
+      lastMeaningfulInputAt = Date.now();
+      addBehavior(10);
+
+      requestState("focused", {
+        bubble: "Paste accepted. I can work with that.",
+        sub: "You dropped in real material. Penny prefers signal over guessing.",
+        focus: `Reading pasted ${label}`
+      });
+
+      if (currentState === "idle") {
+        applyState("engaged", {
+          bubble: "There you are.",
+          sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
+          focus: "Attention captured"
+        });
+      } else {
+        maybeTransition();
+      }
+    }
+
+    function handleSubmitIntent() {
+      const filledCount = inputs.reduce((count, input) => count + ((input.value && input.value.trim()) ? 1 : 0), 0);
+      const hasMessage = !!(messageField && messageField.value.trim().length > 12);
+
+      if (filledCount >= 2 || hasMessage) {
+        addBehavior(18);
+        requestState("escalated", {
+          bubble: "That’s a real handoff. Send it.",
+          sub: "You made it through the noise. Penny is fully tuned and ready for the transfer.",
+          tier: "Handoff ready",
+          focus: "Conversion moment"
+        });
+      } else {
+        addBehavior(-8);
+        requestState("corrective", {
+          bubble: "You can give me a little more than that.",
+          sub: "Penny is still here. She just wants something worth the handoff.",
+          focus: "Waiting for stronger input"
+        });
+      }
+      maybeTransition();
+    }
+
+    function computePassiveTarget() {
+      const now = Date.now();
+      if (!engagedOnce) return { state: "idle", override: null };
+
+      const sinceInput = now - lastInputAt;
+      const sinceMeaningful = now - lastMeaningfulInputAt;
+
+      if (currentState === "corrective" && !canTransition()) {
+        return { state: "corrective", override: currentOverride };
+      }
+
+      if (sinceInput >= TIMING.idleReturn) {
+        return {
+          state: "idle",
+          override: {
+            bubble: "I’ll be right here when you’re ready again.",
+            sub: "Penny settles back to baseline when the lane goes quiet.",
+            focus: "Back to ambient watch"
+          }
+        };
+      }
+
+      if (behaviorScore < -14) {
+        return {
+          state: "corrective",
+          override: {
+            bubble: "Behave, honey.",
+            sub: "Penny is still engaged — just not impressed by chaos.",
+            focus: "Quiet correction"
+          }
+        };
+      }
+
+      if (sinceMeaningful >= TIMING.escalatedPauseMin && behaviorScore >= 16) {
+        return {
+          state: "escalated",
+          override: {
+            bubble: activeField === "message" ? "Now you have me." : "You’re doing better, honey.",
+            sub: "This is the close-attention lane — deliberate, intense, and almost at handoff.",
+            focus: activeField ? `Locked onto ${activeField}` : "Fully tuned to you"
+          }
+        };
+      }
+
+      if (sinceInput >= TIMING.rewardPauseMin && behaviorScore >= 6) {
+        return {
+          state: "reward",
+          override: {
+            bubble: activeField === "message" ? "That’s more like it." : "Yes. Keep going.",
+            sub: "Penny rewards signal, clarity, and momentum.",
+            focus: activeField ? `Responding to your ${activeField}` : "You have her attention"
+          }
+        };
+      }
+
+      if (sinceInput < TIMING.idleReturn && engagedOnce) {
+        return {
+          state: "focused",
+          override: {
+            bubble: activeField ? `Stay with me on the ${activeField}.` : "Go on. I’m listening.",
+            sub: "She’s reading what you give her and adjusting in real time.",
+            focus: activeField ? `Tracking ${activeField}` : "Processing your input"
+          }
+        };
+      }
+
+      return { state: "idle", override: null };
+    }
+
+    function loop() {
+      decayBehavior();
+
+      const passive = computePassiveTarget();
+      requestState(passive.state, passive.override);
+      maybeTransition();
+    }
+
+    inputs.forEach((field) => {
+      field.addEventListener("focus", () => handleFocus(field));
+      field.addEventListener("input", () => handleInput(field));
+      field.addEventListener("paste", () => handlePaste(field));
+    });
+
+    priorityActions.forEach((node) => {
+      node.addEventListener("click", () => {
+        const kind = node.getAttribute("data-penny-assist") || node.getAttribute("data-penny-action") || "concierge";
+        setRouteState(kind);
+      });
+    });
+
+    form.addEventListener("submit", handleSubmitIntent);
+
+    applyState("idle", {
+      bubble: "Tell me what you need, honey.",
+      sub: "The moment you touch the form, Penny shifts into a closer holographic lane and keeps the exchange personal.",
+      tier: "Baseline flirt",
+      focus: "Waiting for your move"
+    });
+
+    window.setInterval(loop, TIMING.monitorInterval);
+  });
+})();
+</script>
+
 </body>
 </html>
