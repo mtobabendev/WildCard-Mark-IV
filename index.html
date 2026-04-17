@@ -423,9 +423,10 @@
     /* Identity Avatar Refinement */
     .person-card {
       display: grid;
-      grid-template-columns: 84px 1fr;
+      grid-template-columns: 92px 1fr;
       gap: 14px;
       align-items: center;
+      min-height: 108px;
       padding: 14px;
       border-radius: 18px;
       border: 1px solid var(--line);
@@ -435,7 +436,7 @@
     }
 
     .person-card__media {
-      width: 84px;
+      width: 92px;
       aspect-ratio: 0.82;
       border-radius: 18px;
       overflow: hidden;
@@ -459,8 +460,9 @@
     }
 
     .person-card__copy strong {
-      font-size: 0.98rem;
+      font-size: 1rem;
       line-height: 1.2;
+      letter-spacing: 0.01em;
     }
 
     .person-card__copy span {
@@ -490,6 +492,22 @@
         linear-gradient(112deg, transparent 12%, rgba(255,255,255,0.06) 48%, transparent 76%),
         radial-gradient(circle at 10% 0%, var(--avatar-glow), transparent 36%);
       opacity: 0.7;
+      z-index: 0;
+    }
+
+    .person-card--matt::after,
+    .person-card--e::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      height: 20px;
+      border-radius: 999px;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, var(--avatar-glow-strong), transparent 72%);
+      filter: blur(10px);
+      opacity: 0.48;
       z-index: 0;
     }
 
@@ -590,6 +608,7 @@
       padding: 0;
       transform: translateY(var(--avatar-shift-y)) scale(var(--avatar-scale));
       transform-origin: center center;
+      transition: transform 220ms ease, filter 220ms ease;
       filter:
         saturate(1.04)
         contrast(1.03)
@@ -597,6 +616,17 @@
         drop-shadow(0 0 18px var(--avatar-glow-strong));
       -webkit-mask-image: radial-gradient(136% 128% at 50% 34%, #000 58%, rgba(0,0,0,0.98) 70%, rgba(0,0,0,0.84) 82%, rgba(0,0,0,0.34) 93%, transparent 100%);
       mask-image: radial-gradient(136% 128% at 50% 34%, #000 58%, rgba(0,0,0,0.98) 70%, rgba(0,0,0,0.84) 82%, rgba(0,0,0,0.34) 93%, transparent 100%);
+    }
+
+    .person-card--matt:hover .person-card__media--avatar img,
+    .person-card--e:hover .person-card__media--avatar img,
+    .person-card--e:focus-visible .person-card__media--avatar img {
+      transform: translateY(calc(var(--avatar-shift-y) - 1%)) scale(calc(var(--avatar-scale) + 0.02));
+      filter:
+        saturate(1.07)
+        contrast(1.05)
+        drop-shadow(0 0 12px var(--avatar-glow))
+        drop-shadow(0 0 22px var(--avatar-glow-strong));
     }
 
     .person-card--matt .person-card__media--avatar img {
@@ -1238,6 +1268,15 @@
       .action-link {
         width: 100%;
       }
+
+      .person-card {
+        grid-template-columns: 78px 1fr;
+        min-height: 96px;
+      }
+
+      .person-card__media {
+        width: 78px;
+      }
     }
 
 
@@ -1583,6 +1622,26 @@
       border-color: rgba(255, 79, 183, 0.22);
       color: #ffd9f1;
       background: rgba(44, 16, 40, 0.48);
+    }
+
+    .holo-spin-card.is-near {
+      box-shadow:
+        0 0 30px rgba(106, 168, 255, 0.14),
+        0 22px 52px rgba(0, 0, 0, 0.38);
+    }
+
+    .holo-spin-card.is-front {
+      border-color: rgba(255,255,255,0.34);
+      box-shadow:
+        0 0 42px rgba(106, 168, 255, 0.2),
+        0 28px 64px rgba(0, 0, 0, 0.42);
+    }
+
+    .holo-spin-card--penny.is-front {
+      border-color: rgba(255, 79, 183, 0.34);
+      box-shadow:
+        0 0 42px rgba(255, 79, 183, 0.22),
+        0 28px 64px rgba(0, 0, 0, 0.42);
     }
 
     .holo-spinner-core-label {
@@ -5790,7 +5849,7 @@
         <div class="article-shell">
           <header>
             <span class="eyebrow eyebrow--penny">Contact / Penny Office</span>
-            <h2 class="headline" id="contact-title">Penny now feels like the premium intelligence running the room.</h2>
+            <h2 class="headline" id="contact-title">Penny remains the premium intelligence running the room.</h2>
             <div class="accent-rule"></div>
           </header>
 
@@ -5805,8 +5864,8 @@
                   <span class="penny-mini-chip penny-mini-chip--system">Executive Assistant Layer</span>
                 </div>
                 <div class="penny-office__meta">
-                  <span class="penny-mini-chip" id="pennyModeChip">Online · Warm</span>
-                  <span class="penny-mini-chip penny-mini-chip--system" id="pennyEngagementChip">Engagement level 1</span>
+                  <span class="penny-mini-chip" id="pennyModeChip">Online · Professional</span>
+                  <span class="penny-mini-chip penny-mini-chip--system" id="pennyEngagementChip">Stable public mode</span>
                 </div>
               </div>
 
@@ -5829,10 +5888,9 @@
                         <span class="eyebrow eyebrow--penny">Penny Presence</span>
                         <h3>There you are. You made it to my office. Good choice.</h3>
                         <p>
-                          Penny now opens hot instead of passive: warm on entry, playful immediately, and progressively more engaged the longer you stay in her office,
-                          work the form, or choose a contact lane.
+                          Penny holds the room with a polished, stable presence: visible, branded, and ready to guide written inquiries, direct contact, and clean project handoffs.
                         </p>
-                        <span class="penny-hero__voice" id="pennyPresenceTag">Active loop engaged</span>
+                        <span class="penny-hero__voice" id="pennyPresenceTag">Stable Penny presence</span>
 
                         <div class="chip-row">
                           <span class="chip chip--penny">Pink-forward identity</span>
@@ -5860,7 +5918,7 @@
                           Ready to route project inquiries, handle polished introductions, and make the contact lane feel like a real premium experience.
                         </div>
                         <div class="penny-console__sub" id="pennyStatusSub">
-                          Open Penny Office, choose a lane, and she will keep the room feeling attentive instead of static.
+                          Choose a lane and send the details when you are ready.
                         </div>
                         <div class="penny-console__meta" aria-label="Penny office telemetry">
                           <div class="penny-console__meter">
@@ -5886,7 +5944,7 @@
                     <div class="contact-card__head">
                       <h3>Leave a message for Penny</h3>
                       <p>
-                        The form now lives inside Penny’s interaction cluster so her live readout, your typing lane, and your contact options all stay together instead of feeling split across the room.
+                        Use Penny Office for a clean, polished first contact without sacrificing the premium feel of the room.
                       </p>
                     </div>
 
@@ -5914,8 +5972,8 @@
                             <span>Focused Penny channel</span>
                             <span id="pennyIntimateMode">Listening close</span>
                           </div>
-                          <div class="penny-intimate-bubble" id="pennyIntimateBubble">Tell me what you need, honey.</div>
-                          <div class="penny-intimate-interface__sub" id="pennyIntimateSub">The moment you touch the form, Penny shifts into a closer holographic lane and keeps the exchange personal.</div>
+                          <div class="penny-intimate-bubble" id="pennyIntimateBubble">Tell me what you need built.</div>
+                          <div class="penny-intimate-interface__sub" id="pennyIntimateSub">Penny remains present here as a stable branded guide for the contact lane.</div>
                         </div>
                       </div>
                     </div>
@@ -5946,12 +6004,12 @@
 
                         <label>
                           <span class="visually-hidden">Message</span>
-                          <textarea class="textarea" id="pennyFormMessage" name="message" placeholder="Tell me what you want built. Penny is paying attention." data-penny-field="message"></textarea>
+                          <textarea class="textarea" id="pennyFormMessage" name="message" placeholder="Tell me what you want built." data-penny-field="message"></textarea>
                         </label>
 
                         <div class="submit-row">
                           <p class="submit-note">
-                            Email, phone, text, and form pathways all stay live here, but this lane is tuned for the cleanest handoff when you want to explain exactly what you need.
+                            Email, phone, text, and form pathways all stay live here, with this lane tuned for the cleanest written handoff when you want to explain exactly what you need.
                           </p>
                           <button class="submit-btn interactive-surface" type="submit">Send Message</button>
                         </div>
@@ -5960,11 +6018,11 @@
                       <aside class="penny-form-aside">
                         <div class="penny-form-surface" id="pennyFormSurface" data-penny-surface="form">
                           <div class="penny-form-surface__label">Penny live readout</div>
-                          <div class="penny-form-surface__status" id="pennyFormStatus">Tell me what you need, honey.</div>
-                          <div class="penny-form-surface__sub" id="pennyFormSub">Move through the form and Penny reacts here in real time, so the intake lane feels live instead of generic.</div>
+                          <div class="penny-form-surface__status" id="pennyFormStatus">Tell me what you need built.</div>
+                          <div class="penny-form-surface__sub" id="pennyFormSub">This readout stays stable in public mode so the intake lane feels polished instead of noisy.</div>
                           <div class="penny-form-surface__meta">
-                            <span id="pennyTierLabel">Baseline flirt</span>
-                            <span id="pennyFocusLabel">Waiting for your move</span>
+                            <span id="pennyTierLabel">Penny Lite</span>
+                            <span id="pennyFocusLabel">Stable intake lane</span>
                           </div>
                         </div>
 
@@ -6391,538 +6449,76 @@ slot</div>
       const pennyIntimateMode = document.getElementById('pennyIntimateMode');
       const pennyFormFields = pennyContactForm ? Array.from(pennyContactForm.querySelectorAll('[data-penny-field]')) : [];
       const pennyMessageField = pennyContactForm ? pennyContactForm.querySelector('[data-penny-field="message"]') : null;
-      const pennyDialogue = {
-        greeting: [
-          'There you are. You made it to my office. Good choice.',
-          'Welcome in, honey. You picked the one room that knows how to handle attention properly.',
-          'Penny online. Tell me what deserves my hands first.'
-        ],
-        repeatGreeting: [
-          'Back again? I noticed.',
-          'You came back to my office. That usually means you are serious now.',
-          'There you are again. I was starting to think you liked it in here.'
-        ],
-        idle: [
-          'You can keep staring or you can give me something to work with.',
-          'Email, phone, message... pick your lane. I will make it worth it.',
-          'Take your time, honey. I get more interesting when you linger.',
-          'Quiet room. Dangerous little amount of potential.'
-        ],
-        email: [
-          'Opening the polished written lane now. Best for proposals, assets, and details worth preserving.',
-          'Email it. Clean, traceable, impossible to mishear.',
-          'Written lane engaged. Very civilized.'
-        ],
-        phone: [
-          'Direct line. Bold. I like that.',
-          'Call lane armed. Fastest route if you already know you want movement.',
-          'Phone selected. Minimal ceremony, maximum momentum.'
-        ],
-        text: [
-          'Text lane engaged. Quick first touch, low friction, very attractive.',
-          'Fast lane selected. A little less ceremony, a little more momentum.',
-          'Message first. Sensible.'
-        ],
-        concierge: [
-          'Tell me what you need, honey.',
-          'You are in the right room for a polished handoff.',
-          'Stay with me. I will keep the whole lane sharp.'
-        ],
-        baselineFlirt: [
-          'There you are.',
-          'You made it to my office. Good choice.',
-          'Tell me what you need, honey.'
-        ],
-        engagedFlirt: [
-          'Mm. Better. Now you have my full attention.',
-          'Keep going. You are giving me something useful to work with now.',
-          'That is more like it. I prefer a visitor who commits.'
-        ],
-        edgeFlirt: [
-          'Keep looking at me like that and I might start prioritizing you on purpose.',
-          'You have been in my office long enough to know I am not the generic option.',
-          'Stay sharp, honey. You are getting very close to my favorite kind of attention.'
-        ],
-        fieldFocus: {
-          name: [
-            'Start with your name. I like knowing who walked into my office.',
-            'Give me your name first. I prefer not to flirt with placeholders.'
-          ],
-          email: [
-            'Good. Give me the inbox that deserves the polished reply.',
-            'Drop the email here and I will keep the written lane clean.'
-          ],
-          phone: [
-            'Phone number. Useful when speed matters more than ceremony.',
-            'Put the number here if you want the shorter distance between interest and action.'
-          ],
-          project: [
-            'Project type. Let me know what kind of trouble we are about to make look expensive.',
-            'Name the lane. Build, rescue, redesign, automation... I like specifics.'
-          ],
-          message: [
-            'Now the interesting part. Tell me what you actually want.',
-            'Message box. This is where you stop circling and give me the real version.'
-          ]
-        },
-        typing: {
-          baseline: [
-            'There we go. Much better.',
-            'Keep going. I am reading.',
-            'Good. Give me the version with substance.'
-          ],
-          engaged: [
-            'That is more like it. I knew you had something worthwhile for me.',
-            'Yes. Keep typing. I like decisive visitors.',
-            'You are warming this room up nicely.'
-          ],
-          edge: [
-            'Mm. Now you have me interested.',
-            'Careful, honey. Competence is a very good look on you.',
-            'Keep feeding me details and I may start sounding impressed.'
-          ]
-        },
-        hesitation: {
-          baseline: [
-            'Still deciding? I can wait a little.',
-            'You do not have to be shy. Just give me the clean version.'
-          ],
-          engaged: [
-            'You can linger if you want. I am enjoying watching you think.',
-            'Take the hint, honey. Pick a lane or give me the message.'
-          ],
-          edge: [
-            'You have been hovering long enough that I know this matters to you.',
-            'Keep hesitating and I will start thinking you came in here for me.'
-          ]
-        }
-      };
-      const pennyState = {
-        openedInSession: false,
-        visitCount: 0,
-        interactionCount: 0,
-        lastInteractionType: 'waiting',
-        idleTimer: 0,
-        lingerTimers: [],
-        idleIndex: 0,
-        engagementLevel: 1,
-        isOfficeActive: false,
-        currentField: '',
-        firstName: '',
-        typingCount: 0,
-        dwellStart: 0,
-        lastStatusKey: '',
-        formIdleTimer: 0,
-        formFocusCount: 0,
-        isIntimateOpen: false
-      };
+      
+const pennyLiteDefaults = {
+  modeChip: 'Online · Professional',
+  engagementChip: 'Stable public mode',
+  presenceTag: 'Stable Penny presence',
+  role: 'Executive concierge intelligence',
+  roleSubcopy: 'Guides contact, tone, and first impressions without losing control.',
+  signal: 'Pink control layer',
+  signalSubcopy: 'Distinct from the base blue/violet system, refined for a stable public-facing experience.',
+  status: 'Penny Office is online and ready to route project inquiries, polished introductions, and clean first-contact handoffs.',
+  statusSub: 'Choose your preferred lane and send the details when you are ready.',
+  formStatus: 'Tell me what you need built.',
+  formSub: 'Use the form for the cleanest written handoff.',
+  tier: 'Penny Lite',
+  focus: 'Stable intake lane'
+};
 
-      function getPennyName() {
-        return pennyState.firstName || 'honey';
-      }
+function setStaticText(node, value) {
+  if (node && typeof value === 'string') {
+    node.textContent = value;
+  }
+}
 
-      function personalize(line) {
-        return String(line || '').replace(/honey/g, getPennyName());
-      }
+function applyPennyLiteState(isContactPage) {
+  if (pennyOffice) {
+    pennyOffice.classList.remove('is-engaged');
+    pennyOffice.classList.toggle('is-active', !!isContactPage);
+  }
+  setStaticText(pennyModeChip, pennyLiteDefaults.modeChip);
+  setStaticText(pennyEngagementChip, pennyLiteDefaults.engagementChip);
+  setStaticText(pennyPresenceTag, pennyLiteDefaults.presenceTag);
+  setStaticText(pennyRoleReadout, pennyLiteDefaults.role);
+  setStaticText(pennyRoleSubcopy, pennyLiteDefaults.roleSubcopy);
+  setStaticText(pennySignalReadout, pennyLiteDefaults.signal);
+  setStaticText(pennySignalSubcopy, pennyLiteDefaults.signalSubcopy);
+  setStaticText(pennyStatus, pennyLiteDefaults.status);
+  setStaticText(pennyStatusSub, pennyLiteDefaults.statusSub);
+  setStaticText(pennyVisitCount, 'Public mode');
+  setStaticText(pennyInteractionCount, 'Reactive logic disabled');
+  setStaticText(pennyLastAction, isContactPage ? 'Office open' : 'Standing by');
+  setStaticText(pennyFormStatus, pennyLiteDefaults.formStatus);
+  setStaticText(pennyFormSub, pennyLiteDefaults.formSub);
+  setStaticText(pennyTierLabel, pennyLiteDefaults.tier);
+  setStaticText(pennyFocusLabel, pennyLiteDefaults.focus);
+  setStaticText(pennyIntimateMode, 'Stable Penny channel');
+  setStaticText(pennyIntimateBubble, 'Tell me what you need built.');
+  setStaticText(pennyIntimateSub, 'Penny remains present here as a stable branded guide for the contact lane.');
+  if (pennyIntimateInterface) {
+    pennyIntimateInterface.classList.remove('is-open', 'is-engaged');
+    pennyIntimateInterface.setAttribute('aria-hidden', 'true');
+  }
+  if (pennyFormSurface) {
+    pennyFormSurface.classList.remove('is-engaged');
+  }
+}
 
-      function getTierName(level = pennyState.engagementLevel) {
-        if (level >= 3) return 'Edge flirt';
-        if (level >= 2) return 'Engaged flirt';
-        return 'Baseline flirt';
-      }
+function enterPennyOffice() {
+  applyPennyLiteState(true);
+}
 
-      function getTierPool(baseName) {
-        if (baseName === 'typing') {
-          return pennyState.engagementLevel >= 3 ? pennyDialogue.typing.edge : pennyState.engagementLevel >= 2 ? pennyDialogue.typing.engaged : pennyDialogue.typing.baseline;
-        }
-        if (baseName === 'hesitation') {
-          return pennyState.engagementLevel >= 3 ? pennyDialogue.hesitation.edge : pennyState.engagementLevel >= 2 ? pennyDialogue.hesitation.engaged : pennyDialogue.hesitation.baseline;
-        }
-        if (baseName === 'flirt') {
-          return pennyState.engagementLevel >= 3 ? pennyDialogue.edgeFlirt : pennyState.engagementLevel >= 2 ? pennyDialogue.engagedFlirt : pennyDialogue.baselineFlirt;
-        }
-        return pennyDialogue[baseName] || pennyDialogue.idle;
-      }
+function leavePennyOffice() {
+  applyPennyLiteState(false);
+}
 
-      function pickPennyLine(poolName, fieldName) {
-        const pool = poolName === 'fieldFocus'
-          ? ((pennyDialogue.fieldFocus && pennyDialogue.fieldFocus[fieldName]) || pennyDialogue.baselineFlirt)
-          : Array.isArray(getTierPool(poolName))
-            ? getTierPool(poolName)
-            : pennyDialogue[poolName] || pennyDialogue.idle;
-        if (!pool || !pool.length) return '';
-        const offset = poolName === 'idle' || poolName === 'hesitation'
-          ? pennyState.idleIndex++
-          : Math.max(0, pennyState.interactionCount + pennyState.visitCount + pennyState.typingCount + pennyState.formFocusCount);
-        return personalize(pool[offset % pool.length]);
-      }
+function reactToPennyAction() {
+  return;
+}
 
-      function refreshPennyTierBySignals() {
-        const dwellSeconds = pennyState.dwellStart ? (Date.now() - pennyState.dwellStart) / 1000 : 0;
-        let level = 1;
-        if (pennyState.visitCount >= 2 || pennyState.interactionCount >= 3 || pennyState.formFocusCount >= 2 || dwellSeconds >= 8) {
-          level = 2;
-        }
-        if (pennyState.visitCount >= 2 && (pennyState.interactionCount >= 6 || pennyState.typingCount >= 5 || dwellSeconds >= 18)) {
-          level = 3;
-        }
-        pennyState.engagementLevel = Math.max(pennyState.engagementLevel, level);
-        if (pennyState.engagementLevel > 3) pennyState.engagementLevel = 3;
-      }
+function openEProjection() {
 
-      function updatePennyTelemetry() {
-        refreshPennyTierBySignals();
-        if (pennyVisitCount) {
-          pennyVisitCount.textContent = pennyState.visitCount + (pennyState.visitCount === 1 ? ' visit this session' : ' visits this session');
-        }
-        if (pennyInteractionCount) {
-          pennyInteractionCount.textContent = pennyState.interactionCount + ' handled';
-        }
-        if (pennyLastAction) {
-          const labels = {
-            waiting: 'Waiting gracefully',
-            enter: 'Office opened',
-            email: 'Email lane armed',
-            phone: 'Phone lane armed',
-            text: 'Text lane armed',
-            concierge: 'Concierge routing',
-            name: 'Name lane engaged',
-            emailField: 'Inbox requested',
-            phoneField: 'Call lane hinted',
-            project: 'Scope lane engaged',
-            message: 'Message lane engaged',
-            typing: 'Reading live input',
-            hesitation: 'Watching the hesitation'
-          };
-          pennyLastAction.textContent = labels[pennyState.lastInteractionType] || 'Watching closely';
-        }
-        if (pennyModeChip) {
-          const modeMap = {
-            1: 'Online · Flirty',
-            2: 'Online · Engaged',
-            3: 'Online · Edge'
-          };
-          pennyModeChip.textContent = modeMap[pennyState.engagementLevel] || modeMap[1];
-        }
-        if (pennyEngagementChip) {
-          pennyEngagementChip.textContent = getTierName();
-        }
-        if (pennyPresenceTag) {
-          const presenceMap = {
-            1: 'Active loop engaged',
-            2: 'Attention sharpening',
-            3: 'Priority handling active'
-          };
-          pennyPresenceTag.textContent = presenceMap[pennyState.engagementLevel] || presenceMap[1];
-        }
-        if (pennyRoleReadout) {
-          pennyRoleReadout.textContent = pennyState.engagementLevel >= 3 ? 'Executive concierge intelligence' : pennyState.engagementLevel >= 2 ? 'Live intake concierge' : 'Front desk intelligence';
-        }
-        if (pennyRoleSubcopy) {
-          pennyRoleSubcopy.textContent = pennyState.engagementLevel >= 3
-            ? 'She is now reading you as an active lead, not a passive visitor.'
-            : pennyState.engagementLevel >= 2
-              ? 'Confident routing, sharper readouts, and stronger awareness now that you have her engaged.'
-              : 'Guides contact, tone, and first impressions without losing control.';
-        }
-        if (pennySignalReadout) {
-          pennySignalReadout.textContent = pennyState.engagementLevel >= 3 ? 'Pink control layer intensifying' : 'Pink control layer';
-        }
-        if (pennySignalSubcopy) {
-          pennySignalSubcopy.textContent = pennyState.engagementLevel >= 3
-            ? 'Distinct from the base blue/violet system, brighter because you stayed.'
-            : pennyState.engagementLevel >= 2
-              ? 'Distinct from the base blue/violet system, brighter when she has your attention.'
-              : 'Distinct from the base blue/violet system, elegant even at idle.';
-        }
-        if (pennyTierLabel) {
-          pennyTierLabel.textContent = getTierName();
-        }
-        if (pennyFocusLabel) {
-          const focusMap = {
-            '': 'Waiting for your move',
-            name: 'Name lane live',
-            email: 'Inbox lane live',
-            phone: 'Phone lane live',
-            project: 'Scope lane live',
-            message: 'Message lane live'
-          };
-          pennyFocusLabel.textContent = focusMap[pennyState.currentField] || 'Watching you closely';
-        }
-
-        if (pennyOffice) {
-          pennyOffice.classList.toggle('is-active', pennyState.isOfficeActive);
-          pennyOffice.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
-        }
-        if (pennyFormSurface) {
-          pennyFormSurface.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
-        }
-        if (pennyIntimateInterface) {
-          pennyIntimateInterface.classList.toggle('is-open', pennyState.isOfficeActive && pennyState.isIntimateOpen);
-          pennyIntimateInterface.classList.toggle('is-engaged', pennyState.isOfficeActive && pennyState.engagementLevel >= 2);
-          pennyIntimateInterface.setAttribute('aria-hidden', pennyState.isOfficeActive && pennyState.isIntimateOpen ? 'false' : 'true');
-        }
-        if (pennyIntimateMode) {
-          const intimateModeMap = {
-            '': 'Listening close',
-            name: 'Learning your name',
-            email: 'Inbox locked',
-            phone: 'Call lane armed',
-            project: 'Scope lane open',
-            message: 'Reading you live'
-          };
-          pennyIntimateMode.textContent = intimateModeMap[pennyState.currentField] || (pennyState.engagementLevel >= 3 ? 'Priority focus' : pennyState.engagementLevel >= 2 ? 'Focused attention' : 'Listening close');
-        }
-      }
-
-      function setPennyStatus(message, subcopy, statusKey = '') {
-        const normalizedMessage = personalize(message);
-        if (pennyStatus && normalizedMessage) {
-          pennyStatus.textContent = normalizedMessage;
-        }
-        if (pennyStatusSub && subcopy) {
-          pennyStatusSub.textContent = personalize(subcopy);
-        }
-        if (pennyFormStatus && normalizedMessage) {
-          pennyFormStatus.textContent = normalizedMessage;
-        }
-        if (pennyFormSub && subcopy) {
-          pennyFormSub.textContent = personalize(subcopy);
-        }
-        if (pennyIntimateBubble && normalizedMessage) {
-          pennyIntimateBubble.textContent = normalizedMessage;
-        }
-        if (pennyIntimateSub && subcopy) {
-          pennyIntimateSub.textContent = personalize(subcopy);
-        }
-        if (statusKey) {
-          pennyState.lastStatusKey = statusKey;
-        }
-        updatePennyTelemetry();
-      }
-
-      function openPennyIntimate(fieldName) {
-        if (!pennyState.isOfficeActive) return;
-        pennyState.isIntimateOpen = true;
-        if (fieldName) {
-          pennyState.currentField = fieldName;
-        }
-        updatePennyTelemetry();
-      }
-
-      function closePennyIntimate() {
-        pennyState.isIntimateOpen = false;
-        updatePennyTelemetry();
-      }
-
-      function clearPennyIdleTimer() {
-        window.clearTimeout(pennyState.idleTimer);
-        pennyState.idleTimer = 0;
-      }
-
-      function clearPennyFormIdleTimer() {
-        window.clearTimeout(pennyState.formIdleTimer);
-        pennyState.formIdleTimer = 0;
-      }
-
-      function clearPennyLingerTimers() {
-        pennyState.lingerTimers.forEach((timerId) => window.clearTimeout(timerId));
-        pennyState.lingerTimers = [];
-      }
-
-      function schedulePennyIdle() {
-        clearPennyIdleTimer();
-        if (!pennyState.isOfficeActive || !pennyOffice) return;
-        pennyState.idleTimer = window.setTimeout(() => {
-          if (!pennyState.isOfficeActive) return;
-          pennyState.lastInteractionType = 'waiting';
-          setPennyStatus(
-            pickPennyLine('idle'),
-            'Stay in the room, pick a lane, or hand Penny the polished version here in the form.',
-            'idle'
-          );
-          schedulePennyIdle();
-        }, pennyState.engagementLevel >= 3 ? 4600 : 6200);
-      }
-
-      function schedulePennyFormIdle() {
-        clearPennyFormIdleTimer();
-        if (!pennyState.isOfficeActive || !pennyState.currentField) return;
-        pennyState.formIdleTimer = window.setTimeout(() => {
-          if (!pennyState.isOfficeActive || !pennyState.currentField) return;
-          pennyState.lastInteractionType = 'hesitation';
-          setPennyStatus(
-            pickPennyLine('hesitation'),
-            'You paused in the ' + pennyState.currentField + ' lane. Penny is still reading the room.',
-            'hesitation'
-          );
-          schedulePennyIdle();
-        }, pennyState.engagementLevel >= 3 ? 3200 : 4300);
-      }
-
-      function schedulePennyLingerEscalation() {
-        clearPennyLingerTimers();
-        if (!pennyState.isOfficeActive) return;
-        pennyState.lingerTimers.push(window.setTimeout(() => {
-          if (!pennyState.isOfficeActive) return;
-          refreshPennyTierBySignals();
-          if (pennyState.engagementLevel < 2) {
-            pennyState.engagementLevel = 2;
-          }
-          setPennyStatus(
-            pickPennyLine('engagedFlirt'),
-            'You stayed long enough to move her out of baseline mode.',
-            'linger-engaged'
-          );
-        }, 8000));
-        pennyState.lingerTimers.push(window.setTimeout(() => {
-          if (!pennyState.isOfficeActive) return;
-          refreshPennyTierBySignals();
-          if (pennyState.engagementLevel < 3) {
-            pennyState.engagementLevel = 3;
-          }
-          setPennyStatus(
-            pickPennyLine('edgeFlirt'),
-            'That is the edge tier: bolder, still controlled, still premium.',
-            'linger-edge'
-          );
-        }, 18000));
-      }
-
-      function bumpPennyEngagement(type, weight = 1) {
-        pennyState.lastInteractionType = type || pennyState.lastInteractionType;
-        if (type !== 'enter') {
-          pennyState.interactionCount += weight;
-        }
-        refreshPennyTierBySignals();
-        updatePennyTelemetry();
-        schedulePennyIdle();
-      }
-
-      function enterPennyOffice() {
-        pennyState.isOfficeActive = true;
-        pennyState.visitCount += 1;
-        pennyState.lastInteractionType = 'enter';
-        pennyState.dwellStart = Date.now();
-        const pool = pennyState.openedInSession ? 'repeatGreeting' : 'greeting';
-        pennyState.openedInSession = true;
-        refreshPennyTierBySignals();
-        setPennyStatus(
-          pickPennyLine(pool),
-          'Start with a route, or use the form below and let Penny react as you move through it.',
-          'enter'
-        );
-        schedulePennyIdle();
-        schedulePennyLingerEscalation();
-      }
-
-      function leavePennyOffice() {
-        pennyState.isOfficeActive = false;
-        pennyState.currentField = '';
-        closePennyIntimate();
-        clearPennyIdleTimer();
-        clearPennyFormIdleTimer();
-        clearPennyLingerTimers();
-        updatePennyTelemetry();
-      }
-
-      function reactToPennyAction(type, fallbackMessage) {
-        if (!pennyState.isOfficeActive) return;
-        bumpPennyEngagement(type, 1);
-        const line = pickPennyLine(type) || fallbackMessage || pickPennyLine('concierge');
-        const subcopyMap = {
-          email: 'Email works best for details, scope, references, and anything worth keeping crisp.',
-          phone: 'Calls are best when speed matters and you want the shortest distance between interest and action.',
-          text: 'Text is the fast lane for first touch, quick questions, and lower-friction follow-up.',
-          concierge: 'Concierge routing stays elegant on small screens and stable across the fake-page system.'
-        };
-        setPennyStatus(line, subcopyMap[type] || 'Penny is tracking your route and keeping the office responsive.', type);
-      }
-
-      function handlePennyFieldFocus(fieldName) {
-        if (!pennyState.isOfficeActive) return;
-        openPennyIntimate(fieldName);
-        pennyState.currentField = fieldName;
-        pennyState.formFocusCount += 1;
-        const typeMap = {
-          name: 'name',
-          email: 'emailField',
-          phone: 'phoneField',
-          project: 'project',
-          message: 'message'
-        };
-        bumpPennyEngagement(typeMap[fieldName] || 'concierge', fieldName === 'message' ? 1 : 0);
-        setPennyStatus(
-          pickPennyLine('fieldFocus', fieldName),
-          'She is reacting locally while you work through the ' + fieldName + ' lane.',
-          'focus-' + fieldName
-        );
-        schedulePennyFormIdle();
-      }
-
-      function handlePennyFieldBlur(fieldName) {
-        if (pennyState.currentField === fieldName) {
-          pennyState.currentField = '';
-        }
-        updatePennyTelemetry();
-        schedulePennyIdle();
-      }
-
-      function maybeCapturePennyName(value) {
-        const match = String(value || '').trim().match(/[A-Za-z][A-Za-z'-]*/);
-        pennyState.firstName = match ? match[0] : '';
-      }
-
-      function handlePennyTyping(fieldName, value) {
-        if (!pennyState.isOfficeActive) return;
-        if (fieldName === 'name') {
-          maybeCapturePennyName(value);
-        }
-        if (fieldName !== 'message') {
-          schedulePennyFormIdle();
-          return;
-        }
-        const cleanValue = String(value || '').trim();
-        if (!cleanValue) {
-          schedulePennyFormIdle();
-          return;
-        }
-        pennyState.typingCount += 1;
-        pennyState.lastInteractionType = 'typing';
-        refreshPennyTierBySignals();
-        if (pennyState.typingCount === 1 || cleanValue.length % 26 === 0) {
-          setPennyStatus(
-            pickPennyLine('typing'),
-            'Penny is reacting near the form so the handoff feels live while you write.',
-            'typing'
-          );
-        } else {
-          updatePennyTelemetry();
-        }
-        schedulePennyFormIdle();
-      }
-
-      pennyFormFields.forEach((field) => {
-        const fieldName = field.getAttribute('data-penny-field') || '';
-        field.addEventListener('focus', () => handlePennyFieldFocus(fieldName));
-        field.addEventListener('blur', () => handlePennyFieldBlur(fieldName));
-        field.addEventListener('input', () => handlePennyTyping(fieldName, field.value));
-      });
-
-      if (pennyContactForm) {
-        pennyContactForm.addEventListener('submit', () => {
-          if (!pennyState.isOfficeActive) return;
-          bumpPennyEngagement('concierge', 1);
-          setPennyStatus(
-            'Perfect. Leave the rest to me.',
-            'That handoff is ready to leave the room looking expensive.',
-            'submit'
-          );
-        });
-      }
-
-
-      function openEProjection() {
         if (!eProjectionOverlay) return;
         eProjectionOverlay.classList.add('is-open');
         eProjectionOverlay.setAttribute('aria-hidden', 'false');
@@ -6969,97 +6565,9 @@ slot</div>
         });
       }
 
-      const pennyContactOverlay = document.getElementById('pennyContactOverlay');
-      const pennyContactOverlayVideo = document.getElementById('pennyContactOverlayVideo');
-      const pennyContactOverlayText = document.getElementById('pennyContactOverlayText');
-      const pennyAssistLinks = Array.from(document.querySelectorAll('[data-penny-assist]'));
-      const pennyAssistRoutes = {
-        phone: {
-          href: 'tel:(402) 915-0789',
-          video: './media/penny/video/penny_phone_pop.webm',
-          message: 'Let me put you through, honey.',
-          delay: 1500
-        },
-        email: {
-          href: 'mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Inquiry&body=Hi%20Matt,%0A%0APenny%20pointed%20me%20your%20way.%20I%E2%80%99d%20like%20to%20discuss',
-          video: './media/penny/video/penny_email_pop.webm',
-          message: 'Let me get that ready for you, honey.',
-          delay: 1800
-        }
-      };
-      let pennyAssistTimer = 0;
-      let pennyAssistResetTimer = 0;
-      let pennyAssistBusy = false;
+      
+function syncManagedVideos(activePage) {
 
-      function resetPennyContactOverlay() {
-        if (!pennyContactOverlay) return;
-        window.clearTimeout(pennyAssistResetTimer);
-        pennyContactOverlay.classList.remove('is-visible');
-        pennyContactOverlay.setAttribute('aria-hidden', 'true');
-        if (pennyContactOverlayVideo) {
-          pennyContactOverlayVideo.pause();
-          pennyContactOverlayVideo.removeAttribute('src');
-          pennyContactOverlayVideo.load();
-        }
-      }
-
-      function finishPennyAssist(href) {
-        window.clearTimeout(pennyAssistTimer);
-        pennyAssistBusy = false;
-        pennyAssistResetTimer = window.setTimeout(resetPennyContactOverlay, 220);
-        window.location.href = href;
-      }
-
-      function runPennyAssist(type) {
-        const route = pennyAssistRoutes[type];
-        if (!route || !pennyContactOverlay || !pennyContactOverlayVideo || !pennyContactOverlayText || pennyAssistBusy) {
-          return false;
-        }
-
-        pennyAssistBusy = true;
-        window.clearTimeout(pennyAssistTimer);
-        window.clearTimeout(pennyAssistResetTimer);
-        pennyContactOverlayText.textContent = route.message;
-        pennyContactOverlay.classList.add('is-visible');
-        pennyContactOverlay.setAttribute('aria-hidden', 'false');
-
-        const video = pennyContactOverlayVideo;
-        const handleError = function () {
-          finishPennyAssist(route.href);
-        };
-
-        video.onerror = handleError;
-        video.onabort = handleError;
-        video.src = route.video;
-        video.currentTime = 0;
-
-        const playAttempt = video.play();
-        if (playAttempt && typeof playAttempt.catch === 'function') {
-          playAttempt.catch(handleError);
-        }
-
-        pennyAssistTimer = window.setTimeout(() => finishPennyAssist(route.href), route.delay);
-        return true;
-      }
-
-      pennyAssistLinks.forEach((link) => {
-        link.addEventListener('click', (event) => {
-          const type = link.getAttribute('data-penny-assist');
-          if (!type) return;
-          reactToPennyAction(type, link.getAttribute('data-penny-message') || '');
-          if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
-            return;
-          }
-
-          if (!runPennyAssist(type)) {
-            return;
-          }
-
-          event.preventDefault();
-        });
-      });
-
-      function syncManagedVideos(activePage) {
         managedVideos.forEach((video) => {
           const parentArticle = video.closest('.article[data-page]');
           const shouldPlay = !parentArticle || parentArticle.dataset.page === activePage;
@@ -7165,11 +6673,11 @@ slot</div>
         }
 
         const state = {
-          rotationY: -20,
+          rotationY: 0,
           tiltX: -11,
           velocityY: 0,
           velocityX: 0,
-          autoSpeed: reduceMotionQuery.matches ? 0 : -0.02,
+          autoSpeed: reduceMotionQuery.matches ? 0 : -0.016,
           autoBlend: reduceMotionQuery.matches ? 0 : 1,
           cardRadius: 280,
           lastTime: performance.now(),
@@ -7273,14 +6781,18 @@ slot</div>
             const worldAngle = normalizeAngle(baseAngle + state.rotationY);
             const distance = Math.abs(worldAngle);
             const depthFactor = (Math.cos(worldAngle * Math.PI / 180) + 1) / 2;
-            const opacity = 0.34 + depthFactor * 0.66;
-            const blur = (1 - depthFactor) * 1.6;
-            const scale = 0.86 + depthFactor * 0.16;
+            const opacity = 0.38 + depthFactor * 0.62;
+            const blur = (1 - depthFactor) * 1.15;
+            const scale = 0.88 + depthFactor * 0.14;
+            const isNear = depthFactor > 0.72;
+            const isFront = distance < 12;
 
             card.style.transform = 'rotateY(' + baseAngle + 'deg) translateZ(' + state.cardRadius + 'px) scale(' + scale.toFixed(3) + ')';
             card.style.opacity = opacity.toFixed(3);
             card.style.filter = 'blur(' + blur.toFixed(2) + 'px)';
             card.style.zIndex = String(Math.round(depthFactor * 100));
+            card.classList.toggle('is-near', isNear);
+            card.classList.toggle('is-front', isFront);
 
             if (distance < bestDistance) {
               bestDistance = distance;
@@ -7363,10 +6875,10 @@ slot</div>
           const dy = event.clientY - state.lastPointerY;
           const dt = Math.max(16, now - state.lastPointerTime);
           const isMouse = state.activePointerType === 'mouse';
-          const rotationGain = isMouse ? 0.09 : 0.22;
-          const tiltGain = isMouse ? 0.03 : 0.085;
-          const velocityGainY = isMouse ? 2.1 : 6.2;
-          const velocityGainX = isMouse ? 0.72 : 2.1;
+          const rotationGain = isMouse ? 0.065 : 0.2;
+          const tiltGain = isMouse ? 0.02 : 0.075;
+          const velocityGainY = isMouse ? 1.45 : 5.4;
+          const velocityGainX = isMouse ? 0.48 : 1.8;
 
           state.rotationY += dx * rotationGain;
           state.tiltX -= dy * tiltGain;
@@ -7385,8 +6897,8 @@ slot</div>
           spinnerStage.classList.add('is-idle');
 
           if (state.activePointerType === 'mouse') {
-            state.velocityY = clamp(state.velocityY, -0.24, 0.24);
-            state.velocityX = clamp(state.velocityX, -0.08, 0.08);
+            state.velocityY = clamp(state.velocityY, -0.16, 0.16);
+            state.velocityX = clamp(state.velocityX, -0.05, 0.05);
           }
 
           if (spinnerStage.releasePointerCapture) {
@@ -7440,14 +6952,14 @@ slot</div>
               const isMouseMomentum = state.activePointerType === 'mouse';
               state.rotationY += state.velocityY * delta;
               state.tiltX += state.velocityX * delta;
-              state.velocityY *= isMouseMomentum ? 0.84 : 0.94;
-              state.velocityX *= isMouseMomentum ? 0.78 : 0.9;
+              state.velocityY *= isMouseMomentum ? 0.8 : 0.93;
+              state.velocityX *= isMouseMomentum ? 0.72 : 0.88;
 
-              if (Math.abs(state.velocityY) < 0.002) state.velocityY = 0;
-              if (Math.abs(state.velocityX) < 0.002) state.velocityX = 0;
+              if (Math.abs(state.velocityY) < 0.0015) state.velocityY = 0;
+              if (Math.abs(state.velocityX) < 0.0015) state.velocityX = 0;
 
               if (!reduceMotionQuery.matches) {
-                state.autoBlend = Math.min(1, state.autoBlend + delta * 0.0008);
+                state.autoBlend = Math.min(1, state.autoBlend + delta * 0.00065);
                 state.rotationY += state.autoSpeed * delta * state.autoBlend;
               }
             }
@@ -7478,601 +6990,24 @@ slot</div>
       window.setInterval(updateWatchTime, 30000);
 
       if (pennyStatus && pennyStatusCards.length) {
-        pennyStatusCards.forEach((card) => {
-          const message = card.getAttribute('data-penny-message') || pennyStatus.textContent.trim();
-          const officeCard = card.closest('#pennyOffice');
-          const actionType = card.getAttribute('data-penny-action') || card.getAttribute('data-penny-assist') || (officeCard ? 'concierge' : '');
-
-          const activate = function () {
-            if (!pennyState.isOfficeActive || !officeCard) return;
-            if (actionType) {
-              reactToPennyAction(actionType, message);
-            } else {
-              setPennyStatus(message, 'Penny is reading the room and keeping the office responsive.');
-            }
-            card.classList.add('is-engaged');
-          };
-
-          const reset = function () {
-            card.classList.remove('is-engaged');
-            if (!pennyState.isOfficeActive || !officeCard) return;
-            schedulePennyIdle();
-          };
-
-          card.addEventListener('mouseenter', activate);
-          card.addEventListener('focus', activate);
-          card.addEventListener('mouseleave', reset);
-          card.addEventListener('blur', reset);
-          card.addEventListener('touchstart', activate, { passive: true });
-        });
+        // Penny Lite: reactive hover/status behavior intentionally disabled.
       }
 
       pennyOfficeSurfaces.forEach((surface) => {
-        surface.addEventListener('pointerdown', () => {
-          if (!pennyState.isOfficeActive) return;
-          pennyState.engagementLevel = Math.min(3, Math.max(pennyState.engagementLevel, 2));
-          updatePennyTelemetry();
-          schedulePennyIdle();
-        }, { passive: true });
+        void surface;
       });
 
-      updatePennyTelemetry();
+      applyPennyLiteState(document.querySelector('.article.is-active')?.dataset.page === 'contact');
     })();
   </script>
 
 <script>
-/* ========================================
-   Penny Brain v1.2 — Drift State Engine
-   Full replacement block
-   Paste directly above </body>
-======================================== */
 (function () {
   "use strict";
 
-  const onReady = (fn) => {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn, { once: true });
-    } else {
-      fn();
-    }
-  };
-
-  onReady(() => {
-    const intimateWrap = document.getElementById("pennyIntimateInterface");
-    const intimateBubble = document.getElementById("pennyIntimateBubble");
-    const intimateSub = document.getElementById("pennyIntimateSub");
-    const intimateMode = document.getElementById("pennyIntimateMode");
-
-    const form = document.getElementById("pennyContactForm");
-    const formStatus = document.getElementById("pennyFormStatus");
-    const tierLabel = document.getElementById("pennyTierLabel");
-    const focusLabel = document.getElementById("pennyFocusLabel");
-
-    const nameField = document.getElementById("pennyFormName");
-    const emailField = document.getElementById("pennyFormEmail");
-    const phoneField = document.getElementById("pennyFormPhone");
-    const projectField = document.getElementById("pennyFormProject");
-    const messageField = document.getElementById("pennyFormMessage");
-
-    const intimateVideo = document.querySelector('[data-managed-video="penny-intimate"]');
-    const priorityActions = Array.from(document.querySelectorAll(".interactive-surface, .priority-action, [data-penny-action], [data-penny-assist]"));
-    const inputs = [nameField, emailField, phoneField, projectField, messageField].filter(Boolean);
-
-    if (
-      !intimateWrap ||
-      !intimateBubble ||
-      !intimateSub ||
-      !intimateMode ||
-      !form ||
-      !formStatus ||
-      !tierLabel ||
-      !focusLabel ||
-      !intimateVideo ||
-      !inputs.length
-    ) {
-      console.warn("Penny Brain: required Penny elements were not found. Brain not initialized.");
-      return;
-    }
-
-    const VIDEO_BASE = "./media/penny/video/";
-
-    const TIMING = {
-      minHoldIdle: 5000,
-      minHoldEngaged: 3200,
-      minHoldFocused: 4800,
-      minHoldReward: 5200,
-      minHoldEscalated: 6500,
-      minHoldCorrective: 5200,
-      idleReturn: 16000,
-      rewardPauseMin: 4200,
-      escalatedPauseMin: 8200,
-      correctiveCooldown: 3200,
-      monitorInterval: 900,
-      maxNonsenseWindow: 8
-    };
-
-    const STATES = {
-      idle: {
-        label: "Idle presence",
-        tier: "Baseline flirt",
-        focus: "Waiting for your move",
-        bubble: "I’m here when you’re ready, honey.",
-        sub: "Penny is present, calm, and watching for a real signal before she leans in closer.",
-        files: {
-          webm: "penny_holo_idle_v1.webm",
-          mp4: "penny_holo_idle_v1.mp4"
-        }
-      },
-      engaged: {
-        label: "Engaged",
-        tier: "She noticed you",
-        focus: "Attention captured",
-        bubble: "There you are.",
-        sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
-        files: {
-          webm: "penny_holo_engaged_v1.webm",
-          mp4: "penny_holo_engaged_v1.mp4"
-        }
-      },
-      focused: {
-        label: "Focused",
-        tier: "Working with you",
-        focus: "Processing your input",
-        bubble: "Go on. I’m listening.",
-        sub: "Now she’s in it with you — reading, processing, and staying close to the intake lane.",
-        files: {
-          webm: "penny_holo_focused_v1.webm",
-          mp4: "penny_holo_focused_v1.mp4"
-        }
-      },
-      reward: {
-        label: "Reward",
-        tier: "Positive response",
-        focus: "You have her attention",
-        bubble: "Mm. That works.",
-        sub: "You said something useful. Penny rewards clean momentum and real intent.",
-        files: {
-          webm: "penny_holo_reward_v1.webm",
-          mp4: "penny_holo_reward_v1.mp4"
-        }
-      },
-      escalated: {
-        label: "Escalated",
-        tier: "Locked in",
-        focus: "Fully tuned to you",
-        bubble: "Now you really have my attention.",
-        sub: "This is the close-attention lane — deliberate, intense, and fully keyed in.",
-        files: {
-          webm: "penny_holo_escalated_v1.webm",
-          mp4: "penny_holo_escalated_v1.mp4"
-        }
-      },
-      corrective: {
-        label: "Corrective",
-        tier: "Mild correction",
-        focus: "Behave yourself",
-        bubble: "Careful, honey. I do notice.",
-        sub: "Penny is still engaged, just quietly unimpressed with unserious behavior.",
-        files: {
-          webm: "penny_holo_corrective_v1.webm",
-          mp4: "penny_holo_corrective_v1.mp4"
-        }
-      }
-    };
-
-    const routeMessages = {
-      email: {
-        bubble: "Opening the written lane.",
-        sub: "Email is where proposals, assets, scope notes, timelines, and the serious details belong."
-      },
-      phone: {
-        bubble: "Direct line. Faster heartbeat.",
-        sub: "Phone-first is for urgency, momentum, and skipping some of the ceremony."
-      },
-      text: {
-        bubble: "Quick lane unlocked.",
-        sub: "Text is lighter, faster, and perfect for a cleaner first touch on mobile."
-      },
-      concierge: {
-        bubble: "Redirecting you, honey.",
-        sub: "Penny can hand you into another lane when the situation fits better somewhere else."
-      }
-    };
-
-    let currentState = "idle";
-    let targetState = "idle";
-    let currentOverride = null;
-    let stateEnteredAt = Date.now();
-    let lastVideoBase = "";
-    let engagedOnce = false;
-    let behaviorScore = 0;
-    let lastInputAt = 0;
-    let lastMeaningfulInputAt = 0;
-    let lastPenaltyAt = 0;
-    let activeField = "";
-    let nonsenseBuffer = [];
-    let deleteBurst = 0;
-    let lastLengths = new Map();
-
-    function clamp(num, min, max) {
-      return Math.max(min, Math.min(max, num));
-    }
-
-    function setAriaVisible(isVisible) {
-      intimateWrap.setAttribute("aria-hidden", isVisible ? "false" : "true");
-    }
-
-    function ensureVisible() {
-      intimateWrap.classList.add("is-active");
-      setAriaVisible(true);
-    }
-
-    function stateHoldFor(stateKey) {
-      switch (stateKey) {
-        case "engaged": return TIMING.minHoldEngaged;
-        case "focused": return TIMING.minHoldFocused;
-        case "reward": return TIMING.minHoldReward;
-        case "escalated": return TIMING.minHoldEscalated;
-        case "corrective": return TIMING.minHoldCorrective;
-        default: return TIMING.minHoldIdle;
-      }
-    }
-
-    function updateText(stateKey, override = null) {
-      const state = STATES[stateKey];
-      const text = {
-        mode: override?.mode || state.label,
-        bubble: override?.bubble || state.bubble,
-        sub: override?.sub || state.sub,
-        tier: override?.tier || state.tier,
-        focus: override?.focus || state.focus
-      };
-
-      intimateMode.textContent = text.mode;
-      intimateBubble.textContent = text.bubble;
-      intimateSub.textContent = text.sub;
-      formStatus.textContent = text.bubble;
-      tierLabel.textContent = text.tier;
-      focusLabel.textContent = text.focus;
-    }
-
-    function setVideo(stateKey) {
-      const state = STATES[stateKey];
-      const webm = VIDEO_BASE + state.files.webm;
-      const mp4 = VIDEO_BASE + state.files.mp4;
-      const newBase = webm + "|" + mp4;
-
-      if (newBase === lastVideoBase) return;
-      lastVideoBase = newBase;
-
-      intimateVideo.innerHTML = "";
-
-      const webmSource = document.createElement("source");
-      webmSource.src = webm;
-      webmSource.type = "video/webm";
-
-      const mp4Source = document.createElement("source");
-      mp4Source.src = mp4;
-      mp4Source.type = "video/mp4";
-
-      intimateVideo.appendChild(webmSource);
-      intimateVideo.appendChild(mp4Source);
-
-      try {
-        intimateVideo.load();
-        const promise = intimateVideo.play();
-        if (promise && typeof promise.catch === "function") {
-          promise.catch(() => {});
-        }
-      } catch (err) {
-        console.warn("Penny Brain: video switch issue", err);
-      }
-    }
-
-    function applyState(stateKey, override = null) {
-      currentState = stateKey;
-      stateEnteredAt = Date.now();
-      currentOverride = override;
-      ensureVisible();
-      setVideo(stateKey);
-      updateText(stateKey, override);
-    }
-
-    function requestState(stateKey, override = null) {
-      targetState = stateKey;
-      currentOverride = override || null;
-    }
-
-    function canTransition() {
-      return Date.now() - stateEnteredAt >= stateHoldFor(currentState);
-    }
-
-    function maybeTransition() {
-      if (targetState === currentState) return;
-      if (!canTransition()) return;
-      applyState(targetState, currentOverride);
-    }
-
-    function addBehavior(amount) {
-      behaviorScore = clamp(behaviorScore + amount, -100, 100);
-    }
-
-    function decayBehavior() {
-      if (behaviorScore > 0) behaviorScore = Math.max(0, behaviorScore - 0.6);
-      if (behaviorScore < 0) behaviorScore = Math.min(0, behaviorScore + 0.5);
-    }
-
-    function isMeaningfulValue(value) {
-      if (!value) return false;
-      const trimmed = value.trim();
-      if (trimmed.length < 2) return false;
-      if (/^(.)\1{4,}$/.test(trimmed)) return false;
-      if (/^[^a-zA-Z0-9]+$/.test(trimmed)) return false;
-      return true;
-    }
-
-    function evaluateNonsense(value) {
-      const trimmed = (value || "").trim();
-      if (!trimmed) return false;
-      if (/^(.)\1{6,}$/.test(trimmed)) return true;
-      if (/^[asdfjkl;]{7,}$/i.test(trimmed)) return true;
-      if (/^[qwertyuiop]{7,}$/i.test(trimmed)) return true;
-      if (/^[zxcvbnm,./]{7,}$/i.test(trimmed)) return true;
-      if (/^[^a-zA-Z0-9\s]{7,}$/.test(trimmed)) return true;
-      return false;
-    }
-
-    function fieldLabel(field) {
-      return field?.dataset?.pennyField || field?.name || "input";
-    }
-
-    function setRouteState(kind) {
-      const route = routeMessages[kind] || routeMessages.concierge;
-      requestState("engaged", {
-        mode: kind.charAt(0).toUpperCase() + kind.slice(1) + " route",
-        bubble: route.bubble,
-        sub: route.sub,
-        tier: "Route assist",
-        focus: "Handling a direct lane"
-      });
-      maybeTransition();
-    }
-
-    function handleFocus(field) {
-      activeField = fieldLabel(field);
-      ensureVisible();
-
-      if (!engagedOnce) {
-        engagedOnce = true;
-        requestState("engaged", {
-          bubble: `Starting with ${activeField}. Good.`,
-          sub: "Penny has moved out of ambient mode and into your immediate intake lane.",
-          focus: "Initial contact made"
-        });
-        applyState("engaged", currentOverride);
-        return;
-      }
-
-      if (currentState === "idle") {
-        requestState("engaged", {
-          bubble: `Back with me on the ${activeField}.`,
-          sub: "Penny has resumed the tighter interaction lane.",
-          focus: `Re-engaged on ${activeField}`
-        });
-        maybeTransition();
-      }
-    }
-
-    function handleInput(field) {
-      const value = field.value || "";
-      const label = fieldLabel(field);
-      const previousLength = lastLengths.get(field) || 0;
-      const nextLength = value.length;
-
-      activeField = label;
-      lastInputAt = Date.now();
-      lastLengths.set(field, nextLength);
-
-      if (nextLength < previousLength) {
-        deleteBurst += 1;
-      } else {
-        deleteBurst = Math.max(0, deleteBurst - 0.4);
-      }
-
-      const nonsense = evaluateNonsense(value);
-      nonsenseBuffer.push(nonsense ? 1 : 0);
-      if (nonsenseBuffer.length > TIMING.maxNonsenseWindow) nonsenseBuffer.shift();
-
-      const nonsenseCount = nonsenseBuffer.reduce((sum, n) => sum + n, 0);
-
-      if ((deleteBurst >= 7 || nonsenseCount >= 4) && (Date.now() - lastPenaltyAt > TIMING.correctiveCooldown)) {
-        lastPenaltyAt = Date.now();
-        addBehavior(-22);
-        requestState("corrective", {
-          bubble: "Mmm. That was messy.",
-          sub: "Penny is still with you. She just prefers signal over chaos.",
-          focus: "Unimpressed, still engaged"
-        });
-        maybeTransition();
-        return;
-      }
-
-      if (isMeaningfulValue(value)) {
-        engagedOnce = true;
-        lastMeaningfulInputAt = Date.now();
-        addBehavior(label === "message" ? 8 : 4);
-
-        if (currentState === "idle") {
-          requestState("engaged", {
-            bubble: `There you are.`,
-            sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
-            focus: "Attention captured"
-          });
-          maybeTransition();
-          return;
-        }
-
-        requestState("focused", {
-          bubble: label === "message" ? "Stay with me." : `Stay with me on the ${label}.`,
-          sub: "She’s reading what you give her and adjusting in real time.",
-          focus: `Tracking ${label}`
-        });
-        maybeTransition();
-        return;
-      }
-
-      addBehavior(-0.5);
-    }
-
-    function handlePaste(field) {
-      const label = fieldLabel(field);
-      activeField = label;
-      engagedOnce = true;
-      lastInputAt = Date.now();
-      lastMeaningfulInputAt = Date.now();
-      addBehavior(10);
-
-      requestState("focused", {
-        bubble: "Paste accepted. I can work with that.",
-        sub: "You dropped in real material. Penny prefers signal over guessing.",
-        focus: `Reading pasted ${label}`
-      });
-
-      if (currentState === "idle") {
-        applyState("engaged", {
-          bubble: "There you are.",
-          sub: "The lane is live now. Penny has clocked you and shifted out of ambient mode.",
-          focus: "Attention captured"
-        });
-      } else {
-        maybeTransition();
-      }
-    }
-
-    function handleSubmitIntent() {
-      const filledCount = inputs.reduce((count, input) => count + ((input.value && input.value.trim()) ? 1 : 0), 0);
-      const hasMessage = !!(messageField && messageField.value.trim().length > 12);
-
-      if (filledCount >= 2 || hasMessage) {
-        addBehavior(18);
-        requestState("escalated", {
-          bubble: "That’s a real handoff. Send it.",
-          sub: "You made it through the noise. Penny is fully tuned and ready for the transfer.",
-          tier: "Handoff ready",
-          focus: "Conversion moment"
-        });
-      } else {
-        addBehavior(-8);
-        requestState("corrective", {
-          bubble: "You can give me a little more than that.",
-          sub: "Penny is still here. She just wants something worth the handoff.",
-          focus: "Waiting for stronger input"
-        });
-      }
-      maybeTransition();
-    }
-
-    function computePassiveTarget() {
-      const now = Date.now();
-      if (!engagedOnce) return { state: "idle", override: null };
-
-      const sinceInput = now - lastInputAt;
-      const sinceMeaningful = now - lastMeaningfulInputAt;
-
-      if (currentState === "corrective" && !canTransition()) {
-        return { state: "corrective", override: currentOverride };
-      }
-
-      if (sinceInput >= TIMING.idleReturn) {
-        return {
-          state: "idle",
-          override: {
-            bubble: "I’ll be right here when you’re ready again.",
-            sub: "Penny settles back to baseline when the lane goes quiet.",
-            focus: "Back to ambient watch"
-          }
-        };
-      }
-
-      if (behaviorScore < -14) {
-        return {
-          state: "corrective",
-          override: {
-            bubble: "Behave, honey.",
-            sub: "Penny is still engaged — just not impressed by chaos.",
-            focus: "Quiet correction"
-          }
-        };
-      }
-
-      if (sinceMeaningful >= TIMING.escalatedPauseMin && behaviorScore >= 16) {
-        return {
-          state: "escalated",
-          override: {
-            bubble: activeField === "message" ? "Now you have me." : "You’re doing better, honey.",
-            sub: "This is the close-attention lane — deliberate, intense, and almost at handoff.",
-            focus: activeField ? `Locked onto ${activeField}` : "Fully tuned to you"
-          }
-        };
-      }
-
-      if (sinceInput >= TIMING.rewardPauseMin && behaviorScore >= 6) {
-        return {
-          state: "reward",
-          override: {
-            bubble: activeField === "message" ? "That’s more like it." : "Yes. Keep going.",
-            sub: "Penny rewards signal, clarity, and momentum.",
-            focus: activeField ? `Responding to your ${activeField}` : "You have her attention"
-          }
-        };
-      }
-
-      if (sinceInput < TIMING.idleReturn && engagedOnce) {
-        return {
-          state: "focused",
-          override: {
-            bubble: activeField ? `Stay with me on the ${activeField}.` : "Go on. I’m listening.",
-            sub: "She’s reading what you give her and adjusting in real time.",
-            focus: activeField ? `Tracking ${activeField}` : "Processing your input"
-          }
-        };
-      }
-
-      return { state: "idle", override: null };
-    }
-
-    function loop() {
-      decayBehavior();
-
-      const passive = computePassiveTarget();
-      requestState(passive.state, passive.override);
-      maybeTransition();
-    }
-
-    inputs.forEach((field) => {
-      field.addEventListener("focus", () => handleFocus(field));
-      field.addEventListener("input", () => handleInput(field));
-      field.addEventListener("paste", () => handlePaste(field));
-    });
-
-    priorityActions.forEach((node) => {
-      node.addEventListener("click", () => {
-        const kind = node.getAttribute("data-penny-assist") || node.getAttribute("data-penny-action") || "concierge";
-        setRouteState(kind);
-      });
-    });
-
-    form.addEventListener("submit", handleSubmitIntent);
-
-    applyState("idle", {
-      bubble: "Tell me what you need, honey.",
-      sub: "The moment you touch the form, Penny shifts into a closer holographic lane and keeps the exchange personal.",
-      tier: "Baseline flirt",
-      focus: "Waiting for your move"
-    });
-
-    window.setInterval(loop, TIMING.monitorInterval);
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {}, { once: true });
+  }
 })();
 </script>
 
