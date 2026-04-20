@@ -5041,6 +5041,433 @@
       }
     }
 
+
+
+    /* ========================================
+       R&D Lab
+    ======================================== */
+    .lab-stage {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lab-hero {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(134, 171, 255, 0.2);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(106, 168, 255, 0.2), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(141, 107, 255, 0.2), transparent 28%),
+        radial-gradient(circle at 72% 78%, rgba(255, 79, 183, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(10, 14, 26, 0.98), rgba(5, 8, 16, 0.995));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 30px rgba(106, 168, 255, 0.08);
+    }
+
+    .lab-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 12%, rgba(255,255,255,0.06) 48%, transparent 74%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px,
+          transparent 22px
+        );
+      opacity: 0.45;
+    }
+
+    .lab-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lab-hero-grid,
+    .lab-preview-grid,
+    .lab-lane-grid,
+    .lab-actions,
+    .lab-status-row,
+    .lab-under-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .lab-copy {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .lab-copy p,
+    .lab-card p,
+    .lab-preview-card p,
+    .lab-under-card p,
+    .lab-note,
+    .lab-preview-meta,
+    .lab-lane-card p {
+      color: var(--text-soft);
+      line-height: 1.72;
+      font-size: 0.92rem;
+    }
+
+    .lab-actions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lab-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(134, 171, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(8, 12, 22, 0.86);
+      transition: var(--transition);
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .lab-action:hover,
+    .lab-action:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(134, 171, 255, 0.26);
+      box-shadow: 0 0 18px rgba(106, 168, 255, 0.12);
+      outline: none;
+    }
+
+    .lab-action--penny {
+      border-color: rgba(255, 79, 183, 0.22);
+      color: #ffe2f5;
+      background:
+        radial-gradient(circle at top, rgba(255, 79, 183, 0.12), transparent 44%),
+        linear-gradient(180deg, rgba(44, 16, 40, 0.95), rgba(18, 11, 22, 0.98));
+      box-shadow: 0 0 18px rgba(255, 79, 183, 0.08);
+    }
+
+    .lab-status-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lab-status-pill {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.012)),
+        rgba(8, 11, 20, 0.82);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    .lab-status-pill span {
+      color: rgba(186, 206, 255, 0.74);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .lab-status-pill strong {
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .lab-guide-card {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 79, 183, 0.22);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.12), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(34, 16, 36, 0.96), rgba(12, 10, 18, 0.99));
+      box-shadow: 0 0 26px rgba(255, 79, 183, 0.1);
+    }
+
+    .lab-guide-visual {
+      position: relative;
+      min-height: 260px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 79, 183, 0.18);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.14), transparent 24%),
+        radial-gradient(circle at 50% 78%, rgba(255, 79, 183, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(40, 18, 40, 0.98), rgba(10, 8, 16, 0.995));
+      isolation: isolate;
+    }
+
+    .lab-guide-visual::before,
+    .lab-guide-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    .lab-guide-visual::before {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), transparent 18%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.028) 0,
+          rgba(255,255,255,0.028) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+      opacity: 0.68;
+      mix-blend-mode: screen;
+      z-index: 2;
+    }
+
+    .lab-guide-visual::after {
+      background:
+        radial-gradient(138% 132% at 50% 34%, transparent 58%, rgba(6, 8, 16, 0.12) 70%, rgba(6, 8, 16, 0.4) 84%, rgba(6, 8, 16, 0.82) 100%),
+        linear-gradient(130deg, transparent 8%, rgba(255,255,255,0.06) 46%, transparent 74%);
+      z-index: 2;
+    }
+
+    .lab-guide-visual img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      transform: scale(1.05);
+      filter:
+        saturate(1.03)
+        contrast(1.03)
+        drop-shadow(0 0 16px rgba(255, 79, 183, 0.14));
+      z-index: 1;
+    }
+
+    .lab-guide-badge,
+    .lab-preview-status,
+    .lab-under-label,
+    .lab-lane-label {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .lab-guide-badge {
+      border: 1px solid rgba(255, 79, 183, 0.22);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffdff2;
+    }
+
+    .lab-preview-grid,
+    .lab-lane-grid,
+    .lab-under-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lab-preview-card,
+    .lab-lane-card,
+    .lab-under-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(134, 171, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.012)),
+        rgba(8, 12, 22, 0.84);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.015),
+        0 16px 36px rgba(0,0,0,0.24);
+    }
+
+    .lab-preview-card--featured {
+      border-color: rgba(255, 79, 183, 0.22);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(27, 14, 28, 0.96), rgba(9, 10, 18, 0.98));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(255, 79, 183, 0.08),
+        0 16px 36px rgba(0,0,0,0.26);
+    }
+
+    .lab-preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .lab-preview-status,
+    .lab-lane-label,
+    .lab-under-label {
+      border: 1px solid rgba(134, 171, 255, 0.16);
+      background: rgba(255,255,255,0.03);
+      color: rgba(220, 229, 255, 0.86);
+    }
+
+    .lab-preview-card--featured .lab-preview-status,
+    .lab-under-card--penny .lab-under-label {
+      border-color: rgba(255, 79, 183, 0.18);
+      background: rgba(255, 79, 183, 0.08);
+      color: #ffdff2;
+    }
+
+    .lab-preview-shell {
+      position: relative;
+      min-height: 180px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.14);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(106, 168, 255, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(141, 107, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, rgba(14, 20, 34, 0.98), rgba(7, 10, 18, 0.995));
+    }
+
+    .lab-preview-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 14%, rgba(255,255,255,0.06) 48%, transparent 74%),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.02) 0,
+          rgba(255,255,255,0.02) 1px,
+          transparent 1px,
+          transparent 18px
+        );
+      opacity: 0.58;
+      pointer-events: none;
+    }
+
+    .lab-preview-core,
+    .lab-preview-gridline,
+    .lab-preview-pulse,
+    .lab-preview-copy {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .lab-preview-core {
+      inset: auto auto 18px 18px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: radial-gradient(circle, rgba(255,255,255,0.16), rgba(106, 168, 255, 0.18) 32%, transparent 70%);
+      box-shadow: 0 0 20px rgba(106, 168, 255, 0.14);
+    }
+
+    .lab-preview-pulse {
+      inset: 18px 18px auto auto;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 79, 183, 0.16), transparent 70%);
+      filter: blur(2px);
+      opacity: 0.88;
+    }
+
+    .lab-preview-gridline {
+      inset: 50% 14px auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(106, 168, 255, 0.54), transparent);
+      opacity: 0.64;
+    }
+
+    .lab-preview-copy {
+      inset: auto 18px 18px auto;
+      display: grid;
+      gap: 6px;
+      text-align: right;
+      color: rgba(234, 239, 255, 0.86);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .lab-preview-meta {
+      display: grid;
+      gap: 4px;
+    }
+
+    .lab-preview-card h3,
+    .lab-lane-card h3,
+    .lab-under-card h3,
+    .lab-guide-copy h3 {
+      font-size: 1rem;
+      line-height: 1.22;
+    }
+
+    .lab-note {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 171, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.01)),
+        rgba(8, 11, 20, 0.82);
+    }
+
+    .lab-note strong {
+      color: rgba(245, 247, 255, 0.96);
+    }
+
+    .lab-under-card--penny {
+      border-color: rgba(255, 79, 183, 0.2);
+      background:
+        radial-gradient(circle at top left, rgba(255, 79, 183, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(25, 13, 24, 0.96), rgba(10, 10, 16, 0.99));
+    }
+
+    @media (min-width: 900px) {
+      .lab-hero-grid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .lab-status-row,
+      .lab-preview-grid,
+      .lab-lane-grid,
+      .lab-under-grid,
+      .lab-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .lab-guide-visual {
+        min-height: 220px;
+      }
+    }
+
     /* ========================================
        Motion Preferences
     ======================================== */
@@ -5844,6 +6271,198 @@
       </article>
 
 
+
+
+      <!-- R&D Lab -->
+      <article class="panel article" id="lab" data-page="lab" aria-labelledby="lab-title">
+        <div class="article-shell">
+          <header>
+            <span class="eyebrow">R&amp;D Lab</span>
+            <h2 class="headline" id="lab-title">A guided showroom entrance for active concepts, future environments, and premium experiments.</h2>
+            <div class="accent-rule"></div>
+          </header>
+
+          <section class="lab-stage">
+            <div class="lab-hero">
+              <div class="lab-hero-grid">
+                <div class="lab-copy">
+                  <span class="eyebrow">Preview floor / outward-facing</span>
+                  <h3 class="section-title">This is where WildCard DEV opens the door to deeper concept work without pulling the flagship site off balance.</h3>
+                  <p>
+                    The R&amp;D Lab is the guided entrance to future preview environments, experimental build lanes, and concept-forward client possibilities. The flagship experience stays clean and stable here on the main site while this floor signals where the more exploratory work is heading next.
+                  </p>
+                  <p>
+                    Penny anchors the room as showroom host, helping frame what is active, what is being staged, and what will eventually open into dedicated preview destinations on the lab domain.
+                  </p>
+
+                  <div class="lab-actions">
+                    <a class="lab-action" href="https://labs.wildcarddev.com" target="_blank" rel="noopener noreferrer">Enter preview domain ↗</a>
+                    <a class="lab-action lab-action--penny" href="#contact" data-nav-link="contact">Route through Penny Office →</a>
+                    <a class="lab-action" href="mailto:matt@wildcarddev.com?subject=WildCard%20DEV%20Lab%20Inquiry&body=Hi%20Matt,%0A%0AI%20was%20looking%20through%20the%20R%26D%20Lab%20entrance%20and%20wanted%20to%20ask%20about" data-penny-assist="email">Ask for a preview by email</a>
+                    <a class="lab-action" href="tel:(402)%20915-0789" data-penny-assist="phone">Call the company line</a>
+                  </div>
+
+                  <div class="lab-status-row" aria-label="R&amp;D Lab status">
+                    <div class="lab-status-pill">
+                      <span>Role</span>
+                      <strong>Guided showroom entrance</strong>
+                    </div>
+                    <div class="lab-status-pill">
+                      <span>Mode</span>
+                      <strong>Public-facing and future-ready</strong>
+                    </div>
+                    <div class="lab-status-pill">
+                      <span>Destination</span>
+                      <strong>labs.wildcarddev.com</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <aside class="lab-guide-card" aria-label="Penny R&amp;D guide">
+                  <div class="lab-guide-visual" aria-hidden="true">
+                    <img src="./media/penny/images/penny-lab-source-v1.png" alt="" />
+                  </div>
+                  <div class="lab-guide-copy">
+                    <span class="lab-guide-badge">Penny / R&amp;D guide presence</span>
+                    <h3>Curated by Penny, framed for visitors, and ready for future lab visuals.</h3>
+                    <p>
+                      For now, this lane stays presentational and polished: a static guide presence, clean showroom language, and lightweight contact touchpoints that reinforce Penny as part of the WildCard DEV system without reactivating unstable behavior.
+                    </p>
+                  </div>
+                </aside>
+              </div>
+            </div>
+
+            <section class="lab-preview-grid" aria-label="Featured R&amp;D previews">
+              <article class="lab-preview-card lab-preview-card--featured">
+                <div class="lab-preview-top">
+                  <span class="lab-preview-status">Featured concept</span>
+                  <span class="lab-preview-status">Active mockup</span>
+                </div>
+                <div class="lab-preview-shell" aria-hidden="true">
+                  <div class="lab-preview-pulse"></div>
+                  <div class="lab-preview-gridline"></div>
+                  <div class="lab-preview-core"></div>
+                  <div class="lab-preview-copy">
+                    <span>Showroom lane</span>
+                    <span>Different Approach Omaha</span>
+                  </div>
+                </div>
+                <div class="lab-preview-meta">
+                  <h3>differentapproachomaha.com</h3>
+                  <p>
+                    An active concept environment in development, staged here as part of the R&amp;D showroom. This entry marks it as a future preview destination with room to evolve into a dedicated external lab experience.
+                  </p>
+                </div>
+                <a class="lab-action" href="https://labs.wildcarddev.com" target="_blank" rel="noopener noreferrer">Open preview structure ↗</a>
+              </article>
+
+              <article class="lab-preview-card">
+                <div class="lab-preview-top">
+                  <span class="lab-preview-status">System lane</span>
+                  <span class="lab-preview-status">Expansion ready</span>
+                </div>
+                <div class="lab-preview-shell" aria-hidden="true">
+                  <div class="lab-preview-pulse"></div>
+                  <div class="lab-preview-gridline"></div>
+                  <div class="lab-preview-core"></div>
+                  <div class="lab-preview-copy">
+                    <span>Client concepts</span>
+                    <span>Premium prototypes</span>
+                  </div>
+                </div>
+                <div class="lab-preview-meta">
+                  <h3>Interactive concept rooms</h3>
+                  <p>
+                    Reserved for higher-end previews where clients can step into polished concept environments, see interaction direction early, and understand what a more cinematic WildCard DEV build can become.
+                  </p>
+                </div>
+                <a class="lab-action" href="https://labs.wildcarddev.com" target="_blank" rel="noopener noreferrer">View outward lab lane ↗</a>
+              </article>
+
+              <article class="lab-preview-card">
+                <div class="lab-preview-top">
+                  <span class="lab-preview-status">Future utility</span>
+                  <span class="lab-preview-status">Showcase hook</span>
+                </div>
+                <div class="lab-preview-shell" aria-hidden="true">
+                  <div class="lab-preview-pulse"></div>
+                  <div class="lab-preview-gridline"></div>
+                  <div class="lab-preview-core"></div>
+                  <div class="lab-preview-copy">
+                    <span>Wearables</span>
+                    <span>QR continuity</span>
+                  </div>
+                </div>
+                <div class="lab-preview-meta">
+                  <h3>Companion systems and handoff surfaces</h3>
+                  <p>
+                    This lane is reserved for wearable-linked previews, polished QR flows, and other continuity experiments that extend the brand beyond a single browser window.
+                  </p>
+                </div>
+                <a class="lab-action" href="#watch" data-nav-link="watch">Cross-check the watch lane →</a>
+              </article>
+            </section>
+
+            <section class="lab-lane-grid" aria-label="Showroom guidance">
+              <article class="lab-lane-card">
+                <span class="lab-lane-label">Why this room exists</span>
+                <h3>A controlled entrance instead of a disconnected side project.</h3>
+                <p>
+                  The R&amp;D Lab keeps experimentation visible and intentional while the flagship site remains the polished front door. Visitors get a clean sense of where innovation is happening without the public build turning into a testing ground.
+                </p>
+              </article>
+
+              <article class="lab-lane-card">
+                <span class="lab-lane-label">Penny-guided framing</span>
+                <h3>Curiosity, coordination, and cleaner transitions into real conversations.</h3>
+                <p>
+                  Penny’s role here is straightforward: host the room, reinforce that these previews are connected to the wider company system, and make the next step into email, phone, or the main office feel seamless.
+                </p>
+              </article>
+
+              <article class="lab-lane-card">
+                <span class="lab-lane-label">Outbound structure</span>
+                <h3>Preview hooks are already staged for dedicated lab destinations.</h3>
+                <p>
+                  As new concept rooms come online, this entrance page can point outward cleanly to labs.wildcarddev.com with minimal rewiring, giving projects room to breathe without forcing a second app structure into the flagship site itself.
+                </p>
+              </article>
+            </section>
+
+            <div class="lab-note">
+              <strong>Under active construction, by design.</strong> The showroom is meant to feel alive: some concepts are already being framed, some are still taking shape, and some are being held for the right visual or interaction pass before they step into a dedicated preview environment.
+            </div>
+
+            <section class="lab-under-grid" aria-label="Under construction R&amp;D hooks">
+              <article class="lab-under-card lab-under-card--penny">
+                <span class="lab-under-label">Penny visual reserve</span>
+                <h3>Future hardhat or labcoat Penny staging lane</h3>
+                <p>
+                  This card intentionally reserves premium space for a future Penny lab visual, build-floor still, or more cinematic showroom asset once the right piece is ready to anchor it.
+                </p>
+              </article>
+
+              <article class="lab-under-card">
+                <span class="lab-under-label">Concept reserve</span>
+                <h3>Project preview slots for new domain experiments</h3>
+                <p>
+                  Additional outbound cards can plug in here for specialty mockups, local business concept builds, themed demo rooms, or other future-facing projects that deserve their own guided entry point.
+                </p>
+              </article>
+
+              <article class="lab-under-card">
+                <span class="lab-under-label">Client possibilities</span>
+                <h3>Showcase-ready space for what comes after the first conversation</h3>
+                <p>
+                  Once a client wants to explore further, this floor can support richer previews, tailored concept framing, and premium proof-of-direction experiences that go beyond a standard brochure presentation.
+                </p>
+              </article>
+            </section>
+          </section>
+        </div>
+      </article>
+
       <!-- Contact / Penny Office -->
       <article class="panel article" id="contact" data-page="contact" aria-labelledby="contact-title">
         <div class="article-shell">
@@ -6400,6 +7019,7 @@ slot</div>
           <button class="nav-btn" type="button" data-page-target="about">About</button>
           <button class="nav-btn" type="button" data-page-target="resume">Resume</button>
           <button class="nav-btn is-active" type="button" data-page-target="portfolio">Portfolio</button>
+          <button class="nav-btn" type="button" data-page-target="lab">R&amp;D Lab</button>
           <button class="nav-btn nav-btn--penny" type="button" data-page-target="contact">Penny Office</button>
           <button class="nav-btn" type="button" data-page-target="watch">Watch</button>
         </div>
